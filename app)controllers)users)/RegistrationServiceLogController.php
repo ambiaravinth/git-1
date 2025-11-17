@@ -5,7 +5,7 @@ namespace App\Controllers\Users;
 use App\Controllers\BaseController;
 use App\Entities\Collection;
 use App\Models\GroupModel;
-use App\Models\WellnessLimsLogsModel;
+use App\Models\RegistrationServiceLogsModel;
 use CodeIgniter\API\ResponseTrait;
 use Myth\Auth\Authorization\PermissionModel;
 use Myth\Auth\Entities\User;
@@ -13,7 +13,7 @@ use Myth\Auth\Entities\User;
 /**
  * Class PnsReportListController.
  */
-class WellnessLimsLogController extends BaseController
+class RegistrationServiceLogController extends BaseController
 {
     use ResponseTrait;
 
@@ -22,7 +22,7 @@ class WellnessLimsLogController extends BaseController
 
     public function __construct()
     {
-        $this->users = new WellnessLimsLogsModel();
+        $this->users = new RegistrationServiceLogsModel();
         helper('common');
     }
 
@@ -40,7 +40,7 @@ class WellnessLimsLogController extends BaseController
             $fromdate = $this->request->getGet('fromdate');
             $todate = $this->request->getGet('todate');
             $status = $this->request->getGet('status');
-            $order = WellnessLimsLogsModel::ORDERABLE[$this->request->getGet('order[0][column]')];
+            $order = RegistrationServiceLogsModel::ORDERABLE[$this->request->getGet('order[0][column]')];
             $dir = $this->request->getGet('order[0][dir]');
             return $this->respond(Collection::datatable(
                 $this->users->getResource($search, $fromdate, $todate, $status, $dir)->orderBy($order, $dir)->limit(
@@ -52,12 +52,15 @@ class WellnessLimsLogController extends BaseController
             ));
         }
 
-        return view('Views/User/wellnesslimslogs', ['title'    => lang('Wellness & LIMS Logs'), 'subtitle' => lang('')]);
+        return view('User/regserviceattchmentlist', [
+            'title'    => lang('Report PDF TPA Log List'),
+            'subtitle' => lang(''),
+        ]);
     }
 
     public function edit($id)
     {
-        $viewcode = new WellnessLimsLogsModel();
+        $viewcode = new RegistrationServiceLogsModel();
         $data_view = $viewcode->find($id);
         $response  = $data_view['response'];
         return $response;
@@ -65,7 +68,7 @@ class WellnessLimsLogController extends BaseController
 
     public function viewpayload($id)
     {
-        $viewcode = new WellnessLimsLogsModel();
+        $viewcode = new RegistrationServiceLogsModel();
         $data_view = $viewcode->find($id);
         $payload  = $data_view['attachment'];
         return $payload;

@@ -79,7 +79,7 @@
         ],
 
         ajax: {
-            url: '<?= route_to('admin/user/cb-magento-logs') ?>',
+            url: '<?= route_to('admin/user/regserviceattchmentloglist') ?>',
             method: 'GET',
             data: function(data) {
                 // Read values
@@ -128,7 +128,7 @@
                 "data": function(data) {
                     return `<td class="text-right py-0 align-middle">
                             <div class="btn-group btn-group-sm">
-                                <a href="<?= route_to('admin/user/cb-magento-logs') ?>/${data.reg_id}/viewpayload" target="_blank" class="btn btn-primary btn-edit"><i class="far fa-eye"></i></a>
+                                <a href="<?= route_to('admin/user/regserviceattchmentloglist') ?>/${data.reg_id}/viewpayload" target="_blank" class="btn btn-primary btn-edit"><i class="far fa-eye"></i></a>
                                
                             </div>
                             </td>`
@@ -138,7 +138,7 @@
                 "data": function(data) {
                     return `<td class="text-right py-0 align-middle">
                             <div class="btn-group btn-group-sm">
-                                <a href="<?= route_to('admin/user/cb-magento-logs') ?>/${data.reg_id}/edit" target="_blank" class="btn btn-primary btn-edit"><i class="far fa-eye"></i></a>
+                                <a href="<?= route_to('admin/user/regserviceattchmentloglist') ?>/${data.reg_id}/edit" target="_blank" class="btn btn-primary btn-edit"><i class="far fa-eye"></i></a>
                                
                             </div>
                             </td>`
@@ -210,7 +210,7 @@
             .then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: `<?= route_to('admin/user/cb-magento-logs') ?>/${$(this).attr('data-id')}`,
+                        url: `<?= route_to('admin/user/regserviceattchmentloglist') ?>/${$(this).attr('data-id')}`,
                         method: 'DELETE',
                     }).done((data, textStatus, jqXHR) => {
                         Toast.fire({

@@ -63,6 +63,14 @@ class CbMagentoLogController extends BaseController
         return $response;
     }
 
+    public function viewpayload($id)
+    {
+        $viewcode = new CbMagentoLogsModel();
+        $data_view = $viewcode->find($id);
+        $payload  = $data_view['attachment'];
+        return $payload;
+    }
+
     /**
      * Show profile user or update.
      *

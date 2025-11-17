@@ -88,6 +88,12 @@ $routes->group('admin', function ($routes) {
 
         $routes->get('wellness-report/(:num)/add', 'WellnessReportListController::add/$1');
         $routes->post('wellness-report/(:num)/add', 'WellnessReportListController::add/$1');
+        $routes->get('regserviceattchmentloglist/(:num)/viewpayload', 'RegistrationServiceLogController::viewpayload/$1', ['filter' => 'permission:manage-user']);
+        $routes->get('wellness-magento-logs/(:num)/viewpayload', 'WellnessMagentoLogController::viewpayload/$1', ['filter' => 'permission:manage-user']);
+        $routes->get('wellness-lims-logs/(:num)/viewpayload', 'WellnessLimsLogController::viewpayload/$1', ['filter' => 'permission:manage-user']);
+        $routes->get('cb-magento-logs/(:num)/viewpayload', 'CbMagentoLogController::viewpayload/$1', ['filter' => 'permission:manage-user']);
+        $routes->get('cb-stem-cell-logs/(:num)/viewpayload', 'CbStemcellLogController::viewpayload/$1', ['filter' => 'permission:manage-user']);
+
         $routes->resource('manage', [
             'filter'     => 'permission:manage-user',
             'namespace'  => 'App\Controllers\Users',

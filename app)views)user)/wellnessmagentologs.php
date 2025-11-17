@@ -52,6 +52,7 @@
                                 <th><?= lang('Lab Id') ?></th>
                                 <th><?= lang('Test GroupCode') ?></th>
                                 <th><?= lang('Status') ?></th>
+                                <th><?= lang('View Payload') ?></th>
                                 <th><?= lang('View Response') ?></th>
                                 <th><?= lang('Created Date') ?></th>
                             </tr>
@@ -121,6 +122,16 @@
                             </td>`
                     }
                     return "-"
+                }
+            },
+            {
+                "data": function(data) {
+                    return `<td class="text-right py-0 align-middle">
+                            <div class="btn-group btn-group-sm">
+                                <a href="<?= route_to('admin/user/wellness-magento-logs') ?>/${data.reg_id}/viewpayload" target="_blank" class="btn btn-primary btn-edit"><i class="far fa-eye"></i></a>
+                               
+                            </div>
+                            </td>`
                 }
             },
             {

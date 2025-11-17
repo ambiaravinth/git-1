@@ -154,6 +154,33 @@ $routes->group('admin', function ($routes) {
             'controller' => 'RegistrationServiceLogController',
             'except'     => 'show',
         ]);
+
+        // New Routes....
+        $routes->resource('wellness-magento-logs', [
+            'filter'     => 'permission:manage-user',
+            'namespace'  => 'App\Controllers\Users',
+            'controller' => 'WellnessMagentoLogController',
+            'except'     => 'show',
+        ]);
+        $routes->resource('wellness-lims-logs', [
+            'filter'     => 'permission:manage-user',
+            'namespace'  => 'App\Controllers\Users',
+            'controller' => 'WellnessLimsLogController',
+            'except'     => 'show',
+        ]);
+        $routes->resource('cb-magento-logs', [
+            'filter'     => 'permission:manage-user',
+            'namespace'  => 'App\Controllers\Users',
+            'controller' => 'CbMagentoLogController',
+            'except'     => 'show',
+        ]);
+        $routes->resource('cb-stem-cell-logs', [
+            'filter'     => 'permission:manage-user',
+            'namespace'  => 'App\Controllers\Users',
+            'controller' => 'CbStemcellLogController',
+            'except'     => 'show',
+        ]);
+
         $routes->resource('viewresponse', [
             'filter'     => 'permission:manage-user',
             'namespace'  => 'App\Controllers\Users',
@@ -203,7 +230,7 @@ $routes->group('admin', function ($routes) {
             'controller' => 'WellnessReportListController',
             'except'     => 'show',
         ]);
-        $routes->resource('wellness-email-log', [
+         $routes->resource('wellness-email-log', [
             'filter'     => 'permission:manage-user',
             'namespace'  => 'App\Controllers\Users',
             'controller' => 'WellnessReportListController::wellnessemail',
@@ -228,7 +255,7 @@ $routes->group('admin', function ($routes) {
             'except'     => 'show',
         ]);
 		
-		 $routes->resource('std-report', [
+	$routes->resource('std-report', [
             'filter'     => 'permission:manage-user',
             'namespace'  => 'App\Controllers\Users',
             'controller' => 'StdListController',
@@ -338,7 +365,7 @@ $routes->group('admin', function ($routes) {
         $routes->get('resendpdfreportmagento', 'GenerateSendPDFReportController::reSendPdfMagento');
         $routes->get('getgenreportpdf', 'GenerateSendPDFReportController::genReport');
         $routes->get('cb_testgroupcode_log', 'CbListController::getTestgroupcodeLog');
-        $routes->get('generate-ovascore-report', 'GenerateSendPDFReportController::generateovascorereports');
+        $routes->get('generate-ovascore-report', 'GenerateSendPDFReportController::generateovascorereports');        
 
         /**Spermscore Approval Routes */
         $routes->post('spermscore_qa_approval', 'SpermScoreListController::qaApproval');
@@ -578,19 +605,19 @@ $routes->group('cron', [
     $routes->cli('hpvmhqupdate', 'HpvController::updateMHQ');
     /**HPV  REPORT CRON END */
 
-
-     /**Wellness  REPORT CRON START */
-     $routes->cli('generatewellnessreport', 'WellnessController::index');
-     $routes->get('pushwellnessreporttolims', 'SendPdftoLims::pushWellnesseporttoLims');
-     $routes->cli('pushwellnessreporttomagento', 'SendPdftoMagento::pushWellnessReporttoMagento');
-     $routes->cli('wellnessarchivejsonandreports', 'ArchiveDearchiveFiles::wellnessArchiveJsonFilesandReports');
-     $routes->cli('wellnessmhqupdate', 'WellnessController::updateMHQ');
-     $routes->cli('wellnessfailedreport', 'EmailController::wellnessFailedReport');
-     $routes->cli('wellnesspnsfailedreportforb2c', 'EmailController::wellnessPNSFailedReportforB2C');
-     $routes->cli('wellnessreportemailtocustomer', 'EmailController::wellnessReportEmailtoCustomer');
+   
+    /**Wellness  REPORT CRON START */
+    $routes->cli('generatewellnessreport', 'WellnessController::index');
+    $routes->get('pushwellnessreporttolims', 'SendPdftoLims::pushWellnesseporttoLims');
+    $routes->cli('pushwellnessreporttomagento', 'SendPdftoMagento::pushWellnessReporttoMagento');
+    $routes->cli('wellnessarchivejsonandreports', 'ArchiveDearchiveFiles::wellnessArchiveJsonFilesandReports');
+    $routes->cli('wellnessmhqupdate', 'WellnessController::updateMHQ');
+    $routes->cli('wellnessfailedreport', 'EmailController::wellnessFailedReport');
+    $routes->cli('wellnesspnsfailedreportforb2c', 'EmailController::wellnessPNSFailedReportforB2C');
+    $routes->cli('wellnessreportemailtocustomer', 'EmailController::wellnessReportEmailtoCustomer');
     $routes->cli('emailefailedwellnessreportsb2candb2b', 'EmailController::emailFailedWellnessReportsB2CAndB2B');
-     /**Wellness  REPORT CRON END */
-     
+    /**Wellness  REPORT CRON END */
+
     /**C&G  REPORT CRON START */
     $routes->cli('candgautoreportgenerate', 'AutoScriptController::candgReportGenerate');
     $routes->cli('cgfailedreport', 'EmailController::cgFailedReport');
@@ -617,7 +644,7 @@ $routes->group('cron', [
     $routes->cli('cbarchivejsonandreports', 'ArchiveDearchiveFiles::cbArchiveJsonFilesandReports');
     $routes->cli('cbfailedreport', 'EmailController::cbFailedReport');
     $routes->cli('cbtestgroupduplicatenotification', 'EmailController::cbTestGroupDuplicateNotification');
-    $routes->cli('pushcbreporttostemcell', 'SendpdftoStemcell::pushCbReporttoStemcell');
+     $routes->cli('pushcbreporttostemcell', 'SendpdftoStemcell::pushCbReporttoStemcell');
     /** CB REPORT CRON END */
 
 	

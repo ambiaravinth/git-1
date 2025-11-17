@@ -6,6 +6,8 @@ use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\StoreConfig;
 use App\Models\RegistrationServiceLogsModel;
+use App\Models\CbMagentoLogsModel;
+use App\Models\WellnessMagentoLogsModel;
 use App\Libraries\MergePDF;
 use App\Models\CronScheduleModel;
 use App\Models\SpermReportDataModel;
@@ -72,7 +74,7 @@ class SendPdftoMagento extends ResourceController
             'config_date' => $config_cb_date['config_value'],
             'limit' => $limit,
         ];
-        
+
         //================== FETCH CONFIGURATIONS DETAILS END ====================//
         return $config;
     }
@@ -103,74 +105,74 @@ class SendPdftoMagento extends ResourceController
     //     //================== FETCH CONFIGURATIONS DETAILS END ====================//
     //     return $config;
     // }
-     public function getWellnessconfig()
-{
-    //================== FETCH CONFIGURATIONS DETAILS START ====================//
-    $configModel = new StoreConfig();
-    $config_limit = $configModel->getConfigValue('PUSH_PDF_MAGENTO_LIMIT');
-    $config_wellness_url = $configModel->getConfigValue('PUSH_WELLNESS_PDF_MAGENTO_URL');
-    $config_wellness_token = $configModel->getConfigValue('PUSH_WELLNESS_PDF_MAGENTO_TOKEN');
+    public function getWellnessconfig()
+    {
+        //================== FETCH CONFIGURATIONS DETAILS START ====================//
+        $configModel = new StoreConfig();
+        $config_limit = $configModel->getConfigValue('PUSH_PDF_MAGENTO_LIMIT');
+        $config_wellness_url = $configModel->getConfigValue('PUSH_WELLNESS_PDF_MAGENTO_URL');
+        $config_wellness_token = $configModel->getConfigValue('PUSH_WELLNESS_PDF_MAGENTO_TOKEN');
 
-    // Check mandatory configs
-    if (!isset($config_wellness_url['config_value']) || !isset($config_wellness_token['config_value'])) {
-        echo "Please set configuration details";
-        $this->cronschedulemodel->updateEndTime([
-            'endtime' => date('Y-m-d H:i:s'),
-            'status' => "error",
-            'remarks' => "Please set configuration details"
-        ], $this->cron_id);
-        exit;
-    }
+        // Check mandatory configs
+        if (!isset($config_wellness_url['config_value']) || !isset($config_wellness_token['config_value'])) {
+            echo "Please set configuration details";
+            $this->cronschedulemodel->updateEndTime([
+                'endtime' => date('Y-m-d H:i:s'),
+                'status' => "error",
+                'remarks' => "Please set configuration details"
+            ], $this->cron_id);
+            exit;
+        }
 
-    // Default limit
+        // Default limit
     $limit = $config_limit['config_value'] ?? 10;
 
-    // Return config array
-    $config = [
-        'url' => $config_wellness_url['config_value'],
-        'token' => $config_wellness_token['config_value'],
-        'limit' => $limit,
-    ];
+        // Return config array
+        $config = [
+            'url' => $config_wellness_url['config_value'],
+            'token' => $config_wellness_token['config_value'],
+            'limit' => $limit,
+        ];
 
-    //================== FETCH CONFIGURATIONS DETAILS END ====================//
-    return $config;
-}
-  public function getPnsconfig()
-{
-    //================== FETCH CONFIGURATIONS DETAILS START ====================//
-    $configModel = new StoreConfig();
-    $config_limit = $configModel->getConfigValue('PUSH_PDF_MAGENTO_LIMIT');
-    $config_pns_url = $configModel->getConfigValue('PUSH_PNS_PDF_MAGENTO_URL');
-    $config_pns_token = $configModel->getConfigValue('PUSH_PNS_PDF_MAGENTO_TOKEN');
+        //================== FETCH CONFIGURATIONS DETAILS END ====================//
+        return $config;
+    }
+    public function getPnsconfig()
+    {
+        //================== FETCH CONFIGURATIONS DETAILS START ====================//
+        $configModel = new StoreConfig();
+        $config_limit = $configModel->getConfigValue('PUSH_PDF_MAGENTO_LIMIT');
+        $config_pns_url = $configModel->getConfigValue('PUSH_PNS_PDF_MAGENTO_URL');
+        $config_pns_token = $configModel->getConfigValue('PUSH_PNS_PDF_MAGENTO_TOKEN');
 
-    // Check mandatory configs
-    if (
-        !isset($config_pns_url['config_value']) || 
-        !isset($config_pns_token['config_value'])
+        // Check mandatory configs
+        if (
+            !isset($config_pns_url['config_value']) ||
+            !isset($config_pns_token['config_value'])
        
-    ) {
-        echo "Please set configuration details";
-        $this->cronschedulemodel->updateEndTime([
-            'endtime' => date('Y-m-d H:i:s'),
-            'status' => "error",
-            'remarks' => "Please set configuration details"
-        ], $this->cron_id);
-        exit;
+        ) {
+            echo "Please set configuration details";
+            $this->cronschedulemodel->updateEndTime([
+                'endtime' => date('Y-m-d H:i:s'),
+                'status' => "error",
+                'remarks' => "Please set configuration details"
+            ], $this->cron_id);
+            exit;
+        }
+
+        // Default limit
+        $limit = $config_limit['config_value'] ?? 10;
+
+        // Return config array
+        $config = [
+            'url' => $config_pns_url['config_value'],
+            'token' => $config_pns_token['config_value'],
+            'limit' => $limit,
+        ];
+
+        //================== FETCH CONFIGURATIONS DETAILS END ====================//
+        return $config;
     }
-
-    // Default limit
-    $limit = $config_limit['config_value'] ?? 10;
-
-    // Return config array
-    $config = [
-        'url' => $config_pns_url['config_value'],
-        'token' => $config_pns_token['config_value'],
-        'limit' => $limit,
-    ];
-
-    //================== FETCH CONFIGURATIONS DETAILS END ====================//
-    return $config;
-}
 
     // Push Sperm Score pdf data to Magento server
     public function pushSpermscoreReporttoMagento()
@@ -188,13 +190,13 @@ class SendPdftoMagento extends ResourceController
        
     }
 
-        // Push CB pdf data to Magento server
-        public function pushCbReporttoMagento()
-        {
+    // Push CB pdf data to Magento server
+    public function pushCbReporttoMagento()
+    {
             $this->cron_id = $this->cronschedulemodel->saveCronSchedule(['cronname'=>'pushcbreporttomagento','starttime'=>date('Y-m-d H:i:s'),'status'=>'inprocess']);
-            $config =  $this->getCbconfig();
+        $config =  $this->getCbconfig();
             $limit =  10;//$config['limit'] ?? 2;
-            $reportrecords = $this->getCbReportDetails($limit);
+        $reportrecords = $this->getCbReportDetails($limit);
             if(!empty($reportrecords)){
                 $this->pushCbReportData($reportrecords, $config,'cb');
             }else{
@@ -215,11 +217,11 @@ class SendPdftoMagento extends ResourceController
             $reportrecords = $this->getWellnesseportDetails($limit, $start_date,$B2C_CODE);
             if ($reportrecords) {
                 $this->pushWellnessReportData($reportrecords, $config, 'wellness');
-            } else {
-                echo 'No pending data to push the PDF';
-            }
-            $this->cronschedulemodel->updateEndTime(['endtime' => date('Y-m-d H:i:s'), 'status' => "success"], $this->cron_id);
+        } else {
+            echo 'No pending data to push the PDF';
         }
+        $this->cronschedulemodel->updateEndTime(['endtime' => date('Y-m-d H:i:s'), 'status' => "success"], $this->cron_id);
+    }
           public function pushPnsReporttoMagento()
             {
                 $this->cron_id = $this->cronschedulemodel->saveCronSchedule(['cronname' => 'pushpnsreporttomagento', 'starttime' => date('Y-m-d H:i:s'), 'status' => 'inprocess']);
@@ -291,7 +293,7 @@ class SendPdftoMagento extends ResourceController
 
      // Push Ovascore pdf data to Magento server
      public function pushOvascoreReporttoMagento()
-     {
+    {
          $this->cron_id = $this->cronschedulemodel->saveCronSchedule(['cronname'=>'pushovascorereporttomagento','starttime'=>date('Y-m-d H:i:s'),'status'=>'inprocess']);
          $config =  $this->getconfiguration();
          $limit =  $config['limit'] ?? 10;
@@ -326,71 +328,71 @@ class SendPdftoMagento extends ResourceController
     public function pushPdfData($reportrecords, $config, $report_type)
     {
             $registrationreportLogs = new RegistrationServiceLogsModel();
-            //================INSERT TESTCODES AGAINST LABID'S==================//
-            //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
-            $configModel = new StoreConfig();
-            $config_value = $configModel->getConfigValue('BLOCK_REPORT_TESTCODES');
-            $BLOCK_REPORT_TESTCODES = isset($config_value['config_value']) ? explode(',', $config_value['config_value']) : array();
-            //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
-            $labIdData = array();
-            foreach ($reportrecords as $row) {
-                
-                if (in_array($row['testgroupcode'], $BLOCK_REPORT_TESTCODES)) {
-                    $updateIsattachmentsent = [
-                        'isrsattachmentsent' => 3   //TESTGROUPCODE IS BLOCKED TO SENT REPORT
-                    ];
-                    $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
+        //================INSERT TESTCODES AGAINST LABID'S==================//
+        //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
+        $configModel = new StoreConfig();
+        $config_value = $configModel->getConfigValue('BLOCK_REPORT_TESTCODES');
+        $BLOCK_REPORT_TESTCODES = isset($config_value['config_value']) ? explode(',', $config_value['config_value']) : array();
+        //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
+        $labIdData = array();
+        foreach ($reportrecords as $row) {
+
+            if (in_array($row['testgroupcode'], $BLOCK_REPORT_TESTCODES)) {
+                $updateIsattachmentsent = [
+                    'isrsattachmentsent' => 3   //TESTGROUPCODE IS BLOCKED TO SENT REPORT
+                ];
+                $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
                     echo $row['lab_id'].' Block to send report';
-                } else {
-                    if (is_file(FCPATH . $row['pdf_path'])) {
-                        $labIdData[$row['lab_id']]['testgroupcode'][] = $row['testgroupcode'];
+            } else {
+                if (is_file(FCPATH . $row['pdf_path'])) {
+                    $labIdData[$row['lab_id']]['testgroupcode'][] = $row['testgroupcode'];
                         $labIdData[$row['lab_id']]['pdfpath'][] = FCPATH.$row['pdf_path'];
                         $labIdData[$row['lab_id']]['report_url'][] = base_url().'/'.$row['pdf_path'];
-                        $labIdData[$row['lab_id']]['crm_number'] = $row['crm_id'];
-                        $labIdData[$row['lab_id']]['goals_achieved'] = $row['goals_achieved'] ?? "0";
+                    $labIdData[$row['lab_id']]['crm_number'] = $row['crm_id'];
+                    $labIdData[$row['lab_id']]['goals_achieved'] = $row['goals_achieved'] ?? "0";
                         if($report_type == 'sperm'){
                             $storagedatetime = $row['sample_storage_date_time'];
                             $labIdData[$row['lab_id']]['sample_storage_date_time'] = date('Y-m-d H:i', strtotime($storagedatetime));
                         }else{
                             $labIdData[$row['lab_id']]['sample_storage_date_time'] = '';
                         }
-                        // CB report cron functionlity to send crm,ladid,email_trigger_date,report_type,customer_email_address,email_trigger_status
+                    // CB report cron functionlity to send crm,ladid,email_trigger_date,report_type,customer_email_address,email_trigger_status
                         if($report_type == 'cb'){
-                            $labIdData[$row['lab_id']]['email_trigger_date_time'] = $row['email_trigger_date_time'];
-                            $labIdData[$row['lab_id']]['report_type'] = 'biobank';
-                            $labIdData[$row['lab_id']]['registration_date'] = $row['registration_date'];
-                            $labIdData[$row['lab_id']]['sample_date'] = $row['sample_date'];
-                            $labIdData[$row['lab_id']]['approved_date'] = $row['approved_on'];
-                            $labIdData[$row['lab_id']]['approved_by'] = '';
-                            $labIdData[$row['lab_id']]['customer_email_address'] = $row['email_id'];
-                            $labIdData[$row['lab_id']]['email_trigger_status'] = $row['email_sent'];
-                        }
-                    } else {
-                        $updateIsattachmentsent = [
-                            'isrsattachmentsent' => 2   //failed to sent attachment
-                        ];
-                        $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
-                        echo $row['lab_id'].' failed to sent attachment';
+                        $labIdData[$row['lab_id']]['email_trigger_date_time'] = $row['email_trigger_date_time'];
+                        $labIdData[$row['lab_id']]['report_type'] = 'biobank';
+                        $labIdData[$row['lab_id']]['registration_date'] = $row['registration_date'];
+                        $labIdData[$row['lab_id']]['sample_date'] = $row['sample_date'];
+                        $labIdData[$row['lab_id']]['approved_date'] = $row['approved_on'];
+                        $labIdData[$row['lab_id']]['approved_by'] = '';
+                        $labIdData[$row['lab_id']]['customer_email_address'] = $row['email_id'];
+                        $labIdData[$row['lab_id']]['email_trigger_status'] = $row['email_sent'];
                     }
+                } else {
+                    $updateIsattachmentsent = [
+                        'isrsattachmentsent' => 2   //failed to sent attachment
+                    ];
+                    $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
+                        echo $row['lab_id'].' failed to sent attachment';
                 }
             }
-            $merged_pdf = "";
-            foreach ($labIdData as $labId => $labData) {
-                $reqPayload = array();
-                $reqPayload['data']['lab_id'] = $labId;
-                $reqPayload['data']['crm_number'] = $labData['crm_number'];
-                $reqPayload['data']['report_type'] = $report_type;
-                $reqPayload['data']['report_url'] = $labData['report_url'][0];
-                $reqPayload['data']['goal_percentage'] = $labData['goals_achieved'];
+        }
+        $merged_pdf = "";
+        foreach ($labIdData as $labId => $labData) {
+            $reqPayload = array();
+            $reqPayload['data']['lab_id'] = $labId;
+            $reqPayload['data']['crm_number'] = $labData['crm_number'];
+            $reqPayload['data']['report_type'] = $report_type;
+            $reqPayload['data']['report_url'] = $labData['report_url'][0];
+            $reqPayload['data']['goal_percentage'] = $labData['goals_achieved'];
                 $reqPayload['data']['sample_storage_date_time'] = $labData['sample_storage_date_time'];
                 if($report_type == 'cb'){
-                    $reqPayload['data']['email_trigger_date_time'] = $labData['email_trigger_date_time'];
-                    $reqPayload['data']['registration_date'] = $labData['registration_date'];
-                    $reqPayload['data']['sample_date'] =  $labData['sample_date'];
-                    $reqPayload['data']['approved_date'] =  $labData['approved_date'];
-                    $reqPayload['data']['approved_by'] = '';
+                $reqPayload['data']['email_trigger_date_time'] = $labData['email_trigger_date_time'];
+                $reqPayload['data']['registration_date'] = $labData['registration_date'];
+                $reqPayload['data']['sample_date'] =  $labData['sample_date'];
+                $reqPayload['data']['approved_date'] =  $labData['approved_date'];
+                $reqPayload['data']['approved_by'] = '';
                     $reqPayload['data']['customer_email_address'] = $labData['customer_email_address'];
-                    $reqPayload['data']['email_trigger_status'] = $labData['email_trigger_status'];
+                $reqPayload['data']['email_trigger_status'] = $labData['email_trigger_status'];
                 }
                 
                 if($report_type != 'cb' ){
@@ -420,30 +422,30 @@ class SendPdftoMagento extends ResourceController
                     }
                 }
             }
-    
-                //=============== MAKE SUFLAM THIRD PARTY API CALL ===================//
+
+            //=============== MAKE SUFLAM THIRD PARTY API CALL ===================//
                 // $response_magento = $this->curlCall($reqPayload, $config);
                 if($report_type == 'cb'){
-                    $reqPayload['data']['report_type'] = 'biobank';
-                    $response_magento = $this->curlCallCBReportMagento($reqPayload, $config);
+            $reqPayload['data']['report_type'] = 'biobank';
+            $response_magento = $this->curlCallCBReportMagento($reqPayload, $config);
                 }else{
                     $response_magento = $this->curlCall($reqPayload, $config);
                 }
-                $request  = $response_magento['post_data'];
-                $response = $response_magento['result'];
+            $request  = $response_magento['post_data'];
+            $response = $response_magento['result'];
 
-                $regdatareportLogs = [
-                    'lab_id' => $labId,
-                    'attachment' => $request,
-                    'testgroupcode' => $labData['testgroupcode'][0],
-                    'response' => json_encode($response),
-                    'created_at' => date("Y-m-d H:i:s"),
-                    'system_type' => 'magento',
-                    'report_type' => $report_type
-                ];
+            $regdatareportLogs = [
+                'lab_id' => $labId,
+                'attachment' => $request,
+                'testgroupcode' => $labData['testgroupcode'][0],
+                'response' => json_encode($response),
+                'created_at' => date("Y-m-d H:i:s"),
+                'system_type' => 'magento',
+                'report_type' => $report_type
+            ];
                 if (isset($response['status']) && $response['status'] == 'success') {
-                    $regdatareportLogs['status'] = "done";
-                    //===================== UPDATE FLAG IN REPORT TABLE ====================//
+                $regdatareportLogs['status'] = "done";
+                //===================== UPDATE FLAG IN REPORT TABLE ====================//
                     $updateIsattachmentsent = [
                         'isrsattachmentsent' => 1,
                         'pushpdfdate' => date("Y-m-d H:i:s")
@@ -452,52 +454,53 @@ class SendPdftoMagento extends ResourceController
 
                     echo "<pre>";
                     echo $labId . " Report Attachment Sent Successfully";
-                } else {
-                    //============== updated status as failed if error ============//
-                    $regdatareportLogs['status'] = "failed";
+            } else {
+                //============== updated status as failed if error ============//
+                $regdatareportLogs['status'] = "failed";
                     $updateIsattachmentsent = [
                         'isrsattachmentsent' => 2   //failed to sent attachment
                     ];
                     $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
                     echo "<pre>";
                     echo $labId . " Getting Error Response from Magento for this LAB ID";
-                }
-
-               
-                $registrationreportLogs->insert($regdatareportLogs); 
-                if (is_file($merged_pdf)) {
-                    unlink($merged_pdf);
-                }
-                //=============== MAKE SUFLAM THIRD PARTY API CALL ===================//
             }
+
+
+            $registrationreportLogs->insert($regdatareportLogs);
+            if (is_file($merged_pdf)) {
+                unlink($merged_pdf);
+            }
+            //=============== MAKE SUFLAM THIRD PARTY API CALL ===================//
+        }
        
     }
 
     public function pushCbReportData($reportrecords, $config, $report_type)
     {
-            $registrationreportLogs = new RegistrationServiceLogsModel();
-            //================INSERT TESTCODES AGAINST LABID'S==================//
-            //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
-            $configModel = new StoreConfig();
-            $config_value = $configModel->getConfigValue('BLOCK_REPORT_TESTCODES');
-            $BLOCK_REPORT_TESTCODES = isset($config_value['config_value']) ? explode(',', $config_value['config_value']) : array();
-            //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
-            $labIdData = array();
-            foreach ($reportrecords as $row) {
-                
-                if (in_array($row['testgroupcode'], $BLOCK_REPORT_TESTCODES)) {
-                    $updateIsattachmentsent = [
-                        'isrsattachmentsent' => 3   //TESTGROUPCODE IS BLOCKED TO SENT REPORT
-                    ];
-                    $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
+        $registrationreportLogs = new RegistrationServiceLogsModel();
+        $registrationreportLogs = new CbMagentoLogsModel();
+        //================INSERT TESTCODES AGAINST LABID'S==================//
+        //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
+        $configModel = new StoreConfig();
+        $config_value = $configModel->getConfigValue('BLOCK_REPORT_TESTCODES');
+        $BLOCK_REPORT_TESTCODES = isset($config_value['config_value']) ? explode(',', $config_value['config_value']) : array();
+        //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
+        $labIdData = array();
+        foreach ($reportrecords as $row) {
+
+            if (in_array($row['testgroupcode'], $BLOCK_REPORT_TESTCODES)) {
+                $updateIsattachmentsent = [
+                    'isrsattachmentsent' => 3   //TESTGROUPCODE IS BLOCKED TO SENT REPORT
+                ];
+                $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
                     echo $row['lab_id'].' Block to send report';
-                } else {
-                    if (is_file(FCPATH . $row['pdf_path'])) {
-                        $labIdData[$row['lab_id']]['testgroupcode'][] = $row['testgroupcode'];
+            } else {
+                if (is_file(FCPATH . $row['pdf_path'])) {
+                    $labIdData[$row['lab_id']]['testgroupcode'][] = $row['testgroupcode'];
                         $labIdData[$row['lab_id']]['pdfpath'][] = FCPATH.$row['pdf_path'];
                         $labIdData[$row['lab_id']]['report_url'][] = base_url().'/'.$row['pdf_path'];
-                        $labIdData[$row['lab_id']]['crm_number'] = $row['crm_id'];
-                        $labIdData[$row['lab_id']]['goals_achieved'] = $row['goals_achieved'] ?? "0";
+                    $labIdData[$row['lab_id']]['crm_number'] = $row['crm_id'];
+                    $labIdData[$row['lab_id']]['goals_achieved'] = $row['goals_achieved'] ?? "0";
                         // CB report cron functionlity to send crm,ladid,email_trigger_date,report_type,customer_email_address,email_trigger_status
                         if($report_type == 'cb'){
                              $input = trim($row['mobile_no']);
@@ -515,107 +518,107 @@ class SendPdftoMagento extends ResourceController
                                 $mobile_number = trim($numbers[1]);
                             }
                         }
-                            $labIdData[$row['lab_id']]['email_trigger_date_time'] = $row['email_trigger_date_time'];
-                            $labIdData[$row['lab_id']]['report_type'] = 'biobank';
-                            $labIdData[$row['lab_id']]['registration_date'] = $row['registration_date'];
-                            $labIdData[$row['lab_id']]['sample_date'] = $row['sample_date'];
+                        $labIdData[$row['lab_id']]['email_trigger_date_time'] = $row['email_trigger_date_time'];
+                        $labIdData[$row['lab_id']]['report_type'] = 'biobank';
+                        $labIdData[$row['lab_id']]['registration_date'] = $row['registration_date'];
+                        $labIdData[$row['lab_id']]['sample_date'] = $row['sample_date'];
                             $labIdData[$row['lab_id']]['approved_date'] = $row['approved_on'];
-                            $labIdData[$row['lab_id']]['approved_by'] = '';
-                            $labIdData[$row['lab_id']]['customer_email_address'] = $row['email_id'];
-                            $labIdData[$row['lab_id']]['email_trigger_status'] = $row['email_sent'];
+                        $labIdData[$row['lab_id']]['approved_by'] = '';
+                        $labIdData[$row['lab_id']]['customer_email_address'] = $row['email_id'];
+                        $labIdData[$row['lab_id']]['email_trigger_status'] = $row['email_sent'];
                             $labIdData[$row['lab_id']]['mobile_number'] = $mobile_number;
                             $labIdData[$row['lab_id']]['alternate_mobile_number'] =  $alternate_mobile_number;
-                        }
-                    } else {
-                        $updateIsattachmentsent = [
-                            'isrsattachmentsent' => 2   //failed to sent attachment
-                        ];
-                        $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
-                        echo $row['lab_id'].' failed to sent attachment';
                     }
+                } else {
+                    $updateIsattachmentsent = [
+                        'isrsattachmentsent' => 2   //failed to sent attachment
+                    ];
+                    $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
+                        echo $row['lab_id'].' failed to sent attachment';
                 }
             }
-            $merged_pdf = "";
-            foreach ($labIdData as $labId => $labData) {
-                $reqPayload = array();
-                $reqPayload['data']['lab_id'] = $labId;
-                $reqPayload['data']['crm_number'] = $labData['crm_number'];
-                $reqPayload['data']['report_type'] = $report_type;
-                $reqPayload['data']['report_url'] = $labData['report_url'][0];
-                $reqPayload['data']['goal_percentage'] = $labData['goals_achieved'];
-                $reqPayload['data']['sample_storage_date_time'] = $labData['sample_storage_date_time'];
+        }
+        $merged_pdf = "";
+        foreach ($labIdData as $labId => $labData) {
+            $reqPayload = array();
+            $reqPayload['data']['lab_id'] = $labId;
+            $reqPayload['data']['crm_number'] = $labData['crm_number'];
+            $reqPayload['data']['report_type'] = $report_type;
+            $reqPayload['data']['report_url'] = $labData['report_url'][0];
+            $reqPayload['data']['goal_percentage'] = $labData['goals_achieved'];
+            $reqPayload['data']['sample_storage_date_time'] = $labData['sample_storage_date_time'];
                 if($report_type == 'cb'){
-                    $reqPayload['data']['email_trigger_date_time'] = $labData['email_trigger_date_time'];
-                    $reqPayload['data']['registration_date'] = $labData['registration_date'];
-                    $reqPayload['data']['sample_date'] =  $labData['sample_date'];
-                    $reqPayload['data']['approved_date'] =  $labData['approved_date'];
-                    $reqPayload['data']['approved_by'] = '';
+                $reqPayload['data']['email_trigger_date_time'] = $labData['email_trigger_date_time'];
+                $reqPayload['data']['registration_date'] = $labData['registration_date'];
+                $reqPayload['data']['sample_date'] =  $labData['sample_date'];
+                $reqPayload['data']['approved_date'] =  $labData['approved_date'];
+                $reqPayload['data']['approved_by'] = '';
                     $reqPayload['data']['customer_email_address'] = trim($labData['customer_email_address']);
-                    $reqPayload['data']['email_trigger_status'] = $labData['email_trigger_status'];
+                $reqPayload['data']['email_trigger_status'] = $labData['email_trigger_status'];
                     $reqPayload['data']['mobile_number'] = $labData['mobile_number'];
                     $reqPayload['data']['alternate_mobile_number'] = $labData['alternate_mobile_number'];
-                }
-             
-                //=============== MAKE SUFLAM THIRD PARTY API CALL ===================//
+            }
+
+            //=============== MAKE SUFLAM THIRD PARTY API CALL ===================//
            
                 $reqPayload['data']['report_type'] = 'biobank';
                 $response_magento = $this->curlCallCBReportMagento($reqPayload, $config);
-                
-                $request  = $response_magento['post_data'];
-                $response = $response_magento['result'];
 
-                $regdatareportLogs = [
-                    'lab_id' => $labId,
-                    'attachment' => $request,
-                    'testgroupcode' => $labData['testgroupcode'][0],
-                    'response' => json_encode($response),
-                    'created_at' => date("Y-m-d H:i:s"),
-                    'system_type' => 'magento',
-                    'report_type' => $report_type
-                ];
-                if (isset($response['status']) && ($response['status'] == 'success' || $response['status'] == 'true')) {
-                    $regdatareportLogs['status'] = "done";
-                    //===================== UPDATE FLAG IN REPORT TABLE ====================//
-                    if ($report_type == 'cb') {
-                        if (isset($response['response'])) {
-                            $decodedResponse = json_decode($response['response'], true);
-                            if (json_last_error() !== JSON_ERROR_NONE) {
-                                // Invalid JSON - update isrsattachmentsent to 2
-                                $isrsattachmentsent = 2;
-                                $updateIsattachmentsent = [
-                                    'isrsattachmentsent' => $isrsattachmentsent,
-                                    'failed_reason' => "The JSON response from Magento is invalid",
-                                    'is_failed' => 1
-                                ];
-                                $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
-                                echo $labId . " Invalid JSON: " . json_last_error_msg();
-                                return;
-                            }
-                            if (isset($decodedResponse['success']['data'])) {
-                                $magento_response_id = $decodedResponse['success']['data'] ?? null;
-                            }
-                            if (!empty($magento_response_id)) {
-                                $isrsattachmentsent = 1;
-                                $updateIsattachmentsent = [
-                                    'magento_response_id' => $magento_response_id,
-                                    'isrsattachmentsent' => $isrsattachmentsent,
-                                    'pushpdfdate' => date("Y-m-d H:i:s"),
-                                    'failed_reason' => "",
-                                    'is_failed' => 0
-                                ];
-                                $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
-                                echo $labId . " Report Attachment Sent Successfully";
-                            } else {
-                                $isrsattachmentsent = 2;
-                                $updateIsattachmentsent = [
-                                    'isrsattachmentsent' => $isrsattachmentsent,
-                                    'failed_reason' => 'Magento response ID is missing or unavailable',
-                                    'is_failed' => 1
-                                ];
-                                $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
-                                echo $labId . " Magento reponse id empty";
-                            }
+            $request  = $response_magento['post_data'];
+            $response = $response_magento['result'];
+
+            $regdatareportLogs = [
+                'lab_id' => $labId,
+                'attachment' => $request,
+                'testgroupcode' => $labData['testgroupcode'][0],
+                'response' => json_encode($response),
+                'created_at' => date("Y-m-d H:i:s"),
+                'system_type' => 'magento',
+                'report_type' => $report_type
+            ];
+            if (isset($response['status']) && ($response['status'] == 'success' || $response['status'] == 'true')) {
+                $regdatareportLogs['status'] = "done";
+                //===================== UPDATE FLAG IN REPORT TABLE ====================//
+                if ($report_type == 'cb') {
+                    if (isset($response['response'])) {
+                        $decodedResponse = json_decode($response['response'], true);
+                        if (json_last_error() !== JSON_ERROR_NONE) {
+                            // Invalid JSON - update isrsattachmentsent to 2
+                            $isrsattachmentsent = 2;
+                            $updateIsattachmentsent = [
+                                'isrsattachmentsent' => $isrsattachmentsent,
+                                'failed_reason' => "The JSON response from Magento is invalid",
+                                'is_failed' => 1
+                            ];
+                            $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
+                            echo $labId . " Invalid JSON: " . json_last_error_msg();
+                            return;
                         }
+                        if (isset($decodedResponse['success']['data'])) {
+                            $magento_response_id = $decodedResponse['success']['data'] ?? null;
+                        }
+                        if (!empty($magento_response_id)) {
+                            $isrsattachmentsent = 1;
+                            $updateIsattachmentsent = [
+                                    'magento_response_id' => $magento_response_id,
+                                'isrsattachmentsent' => $isrsattachmentsent,
+                                'pushpdfdate' => date("Y-m-d H:i:s"),
+                                'failed_reason' => "",
+                                'is_failed' => 0
+                            ];
+                            $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
+                            echo $labId . " Report Attachment Sent Successfully";
+                        } else {
+                            $isrsattachmentsent = 2;
+                            $updateIsattachmentsent = [
+                                'isrsattachmentsent' => $isrsattachmentsent,
+                                'failed_reason' => 'Magento response ID is missing or unavailable',
+                                'is_failed' => 1
+                            ];
+                            $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
+                            echo $labId . " Magento reponse id empty";
+                        }
+                    }
                     }else{
                     $updateIsattachmentsent = [
                         'isrsattachmentsent' => 1,
@@ -625,71 +628,72 @@ class SendPdftoMagento extends ResourceController
 
                     echo "<pre>";
                     echo $labId . " Report Attachment Sent Successfully";
-                    }
-                } else {
-                    //============== updated status as failed if error ============//
-                    $regdatareportLogs['status'] = "failed";
-                    if ($report_type == 'cb') {
-                        $updateIsattachmentsent = [
-                            'isrsattachmentsent' => 2,  //failed to sent attachment
-                            'failed_reason' => "Getting an error response from Magento",
-                            'is_failed' => 1
-    
-                        ];
-                        $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
-                        echo "<pre>";
-                        echo $labId . " Getting Error Response from Magento for this LAB ID";
+                }
+            } else {
+                //============== updated status as failed if error ============//
+                $regdatareportLogs['status'] = "failed";
+                if ($report_type == 'cb') {
+                    $updateIsattachmentsent = [
+                        'isrsattachmentsent' => 2,  //failed to sent attachment
+                        'failed_reason' => "Getting an error response from Magento",
+                        'is_failed' => 1
+
+                    ];
+                    $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
+                    echo "<pre>";
+                    echo $labId . " Getting Error Response from Magento for this LAB ID";
                     }
                     else{
-                        $updateIsattachmentsent = [
-                            'isrsattachmentsent' => 2   //failed to sent attachment
-                        ];
-                        $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
-                        echo "<pre>";
-                        echo $labId . " Getting Error Response from Magento for this LAB ID";
-                    }
+                    $updateIsattachmentsent = [
+                        'isrsattachmentsent' => 2   //failed to sent attachment
+                    ];
+                    $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
+                    echo "<pre>";
+                    echo $labId . " Getting Error Response from Magento for this LAB ID";
                 }
-
-               
-                $registrationreportLogs->insert($regdatareportLogs); 
-                if (is_file($merged_pdf)) {
-                    unlink($merged_pdf);
-                }
-                //=============== MAKE SUFLAM THIRD PARTY API CALL ===================//
             }
+
+
+            $registrationreportLogs->insert($regdatareportLogs);
+            if (is_file($merged_pdf)) {
+                unlink($merged_pdf);
+            }
+            //=============== MAKE SUFLAM THIRD PARTY API CALL ===================//
+        }
        
     }
 
-      public function pushWellnessReportData($reportrecords, $config, $report_type)
+    public function pushWellnessReportData($reportrecords, $config, $report_type)
     {
-            $registrationreportLogs = new RegistrationServiceLogsModel();
-            //================INSERT TESTCODES AGAINST LABID'S==================//
-            //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
-            $configModel = new StoreConfig();
-            $config_value = $configModel->getConfigValue('BLOCK_REPORT_TESTCODES');
-            $BLOCK_REPORT_TESTCODES = isset($config_value['config_value']) ? explode(',', $config_value['config_value']) : array();
-            //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
-            $labIdData = array();
-            foreach ($reportrecords as $row) {
-                
-                if (in_array($row['testgroupcode'], $BLOCK_REPORT_TESTCODES)) {
-                    $updateIsattachmentsent = [
-                        'isrsattachmentsenttomagento' => 3   //TESTGROUPCODE IS BLOCKED TO SENT REPORT
-                    ];
-                    $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
+        // $registrationreportLogs = new RegistrationServiceLogsModel();
+        $registrationreportLogs = new WellnessMagentoLogsModel;
+        //================INSERT TESTCODES AGAINST LABID'S==================//
+        //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
+        $configModel = new StoreConfig();
+        $config_value = $configModel->getConfigValue('BLOCK_REPORT_TESTCODES');
+        $BLOCK_REPORT_TESTCODES = isset($config_value['config_value']) ? explode(',', $config_value['config_value']) : array();
+        //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
+        $labIdData = array();
+        foreach ($reportrecords as $row) {
+
+            if (in_array($row['testgroupcode'], $BLOCK_REPORT_TESTCODES)) {
+                $updateIsattachmentsent = [
+                    'isrsattachmentsenttomagento' => 3   //TESTGROUPCODE IS BLOCKED TO SENT REPORT
+                ];
+                $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
                     echo $row['lab_id'].' Block to send report';
-                } else {
-                    if (is_file(FCPATH . $row['pdf_path'])) {
-                        $labIdData[$row['lab_id']]['testgroupcode'][] = $row['testgroupcode'];
+            } else {
+                if (is_file(FCPATH . $row['pdf_path'])) {
+                    $labIdData[$row['lab_id']]['testgroupcode'][] = $row['testgroupcode'];
                         $labIdData[$row['lab_id']]['pdfpath'][] = FCPATH.$row['pdf_path'];
                         $labIdData[$row['lab_id']]['report_url'][] = base_url().'/'.$row['pdf_path'];
-                        $labIdData[$row['lab_id']]['crm_number'] = $row['crm_id'];
-                        $labIdData[$row['lab_id']]['lab_id'] = $row['lab_id'];
-                        $labIdData[$row['lab_id']]['report_type'] = $report_type;
-                        $labIdData[$row['lab_id']]['service_type'] = $row['service_type'];
-                        $labIdData[$row['lab_id']]['report_released_date'] = $row['report_release_date'];
-                        $labIdData[$row['lab_id']]['sample_registered_date'] = $row['sample_reg_date'];
-                        if ($labIdData[$row['lab_id']]['service_type']) {
+                    $labIdData[$row['lab_id']]['crm_number'] = $row['crm_id'];
+                    $labIdData[$row['lab_id']]['lab_id'] = $row['lab_id'];
+                    $labIdData[$row['lab_id']]['report_type'] = $report_type;
+                    $labIdData[$row['lab_id']]['service_type'] = $row['service_type'];
+                    $labIdData[$row['lab_id']]['report_released_date'] = $row['report_release_date'];
+                    $labIdData[$row['lab_id']]['sample_registered_date'] = $row['sample_reg_date'];
+                    if ($labIdData[$row['lab_id']]['service_type']) {
                         $serviceType = $labIdData[$row['lab_id']]['service_type'];
 
                         $packageNames = [
@@ -713,54 +717,54 @@ class SendPdftoMagento extends ResourceController
                         $labIdData[$row['lab_id']]['report_title'] = $reportTitle;
                     }
                        
-                    } else {
-                        $updateIsattachmentsent = [
-                            'isrsattachmentsenttomagento' => 2   //failed to sent attachment
-                        ];
-                        $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
+                } else {
+                    $updateIsattachmentsent = [
+                        'isrsattachmentsenttomagento' => 2   //failed to sent attachment
+                    ];
+                    $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
                         echo $row['lab_id'].' failed to sent attachment';
-                    }
                 }
             }
-            $merged_pdf = "";
-            foreach ($labIdData as $labId => $labData) {
-                
-                $reqPayload = array();
-                $reqPayload['data']['crm'] = $labData['crm_number'];
-                $reqPayload['data']['lab_id'] = $labId;
-                $reqPayload['data']['report_type'] = $report_type;
-                $reqPayload['data']['report_link'] = $labData['report_url'][0];
-                $reqPayload['data']['report_released_date'] =  $labData['report_released_date'];
-                $reqPayload['data']['sample_registered_date'] =   $labData['sample_registered_date'];
-                $reqPayload['data']['report_title'] =   $labData['report_title'];
-                $reqPayload['data']['service_id'] =  $labData['service_type'];
-               
-             
-                //=============== MAKE POST LOGIN THIRD PARTY API CALL ===================//
-           
-                
-                // debug($config);
-                $response_magento = $this->curlCallWellnessReportMagento($reqPayload, $config);
-                //debug($response_magento);
-                
-                $request  = $response_magento['post_data'];
-                $response = $response_magento['result'];
+        }
+        $merged_pdf = "";
+        foreach ($labIdData as $labId => $labData) {
 
-                $regdatareportLogs = [
-                    'lab_id' => $labId,
-                    'attachment' => $request,
-                    'testgroupcode' => $labData['testgroupcode'][0],
-                    'response' => json_encode($response),
-                    'created_at' => date("Y-m-d H:i:s"),
-                    'system_type' => 'magento',
-                    'report_type' => $report_type
-                ];
-                if (isset($response['status']) && ($response['status'] == 'success' || $response['status'] == 'true')) {
-                    $regdatareportLogs['status'] = "done";
-                    //===================== UPDATE FLAG IN REPORT TABLE ====================//
-                    if ($report_type == 'wellness') {
-                     if (isset($response['response'])) {
-                           $decodedResponse = json_decode($response['response'], true);
+            $reqPayload = array();
+            $reqPayload['data']['crm'] = $labData['crm_number'];
+            $reqPayload['data']['lab_id'] = $labId;
+            $reqPayload['data']['report_type'] = $report_type;
+            $reqPayload['data']['report_link'] = $labData['report_url'][0];
+            $reqPayload['data']['report_released_date'] =  $labData['report_released_date'];
+            $reqPayload['data']['sample_registered_date'] =   $labData['sample_registered_date'];
+            $reqPayload['data']['report_title'] =   $labData['report_title'];
+            $reqPayload['data']['service_id'] =  $labData['service_type'];
+
+
+            //=============== MAKE POST LOGIN THIRD PARTY API CALL ===================//
+
+
+            // debug($config);
+            $response_magento = $this->curlCallWellnessReportMagento($reqPayload, $config);
+            //debug($response_magento);
+
+            $request  = $response_magento['post_data'];
+            $response = $response_magento['result'];
+
+            $regdatareportLogs = [
+                'lab_id' => $labId,
+                'attachment' => $request,
+                'testgroupcode' => $labData['testgroupcode'][0],
+                'response' => json_encode($response),
+                'created_at' => date("Y-m-d H:i:s"),
+                'system_type' => 'magento',
+                'report_type' => $report_type
+            ];
+            if (isset($response['status']) && ($response['status'] == 'success' || $response['status'] == 'true')) {
+                $regdatareportLogs['status'] = "done";
+                //===================== UPDATE FLAG IN REPORT TABLE ====================//
+                if ($report_type == 'wellness') {
+                    if (isset($response['response'])) {
+                        $decodedResponse = json_decode($response['response'], true);
 
                         if (json_last_error() !== JSON_ERROR_NONE) {
                             // Invalid JSON - update isrsattachmentsenttomagento to 2
@@ -796,147 +800,147 @@ class SendPdftoMagento extends ResourceController
 
                     echo "<pre>";
                     echo $labId . " Report Attachment Sent Successfully";
-                    }
-                } else {
-                    //============== updated status as failed if error ============//
-                    $regdatareportLogs['status'] = "failed";
-                    if ($report_type == 'wellness') {
-                        $updateIsattachmentsent = [
-                            'isrsattachmentsenttomagento' => 2,  //failed to sent attachment
-                            'failed_reason' => "Getting an error response from Magento",
-                            'is_failed' => 1
-    
-                        ];
-                        $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
-                        echo "<pre>";
-                        echo $labId . " Getting Error Response from Magento for this LAB ID";
+                }
+            } else {
+                //============== updated status as failed if error ============//
+                $regdatareportLogs['status'] = "failed";
+                if ($report_type == 'wellness') {
+                    $updateIsattachmentsent = [
+                        'isrsattachmentsenttomagento' => 2,  //failed to sent attachment
+                        'failed_reason' => "Getting an error response from Magento",
+                        'is_failed' => 1
+
+                    ];
+                    $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
+                    echo "<pre>";
+                    echo $labId . " Getting Error Response from Magento for this LAB ID";
                     }
                     else{
-                        $updateIsattachmentsent = [
-                            'isrsattachmentsenttomagento' => 2   //failed to sent attachment
-                        ];
-                        $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
-                        echo "<pre>";
-                        echo $labId . " Getting Error Response from Magento for this LAB ID";
-                    }
+                    $updateIsattachmentsent = [
+                        'isrsattachmentsenttomagento' => 2   //failed to sent attachment
+                    ];
+                    $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
+                    echo "<pre>";
+                    echo $labId . " Getting Error Response from Magento for this LAB ID";
                 }
-
-               
-                $registrationreportLogs->insert($regdatareportLogs); 
-                if (is_file($merged_pdf)) {
-                    unlink($merged_pdf);
-                }
-                //=============== MAKE MAGENTO THIRD PARTY API CALL ===================//
             }
+
+
+            $registrationreportLogs->insert($regdatareportLogs);
+            if (is_file($merged_pdf)) {
+                unlink($merged_pdf);
+            }
+            //=============== MAKE MAGENTO THIRD PARTY API CALL ===================//
+        }
        
     }
 
-     public function pushPnsReportData($reportrecords, $config, $report_type)
+    public function pushPnsReportData($reportrecords, $config, $report_type)
     {
-            $registrationreportLogs = new RegistrationServiceLogsModel();
+        $registrationreportLogs = new RegistrationServiceLogsModel();
 
-            //================INSERT TESTCODES AGAINST LABID'S==================//
-            //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
-            $configModel = new StoreConfig();
-            $config_value = $configModel->getConfigValue('BLOCK_REPORT_TESTCODES');
-            $BLOCK_REPORT_TESTCODES = isset($config_value['config_value']) ? explode(',', $config_value['config_value']) : array();
-            //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
-            $labIdData = array();
-            foreach ($reportrecords as $row) {
-                
-                if (is_file(FCPATH . $row['pdf_path'])) {
-                        $labIdData[$row['lab_id']]['testgroupcode'][] = $row['testgroupcode'];
+        //================INSERT TESTCODES AGAINST LABID'S==================//
+        //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
+        $configModel = new StoreConfig();
+        $config_value = $configModel->getConfigValue('BLOCK_REPORT_TESTCODES');
+        $BLOCK_REPORT_TESTCODES = isset($config_value['config_value']) ? explode(',', $config_value['config_value']) : array();
+        //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
+        $labIdData = array();
+        foreach ($reportrecords as $row) {
+
+            if (is_file(FCPATH . $row['pdf_path'])) {
+                $labIdData[$row['lab_id']]['testgroupcode'][] = $row['testgroupcode'];
                         $labIdData[$row['lab_id']]['pdfpath'][] = FCPATH.$row['pdf_path'];
                         $labIdData[$row['lab_id']]['report_url'][] = base_url().'/'.$row['pdf_path'];
-                        $labIdData[$row['lab_id']]['crm_number'] = $row['crm_id'];
-                        $labIdData[$row['lab_id']]['lab_id'] = $row['lab_id'];
-                        $labIdData[$row['lab_id']]['report_type'] = $report_type;
-                        $labIdData[$row['lab_id']]['report_released_date'] = $row['report_release_date'];
-                        $labIdData[$row['lab_id']]['sample_registered_date'] = $row['sample_reg_date'];
-                        $services = [
-                            '1TQWPLGF'     => '1T Quad (with PLGF) (Delfia)',
-                            '1TPENDEL'     => '1T Penta (Delfia)',
-                            'TDSWOPE'      => '1TPenta_Delfia Serum without PE',
-                            'CSDEL'        => 'Combined Screening Delfia Serum',
-                            'CSIMUNIPTOLD' => 'Combined Screening with NIPT (Immulite)',
-                            'CSDELNIPTOLD' => 'Combined Screening with NIPT (Delfia)',
-                            'CSIMUQFPCR'   => 'Combined Screening with QF-PCR (Immulite)',
-                            'CSDELQFPCR'   => 'Combined Screening with QFPCR (Delfia)',
-                            'DMNIPT'       => 'Double Marker with NIPT',
-                            'DMNDS'        => 'Double Marker With NIPT Delfia_Serum',
-                            'DMDS'         => 'Double Marker-Delfia_Serum',
-                            'CSPLGFDEL'    => 'Combined Screening with PLGF (Delfia)',
+                $labIdData[$row['lab_id']]['crm_number'] = $row['crm_id'];
+                $labIdData[$row['lab_id']]['lab_id'] = $row['lab_id'];
+                $labIdData[$row['lab_id']]['report_type'] = $report_type;
+                $labIdData[$row['lab_id']]['report_released_date'] = $row['report_release_date'];
+                $labIdData[$row['lab_id']]['sample_registered_date'] = $row['sample_reg_date'];
+                $services = [
+                    '1TQWPLGF'     => '1T Quad (with PLGF) (Delfia)',
+                    '1TPENDEL'     => '1T Penta (Delfia)',
+                    'TDSWOPE'      => '1TPenta_Delfia Serum without PE',
+                    'CSDEL'        => 'Combined Screening Delfia Serum',
+                    'CSIMUNIPTOLD' => 'Combined Screening with NIPT (Immulite)',
+                    'CSDELNIPTOLD' => 'Combined Screening with NIPT (Delfia)',
+                    'CSIMUQFPCR'   => 'Combined Screening with QF-PCR (Immulite)',
+                    'CSDELQFPCR'   => 'Combined Screening with QFPCR (Delfia)',
+                    'DMNIPT'       => 'Double Marker with NIPT',
+                    'DMNDS'        => 'Double Marker With NIPT Delfia_Serum',
+                    'DMDS'         => 'Double Marker-Delfia_Serum',
+                    'CSPLGFDEL'    => 'Combined Screening with PLGF (Delfia)',
                             'CSPLGFDELNIPT'=> 'Combined Screening + PLGF with NIPT (Delfia)',
-                            'QSTDEL14W'    => '2T Quadruple Screening (14w 1days to 14w 5 days) - Delfia',
-                            'STSIMU'       => '2T Triple Screening (Immulite)',
-                            'STSDEL14W'    => '2T Triple Screening (14w 1 days to 14w 5 days) (Delfia)',
-                            'QSTDEL'       => '2T Quadruple Screening (Delfia)',
-                            'QSTIMU'       => '2T Quadruple Screening (Immulite)',
-                            'STSDEL'       => '2T Triple Screen (Delfia)',
-                            'CSIMU'        => 'Combined Screening (Immulite)',
-                            'DMDEL'        => 'Double marker (Delfia)',
-                            'DMIMU'        => 'Double marker (Immulite)',
-                            'CSDELHBA'     => 'Combined Screening (Delfia) with Hemoglobinopathy + HBA1C',
-                            'GEN0875'      => 'msurePGx-Pharmacogenetics Comprehensive Panel',
-                            'GEN0916'      => 'msurePGx-Pharmacogenetics Comprehensive Panel for Onco',
-                        ];
-                        if (!empty($labIdData[$row['lab_id']]['testgroupcode'])) {
-                            $testgroupcode = $labIdData[$row['lab_id']]['testgroupcode'][0];
-                            $labIdData[$row['lab_id']]['report_title'] = $services[$testgroupcode] ?? $row['report_title'];
-                       }
-                       
-                    } else {
-                        $updateIsattachmentsent = [
-                            'isrsattachmentsenttomagento' => 2   //failed to sent attachment
-                        ];
-                        $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
-                        echo $row['lab_id'].' failed to sent attachment';
-                    }
-            }
-            $merged_pdf = "";
-            foreach ($labIdData as $labId => $labData) {
-                
-                $reqPayload = array();
-                $reqPayload['data']['crm'] = $labData['crm_number'];
-                $reqPayload['data']['lab_id'] = $labId;
-                $reqPayload['data']['report_type'] = $report_type;
-                $reqPayload['data']['report_link'] = $labData['report_url'][0];
-                $reqPayload['data']['report_released_date'] =  $labData['report_released_date'];
-                $reqPayload['data']['sample_registered_date'] =   $labData['sample_registered_date'];
-                $reqPayload['data']['report_title'] =   $labData['report_title'];
-                $reqPayload['data']['service_id'] = $labData['testgroupcode'][0];
-
-
-                // debug($reqPayload['data']);
-               
-             
-                //=============== MAKE POST LOGIN THIRD PARTY API CALL ===================//
-           
-                
-                // debug($config);
-                $response_magento = $this->curlCallPNSReportMagento($reqPayload, $config);
-                // debug($response_magento);
-                
-                $request  = $response_magento['post_data'];
-                $response = $response_magento['result'];
-
-
-
-                $regdatareportLogs = [
-                    'lab_id' => $labId,
-                    'attachment' => $request,
-                    'testgroupcode' => $labData['testgroupcode'][0],
-                    'response' => json_encode($response),
-                    'created_at' => date("Y-m-d H:i:s"),
-                    'system_type' => 'magento',
-                    'report_type' => $report_type
+                    'QSTDEL14W'    => '2T Quadruple Screening (14w 1days to 14w 5 days) - Delfia',
+                    'STSIMU'       => '2T Triple Screening (Immulite)',
+                    'STSDEL14W'    => '2T Triple Screening (14w 1 days to 14w 5 days) (Delfia)',
+                    'QSTDEL'       => '2T Quadruple Screening (Delfia)',
+                    'QSTIMU'       => '2T Quadruple Screening (Immulite)',
+                    'STSDEL'       => '2T Triple Screen (Delfia)',
+                    'CSIMU'        => 'Combined Screening (Immulite)',
+                    'DMDEL'        => 'Double marker (Delfia)',
+                    'DMIMU'        => 'Double marker (Immulite)',
+                    'CSDELHBA'     => 'Combined Screening (Delfia) with Hemoglobinopathy + HBA1C',
+                    'GEN0875'      => 'msurePGx-Pharmacogenetics Comprehensive Panel',
+                    'GEN0916'      => 'msurePGx-Pharmacogenetics Comprehensive Panel for Onco',
                 ];
-                if (isset($response['status']) && ($response['status'] == 'success' || $response['status'] == 'true')) {
-                    $regdatareportLogs['status'] = "done";
-                    //===================== UPDATE FLAG IN REPORT TABLE ====================//
-                    if ($report_type == 'pns') {
-                      if (isset($response['response'])) {
-                 $decodedResponse = json_decode($response['response'], true);
+                if (!empty($labIdData[$row['lab_id']]['testgroupcode'])) {
+                    $testgroupcode = $labIdData[$row['lab_id']]['testgroupcode'][0];
+                    $labIdData[$row['lab_id']]['report_title'] = $services[$testgroupcode] ?? $row['report_title'];
+                }
+                       
+            } else {
+                $updateIsattachmentsent = [
+                    'isrsattachmentsenttomagento' => 2   //failed to sent attachment
+                ];
+                $this->updateIsattachmentsent($row['lab_id'], $report_type, $updateIsattachmentsent);
+                        echo $row['lab_id'].' failed to sent attachment';
+            }
+        }
+        $merged_pdf = "";
+        foreach ($labIdData as $labId => $labData) {
+
+            $reqPayload = array();
+            $reqPayload['data']['crm'] = $labData['crm_number'];
+            $reqPayload['data']['lab_id'] = $labId;
+            $reqPayload['data']['report_type'] = $report_type;
+            $reqPayload['data']['report_link'] = $labData['report_url'][0];
+            $reqPayload['data']['report_released_date'] =  $labData['report_released_date'];
+            $reqPayload['data']['sample_registered_date'] =   $labData['sample_registered_date'];
+            $reqPayload['data']['report_title'] =   $labData['report_title'];
+            $reqPayload['data']['service_id'] = $labData['testgroupcode'][0];
+
+
+            // debug($reqPayload['data']);
+
+
+            //=============== MAKE POST LOGIN THIRD PARTY API CALL ===================//
+
+
+            // debug($config);
+            $response_magento = $this->curlCallPNSReportMagento($reqPayload, $config);
+            // debug($response_magento);
+
+            $request  = $response_magento['post_data'];
+            $response = $response_magento['result'];
+
+
+
+            $regdatareportLogs = [
+                'lab_id' => $labId,
+                'attachment' => $request,
+                'testgroupcode' => $labData['testgroupcode'][0],
+                'response' => json_encode($response),
+                'created_at' => date("Y-m-d H:i:s"),
+                'system_type' => 'magento',
+                'report_type' => $report_type
+            ];
+            if (isset($response['status']) && ($response['status'] == 'success' || $response['status'] == 'true')) {
+                $regdatareportLogs['status'] = "done";
+                //===================== UPDATE FLAG IN REPORT TABLE ====================//
+                if ($report_type == 'pns') {
+                    if (isset($response['response'])) {
+                        $decodedResponse = json_decode($response['response'], true);
 
                         if (json_last_error() !== JSON_ERROR_NONE) {
                             // Invalid JSON - update isrsattachmentsenttomagento to 2
@@ -974,38 +978,38 @@ class SendPdftoMagento extends ResourceController
 
                     echo "<pre>";
                     echo $labId . " Report Attachment Sent Successfully";
-                    }
-                } else {
-                    //============== updated status as failed if error ============//
-                    $regdatareportLogs['status'] = "failed";
-                    if ($report_type == 'wellness') {
-                        $updateIsattachmentsent = [
-                            'isrsattachmentsenttomagento' => 2,  //failed to sent attachment
-                            'failed_reason' => "Getting an error response from Magento",
-                            'is_failed' => 1
-    
-                        ];
-                        $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
-                        echo "<pre>";
-                        echo $labId . " Getting Error Response from Magento for this LAB ID";
+                }
+            } else {
+                //============== updated status as failed if error ============//
+                $regdatareportLogs['status'] = "failed";
+                if ($report_type == 'wellness') {
+                    $updateIsattachmentsent = [
+                        'isrsattachmentsenttomagento' => 2,  //failed to sent attachment
+                        'failed_reason' => "Getting an error response from Magento",
+                        'is_failed' => 1
+
+                    ];
+                    $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
+                    echo "<pre>";
+                    echo $labId . " Getting Error Response from Magento for this LAB ID";
                     }
                     else{
-                        $updateIsattachmentsent = [
+                    $updateIsattachmentsent = [
                             'isrsattachmentsenttomagento' => 2   //failed to sent attachment
-                        ];
-                        $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
-                        echo "<pre>";
-                        echo $labId . " Getting Error Response from Magento for this LAB ID";
-                    }
+                    ];
+                    $this->updateIsattachmentsent($labId, $report_type, $updateIsattachmentsent);
+                    echo "<pre>";
+                    echo $labId . " Getting Error Response from Magento for this LAB ID";
                 }
-
-               
-                $registrationreportLogs->insert($regdatareportLogs); 
-                if (is_file($merged_pdf)) {
-                    unlink($merged_pdf);
-                }
-                //=============== MAKE MAGENTO THIRD PARTY API CALL ===================//
             }
+
+
+            $registrationreportLogs->insert($regdatareportLogs);
+            if (is_file($merged_pdf)) {
+                unlink($merged_pdf);
+            }
+            //=============== MAKE MAGENTO THIRD PARTY API CALL ===================//
+        }
        
     }
 
@@ -1013,13 +1017,13 @@ class SendPdftoMagento extends ResourceController
     {
         $spermscore_report_table = new SpermReportDataModel();
         $reportData = $spermscore_report_table
-        ->select("lab_id,testgroupcode,pdf_path,crm_id,goals_achieved,sample_storage_date_time")
-        ->where('isrsattachmentsent', 0)
-        ->where('report_status', 1)
-        ->where('pdf_path is not', null)
-        ->where('is_generated', 1)
-        ->where('created_at >=', '2023-07-26 16:00:00')
-        ->findAll((int)$limit);
+            ->select("lab_id,testgroupcode,pdf_path,crm_id,goals_achieved,sample_storage_date_time")
+            ->where('isrsattachmentsent', 0)
+            ->where('report_status', 1)
+            ->where('pdf_path is not', null)
+            ->where('is_generated', 1)
+            ->where('created_at >=', '2023-07-26 16:00:00')
+            ->findAll((int)$limit);
         return $reportData;
     }
 
@@ -1027,12 +1031,12 @@ class SendPdftoMagento extends ResourceController
     {
         $hpv_report_table = new HpvDataModel();
         $reportData = $hpv_report_table
-        ->select("lab_id,testgroupcode,pdf_path,crm_id,0 as goals_achieved")
-        ->where('isrsattachmentsent', 0)
-        ->where('pdf_path is not', null)
-        ->where('is_generated', 1)
-        // ->where('lab_id','31200112209')
-        ->findAll((int)$limit);
+            ->select("lab_id,testgroupcode,pdf_path,crm_id,0 as goals_achieved")
+            ->where('isrsattachmentsent', 0)
+            ->where('pdf_path is not', null)
+            ->where('is_generated', 1)
+            // ->where('lab_id','31200112209')
+            ->findAll((int)$limit);
         return $reportData;
     }
 
@@ -1042,9 +1046,9 @@ class SendPdftoMagento extends ResourceController
         $reportData = $cg_report_table
         ->select("lab_id,testgroupcode,pdf_path,crm_id,0 as goals_achieved")
         ->where('isrsattachmentsent', 0)
-        ->where('pdf_path is not', null)
-        ->where('is_generated', 1)
-        ->findAll((int)$limit);
+            ->where('pdf_path is not', null)
+            ->where('is_generated', 1)
+            ->findAll((int)$limit);
         return $reportData;
     }
     function getWellnesseportDetails($limit, $start_date,$B2C_CODE)
@@ -1077,12 +1081,12 @@ class SendPdftoMagento extends ResourceController
     {
         $ovascore_report_table = new OvaScoreDataModel();
         $reportData = $ovascore_report_table
-        ->select("lab_id,pdf_base_64,testgroupcode,pdf_path,crm_id,0 as goals_achieved")
-        ->where('isrsattachmentsent', 0)
-        ->where('pdf_path is not', null)
-        ->where('is_generated', 1)
+            ->select("lab_id,pdf_base_64,testgroupcode,pdf_path,crm_id,0 as goals_achieved")
+            ->where('isrsattachmentsent', 0)
+            ->where('pdf_path is not', null)
+            ->where('is_generated', 1)
         // ->where('lab_id','40200101886')
-        ->findAll((int)$limit);
+            ->findAll((int)$limit);
         // debug($reportData);
         return $reportData;
     }
@@ -1091,25 +1095,25 @@ class SendPdftoMagento extends ResourceController
     {
         $peri_report_table = new PerimenopauseDataModel();
         $reportData = $peri_report_table
-        ->select("lab_id,testgroupcode,pdf_path,crm_id,0 as goals_achieved")
-        ->where('isrsattachmentsent', 0)
-        ->where('pdf_path is not', null)
-        ->where('is_generated', 1)
-        ->findAll((int)$limit);
+            ->select("lab_id,testgroupcode,pdf_path,crm_id,0 as goals_achieved")
+            ->where('isrsattachmentsent', 0)
+            ->where('pdf_path is not', null)
+            ->where('is_generated', 1)
+            ->findAll((int)$limit);
         return $reportData;
     }
-    
+
 
     function getSTDReportDetails($limit)
     {
         $std_report_table = new StdReportDataModel();
         $reportData = $std_report_table
-        ->select("lab_id,testgroupcode,pdf_path,crm_id,0 as goals_achieved")
-        ->where('isrsattachmentsent', 0)
-        ->where('pdf_path is not', null)
-        ->where('is_generated', 1)
+            ->select("lab_id,testgroupcode,pdf_path,crm_id,0 as goals_achieved")
+            ->where('isrsattachmentsent', 0)
+            ->where('pdf_path is not', null)
+            ->where('is_generated', 1)
         // ->where('lab_id', '40200104280')
-        ->findAll((int)$limit);
+            ->findAll((int)$limit);
         return $reportData;
     }
 
@@ -1119,82 +1123,82 @@ class SendPdftoMagento extends ResourceController
         $reportData = $cb_report_table
         ->select('lab_id,crm_name,crm_id,pdf_path,email_id,min(created_at) as created_at,approved_on,registration_date,email_sent,0 as goals_achieved,email_trigger_date_time,mobile_no,sample_date,reportgenerationdate,approve_date, "" as testgroupcode')
         ->where('isrsattachmentsent', 0)
-        ->where('pdf_path is not', null)
+            ->where('pdf_path is not', null)
         ->where('reportgenerationdate >=', '2025-01-08')
         // ->where('crm_id', '240003701038')
-        ->where('is_generated', 1)
-        ->groupBy('lab_id')
-        ->findAll((int)$limit);
+            ->where('is_generated', 1)
+            ->groupBy('lab_id')
+            ->findAll((int)$limit);
         return $reportData;
     }
 
     function updateIsattachmentsent($lab_id, $report_type, $update_isrsattachmentsent)
-    { 
-     if ($report_type == 'cb') {
+    {
+        if ($report_type == 'cb') {
         $isrsattachmentsent = $update_isrsattachmentsent['isrsattachmentsent'];
-        $dbh = \Config\Database::connect();
-        if ($isrsattachmentsent == 1) {
+            $dbh = \Config\Database::connect();
+            if ($isrsattachmentsent == 1) {
             $magento_response_id = $update_isrsattachmentsent['magento_response_id'] ?? null;
             $magento_response_value = is_null($magento_response_id) ? null : "'" . $magento_response_id . "'";
             $failed_reason = $update_isrsattachmentsent['failed_reason'];
             $is_failed = $update_isrsattachmentsent['is_failed'];
 
-            $query = "UPDATE " . trim(strtolower($report_type)) . "_report_data 
-            SET isrsattachmentsent = $isrsattachmentsent, 
-              pushpdfdate = '" . date('Y-m-d H:i:s') . "', 
-              magento_response_id = $magento_response_value,
-              failed_reason = '" . addslashes($failed_reason) . "',
-              is_failed =  $is_failed
-             WHERE lab_id = '" . $lab_id . "'";
-        } else {
+                $query = "UPDATE " . trim(strtolower($report_type)) . "_report_data 
+                SET isrsattachmentsent = $isrsattachmentsent, 
+                  pushpdfdate = '" . date('Y-m-d H:i:s') . "', 
+                  magento_response_id = $magento_response_value,
+                  failed_reason = '" . addslashes($failed_reason) . "',
+                  is_failed =  $is_failed
+                 WHERE lab_id = '" . $lab_id . "'";
+            } else {
             $failed_reason = $update_isrsattachmentsent['failed_reason'];
             $is_failed = $update_isrsattachmentsent['is_failed'];
-            $query = "UPDATE " . trim(strtolower($report_type)) . "_report_data 
-            SET isrsattachmentsent = $isrsattachmentsent,
-                failed_reason = '" . addslashes($failed_reason) . "',
-                 is_failed =  $is_failed
-            WHERE lab_id = '" . addslashes($lab_id) . "'";
-        }
-
-        $dbh->query($query);
-    }else {
-       if ($report_type == 'wellness'|| $report_type == 'pns') {
-            $isrsattachmentsent = $update_isrsattachmentsent['isrsattachmentsenttomagento'];
-            $dbh = \Config\Database::connect();
-
-            if ($isrsattachmentsent == 1) {
-                $failed_reason = $update_isrsattachmentsent['failed_reason'];
-                $is_failed = $update_isrsattachmentsent['is_failed'];
-
                 $query = "UPDATE " . trim(strtolower($report_type)) . "_report_data 
-                SET isrsattachmentsenttomagento = $isrsattachmentsent, 
-                pushpdfdatemaganto  = '" . date('Y-m-d H:i:s') . "',
-                failed_reason = '" . addslashes($failed_reason) . "',
-                is_failed =  $is_failed
-                WHERE lab_id = '" . $lab_id . "'";
-            } else {
-                $failed_reason = $update_isrsattachmentsent['failed_reason'];
-                $is_failed = $update_isrsattachmentsent['is_failed'];
-                $query = "UPDATE " . trim(strtolower($report_type)) . "_report_data 
-                SET isrsattachmentsenttomagento = $isrsattachmentsent,
+                SET isrsattachmentsent = $isrsattachmentsent,
                     failed_reason = '" . addslashes($failed_reason) . "',
-                    is_failed =  $is_failed
+                     is_failed =  $is_failed
                 WHERE lab_id = '" . addslashes($lab_id) . "'";
             }
 
             $dbh->query($query);
+    }else {
+       if ($report_type == 'wellness'|| $report_type == 'pns') {
+            $isrsattachmentsent = $update_isrsattachmentsent['isrsattachmentsenttomagento'];
+                $dbh = \Config\Database::connect();
+
+                if ($isrsattachmentsent == 1) {
+                $failed_reason = $update_isrsattachmentsent['failed_reason'];
+                $is_failed = $update_isrsattachmentsent['is_failed'];
+
+                    $query = "UPDATE " . trim(strtolower($report_type)) . "_report_data 
+                SET isrsattachmentsenttomagento = $isrsattachmentsent, 
+                  pushpdfdatemaganto  = '" . date('Y-m-d H:i:s') . "',
+                  failed_reason = '" . addslashes($failed_reason) . "',
+                  is_failed =  $is_failed
+                 WHERE lab_id = '" . $lab_id . "'";
+                } else {
+                $failed_reason = $update_isrsattachmentsent['failed_reason'];
+                $is_failed = $update_isrsattachmentsent['is_failed'];
+                    $query = "UPDATE " . trim(strtolower($report_type)) . "_report_data 
+                SET isrsattachmentsenttomagento = $isrsattachmentsent,
+                    failed_reason = '" . addslashes($failed_reason) . "',
+                     is_failed =  $is_failed
+                WHERE lab_id = '" . addslashes($lab_id) . "'";
+                }
+
+                $dbh->query($query);
         }
 
         else{
                 $isrsattachmentsent = $update_isrsattachmentsent['isrsattachmentsent'];
-            $dbh = \Config\Database::connect();
-            if ($isrsattachmentsent == 1) {
-                $query = ("update  " . trim(strtolower($report_type)) . "_report_data set isrsattachmentsent = $isrsattachmentsent, pushpdfdate = '" . date('Y-m-d H:i:s') . "' where lab_id = '" . $lab_id . "' ");
-            } else {
-                $query = ("update  " . trim(strtolower($report_type)) . "_report_data set isrsattachmentsent = $isrsattachmentsent where lab_id = '" . $lab_id . "' ");
-            }
+                $dbh = \Config\Database::connect();
+                if ($isrsattachmentsent == 1) {
+                    $query = ("update  " . trim(strtolower($report_type)) . "_report_data set isrsattachmentsent = $isrsattachmentsent, pushpdfdate = '" . date('Y-m-d H:i:s') . "' where lab_id = '" . $lab_id . "' ");
+                } else {
+                    $query = ("update  " . trim(strtolower($report_type)) . "_report_data set isrsattachmentsent = $isrsattachmentsent where lab_id = '" . $lab_id . "' ");
+                }
 
-            $dbh->query($query);
+                $dbh->query($query);
 
             }
 
@@ -1219,8 +1223,8 @@ class SendPdftoMagento extends ResourceController
         }
         return $q->getResult();
     }
-   
-    
+
+
     function pushregservattachmentlog($log)
     {
         $date =  date('Y-m-d');
@@ -1269,17 +1273,17 @@ class SendPdftoMagento extends ResourceController
         if(curl_errno($ch)){
             echo 'Curl error: '.curl_error($ch);
         }
-        
+
         curl_close ($ch); 
 
         //$result = '{"status":"success","code":"200","message":"Data Updated Successfully","errors":[]}';
 
         $data['post_data'] = $post_data;
         $data['result'] = json_decode($result, true);
-       
+
         return $data;
     }
-    
+
     function curlCallCBReportMagento($params, $credential)
     {
         // debug($credential);
@@ -1314,7 +1318,7 @@ class SendPdftoMagento extends ResourceController
         if(curl_errno($ch)){
             echo 'Curl error: '.curl_error($ch);
         }
-        
+
         curl_close ($ch); 
 
         //$result = '{"status":"success","code":"200","message":"Data Updated Successfully","errors":[]}';
@@ -1329,7 +1333,7 @@ class SendPdftoMagento extends ResourceController
     // function curlCallWellnessReportMagento($params,$config)
     // {
     //     // Step 1: Magento credentials (define here directly)
-        
+
     //     $username = $config['username'];
     //     $password = $config['password'];
     //     $authUrl = $config['authurl'];
@@ -1391,75 +1395,75 @@ class SendPdftoMagento extends ResourceController
     //     ];
     // }
     function curlCallWellnessReportMagento($params, $config)
-{
-    $apiUrl = $config['url'];
+    {
+        $apiUrl = $config['url'];
     $token  = $config['token']; 
 
-    // Prepare post data
-    $postData = json_encode($params);
+        // Prepare post data
+        $postData = json_encode($params);
 
-    // Initialize cURL
-    $ch = curl_init($apiUrl);
-    curl_setopt_array($ch, [
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $postData,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
-        CURLOPT_HTTPHEADER => [
-            'Authorization: Bearer ' . $token,
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($postData),
-        ],
-    ]);
+        // Initialize cURL
+        $ch = curl_init($apiUrl);
+        curl_setopt_array($ch, [
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $postData,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+            CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer ' . $token,
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($postData),
+            ],
+        ]);
 
-    $result = curl_exec($ch);
-    if (curl_errno($ch)) {
-        echo 'Curl error: ' . curl_error($ch);
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Curl error: ' . curl_error($ch);
+            curl_close($ch);
+            return ['error' => 'Curl request failed'];
+        }
+
         curl_close($ch);
-        return ['error' => 'Curl request failed'];
+
+        return [
+            'post_data' => $postData,
+            'result' => json_decode($result, true),
+        ];
     }
+    function curlCallPNSReportMagento($params, $config)
+    {
+        $apiUrl = $config['url'];
+        $token  = $config['token']; // Token comes directly from config
 
-    curl_close($ch);
+        // Prepare post data
+        $postData = json_encode($params);
 
-    return [
-        'post_data' => $postData,
-        'result' => json_decode($result, true),
-    ];
-}
-function curlCallPNSReportMagento($params, $config)
-{
-    $apiUrl = $config['url'];
-    $token  = $config['token']; // Token comes directly from config
+        // Initialize cURL
+        $ch = curl_init($apiUrl);
+        curl_setopt_array($ch, [
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $postData,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+            CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer ' . $token,
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($postData),
+            ],
+        ]);
 
-    // Prepare post data
-    $postData = json_encode($params);
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Curl error: ' . curl_error($ch);
+            curl_close($ch);
+            return ['error' => 'Curl request failed'];
+        }
 
-    // Initialize cURL
-    $ch = curl_init($apiUrl);
-    curl_setopt_array($ch, [
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $postData,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
-        CURLOPT_HTTPHEADER => [
-            'Authorization: Bearer ' . $token,
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($postData),
-        ],
-    ]);
-
-    $result = curl_exec($ch);
-    if (curl_errno($ch)) {
-        echo 'Curl error: ' . curl_error($ch);
         curl_close($ch);
-        return ['error' => 'Curl request failed'];
+
+        return [
+            'post_data' => $postData,
+            'result' => json_decode($result, true),
+        ];
     }
-
-    curl_close($ch);
-
-    return [
-        'post_data' => $postData,
-        'result' => json_decode($result, true),
-    ];
-}
 }

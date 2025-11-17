@@ -7,6 +7,7 @@ use CodeIgniter\API\ResponseTrait;
 use App\Models\StoreConfig;
 use App\Models\ReportDataModel;
 use App\Models\RegistrationServiceLogsModel;
+use App\Models\WellnessLimsLogsModel;
 use App\Models\LimsSlimsModel;
 use App\Libraries\MergePDF;
 use App\Models\CronScheduleModel;
@@ -76,18 +77,18 @@ class SendPdftoLims extends ResourceController
     }
     // Push Wellness pdf data to Lims server
     public function pushWellnesseporttoLims()
-        {
-            $this->cron_id = $this->cronschedulemodel->saveCronSchedule(['cronname'=>'pushwellnessreporttolims','starttime'=>date('Y-m-d H:i:s'),'status'=>'inprocess']);
-            $config =  $this->getconfiguration();
-            $reportrecords = $this->getWellnessReportDetails($config['limit']);
-            if($reportrecords){
-                $this->pushPdfData($reportrecords, $config,'wellness');
-            }else{
-                echo 'No pending data to push the PDF';
-            }
-            $this->cronschedulemodel->updateEndTime(['endtime'=>date('Y-m-d H:i:s'),'status'=>"success"],$this->cron_id);
-           
+    {
+        $this->cron_id = $this->cronschedulemodel->saveCronSchedule(['cronname'=>'pushwellnessreporttolims','starttime'=>date('Y-m-d H:i:s'),'status'=>'inprocess']);
+        $config =  $this->getconfiguration();
+        $reportrecords = $this->getWellnessReportDetails($config['limit']);
+        if($reportrecords){
+            $this->pushPdfData($reportrecords, $config,'wellness');
+        }else{
+            echo 'No pending data to push the PDF';
         }
+        $this->cronschedulemodel->updateEndTime(['endtime'=>date('Y-m-d H:i:s'),'status'=>"success"],$this->cron_id);
+       
+    }
     // Push C&G pdf data to Lims server
     public function pushCandgeporttoLims()
     {
@@ -118,7 +119,11 @@ class SendPdftoLims extends ResourceController
     }
     public function pushPdfData($reportrecords, $config, $report_type)
     {
+        if($report_type == 'wellness'){
+            $registrationreportLogs = new WellnessLimsLogsModel();
+        }else{
             $registrationreportLogs = new RegistrationServiceLogsModel();
+        }
             //================INSERT TESTCODES AGAINST LABID'S==================//
             //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
             $configModel = new StoreConfig();
@@ -187,13 +192,13 @@ class SendPdftoLims extends ResourceController
                 if (isset($response['IsSuccess']) && $response['IsSuccess'] == true) {
                     $regdatareportLogs['status'] = "done";
                     //===================== UPDATE FLAG IN REPORT TABLE ====================//
-
+                   
                     if($report_type == 'wellness'){
                         $dbh = \Config\Database::connect();
                         $sql = "SELECT pushpdfdate FROM wellness_report_data WHERE lab_id = ?";
                         $query = $dbh->query($sql, [$labId]);
                         $results = $query->getResultArray();
-                        $updateIsattachmentsent = [
+                          $updateIsattachmentsent = [
                             'isrsattachmentsent' => 1,
                             'pushpdfdate' => $results[0]['pushpdfdate'],
                         ];
@@ -262,7 +267,7 @@ class SendPdftoLims extends ResourceController
     //     where isrsattachmentsent = 0 and pdf_path is not null and is_generated =1 limit " .$limit);
     //     return $q->getResult();
     // }
-     function getHpvReportDetails($limit)
+    function getHpvReportDetails($limit)
     {
         $dbh = \Config\Database::connect();
         $q = $dbh->query("select lab_id,pdf_base_64,testgroupcode,pdf_path from hpv_report_data 
@@ -270,37 +275,37 @@ class SendPdftoLims extends ResourceController
         return $q->getResult();
     }
     function getWellnessReportDetails($limit = 10)
-{
-    $dbh = \Config\Database::connect();
-    $configModel = new StoreConfig();
+    {
+        $dbh = \Config\Database::connect();
+        $configModel = new StoreConfig();
 
-    // Get configuration values
-    $start_date = $configModel->getConfigValue('WELLNESS_CUSTOMER_TRIGGER_START_DATE')['config_value'];
+        // Get configuration values
+        $start_date = $configModel->getConfigValue('WELLNESS_CUSTOMER_TRIGGER_START_DATE')['config_value'];
     $bs_code_config = explode(',', $configModel->getConfigValue('WELLNESS_BS_CODES')['config_value']);
 
-    // Prepare the IN clause
-    $bs_code_list = implode("','", array_map('trim', $bs_code_config));
-    $bs_code_list = "'$bs_code_list'";
+        // Prepare the IN clause
+        $bs_code_list = implode("','", array_map('trim', $bs_code_config));
+        $bs_code_list = "'$bs_code_list'";
 
-    // Build and run the query
-    $sql = "
+        // Build and run the query
+        $sql = "
         SELECT lab_id, pdf_base_64, created_at, testgroupcode, pdf_path 
-        FROM wellness_report_data 
-        WHERE 
-            created_at >= '2024-11-25 00:00:00'
-            AND isrsattachmentsent = 0 
-            AND pdf_path IS NOT NULL 
-            AND is_generated = 1 
-            AND (
-                (created_at >= ? AND bs_code NOT IN ($bs_code_list)) OR 
-                (created_at < ?)
-            )
-        LIMIT $limit
-    ";
+            FROM wellness_report_data 
+            WHERE 
+                created_at >= '2024-11-25 00:00:00'
+                AND isrsattachmentsent = 0 
+                AND pdf_path IS NOT NULL 
+                AND is_generated = 1 
+                AND (
+                    (created_at >= ? AND bs_code NOT IN ($bs_code_list)) OR 
+                    (created_at < ?)
+                )
+            LIMIT $limit
+        ";
 
-    $q = $dbh->query($sql, [$start_date, $start_date]);
-    return $q->getResult();
-}
+        $q = $dbh->query($sql, [$start_date, $start_date]);
+        return $q->getResult();
+    }
 
 
     function getCandgReportDetails($limit)
@@ -321,10 +326,10 @@ class SendPdftoLims extends ResourceController
     {
         $isrsattachmentsent = $update_isrsattachmentsent['isrsattachmentsent'];
         $dbh = \Config\Database::connect();
-         if($report_type == 'wellness'){
+        if($report_type == 'wellness'){
         $pushpdfdate = $update_isrsattachmentsent['pushpdfdate'];
         if(empty($pushpdfdate)){
-        if($isrsattachmentsent == 1){
+             if($isrsattachmentsent == 1){
             $query = ("update  " . trim(strtolower($report_type)) . "_report_data set isrsattachmentsent = $isrsattachmentsent, pushpdfdate = '".date('Y-m-d H:i:s')."' where lab_id = '" . $lab_id . "' ");
         }else{
             $query = ("update  " . trim(strtolower($report_type)) . "_report_data set isrsattachmentsent = $isrsattachmentsent where lab_id = '" . $lab_id . "' ");

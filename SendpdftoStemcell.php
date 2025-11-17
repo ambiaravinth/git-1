@@ -6,6 +6,7 @@ use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\StoreConfig;
 use App\Models\RegistrationServiceLogsModel;
+use App\Models\CbStemcellLogsModel;
 use App\Libraries\MergePDF;
 use App\Models\CronScheduleModel;
 use App\Models\SpermReportDataModel;
@@ -70,7 +71,8 @@ class SendpdftoStemcell extends ResourceController
 
     public function pushCbReportData($reportrecords, $config, $report_type)
     {
-            $registrationreportLogs = new RegistrationServiceLogsModel();
+            // $registrationreportLogs = new RegistrationServiceLogsModel();
+            $registrationreportLogs = new CbStemcellLogsModel();
             //================INSERT TESTCODES AGAINST LABID'S==================//
             //================ VERIFY TESTCODES ALLOWED TO SENT OR NOT ===============//
             $configModel = new StoreConfig();

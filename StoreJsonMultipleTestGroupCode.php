@@ -53,13 +53,13 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
      * report_status = 1 //Ready to Generate Report
      */
 
-  
+
     /****
      * Common Function to Store JSON and save/update details in database
      */
     public function StoreJSONMultipleTestgroupcode($limsSingleData,$reporttype)
     {
-        
+
         $lims_data_filpath = FCPATH . $limsSingleData['insert_data'];
         if (file_exists($lims_data_filpath)) {
 
@@ -87,8 +87,8 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
                     $email_id = $Jsondata->data->PatientDetails[0]->client_email ?? "";
                 }
 
-              // start wellness package distinguish
-              if ($reporttype == 'wellness') {
+                // start wellness package distinguish
+                if ($reporttype == 'wellness') {
                 $wellness_service_code = [
                     'AYN_016' => 'AYN_016',
                     'AYN_017' => 'AYN_017',
@@ -112,16 +112,16 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
                 }
             
                 // Loop through test groups and look for matching package code
-                foreach ($Jsondata->data->TestGroupDetails as $testGroup) {
+                    foreach ($Jsondata->data->TestGroupDetails as $testGroup) {
                     if (empty($testGroup->PackageCode)) {
                         continue;
                     }
             
                     if (array_key_exists($testGroup->PackageCode, $wellness_service_code)) {
-                        $service_type = $testGroup->PackageCode;
-                        break;
+                            $service_type = $testGroup->PackageCode;
+                            break;
+                        }
                     }
-                }
                 if ($service_type) {
                     $template_version = getTemplateVersionforWellness('wellness', $service_type);
 
@@ -139,8 +139,8 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
                     echo $msg;
                     return;
                 }
-            }
-            // end wellness package distinguish
+                }
+                // end wellness package distinguish
 
             } catch (\Exception $e) {
                 echo $e;
@@ -202,7 +202,7 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
     }
 
     // function saveInReportDataTable($data)
-    // { 
+    // {
 
     //     $reportData = $this->checkLabRecordExist($data['lab_id'],$data['testgroupcode'],$data['report_type']);
     //     if (empty($reportData)) {
@@ -286,7 +286,7 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
                 ];
                 // start wellness package distinguish
                 if($commonPayload['reg_type'] == 'wellness'){
-                     $existing = $this->model->where('lab_id', $lab_id)->first();
+                    $existing = $this->model->where('lab_id', $lab_id)->first();
                     if($existing['is_generated'] == 2){
                         $existing['is_generated'] = 0;
                     }
@@ -339,7 +339,7 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
 
                 $this->updateLIMSStatus($commonPayload['lims_id'], $sameJsonData);
 
-                  //===================== UPDATE EXECUTION LOG ===================//
+                //===================== UPDATE EXECUTION LOG ===================//
                   saveExecutionLog(["lab_id" => $lab_id,"message" => "Same Json Data pushed to generate report ".$commonPayload['reg_type']." and test group code ".$testGroupCode,
                   "datetime" => date('Y-m-d H:i:s'),"testgroupcode" => $testGroupCode ]);
 
@@ -406,8 +406,8 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
 
             }
             
-            $datauser['service_type'] = $service_type;
-            $datauser['template_version'] = $template_version_no;
+                $datauser['service_type'] = $service_type;
+                $datauser['template_version'] = $template_version_no;
             if(isset($commonPayload['reporttype']) && $commonPayload['reporttype']=='wellness'){
                 $datauser['failed_reason_email_sent'] = $failed_reason_email_sent;
                 $datauser['is_generated'] = $is_generated;
@@ -421,7 +421,7 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
                 $datauser['failed_reason_email'] =$failed_reason_email;
                 $datauser['report_release_date'] = $report_release_date;
             }
-            
+
 
             // end wellness package distinguish
             if (!empty($this->model)) {
@@ -482,7 +482,7 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
             if(count($json_file) > 1){
                 if (!file_exists($filepath."json/")) {
 					mkdir($filepath."json/", 0777, TRUE);
-				}
+                }
 
                 // if (copy($old_json_path, FCPATH . $filepath."json/".$json_filename)) {
                 //     unlink($old_json_path);
@@ -495,19 +495,19 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
         if(is_file($old_pdf_report_path)){
             $pdf_file = explode("/", $old_pdf_report_path);
             $pdf_filename = end($pdf_file);
-             if (count($pdf_file) > 1) {
+            if (count($pdf_file) > 1) {
 
                 if (!file_exists($filepath . "pdf/")) {
                     mkdir($filepath . "pdf/", 0777, TRUE);
                 }
 
                if($reg_type == 'wellness'){
-                  copy($old_pdf_report_path, FCPATH . $filepath . "pdf/" . $pdf_filename);
+                    copy($old_pdf_report_path, FCPATH . $filepath . "pdf/" . $pdf_filename);
                 }else{
                 if (copy($old_pdf_report_path, FCPATH . $filepath."pdf/".$pdf_filename)) {
-                    unlink($old_pdf_report_path);
+                        unlink($old_pdf_report_path);
+                    }
                 }
-            }
             }
         }
 
@@ -518,8 +518,8 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
         $dbh = \Config\Database::connect();
         $q = $dbh->query("select entity_id,lab_id,testgroupcode from report_data where lab_id = '" . $lab_id . "'");
         $results = $q->getResult();
-       // return count($results);
-       return $results;
+        // return count($results);
+        return $results;
     }
 
     public function checkReportExist($lab_id)
@@ -575,19 +575,19 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
             $this->report_id = 7;
         }
         else if (trim($reg_type) == "ovascore") {
-            
+
             $this->tablename = "ovascore_report_data";
             $this->model = new OvaScoreDataModel();
             $this->report_id = 8;
         }
         else if (trim($reg_type) == "annualstemmatch") {
-            
+
             $this->tablename = "annualstemmatch_report_data";
             $this->model = new AnnualStemMatchDataModel();
             $this->report_id = 9;
         }
         else if (trim($reg_type) == "pharmacogene") {
-            
+
             $this->tablename = "pharmacogene_report_data";
             $this->model = new PharmaCoGenomicsDataModel();
             $this->report_id = 10;
@@ -677,38 +677,38 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
             'email_id' => $email_id
         ];
 
-         // start wellness package distinguish
-         $service_type = $commonPayload['service_type'] ?? '';
-         $template_version_no = $commonPayload['template_version'] ?? '';
+        // start wellness package distinguish
+        $service_type = $commonPayload['service_type'] ?? '';
+        $template_version_no = $commonPayload['template_version'] ?? '';
           if(isset($commonPayload['reporttype']) && $commonPayload['reporttype']=='wellness'){
-             $existing = $this->model->where('lab_id', $lab_id)->first();
+            $existing = $this->model->where('lab_id', $lab_id)->first();
             if($existing['is_generated'] == 2){
-                    $existing['is_generated'] = 0;
-                }
+                $existing['is_generated'] = 0;
+            }
             if($existing['email_sent'] == 2){
-                    $existing['email_sent'] = 0;
-                }
+                $existing['email_sent'] = 0;
+            }
             if($existing['isrsattachmentsent'] == 2){
-                    $existing['isrsattachmentsent'] = 0;
-                }
+                $existing['isrsattachmentsent'] = 0;
+            }
              if($existing['isrsattachmentsenttomagento'] == 2){
                         $existing['isrsattachmentsenttomagento'] = 0;
              }
-                $failed_reason_email_sent  =  $commonPayload['failed_reason_email_sent'];
-                $is_generated = $existing['is_generated'];
-                $is_failed =  $commonPayload['is_failed'];
-                $failed_reason = $commonPayload['failed_reason'];
-                $email_sent = $existing['email_sent'];
-                $isrsattachmentsent = $existing['isrsattachmentsent'];
-                $isrsattachmentsenttomagento = $existing['isrsattachmentsenttomagento'];
+            $failed_reason_email_sent  =  $commonPayload['failed_reason_email_sent'];
+            $is_generated = $existing['is_generated'];
+            $is_failed =  $commonPayload['is_failed'];
+            $failed_reason = $commonPayload['failed_reason'];
+            $email_sent = $existing['email_sent'];
+            $isrsattachmentsent = $existing['isrsattachmentsent'];
+            $isrsattachmentsenttomagento = $existing['isrsattachmentsenttomagento'];
                 $bs_code = $commonPayload['bs_code']?? null;
-                $branch_name = $commonPayload['branch_name'] ?? '';
-                $sample_reg_date = $commonPayload['sample_reg_date'] ?? null;
+            $branch_name = $commonPayload['branch_name'] ?? '';
+            $sample_reg_date = $commonPayload['sample_reg_date'] ?? null;
                 $failed_reason_email = $commonPayload['failed_reason_email'] ?? '';
-                $report_release_date = $commonPayload['report_release_date'] ?? null;
-                if (!empty($service_type)) {
-             $updatePath['service_type'] = $service_type;
-             $updatePath['template_version'] = $template_version_no;
+            $report_release_date = $commonPayload['report_release_date'] ?? null;
+            if (!empty($service_type)) {
+                $updatePath['service_type'] = $service_type;
+                $updatePath['template_version'] = $template_version_no;
              if(isset($commonPayload['reporttype']) && $commonPayload['reporttype']=='wellness'){
                 $updatePath['failed_reason_email_sent'] = $failed_reason_email_sent;
                 $updatePath['is_generated'] = $is_generated;
@@ -727,12 +727,12 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
                 $updatePath['resend_date'] = null;
                 $updatePath['resend_mail_status'] = 0;
                 $updatePath['report_release_date'] = $report_release_date;
-             }
+            }
             }
                 
-            }
-         
-         // end wellness package distinguish
+        }
+
+        // end wellness package distinguish
 
         $dbh = \Config\Database::connect();
         $dbh->table($this->tablename)->where('lab_id',$lab_id)->set($updatePath)->update();
@@ -790,12 +790,12 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
         $template_version_no = $commonPayload['template_version'] ?? '';
         if(isset($commonPayload['reporttype']) && $commonPayload['reporttype']=='wellness'){
             $existing = $this->model->where('lab_id', $lab_id)->first();
-            if($existing['is_generated'] == 2){
-                    $existing['is_generated'] = 0;
-                    $existing['email_sent'] = 0;
-                    $existing['isrsattachmentsent'] = 0;
-                        $existing['isrsattachmentsenttomagento'] = 0;
-            // }
+          
+            $existing['is_generated'] = 0;
+            $existing['email_sent'] = 0;
+            $existing['isrsattachmentsent'] = 0;
+            $existing['isrsattachmentsenttomagento'] = 0;
+            $existing['isrsattachmentsenttomfine'] = 0;
 
             // if ($existing['is_generated'] == 2) {
             //     $existing['is_generated'] = 0;
@@ -806,6 +806,7 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
             // if ($existing['isrsattachmentsent'] == 2) {
             //     $existing['isrsattachmentsent'] = 0;
             // }
+            
             $failed_reason_email_sent  =  $commonPayload['failed_reason_email_sent'];
             $is_generated =  $existing['is_generated'];
             $is_failed =  $commonPayload['is_failed'];
@@ -818,33 +819,35 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
             $sample_reg_date = $commonPayload['sample_reg_date'] ?? null;
             $failed_reason_email = $commonPayload['failed_reason_email'] ?? '';
             $report_release_date = $commonPayload['report_release_date'] ?? null;
+            $isrsattachmentsenttomfine = $existing['isrsattachmentsenttomfine'];
 
             if (!empty($service_type)) {
-            $updatePath['service_type'] = $service_type;
-            $updatePath['template_version'] = $template_version_no;
+                $updatePath['service_type'] = $service_type;
+                $updatePath['template_version'] = $template_version_no;
             if(isset($commonPayload['reporttype']) && $commonPayload['reporttype']=='wellness'){
-            $updatePath['failed_reason_email_sent'] = $failed_reason_email_sent;
-            $updatePath['is_generated'] = $is_generated;
-            $updatePath['is_failed'] = $is_failed;
-            $updatePath['failed_reason'] = $failed_reason;
-            $updatePath['email_sent'] = $email_sent;
-            $updatePath['isrsattachmentsent'] = $isrsattachmentsent;
-            $updatePath['isrsattachmentsenttomagento'] = $isrsattachmentsenttomagento;
-            $updatePath['json_update_date']  = date('Y-m-d H:i:s');
-            $updatePath['bs_code']  = $bs_code;
+                $updatePath['failed_reason_email_sent'] = $failed_reason_email_sent;
+                $updatePath['is_generated'] = $is_generated;
+                $updatePath['is_failed'] = $is_failed;
+                $updatePath['failed_reason'] = $failed_reason;
+                $updatePath['email_sent'] = $email_sent;
+                $updatePath['isrsattachmentsent'] = $isrsattachmentsent;
+                $updatePath['isrsattachmentsenttomagento'] = $isrsattachmentsenttomagento;
+                $updatePath['isrsattachmentsenttomfine'] = $isrsattachmentsenttomfine;
+                $updatePath['json_update_date']  = date('Y-m-d H:i:s');
+                $updatePath['bs_code']  = $bs_code;
             $updatePath['reportregenerationdate'] = null;
             $updatePath['repushpdfdate'] = null;
-            $updatePath['branch_name'] = $branch_name;
-            $updatePath['sample_reg_date'] = $sample_reg_date;
+                $updatePath['branch_name'] = $branch_name;
+                $updatePath['sample_reg_date'] = $sample_reg_date;
             $updatePath['failed_reason_email'] =$failed_reason_email;
             $updatePath['resend_date'] = null;
             $updatePath['resend_mail_status'] = 0;
-            $updatePath['report_release_date'] = $report_release_date;
+                $updatePath['report_release_date'] = $report_release_date;
             
             }
         }
         }
-       
+
         
         // end wellness package distinguish
         $this->model->where('lab_id',$lab_id)->set($updatePath)->update();
@@ -894,7 +897,7 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
             echo "Temp File can't be moved!";
             return "";
         } else {
-           return $filepath . $filename;
+            return $filepath . $filename;
         }
     }
 }

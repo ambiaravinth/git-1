@@ -72,7 +72,7 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                             <?php } else { ?>
                                             <td style="width:100%; display:inline-block;">
                                             <?php } ?>
-                                            <?= ucwords(($patientdetails['Patient_name'])) ?>
+                                            <?= ucwords($patientdetails['Title']); ?><?= ucwords(($patientdetails['Patient_name'])) ?>
                                             </td>
                                     </tr>
                                     <tr>
@@ -412,7 +412,7 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                     <td class="patient-speci-presc-tb-parameter <?= $ftclass ?> number <?= $css_color ?>"><?php echo $printingName; ?></td>
                                 <?php } ?>
                             </tr>
-                             <?php
+                            <?php
                             $temp_prisca_Syndrome_age_risk = [];
                             $BR_Risk_flag = '0:0';
                             $FR_Risk_flag = '0:0';
@@ -441,7 +441,7 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                                     <td><span class="risk-graph-font">Risk for Twin2 - <?php echo $riskassessment['downsyndrome'][$keys[1]]['final_risk']; ?></span></td>
                                                 </tr>
                                                 <?php } else {
-                                               foreach ($riskassessment['downsyndrome'] as $Syndrome) {
+                                                foreach ($riskassessment['downsyndrome'] as $Syndrome) {
                                                     $temp_prisca_Syndrome_age_risk[] = $Syndrome['age_risk']; ?>
                                                     <tr>
                                                         <td><span class="risk-graph-font">Final Risk (FR) - <?php echo $Syndrome['final_risk']; ?></span></td>
@@ -471,7 +471,7 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                     <td class="<?= $riskassessment['style_color']['edward_risk_color'] ?> patient-speci-presc-tb-def">
                                         <table class="patient-speci-presc-tb-def-div <?= $ftclass ?> number" style="color:#333333;font-size:12px;" cellpadding="0">
                                             <?php
-                                             $i = 0;
+                                            $i = 0;
                                             if (count($riskassessment['edwardSyndrome']) == 2) {
                                                 $keys = array_keys($riskassessment['edwardSyndrome']); ?>
                                                 <tr>
@@ -495,7 +495,7 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                                         <td><span class="risk-graph-font">Final Risk (FR) - <?php echo $Syndrome['final_risk']; ?></span></td>
                                                     </tr>
                                                     <tr>
-                                                          <td><span class="risk-graph-font">Age Risk (AR) - <?php echo ($riskassessment['risksoftwaremethod'] == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $Syndrome['age_risk']; ?></span></td>
+                                                        <td><span class="risk-graph-font">Age Risk (AR) - <?php echo ($riskassessment['risksoftwaremethod'] == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $Syndrome['age_risk']; ?></span></td>
                                                     </tr>
                                                     <tr>
                                                         <td><span class="risk-graph-font">Risk Result - <?php echo $Syndrome['risk_result']; ?></span></td>
@@ -533,7 +533,7 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                                         <td><span class="risk-graph-font">Final Risk (FR) - <?php echo $Syndrome['final_risk']; ?></span></td>
                                                     </tr>
                                                     <tr>
-                                                         <td><span class="risk-graph-font">Age Risk (AR) - <?php echo ($riskassessment['risksoftwaremethod'] == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $Syndrome['age_risk']; ?></span></td>
+                                                        <td><span class="risk-graph-font">Age Risk (AR) - <?php echo ($riskassessment['risksoftwaremethod'] == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $Syndrome['age_risk']; ?></span></td>
                                                     </tr>
                                                     <tr>
                                                         <td><span class="risk-graph-font">Risk Result - <?php echo $Syndrome['risk_result']; ?></span></td>
@@ -665,12 +665,12 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                                         //     echo riskGraph($riskassessment['downsyndrome'], $ftclass);
                                                         // } else {
                                                         //     echo riskGraphWithoutBR($riskassessment['downsyndrome'], $ftclass);
-                                                        // } 
+                                                        // }
                                                         if ($riskassessment['showBR'] == 1 && !empty($riskassessment['downsyndrome']['PRDS']['biochemical_risk']) || !empty($riskassessment['downsyndrome']['PNSDMDS']['biochemical_risk'])) {
                                                             if ($riskassessment['risksoftwaremethod'] == "PRISCA") {
                                                                 echo riskGraphPrisca($riskassessment['downsyndrome'], $ftclass);
                                                             } else {
-                                                               
+
                                                                 echo riskGraph($riskassessment['downsyndrome'], $ftclass);
                                                             }
                                                         } else {
@@ -678,10 +678,10 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                                                 echo riskGraphPriscaWithoutBR($riskassessment['downsyndrome'], $ftclass);
                                                             } else {
                                                                 echo riskGraphWithoutBR($riskassessment['downsyndrome'], $ftclass);
-                                                            }
                                                         }
-                                                         ?>
-                                                        </td>
+                                                        }
+                                                        ?>
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -737,13 +737,13 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                         <td class="graph-main-div <?= $riskassessment['style_color']['ntsyndrome_border_color'] ?>">
                                             <table class="graph" style="color:#333333;font-size:12px;" cellpadding="0">
                                                 <tr>
-                                                    <td><?php 
-                                                               if ($ongoingpregnancy['NumberofFoetus'] == 2) {
-                                                                  echo riskGraphForNTDTwin($momValue, $ftclass); 
-                                                                } else {
-                                                                   echo riskGraphForNTD($momValue, $ftclass); 
-                                                                }
-                                                         ?></td>
+                                                    <td><?php
+                                                        if ($ongoingpregnancy['NumberofFoetus'] == 2) {
+                                                            echo riskGraphForNTDTwin($momValue, $ftclass);
+                                                        } else {
+                                                            echo riskGraphForNTD($momValue, $ftclass);
+                                                        }
+                                                        ?></td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -840,7 +840,7 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                         <?php } ?>
                     </td>
                 </tr>
-                 <?php
+                <?php
                 if (!function_exists('find_ratio_result')) {
                 function find_ratio_result($value, $min, $max)
                 {
@@ -850,7 +850,7 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                     }
                     return false;
                 }
-            }
+               }
                 ?>
                 <?php if ($Prefix_flag == 1 && $Risk_Name_flag == "T21" && find_ratio_result($BR_Risk_flag, 1, 1000) && find_ratio_result($FR_Risk_flag, 1000, 100000) && $FR_Risk_Word_flag == "Low Risk") { ?>
                     <tr class='interpretation-main'>
@@ -898,7 +898,7 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                             <?php } else { ?>
                                             <td style="width:100%; display:inline-block;">
                                             <?php } ?>
-                                            <?= ucwords(($patientdetails['Patient_name'])) ?>
+                                            <?= ucwords($patientdetails['Title']); ?><?= ucwords(($patientdetails['Patient_name'])) ?>
                                             </td>
                                     </tr>
                                    
@@ -1524,25 +1524,25 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                 </p>
                                 <p class="risk-title title" style="text-align:left;font-size: 13px;margin-top: 1px !important; margin-bottom: -40px;"> Trisomy T21 Cuttoff
                                 <p>
-                                    <tr>
-                                        <td class='risk-1'>
-                                            <p class='risk-title' style="font-size: 12px;">Increased Risk:</p>
+                                <tr>
+                                    <td class='risk-1'>
+                                        <p class='risk-title' style="font-size: 12px;">Increased Risk:</p>
                                             <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as “Screen Positive” when the
                                                 probability ratio is greater than <span class='number'><?php echo $lowCutoff ?></span> births.</p>
-                                        </td>
-                                        <?php if (strtoupper($reportdata['risk_type']) != "2LEVEL") { ?>
+                                    </td>
+                                    <?php if (strtoupper($reportdata['risk_type']) != "2LEVEL") { ?>
                                             <td class='risk-2'>
                                                 <p class='risk-title' style="font-size: 12px;">Intermediate Risk: </p>
                                                 <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as “Intermediate Probability” when
-                                                    the probability ratio is within <span class='number'>1:251</span> and <span class='number'>1:1000</span> births.</p>
-                                            </td>
-                                        <?php } ?>
-                                        <td class='risk-3'>
-                                            <p class='risk-title' style="font-size: 12px;">Low Risk:</p>
-                                            <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as "Screen Negative" when the probability ratio is lesser&nbsp; than <span class='number'><?php echo $lowCutoff ?></span> births.
-                                            </p>
+                                                the probability ratio is within <span class='number'>1:251</span> and <span class='number'>1:1000</span> births.</p>
                                         </td>
-                                    </tr>
+                                    <?php } ?>
+                                    <td class='risk-3'>
+                                        <p class='risk-title' style="font-size: 12px;">Low Risk:</p>
+                                            <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as "Screen Negative" when the probability ratio is lesser&nbsp; than <span class='number'><?php echo $lowCutoff ?></span> births.
+                                        </p>
+                                    </td>
+                                </tr>
 
                                     <?php if ($marker == "pereport") {
                                         $pelowCutoff = '1:100';
@@ -1593,7 +1593,7 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                 <p><span class='number'>2.</span> Ultrasound observations / measurements if not performed as
                                     per imaging guidelines may lead to erroneous risk assessments, and LifeCell does not
                                     bear responsibility for results arising due to such errors</p>
-                                    <p><span class='number'><b>3.</b></span><b> As per FMF Guidelines, if Down Syndrome final risk is between 251 to 1000, it will be considered as intermediate risk and further testing will be required for confirmation. </b></p>
+                                <p><span class='number'><b>3.</b></span><b> As per FMF Guidelines, if Down Syndrome final risk is between 251 to 1000, it will be considered as intermediate risk and further testing will be required for confirmation. </b></p>
                             </td>
                         </tr>
                     </table>

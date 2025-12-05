@@ -792,17 +792,20 @@ class StoreJsonMultipleTestGroupCode extends ResourceController
             $existing = $this->model->where('lab_id', $lab_id)->first();
             if($existing['is_generated'] == 2){
                     $existing['is_generated'] = 0;
-                }
-            if($existing['email_sent'] == 2){
                     $existing['email_sent'] = 0;
-                }
-            if($existing['isrsattachmentsent'] == 2){
                     $existing['isrsattachmentsent'] = 0;
-                }
-             if($existing['isrsattachmentsenttomagento'] == 2){
                         $existing['isrsattachmentsenttomagento'] = 0;
-             }
+            // }
 
+            // if ($existing['is_generated'] == 2) {
+            //     $existing['is_generated'] = 0;
+            // }
+            // if ($existing['email_sent'] == 2) {
+            //     $existing['email_sent'] = 0;
+            // }
+            // if ($existing['isrsattachmentsent'] == 2) {
+            //     $existing['isrsattachmentsent'] = 0;
+            // }
             $failed_reason_email_sent  =  $commonPayload['failed_reason_email_sent'];
             $is_generated =  $existing['is_generated'];
             $is_failed =  $commonPayload['is_failed'];

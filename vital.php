@@ -11,6 +11,10 @@
         .image-ressult {
             font-size: 22px !important;
         }
+
+        .electric-g{
+            font-size: 8px !important;
+        }
     </style>
     <script>
         function number_pages() {
@@ -317,7 +321,7 @@
 
     // Vitaminis 
 
-       if (($miniralVitaminIronResults['vitaminbtwelve_color_code'] == 'red') || ($miniralVitaminIronResults['vitamind_color_code'] == 'red') ||
+    if (($miniralVitaminIronResults['vitaminbtwelve_color_code'] == 'red') || ($miniralVitaminIronResults['vitamind_color_code'] == 'red') ||
         //($miniralVitaminIronResults['folic_acid_color_code'] == 'red') || ($miniralVitaminIronResults['phosphorus_color_code'] == 'red') ||
         (! empty($miniralVitaminIronResults['ferritin_color_code']) == 'red') || ($miniralVitaminIronResults['iron_color_code'] == 'red') ||
         ($miniralVitaminIronResults['uibc_color_code'] == 'red') || ($miniralVitaminIronResults['tibc_color_code'] == 'red') || ($miniralVitaminIronResults['iron_saturation_color_code'] =='red')
@@ -488,7 +492,8 @@
     if ($patientDetails['is_cap_accredited']) {
         $footerWithoutLogo .= "<div style='display: inline-block; margin-left: 10px;'><img src='https://cdn.shop.lifecell.in/reports/wellness/images/logo-cap.png' alt='' class='demo-dcn-img'></div>";
     }
-    $footerWithoutLogo .= "                 <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . " | CRM: " . $patientDetails['crm'] . "</div>
+    $footerWithoutLogo .= "                 <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . "</div>
+                                            <div style='font-size: 11px; color:#a5247a; font-weight:600;'> CRM: " . $patientDetails['crm'] . "</div>
                                             <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
                                         </td>
                                         <td style='width:100%; margin:0 auto; display:table;'>
@@ -513,8 +518,8 @@
                                     </tr>
                                 </table>
                                 <div class='clear-both'>
-                                    <p class='footer-adress' style='font-size:11px; padding:2px 5px 5px;'>" . $patientDetails['processing_branch_address'] . "</p>
-                                    <p class='electric-g'>This is an electronically generated report (Initial report V1)</p>
+                                    <p class='footer-adress' style='font-size:11px; padding:2px 5px 5px;'> Processed at: " . $patientDetails['processing_branch_address'] . "</p>
+                                    <p class='electric-g'>This is a computer Generated medical diagnostic report that has been validated by Authorized medical practitioner/Doctor, the report does not need physical signature. (Initial report V1)</p>
                                     <img style='width:100%; display: block; height:auto;'src='https://cdn.shop.lifecell.in/reports/wellness/images/footer-divider.png' alt='' />
                                 </div>   
                             </footer>
@@ -534,7 +539,7 @@
             });
             $unique_locs = array_unique($footer_process_locations);
             if (empty($footer_process_locations)) {
-                $footer_process_location = "Registered Office: No. 16, Vijayaraghava Lane, Vijayaraghava Road, T. Nagar,  Thygarayanagar , Chennai , Tamil Nadu - 600017";
+                $footer_process_location = "Registered Office: No. 16, Vijayaraghava Lane, T. Nagar, Chennai , Tamil Nadu - 600017, CIN: U85196TN2004PTC053577";
                 return $footer_process_location;
             }
             if (count($unique_locs) === 1) {
@@ -607,7 +612,8 @@
             if ($patientDetails['is_cap_accredited']) {
                 $footerWithLogo .= "<div style='display: inline-block; margin-left: 10px;'><img src='https://cdn.shop.lifecell.in/reports/wellness/images/logo-cap.png' alt='' class='demo-dcn-img'> </div>";
             }
-            $footerWithLogo .= "                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . " | CRM: " . $patientDetails['crm'] . "</div>
+            $footerWithLogo .= "                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . "</div>
+                                                <div style='font-size: 11px; color:#a5247a; font-weight:600;'> CRM: " . $patientDetails['crm'] . "</div>
                                                 <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
                                             </td>
                                             <td style='width:60%; padding:0px;'>
@@ -632,8 +638,8 @@
                                         </tr>
                                     </table>
                                     <div class='clear-both' style='margin-top:10px;'>
-                                        <p class='footer-adress' style='font-size:8px; padding:2px 5px 5px;'>" . $processing_branch_address . "</p>
-                                        <p class='electric-g'>This is an electronically generated report (" . $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
+                                        <p class='footer-adress' style='font-size:8px; padding:2px 5px 5px;'> Processed at: " . $processing_branch_address . "</p>
+                                        <p class='electric-g'>This is a computer Generated medical diagnostic report that has been validated by Authorized medical practitioner/Doctor, the report does not need physical signature. (" . $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
                                         <img style='width:100%; display: block; height:auto;' src='https://cdn.shop.lifecell.in/reports/wellness/images/footer-divider.png' alt='' />
                                     </div>
                                 </div>
@@ -655,7 +661,8 @@
     if ($patientDetails['is_cap_accredited']) {
         $footerWithLogo .= "<div style='display: inline-block; margin-left: 10px;'><img src='https://cdn.shop.lifecell.in/reports/wellness/images/logo-cap.png' alt='' class='demo-dcn-img'> </div>";
     }
-    $footerWithLogo .= "                    <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . " | CRM: " . $patientDetails['crm'] . "</div>
+    $footerWithLogo .= "                    <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . "</div>
+                                            <div style='font-size: 11px; color:#a5247a; font-weight:600;'> CRM: " . $patientDetails['crm'] . "</div>
                                             <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
                                         </td>
                                         <td style='width:60%; padding:0px;'>
@@ -667,8 +674,8 @@
                                     </tr>
                                 </table>
                                 <div class='clear-both' style='margin-top:10px;'>
-                                    <p class='footer-adress' style='font-size:8px; padding:2px 5px 5px;'>Registered Office: No. 16, Vijayaraghava Lane, Vijayaraghava Road, T. Nagar,  Thygarayanagar , Chennai , Tamil Nadu - 600017 </p>
-                                    <p class='electric-g'>This is an electronically generated report (" . $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
+                                    <p class='footer-adress' style='font-size:8px; padding:2px 5px 5px;'>Registered Office: No. 16, Vijayaraghava Lane, T. Nagar, Chennai , Tamil Nadu - 600017, CIN: U85196TN2004PTC053577 </p>
+                                    <p class='electric-g'>This is a computer Generated medical diagnostic report that has been validated by Authorized medical practitioner/Doctor, the report does not need physical signature. (" . $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
                                     <img style='width:100%; display: block; height:auto;' src='https://cdn.shop.lifecell.in/reports/wellness/images/footer-divider.png' alt='' />
                                 </div>
                             </div>
@@ -1653,7 +1660,7 @@
                     </tr>
                 </table>
 
-               <?php if (isset($heartResults['triglycerides_result_value']) && $heartResults['triglycerides_result_value'] != null && $heartResults['triglycerides_result_value'] <= 400) { ?>
+                <?php if (isset($heartResults['triglycerides_result_value']) && $heartResults['triglycerides_result_value'] != null && $heartResults['triglycerides_result_value'] <= 400) { ?>
                     <?php if($heartResults['lipoprotein_ldl_status_found']){ ?>
                     <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
                         <tr>
@@ -2876,7 +2883,7 @@
                         </td>
                     </tr>
                 </table> -->
-                
+
             </div>
             <footer style="
 		position: absolute; 
@@ -6155,7 +6162,7 @@
         </div>
         <!-- </div>
     <div class="body-cl"> -->
-     <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
+        <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
             <div class="resultDetails" style="page-break-after: always; padding-top:50px;">
                 <div style="width:100%;">
                     <?php echo $co_brand_header2; ?>
@@ -6417,7 +6424,7 @@
         </div>
 
 
-             <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
+        <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
             <div class="resultDetails" style="page-break-after: always;padding-top:50px;">
                 <div style="width:100%;">
                     <?php echo $co_brand_header2; ?>
@@ -8264,7 +8271,7 @@
                             <?php } ?>
                         <?php } ?>
                     </tr>
-                   <tr>
+                    <tr>
                         <?php
                         if ($heartResults['lipoprotein_ldl_status_found']) {
                             // Assign values when LDL status is found
@@ -8276,26 +8283,26 @@
                             $heartResults['total_cholesterol_hdl_ratio'] = ($heartResults['total_cholesterolhdlratio_color_code'] != 'green') ? 'Total Cholesterol / HDL Ratio,' : '';
                             $heartResults['ldl_or_hdl_ratio'] = ($heartResults['ldlorhdlratio_color_code'] != 'green') ? 'LDL / HDL Ratio,' : '';
                             $heartResults['non_hdl_cholesterol'] = ($heartResults['nonhdlcholesterol_color_code'] != 'green') ? 'Non HDL Cholesterol,' : '';
-                            ?>
+                        ?>
 
-                            <?php if (
+                        <?php if (
                                 $heartResults['total_cholesterol_color_code'] == 'green' &&
                                 $heartResults['triglycerides_color_code'] == 'green' &&
                                 $heartResults['hdl_cholesterol_color_code'] == 'green' &&
                                 $heartResults['lipoproteincholesterol_color_code'] == 'green' &&
                                 $heartResults['lipoprotein_ldl_color_code'] == 'green' &&
                                 $heartResults['total_cholesterolhdlratio_color_code'] == 'green' &&
-                                $heartResults['ldlorhdlratio_color_code'] == 'green' &&
-                                $heartResults['nonhdlcholesterol_color_code'] == 'green'
-                            ) { ?>
+                            $heartResults['ldlorhdlratio_color_code'] == 'green' &&
+                            $heartResults['nonhdlcholesterol_color_code'] == 'green'
+                        ) { ?>
                                 <td class="tests">Heart - Nill</td>
                             <?php } else { ?>
-                                <td class="tests">Heart -
-                                    <?= $heartResults['total_cholesterol'] ?>
-                                    <?= $heartResults['triglycerides'] ?>
-                                    <?= $heartResults['HDL_cholesterol'] ?>
-                                    <?= $heartResults['low_Density_lipoprotein'] ?>
-                                    <?= $heartResults['very_low_Density_lipoprotein'] ?>
+                            <td class="tests">Heart -
+                                <?= $heartResults['total_cholesterol'] ?>
+                                <?= $heartResults['triglycerides'] ?>
+                                <?= $heartResults['HDL_cholesterol'] ?>
+                                <?= $heartResults['low_Density_lipoprotein'] ?>
+                            <?= $heartResults['very_low_Density_lipoprotein'] ?>
                                     <?= $heartResults['total_cholesterol_hdl_ratio'] ?>
                                     <?= $heartResults['ldl_or_hdl_ratio'] ?>
                                     <?= $heartResults['non_hdl_cholesterol'] ?>
@@ -8328,10 +8335,10 @@
                                     <?= $heartResults['triglycerides'] ?>
                                     <?= $heartResults['HDL_cholesterol'] ?>
                                     <?= $heartResults['low_Density_lipoprotein'] ?>
-                                    <?= $heartResults['total_cholesterol_hdl_ratio'] ?>
-                                    <?= $heartResults['ldl_or_hdl_ratio'] ?>
-                                    <?= $heartResults['non_hdl_cholesterol'] ?>
-                                </td>
+                                <?= $heartResults['total_cholesterol_hdl_ratio'] ?>
+                                <?= $heartResults['ldl_or_hdl_ratio'] ?>
+                                <?= $heartResults['non_hdl_cholesterol'] ?>
+                            </td>
                             <?php } ?>
                         <?php } ?>
                     </tr>
@@ -8677,7 +8684,7 @@
                             $bloodResults['mch_color_code'] = '';
                         }
                         ?>
-                         <?php if (
+                        <?php if (
                             $bloodResults['hemoglobin_color_code'] == 'green' && $bloodResults['rbccount_color_code'] == 'green' &&
                             $bloodResults['hematocrit_pcv_color_code'] == 'green' && //$bloodResults['platelet_cell_ratio_color_code'] == 'green' &&
                             $bloodResults['leukocytes_count_color_code'] == 'green' && $bloodResults['neutrophils_count_color_code'] == 'green' &&
@@ -8787,7 +8794,7 @@
                                 ?>
                                 <?= $miniralVitaminIronResults['tibc']
                                 ?>
-                                 <?= $miniralVitaminIronResults['iron_saturation']
+                                <?= $miniralVitaminIronResults['iron_saturation']
                                 ?>
                             </td>
                         <?php } ?>
@@ -9210,7 +9217,7 @@
                 <!-- <div class="wr-disclaimer" style="width:100%; padding-bottom:10px;"> -->
                 <p class="title" style="color:#a5247a; font-size:16px; padding:10px 0px 2px;">Disclaimer</p>
                 <div style="width:70%; float:left;">
-                    <p style="font-size:12px;">This is an electronically authenticated report, if test results are alarming or unexpected, customer/Client is advised to contact the customer care immediately for possibleremedial action. All lab results are subject to clinical interpretation by qualified medical professional and this report is not subject to use for any medico-legal purpose.</p>
+                    <p style="font-size:12px;">This is an electronically authenticated report, if test results are alarming or unexpected, customer/Client is advised to contact the customer care immediately for possible remedial action. All lab results are subject to clinical interpretation by qualified medical professional and this report is not subject to use for any medico-legal purpose.</p>
                 </div>
                 <div style="width: 28%; border-left: 1px solid #ccc; vertical-align: middle; float:right; text-align:right;">
                     <p><a style="font-size:12px; margin-right:10px; text-decoration:none;" href="mailto:care@lifecell.in"><img style="padding-right:10px; padding-bottom:3px; width:20px; vertical-align:middle;" src="https://cdn.shop.lifecell.in/reports/wellness/images/mail-icon-wr.png" alt='' />care@lifecell.in</a>

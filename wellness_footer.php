@@ -77,9 +77,12 @@ if ($doctor3signature) {
 						</div>
 						<?php } ?>
 						<div style="color:#000; line-height:10px; font-size: 9px;"><?= $patientDetails['nabl_code'] ?></div>
-						<div style="font-size: 11px; color:#a5247a; font-weight:600;"><?= ucwords(strtolower($patientDetails['patient_name'])); ?> | CRM: <?= $patientDetails['crm']; ?></div>
+						<!-- <div style="font-size: 11px; color:#a5247a; font-weight:600;"><?= ucwords(strtolower($patientDetails['patient_name'])); ?> | CRM: <?= $patientDetails['crm']; ?></div> -->
 						<!-- <div style="font-size: 12px; color:#a5247a; font-weight:600;">Sample Report | CRM: 00000</div> -->
-						<div style="font-size:10px; color:#a5247a; font-weight:600;">DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
+						<!-- <div style="font-size:10px; color:#a5247a; font-weight:600;">DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div> -->
+						 <div style='font-size: 11px; color:#a5247a; font-weight:600;'><?= ucwords(strtolower($patientDetails['patient_name'])) ?></div>
+                                            <div style='font-size: 11px; color:#a5247a; font-weight:600;'> CRM: <?= $patientDetails['crm'] ?></div>
+                                            <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
 					</td>
 					
 					<td style="text-align:center; width:100%; margin:0 auto; display:table;">
@@ -105,8 +108,8 @@ if ($doctor3signature) {
 			</table>
 			<div class="clear-both">
                 <!-- <p class="footer-adress" style="font-size: 11px; padding: 3px 0;"><?= $patientDetails['processing_branch_address']; ?></p> -->
-                <p class="footer-adress" style="font-size:11px; padding:2px 5px 5px;"><?= $patientDetails['processing_branch_address']; ?></p>
-                <p class="electric-g">This is an electronically generated report (Initial report V1)</p>
+                <p class="footer-adress" style="font-size:11px; padding:2px 5px 5px;">Processed at: <?= $patientDetails['processing_branch_address']; ?></p>
+                <p class="electric-g">This is a computer Generated medical diagnostic report that has been validated by Authorized medical practitioner/Doctor, the report does not need physical signature. (Initial report V1)</p>
 				<img style="width:100%; display: block; height:auto;"src="https://cdn.shop.lifecell.in/reports/wellness/images/footer-divider.png" alt="" />
             </div>
             <div class="pageno"><span class='page'>1</span> of <span class=''><?= $reportData['pagecount'] ?? 25 ?> </span></div>

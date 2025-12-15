@@ -11,6 +11,10 @@
         .image-ressult {
             font-size: 22px !important;
         }
+
+        .electric-g{
+            font-size: 8px !important;
+        }
     </style>
     <script>
         function number_pages() {
@@ -515,8 +519,9 @@
                 </div>";
     }
     $footerWithoutLogo .= "
-                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . " | CRM: " . $patientDetails['crm'] . "</div>
-                <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
+                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . "</div>
+                                            <div style='font-size: 11px; color:#a5247a; font-weight:600;'> CRM: " . $patientDetails['crm'] . "</div>
+                                            <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
             </td>
             
             <td style='width:100%; margin:0 auto; display:table;'>
@@ -541,8 +546,8 @@
         </tr>
     </table>
     <div class='clear-both'>
-        <p class='footer-adress' style='font-size:11px; padding:2px 5px 5px;'>" . $patientDetails['processing_branch_address'] . "</p>
-        <p class='electric-g'>This is an electronically generated report (Initial report V1)</p>
+        <p class='footer-adress' style='font-size:11px; padding:2px 5px 5px;'>Processed at: " . $patientDetails['processing_branch_address'] . "</p>
+        <p class='electric-g'>This is a computer Generated medical diagnostic report that has been validated by Authorized medical practitioner/Doctor, the report does not need physical signature. (Initial report V1)</p>
         <img style='width:100%; display: block; height:auto;'src='https://cdn.shop.lifecell.in/reports/wellness/images/footer-divider.png' alt='' />
     </div>   
 </footer>
@@ -563,7 +568,7 @@
             });
             $unique_locs = array_unique($footer_process_locations);
             if (empty($footer_process_locations)) {
-                $footer_process_location = "Registered Office: No. 16, Vijayaraghava Lane, Vijayaraghava Road, T. Nagar,  Thygarayanagar , Chennai , Tamil Nadu - 600017";
+                $footer_process_location = "Registered Office: No. 16, Vijayaraghava Lane, T. Nagar, Chennai , Tamil Nadu - 600017, CIN: U85196TN2004PTC053577";
                 return $footer_process_location;
             }
             if (count($unique_locs) === 1) {
@@ -640,8 +645,9 @@
             $footerWithLogo .= "                    <!-- <div><img src='" . $footerNablLogo . "' alt='' style='width: auto;height:45px;'='processed-img'></div> -->
                                                 <!-- <div style='color:#000; line-height:10px; font-size: 9px;'>" . $patientDetails['nabl_code'] . "</div> -->
                                                 <!-- <div style='color:#000; line-height:20px; font-size: 12px;'>(Processed at NABL Lab)</div> -->
-                                                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . " | CRM: " . $patientDetails['crm'] . "</div>
-                                                <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
+                                                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . "</div>
+                                            <div style='font-size: 11px; color:#a5247a; font-weight:600;'> CRM: " . $patientDetails['crm'] . "</div>
+                                            <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
                                             </td>
                                             <td style='width:60%; padding:0px;'>
                                                 <table style='width:100%; border-collapse:collapse; text-align:center;'>
@@ -665,8 +671,8 @@
                                         </tr>
                                     </table>
                                     <div class='clear-both' style='margin-top:10px;'>
-                                        <p class='footer-adress' style='font-size:8px; padding:2px 5px 5px;'>" . $processing_branch_address . "</p>
-                                        <p class='electric-g'>This is an electronically generated report (" . $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
+                                        <p class='footer-adress' style='font-size:8px; padding:2px 5px 5px;'> Processed at: " . $processing_branch_address . "</p>
+                                        <p class='electric-g'>This is a computer Generated medical diagnostic report that has been validated by Authorized medical practitioner/Doctor, the report does not need physical signature. (" . $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
                                         <img style='width:100%; display: block; height:auto;' src='https://cdn.shop.lifecell.in/reports/wellness/images/footer-divider.png' alt='' />
                                     </div>
                                 </div>
@@ -697,8 +703,9 @@
                    <!-- <div><img src='" . $footerNablLogo . "' alt='' style='width: auto;height:45px;'='processed-img'></div> -->
                 <!-- <div style='color:#000; line-height:10px; font-size: 9px;'>" . $patientDetails['nabl_code'] . "</div> -->
                 <!-- <div style='color:#000; line-height:20px; font-size: 12px;'>(Processed at NABL Lab)</div> -->
-                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . " | CRM: " . $patientDetails['crm'] . "</div>
-                <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
+                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . "</div>
+                                            <div style='font-size: 11px; color:#a5247a; font-weight:600;'> CRM: " . $patientDetails['crm'] . "</div>
+                                            <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
             </td>
             
             <td style='width:60%; padding:0px;'>
@@ -738,9 +745,8 @@
         </tr>
     </table>
     <div class='clear-both' style='margin-top:10px;'>
-        <p class='footer-adress' style='font-size:8px; padding:2px 5px 5px;'>Registered Office: No. 16, Vijayaraghava Lane, Vijayaraghava Road, T. Nagar,  Thygarayanagar , Chennai , Tamil Nadu - 600017 </p>
-        <p class='electric-g'>This is an electronically generated report ("
-        . $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
+        <p class='footer-adress' style='font-size:8px; padding:2px 5px 5px;'>Registered Office: No. 16, Vijayaraghava Lane, T. Nagar, Chennai , Tamil Nadu - 600017, CIN: U85196TN2004PTC053577 </p>
+        <p class='electric-g'>This is a computer Generated medical diagnostic report that has been validated by Authorized medical practitioner/Doctor, the report does not need physical signature. (". $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
         <img style='width:100%; display: block; height:auto;' src='https://cdn.shop.lifecell.in/reports/wellness/images/footer-divider.png' alt='' />
     </div>
 </div>
@@ -1792,7 +1798,7 @@
                         </td>
                     </tr>
                 </table>
-               <?php if (isset($heartResults['triglycerides_result_value']) && $heartResults['triglycerides_result_value'] != null && $heartResults['triglycerides_result_value'] <= 400) { ?>
+                <?php if (isset($heartResults['triglycerides_result_value']) && $heartResults['triglycerides_result_value'] != null && $heartResults['triglycerides_result_value'] <= 400) { ?>
                     <?php if($heartResults['lipoprotein_ldl_status_found']){ ?>
                     <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
                         <tr>
@@ -7357,80 +7363,80 @@
                     </td>
                 </tr>
             </table>
-             <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
-                    <tr>
-                        <td class="leftPanel">
-                            <div class="graphDetail">
-                                <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                <div>
-                                    <span class="<?= $miniralVitaminIronResults['iron_saturation_color_code']; ?>" style="font-size: 34px;">
-                                        <?php echo (($miniralVitaminIronResults['iron_saturation_result_value'] != '') ? $miniralVitaminIronResults['iron_saturation_result_value'] : '') ?>
-                                    </span><?php echo htmlspecialchars($miniralVitaminIronResults['iron_saturation_uom']) ?>
-                                </div>
-
-                                <!-- Thumbs + Interpretation -->
-                                <table class="image-result">
-                                    <tr>
-                                        <?php if (!empty($miniralVitaminIronResults['iron_saturation_thumb_up_icon'])): ?>
-                                            <td><img src="<?= $miniralVitaminIronResults['iron_saturation_thumb_up_icon']; ?>" /></td>
-                                        <?php endif; ?>
-                                        <td class="<?= $miniralVitaminIronResults['iron_saturation_color_code']; ?> image-ressult">
-                                            <?php echo (($miniralVitaminIronResults['iron_saturation_result_value_in_words'] != '') ? $miniralVitaminIronResults['iron_saturation_result_value_in_words'] : '') ?>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="mediacal-update">
-                                    <tr>
-                                        <td>Range</td>
-                                        <?php if (!empty($miniralVitaminIronResults['iron_saturation_BRInterval_result_value'])) { ?>
-                                            <td> : <?php echo $miniralVitaminIronResults['iron_saturation_BRInterval_result_value'] ?> </td>
-                                        <?php } else { ?>
-                                            <td> : <?php echo $miniralVitaminIronResults['iron_saturation_low_result_value'] . " - " . $miniralVitaminIronResults['iron_saturation_high_result_value']?> </td>
-                                        <?php } ?>
-                                    </tr>
-                                </table>
+            <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
+                <tr>
+                    <td class="leftPanel">
+                        <div class="graphDetail">
+                            <p style="color: #333;font-weight:600;">Your Result Value</p>
+                            <div>
+                                <span class="<?= $miniralVitaminIronResults['iron_saturation_color_code']; ?>" style="font-size: 34px;">
+                                    <?php echo (($miniralVitaminIronResults['iron_saturation_result_value'] != '') ? $miniralVitaminIronResults['iron_saturation_result_value'] : '') ?>
+                                </span><?php echo htmlspecialchars($miniralVitaminIronResults['iron_saturation_uom']) ?>
                             </div>
-                        </td>
 
-                        <!-- % OF IRON SATURATION -->
-                        <td class="rightPanel">
-                            <div class="graphContent" style="position: relative;">
-                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                    <h4 style="margin: 0;">% of Iron Saturation</h4>
-                                    <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['iron_saturation_sample_method']; ?> </p>
-                                </div>
-
-                                <!-- NABL Logo and Code -->
-                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-                                    <?php if ($miniralVitaminIronResults['iron_saturation_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                            <?= $min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_nabl_code']; ?>
-                                        </div>
+                            <!-- Thumbs + Interpretation -->
+                            <table class="image-result">
+                                <tr>
+                                    <?php if (!empty($miniralVitaminIronResults['iron_saturation_thumb_up_icon'])): ?>
+                                        <td><img src="<?= $miniralVitaminIronResults['iron_saturation_thumb_up_icon']; ?>" /></td>
                                     <?php endif; ?>
-                                </div>
+                                    <td class="<?= $miniralVitaminIronResults['iron_saturation_color_code']; ?> image-ressult">
+                                        <?php echo (($miniralVitaminIronResults['iron_saturation_result_value_in_words'] != '') ? $miniralVitaminIronResults['iron_saturation_result_value_in_words'] : '') ?>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="mediacal-update">
+                                <tr>
+                                    <td>Range</td>
+                                    <?php if (!empty($miniralVitaminIronResults['iron_saturation_BRInterval_result_value'])) { ?>
+                                        <td> : <?php echo $miniralVitaminIronResults['iron_saturation_BRInterval_result_value'] ?> </td>
+                                    <?php } else { ?>
+                                            <td> : <?php echo $miniralVitaminIronResults['iron_saturation_low_result_value'] . " - " . $miniralVitaminIronResults['iron_saturation_high_result_value']?> </td>
+                                    <?php } ?>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
 
-                                <!-- Description -->
-                                <p style="margin-top:5px;">
-                                    Percentage of Iron Saturation also known as Transferrin saturation is the ratio of serum iron and TIBC. 
-                                    This parameter provides an estimate of how much serum iron is actually bound to transferrin and is expressed as a percentage. 
-                                    Transferrin saturation is typically utilised to determine a patient's iron status to detect either iron deficiency or overload.
-                                </p>
+                    <!-- % OF IRON SATURATION -->
+                    <td class="rightPanel">
+                        <div class="graphContent" style="position: relative;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                <h4 style="margin: 0;">% of Iron Saturation</h4>
+                                <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['iron_saturation_sample_method']; ?> </p>
+                            </div>
 
-                                <!-- Impact on health -->
-                                <?php if (!empty($miniralVitaminIronResults['iron_saturation_impact_on_health'])): ?>
-                                    <h4>Impact on health</h4>
-                                    <p><?= $miniralVitaminIronResults['iron_saturation_impact_on_health']; ?></p>
-                                <?php endif; ?>
-
-                                <!-- Suggestion -->
-                                <?php if (!empty($miniralVitaminIronResults['iron_saturation_suggestion'])): ?>
-                                    <h4>Suggestion</h4>
-                                    <p><?= $miniralVitaminIronResults['iron_saturation_suggestion']; ?></p>
+                            <!-- NABL Logo and Code -->
+                            <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+                                <?php if ($miniralVitaminIronResults['iron_saturation_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                    <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                    <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                        <?= $min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_nabl_code']; ?>
+                                    </div>
                                 <?php endif; ?>
                             </div>
-                        </td>
-                    </tr>
+
+                            <!-- Description -->
+                            <p style="margin-top:5px;">
+                                Percentage of Iron Saturation also known as Transferrin saturation is the ratio of serum iron and TIBC.
+                                This parameter provides an estimate of how much serum iron is actually bound to transferrin and is expressed as a percentage.
+                                Transferrin saturation is typically utilised to determine a patient's iron status to detect either iron deficiency or overload.
+                            </p>
+
+                            <!-- Impact on health -->
+                            <?php if (!empty($miniralVitaminIronResults['iron_saturation_impact_on_health'])): ?>
+                                <h4>Impact on health</h4>
+                                <p><?= $miniralVitaminIronResults['iron_saturation_impact_on_health']; ?></p>
+                            <?php endif; ?>
+
+                            <!-- Suggestion -->
+                            <?php if (!empty($miniralVitaminIronResults['iron_saturation_suggestion'])): ?>
+                                <h4>Suggestion</h4>
+                                <p><?= $miniralVitaminIronResults['iron_saturation_suggestion']; ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </td>
+                </tr>
             </table>
 
 
@@ -9108,7 +9114,7 @@
                         <?php } ?>
                     <?php } ?>
                 </tr>
-                 <tr>
+                <tr>
                     <?php
                     if ($heartResults['lipoprotein_ldl_status_found']) {
                         // LDL status found → include VLDL
@@ -9124,30 +9130,30 @@
                         $heartResults['apolipoprotein_B_serum'] = ($heartResults['apolipoprotein_B_serum_color_code'] != 'green') ? 'Apolipoprotein B, Serum,' : '';
                         $heartResults['apolipoprotein_A1_serum'] = ($heartResults['apolipoprotein_A1_serum_color_code'] != 'green') ? 'Apolipoprotein A1, Serum,' : '';
                         $heartResults['apolipoprotein_A1_B_serum'] = ($heartResults['apolipoprotein_A1_B_serum_color_code'] != 'green') ? 'APO- B/ APO- A1 Ratio' : '';
-                        ?>
+                    ?>
 
-                        <?php if (
+                    <?php if (
                             $heartResults['total_cholesterol_color_code'] == 'green' &&
                             $heartResults['triglycerides_color_code'] == 'green' &&
                             $heartResults['hdl_cholesterol_color_code'] == 'green' &&
                             $heartResults['lipoproteincholesterol_color_code'] == 'green' &&
                             $heartResults['lipoprotein_ldl_color_code'] == 'green' &&
                             $heartResults['total_cholesterolhdlratio_color_code'] == 'green' &&
-                            $heartResults['ldlorhdlratio_color_code'] == 'green' &&
+                        $heartResults['ldlorhdlratio_color_code'] == 'green' &&
                             $heartResults['nonhdlcholesterol_color_code'] == 'green' &&
                             $heartResults['high_sensitive_CRP_serum_color_code'] == 'green' &&
                             $heartResults['apolipoprotein_B_serum_color_code'] == 'green' &&
                             $heartResults['apolipoprotein_A1_serum_color_code'] == 'green' &&
                             $heartResults['apolipoprotein_A1_B_serum_color_code'] == 'green'
-                        ) { ?>
+                    ) { ?>
                             <td class="tests">Heart - Nill</td>
                         <?php } else { ?>
-                            <td class="tests">Heart -
-                                <?= $heartResults['total_cholesterol'] ?>
-                                <?= $heartResults['triglycerides'] ?>
-                                <?= $heartResults['HDL_cholesterol'] ?>
-                                <?= $heartResults['low_Density_lipoprotein'] ?>
-                                <?= $heartResults['very_low_Density_lipoprotein'] ?>
+                        <td class="tests">Heart -
+                            <?= $heartResults['total_cholesterol'] ?>
+                            <?= $heartResults['triglycerides'] ?>
+                            <?= $heartResults['HDL_cholesterol'] ?>
+                            <?= $heartResults['low_Density_lipoprotein'] ?>
+                            <?= $heartResults['very_low_Density_lipoprotein'] ?>
                                 <?= $heartResults['total_cholesterol_hdl_ratio'] ?>
                                 <?= $heartResults['ldl_or_hdl_ratio'] ?>
                                 <?= $heartResults['non_hdl_cholesterol'] ?>
@@ -9156,7 +9162,7 @@
                                 <?= $heartResults['apolipoprotein_A1_serum'] ?>
                                 <?= $heartResults['apolipoprotein_A1_B_serum'] ?>
                             </td>
-                        <?php } ?>
+                            <?php } ?>
                     <?php } else {
                         // LDL status NOT found → exclude VLDL
                         $heartResults['total_cholesterol'] = ($heartResults['total_cholesterol_color_code'] != 'green') ? 'Total Cholesterol,' : '';
@@ -9192,14 +9198,14 @@
                                 <?= $heartResults['triglycerides'] ?>
                                 <?= $heartResults['HDL_cholesterol'] ?>
                                 <?= $heartResults['low_Density_lipoprotein'] ?>
-                                <?= $heartResults['total_cholesterol_hdl_ratio'] ?>
-                                <?= $heartResults['ldl_or_hdl_ratio'] ?>
-                                <?= $heartResults['non_hdl_cholesterol'] ?>
-                                <?= $heartResults['high_sensitive_CRP_serum'] ?>
-                                <?= $heartResults['apolipoprotein_B_serum'] ?>
-                                <?= $heartResults['apolipoprotein_A1_serum'] ?>
-                                <?= $heartResults['apolipoprotein_A1_B_serum'] ?>
-                            </td>
+                            <?= $heartResults['total_cholesterol_hdl_ratio'] ?>
+                            <?= $heartResults['ldl_or_hdl_ratio'] ?>
+                            <?= $heartResults['non_hdl_cholesterol'] ?>
+                            <?= $heartResults['high_sensitive_CRP_serum'] ?>
+                            <?= $heartResults['apolipoprotein_B_serum'] ?>
+                            <?= $heartResults['apolipoprotein_A1_serum'] ?>
+                            <?= $heartResults['apolipoprotein_A1_B_serum'] ?>
+                        </td>
                         <?php } ?>
                     <?php } ?>
                 </tr>
@@ -10076,7 +10082,7 @@
         <div class="wr-disclaimer" style="width:100%; padding-bottom:10px;">
             <p class="title" style="color:#a5247a; font-size:16px; padding:10px 0px 2px;">Disclaimer</p>
             <div style="width:70%; float:left;">
-                <p style="font-size:12px;">This is an electronically authenticated report, if test results are alarming or unexpected, customer/Client is advised to contact the customer care immediately for possibleremedial action. All lab results are subject to clinical interpretation by qualified medical professional and this report is not subject to use for any medico-legal purpose.</p>
+                <p style="font-size:12px;">This is an electronically authenticated report, if test results are alarming or unexpected, customer/Client is advised to contact the customer care immediately for possible remedial action. All lab results are subject to clinical interpretation by qualified medical professional and this report is not subject to use for any medico-legal purpose.</p>
             </div>
             <div style="width: 28%; border-left: 1px solid #ccc; vertical-align: middle; float:right; text-align:right;">
                 <p><a style="font-size:12px; margin-right:10px; text-decoration:none;" href="mailto:care@lifecell.in"><img style="padding-right:10px; padding-bottom:3px; width:20px; vertical-align:middle;" src="https://cdn.shop.lifecell.in/reports/wellness/images/mail-icon-wr.png" alt='' />care@lifecell.in</a>

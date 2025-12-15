@@ -11,6 +11,10 @@
         .image-ressult {
             font-size: 22px !important;
         }
+
+        .electric-g{
+            font-size: 8px !important;
+        }
     </style>
     <script>
         function number_pages() {
@@ -514,8 +518,9 @@
                 </div>";
     }
     $footerWithoutLogo .= "
-                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . " | CRM: " . $patientDetails['crm'] . "</div>
-                <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
+                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . "</div>
+                                            <div style='font-size: 11px; color:#a5247a; font-weight:600;'> CRM: " . $patientDetails['crm'] . "</div>
+                                            <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
             </td>
             
             <td style='width:100%; margin:0 auto; display:table;'>
@@ -540,8 +545,8 @@
         </tr>
     </table>
     <div class='clear-both'>
-        <p class='footer-adress' style='font-size:11px; padding:2px 5px 5px;'>" . $patientDetails['processing_branch_address'] . "</p>
-        <p class='electric-g'>This is an electronically generated report (Initial report V1)</p>
+        <p class='footer-adress' style='font-size:11px; padding:2px 5px 5px;'>Processed at: " . $patientDetails['processing_branch_address'] . "</p>
+        <p class='electric-g'>This is a computer Generated medical diagnostic report that has been validated by Authorized medical practitioner/Doctor, the report does not need physical signature. (Initial report V1)</p>
         <img style='width:100%; display: block; height:auto;'src='https://cdn.shop.lifecell.in/reports/wellness/images/footer-divider.png' alt='' />
     </div>   
 </footer>
@@ -567,8 +572,9 @@
                    <!-- <div><img src='" . $footerNablLogo . "' alt='' style='width: auto;height:45px;'='processed-img'></div> -->
                 <!-- <div style='color:#000; line-height:10px; font-size: 9px;'>" . $patientDetails['nabl_code'] . "</div> -->
                 <!-- <div style='color:#000; line-height:20px; font-size: 12px;'>(Processed at NABL Lab)</div> -->
-                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . " | CRM: " . $patientDetails['crm'] . "</div>
-                <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
+                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . "</div>
+                                            <div style='font-size: 11px; color:#a5247a; font-weight:600;'> CRM: " . $patientDetails['crm'] . "</div>
+                                            <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
             </td>
             
             <td style='width:60%; padding:0px;'>
@@ -588,7 +594,7 @@
             });
             $unique_locs = array_unique($footer_process_locations);
             if (empty($footer_process_locations)) {
-                $footer_process_location = "Registered Office: No. 16, Vijayaraghava Lane, Vijayaraghava Road, T. Nagar,  Thygarayanagar , Chennai , Tamil Nadu - 600017";
+                $footer_process_location = "Registered Office: No. 16, Vijayaraghava Lane, T. Nagar, Chennai , Tamil Nadu - 600017, CIN: U85196TN2004PTC053577";
                 return $footer_process_location;
             }
             if (count($unique_locs) === 1) {
@@ -665,8 +671,9 @@
             $footerWithLogo .= "                    <!-- <div><img src='" . $footerNablLogo . "' alt='' style='width: auto;height:45px;'='processed-img'></div> -->
                                                 <!-- <div style='color:#000; line-height:10px; font-size: 9px;'>" . $patientDetails['nabl_code'] . "</div> -->
                                                 <!-- <div style='color:#000; line-height:20px; font-size: 12px;'>(Processed at NABL Lab)</div> -->
-                                                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . " | CRM: " . $patientDetails['crm'] . "</div>
-                                                <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
+                                                <div style='font-size: 11px; color:#a5247a; font-weight:600;'>" . ucwords(strtolower($patientDetails['patient_name'])) . "</div>
+                                            <div style='font-size: 11px; color:#a5247a; font-weight:600;'> CRM: " . $patientDetails['crm'] . "</div>
+                                            <div style='font-size:10px; color:#a5247a; font-weight:600;'>DCN: LC/HCH/STDF-RPT/ENG/1222/V001 </div>
                                             </td>
                                             <td style='width:60%; padding:0px;'>
                                                 <table style='width:100%; border-collapse:collapse; text-align:center;'>
@@ -690,8 +697,8 @@
                                         </tr>
                                     </table>
                                     <div class='clear-both' style='margin-top:10px;'>
-                                        <p class='footer-adress' style='font-size:8px; padding:2px 5px 5px;'>" . $processing_branch_address . "</p>
-                                        <p class='electric-g'>This is an electronically generated report (" . $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
+                                        <p class='footer-adress' style='font-size:8px; padding:2px 5px 5px;'>Processed at: " . $processing_branch_address . "</p>
+                                        <p class='electric-g'>This is a computer Generated medical diagnostic report that has been validated by Authorized medical practitioner/Doctor, the report does not need physical signature. (" . $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
                                         <img style='width:100%; display: block; height:auto;' src='https://cdn.shop.lifecell.in/reports/wellness/images/footer-divider.png' alt='' />
                                     </div>
                                 </div>
@@ -740,9 +747,8 @@
         </tr>
     </table>
     <div class='clear-both' style='margin-top:10px;'>
-        <p class='footer-adress' style='font-size:11px; padding:2px 5px 5px;'>" . $patientDetails['processing_branch_address'] . "</p>
-        <p class='electric-g'>This is an electronically generated report ("
-        . $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
+        <p class='footer-adress' style='font-size:11px; padding:2px 5px 5px;'> Registered Office: No. 16, Vijayaraghava Lane, T. Nagar, Chennai , Tamil Nadu - 600017, CIN: U85196TN2004PTC053577</p>
+        <p class='electric-g'>This is a computer Generated medical diagnostic report that has been validated by Authorized medical practitioner/Doctor, the report does not need physical signature. (". $patientDetails['versionText'] . " V" . $patientDetails['reportversion'] . ")</p>
         <img style='width:100%; display: block; height:auto;' src='https://cdn.shop.lifecell.in/reports/wellness/images/footer-divider.png' alt='' />
     </div>
 </div>
@@ -6389,335 +6395,335 @@
     <!-- </div> -->
     <!-- </div>
     <div class="body-cl"> -->
-        <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
-            <div class="resultDetails" style="page-break-after: always; padding-top:50px;">
-                <div style="width:100%;">
-                    <?php echo $co_brand_header2; ?>
-                </div>
-                <div>
-                    <table>
-                        <tr>
-                            <td> <img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
-                        </tr>
-                    </table>
-                </div>
-                <table cellspacing="0" cellpadding="0">
-                    <tr class="d-block">
-                        <td>
-                            <img src="https://cdn.shop.lifecell.in/reports/wellness/images/mfine-iron.png" alt="" style=" padding-left: 10px; width:45px;" class="w-100">
-                        </td>
-                        <?php if (($patientDetails['PackageCode'] == 'AYN_017') || ($patientDetails['PackageCode'] == 'AYN_016')) { ?>
-                            <td style="padding-left:15px;"> <span style="width:100%;" class="result-title <?= $miniralVitaminIronResults['vit-min-iron-summary']; ?>">Vitamins & Iron</span>
-                            <?php } else { ?>
-                            <td style="padding-left:15px;"> <span style="width:100%;" class="result-title <?= $miniralVitaminIronResults['vit-min-iron-summary']; ?>">Vitamins,Minerals & Iron</span>
-                            <?php } ?>
-                            </td>
-                    </tr>
-                </table>
+    <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
+        <div class="resultDetails" style="page-break-after: always; padding-top:50px;">
+            <div style="width:100%;">
+                <?php echo $co_brand_header2; ?>
+            </div>
+            <div>
                 <table>
                     <tr>
-                        <td style="padding-left: 65px;font-size: 14px;">
-                            <p> <span style="font-weight: 700;">Vitamins:</span> Vitamins test is used to check the levels of essential vitamins levels in your blood</p>
-                            <?php if (($patientDetails['PackageCode'] == 'AYN_017') || ($patientDetails['PackageCode'] == 'AYN_016')) { ?>
-                                <p></p>
-                            <?php } else { ?>
-                                <p><span style="font-weight: 700;">Minerals:</span> Adequate amount of mineral is required for proper functioning of body</p>
-                            <?php } ?>
-
-                            <p><span style="font-weight: 700;">Iron:</span> Iron Profile is a set of tests that checks for Iron levels of your body</p>
-                        </td>
+                        <td> <img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
                     </tr>
                 </table>
-                <!--Hiding Ferritin for Ayushman Vital Package -->
-                <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
-                    <tr>
-                        <td class="leftPanel">
-                            <div class="graphDetail">
-                                <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                <div>
-                                    <span class="<?= $miniralVitaminIronResults['vitaminbtwelve_color_code']; ?>" style="font-size: 34px;">
-                                        <?php echo (($miniralVitaminIronResults['vitaminbtwelve_result_value'] != '') ? $miniralVitaminIronResults['vitaminbtwelve_result_value'] : '') ?>
-                                    </span> <?php echo htmlspecialchars($miniralVitaminIronResults['vitaminbtwelve_uom']); ?>
-                                </div>
-                                <table class="image-result">
-                                    <tr>
-                                        <?php if ($miniralVitaminIronResults['vitaminbtwelve_result_value_cleaned'] < (float) $miniralVitaminIronResults['vitaminbtwelve_low_result_value']) { ?>
-                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                        <?php } ?>
+            </div>
+            <table cellspacing="0" cellpadding="0">
+                <tr class="d-block">
+                    <td>
+                        <img src="https://cdn.shop.lifecell.in/reports/wellness/images/mfine-iron.png" alt="" style=" padding-left: 10px; width:45px;" class="w-100">
+                    </td>
+                    <?php if (($patientDetails['PackageCode'] == 'AYN_017') || ($patientDetails['PackageCode'] == 'AYN_016')) { ?>
+                        <td style="padding-left:15px;"> <span style="width:100%;" class="result-title <?= $miniralVitaminIronResults['vit-min-iron-summary']; ?>">Vitamins & Iron</span>
+                        <?php } else { ?>
+                        <td style="padding-left:15px;"> <span style="width:100%;" class="result-title <?= $miniralVitaminIronResults['vit-min-iron-summary']; ?>">Vitamins,Minerals & Iron</span>
+                        <?php } ?>
+                        </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td style="padding-left: 65px;font-size: 14px;">
+                        <p> <span style="font-weight: 700;">Vitamins:</span> Vitamins test is used to check the levels of essential vitamins levels in your blood</p>
+                        <?php if (($patientDetails['PackageCode'] == 'AYN_017') || ($patientDetails['PackageCode'] == 'AYN_016')) { ?>
+                            <p></p>
+                        <?php } else { ?>
+                            <p><span style="font-weight: 700;">Minerals:</span> Adequate amount of mineral is required for proper functioning of body</p>
+                        <?php } ?>
 
-                                        <?php if ($miniralVitaminIronResults['vitaminbtwelve_result_value_cleaned'] >= (float) $miniralVitaminIronResults['vitaminbtwelve_low_result_value'] && $miniralVitaminIronResults['vitaminbtwelve_result_value_cleaned'] <= (float) $miniralVitaminIronResults['vitaminbtwelve_high_result_value']) { ?>
-                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
-                                        <?php } ?>
+                        <p><span style="font-weight: 700;">Iron:</span> Iron Profile is a set of tests that checks for Iron levels of your body</p>
+                    </td>
+                </tr>
+            </table>
+            <!--Hiding Ferritin for Ayushman Vital Package -->
+            <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
+                <tr>
+                    <td class="leftPanel">
+                        <div class="graphDetail">
+                            <p style="color: #333;font-weight:600;">Your Result Value</p>
+                            <div>
+                                <span class="<?= $miniralVitaminIronResults['vitaminbtwelve_color_code']; ?>" style="font-size: 34px;">
+                                    <?php echo (($miniralVitaminIronResults['vitaminbtwelve_result_value'] != '') ? $miniralVitaminIronResults['vitaminbtwelve_result_value'] : '') ?>
+                                </span> <?php echo htmlspecialchars($miniralVitaminIronResults['vitaminbtwelve_uom']); ?>
+                            </div>
+                            <table class="image-result">
+                                <tr>
+                                    <?php if ($miniralVitaminIronResults['vitaminbtwelve_result_value_cleaned'] < (float) $miniralVitaminIronResults['vitaminbtwelve_low_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                    <?php } ?>
 
-                                        <?php if ($miniralVitaminIronResults['vitaminbtwelve_result_value_cleaned'] > (float) $miniralVitaminIronResults['vitaminbtwelve_high_result_value']) { ?>
-                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                        <?php } ?>
-                                        <td class="<?= $miniralVitaminIronResults['vitaminbtwelve_color_code']; ?> image-ressult">
-                                            <?php echo (($miniralVitaminIronResults['vitaminbtwelve_result_value_in_words'] != '') ? $miniralVitaminIronResults['vitaminbtwelve_result_value_in_words'] : '') ?>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="mediacal-update">
-                                    <!-- <tr>
+                                    <?php if ($miniralVitaminIronResults['vitaminbtwelve_result_value_cleaned'] >= (float) $miniralVitaminIronResults['vitaminbtwelve_low_result_value'] && $miniralVitaminIronResults['vitaminbtwelve_result_value_cleaned'] <= (float) $miniralVitaminIronResults['vitaminbtwelve_high_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
+                                    <?php } ?>
+
+                                    <?php if ($miniralVitaminIronResults['vitaminbtwelve_result_value_cleaned'] > (float) $miniralVitaminIronResults['vitaminbtwelve_high_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                    <?php } ?>
+                                    <td class="<?= $miniralVitaminIronResults['vitaminbtwelve_color_code']; ?> image-ressult">
+                                        <?php echo (($miniralVitaminIronResults['vitaminbtwelve_result_value_in_words'] != '') ? $miniralVitaminIronResults['vitaminbtwelve_result_value_in_words'] : '') ?>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="mediacal-update">
+                                <!-- <tr>
                                         <td>Range</td>
                                         <td> : <?php echo $miniralVitaminIronResults['vitaminbtwelve_low_result_value'] . " - " . $miniralVitaminIronResults['vitaminbtwelve_high_result_value'] . " " . $miniralVitaminIronResults['vitaminbtwelve_uom']; ?></td>
                                     </tr> -->
-                                    <td>Range</td>
-                                    <?php if (!empty($miniralVitaminIronResults['vitaminbtwelve_BRInterval_result_value'])) { ?>
-                                        <td> : <?php echo $miniralVitaminIronResults['vitaminbtwelve_BRInterval_result_value'] . " " . $miniralVitaminIronResults['vitaminbtwelve_uom']; ?> </td>
-                                    <?php } else { ?>
-                                        <td> : <?php echo $miniralVitaminIronResults['vitaminbtwelve_low_result_value'] . " - " . $miniralVitaminIronResults['vitaminbtwelve_high_result_value'] . " " . $miniralVitaminIronResults['vitaminbtwelve_uom']; ?> </td>
-                                    <?php } ?>
-                                </table>
-                            </div>
-                        </td>
-                        <!-- Vitamin B12 -->
-                        <td class="rightPanel">
-                            <div class="graphContent" style="position: relative;">
-                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                    <h4 style="margin: 0;">Vitamin B12</h4>
-                                    <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['vitaminbtwelve_sample_method']; ?> </p>
-                                </div>
-
-                                <!-- NABL Logo and Code Positioned Absolutely -->
-                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                    <?php if ($miniralVitaminIronResults['vitaminbtwelve_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                            <?= $min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_nabl_code']; ?>
-                                        </div>
-                                    <?php endif; ?>
-
-                                </div>
-
-                                <p style="margin-top:5px;">Vitamin B12 is one of the essential vitamins of your body. This test measures the level
-                                    of Vitamin B12 in your blood. Vitamin B12 controls many body functions such as
-                                    regulation of brain health, production of blood cells and other functioning. Deficiency
-                                    of Vitamin B is common</p>
-
-                                <?php if ($miniralVitaminIronResults['vitaminbtwelve_impact_on_health'] != '') { ?>
-                                    <h4>Impact on health</h4>
-                                    <p><?php echo ($miniralVitaminIronResults['vitaminbtwelve_impact_on_health'] != '') ? $miniralVitaminIronResults['vitaminbtwelve_impact_on_health'] : '' ?></p>
+                                <td>Range</td>
+                                <?php if (!empty($miniralVitaminIronResults['vitaminbtwelve_BRInterval_result_value'])) { ?>
+                                    <td> : <?php echo $miniralVitaminIronResults['vitaminbtwelve_BRInterval_result_value'] . " " . $miniralVitaminIronResults['vitaminbtwelve_uom']; ?> </td>
+                                <?php } else { ?>
+                                    <td> : <?php echo $miniralVitaminIronResults['vitaminbtwelve_low_result_value'] . " - " . $miniralVitaminIronResults['vitaminbtwelve_high_result_value'] . " " . $miniralVitaminIronResults['vitaminbtwelve_uom']; ?> </td>
                                 <?php } ?>
+                            </table>
+                        </div>
+                    </td>
+                    <!-- Vitamin B12 -->
+                    <td class="rightPanel">
+                        <div class="graphContent" style="position: relative;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                <h4 style="margin: 0;">Vitamin B12</h4>
+                                <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['vitaminbtwelve_sample_method']; ?> </p>
                             </div>
-                        </td>
-                    </tr>
-                </table>
+
+                            <!-- NABL Logo and Code Positioned Absolutely -->
+                            <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                <?php if ($miniralVitaminIronResults['vitaminbtwelve_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                    <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                    <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                        <?= $min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_nabl_code']; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                            </div>
+
+                            <p style="margin-top:5px;">Vitamin B12 is one of the essential vitamins of your body. This test measures the level
+                                of Vitamin B12 in your blood. Vitamin B12 controls many body functions such as
+                                regulation of brain health, production of blood cells and other functioning. Deficiency
+                                of Vitamin B is common</p>
+
+                            <?php if ($miniralVitaminIronResults['vitaminbtwelve_impact_on_health'] != '') { ?>
+                                <h4>Impact on health</h4>
+                                <p><?php echo ($miniralVitaminIronResults['vitaminbtwelve_impact_on_health'] != '') ? $miniralVitaminIronResults['vitaminbtwelve_impact_on_health'] : '' ?></p>
+                            <?php } ?>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
+                <tr>
+                    <td class="leftPanel">
+                        <div class="graphDetail">
+                            <p style="color: #333;font-weight:600;">Your Result Value</p>
+                            <div>
+                                <span class="<?= $miniralVitaminIronResults['vitamind_color_code']; ?>" style="font-size: 34px;">
+                                    <?php echo (($miniralVitaminIronResults['vitamind_result_value'] != '') ? $miniralVitaminIronResults['vitamind_result_value'] : '') ?>
+                                </span> <?php echo htmlspecialchars($miniralVitaminIronResults['vitamind_uom']); ?>
+                            </div>
+
+                            <table class="image-result">
+                                <tr>
+                                    <td><img src="<?= $miniralVitaminIronResults['vitamind_thumb_up_icon'] ?>" /></td>
+                                    <td class="<?= $miniralVitaminIronResults['vitamind_color_code']; ?> image-ressult">
+                                        <?php echo (($miniralVitaminIronResults['vitamind_result_value_in_words'] != '') ? $miniralVitaminIronResults['vitamind_result_value_in_words'] : '') ?>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="mediacal-update">
+                                <?php
+                                foreach ($miniralVitaminIronResults['vitamind_reference_ranges_value'] as $label => $range) {
+                                    echo "<tr>";
+                                    echo "<td>" . ucwords($label) . "</td>";
+                                    echo "<td>: $range</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+
+                            </table>
+                        </div>
+                    </td>
+                    <!-- Vitamin D-25 Hydroxy -->
+                    <td class="rightPanel">
+                        <div class="graphContent" style="position: relative;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                <h4 style="margin: 0;">Vitamin D-25 Hydroxy</h4>
+                                <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['vitamind_sample_method']; ?> </p>
+                            </div>
+                            <!-- NABL Logo and Code Positioned Absolutely -->
+                            <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+                                <?php if ($miniralVitaminIronResults['vitamind_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                    <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                    <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                        <?= $min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_nabl_code']; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <p style="margin-top:5px;">Vitamin D- 25 Hydroxy monitors Vitamin- D levels in your bodyIn your bloodstream, vitamin
+                                D2 and vitamin D3 are changed into a form of vitamin D called Vitamin D-25 Hydroxy. A
+                                vitamin D blood test measures the level of 25 (OH) D in your blood.</p>
+                            <?php if ($miniralVitaminIronResults['vitamind_impact_on_health'] != '') { ?>
+                                <h4>Impact on health</h4>
+                                <p><?php echo ($miniralVitaminIronResults['vitamind_impact_on_health'] != '') ? $miniralVitaminIronResults['vitamind_impact_on_health'] : '' ?></p>
+                            <?php } ?>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <?php if ($patientDetails['PackageCode'] !== 'AYN_016') { ?>
                 <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
                     <tr>
                         <td class="leftPanel">
                             <div class="graphDetail">
                                 <p style="color: #333;font-weight:600;">Your Result Value</p>
                                 <div>
-                                    <span class="<?= $miniralVitaminIronResults['vitamind_color_code']; ?>" style="font-size: 34px;">
-                                        <?php echo (($miniralVitaminIronResults['vitamind_result_value'] != '') ? $miniralVitaminIronResults['vitamind_result_value'] : '') ?>
-                                    </span> <?php echo htmlspecialchars($miniralVitaminIronResults['vitamind_uom']); ?>
-                                </div>
-
-                                <table class="image-result">
-                                    <tr>
-                                        <td><img src="<?= $miniralVitaminIronResults['vitamind_thumb_up_icon'] ?>" /></td>
-                                        <td class="<?= $miniralVitaminIronResults['vitamind_color_code']; ?> image-ressult">
-                                            <?php echo (($miniralVitaminIronResults['vitamind_result_value_in_words'] != '') ? $miniralVitaminIronResults['vitamind_result_value_in_words'] : '') ?>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="mediacal-update">
-                                    <?php
-                                    foreach ($miniralVitaminIronResults['vitamind_reference_ranges_value'] as $label => $range) {
-                                        echo "<tr>";
-                                        echo "<td>" . ucwords($label) . "</td>";
-                                        echo "<td>: $range</td>";
-                                        echo "</tr>";
-                                    }
-                                    ?>
-
-                                </table>
-                            </div>
-                        </td>
-                        <!-- Vitamin D-25 Hydroxy -->
-                        <td class="rightPanel">
-                            <div class="graphContent" style="position: relative;">
-                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                    <h4 style="margin: 0;">Vitamin D-25 Hydroxy</h4>
-                                    <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['vitamind_sample_method']; ?> </p>
-                                </div>
-                                <!-- NABL Logo and Code Positioned Absolutely -->
-                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-                                    <?php if ($miniralVitaminIronResults['vitamind_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                            <?= $min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_nabl_code']; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
-                                <p style="margin-top:5px;">Vitamin D- 25 Hydroxy monitors Vitamin- D levels in your bodyIn your bloodstream, vitamin
-                                    D2 and vitamin D3 are changed into a form of vitamin D called Vitamin D-25 Hydroxy. A
-                                    vitamin D blood test measures the level of 25 (OH) D in your blood.</p>
-                                <?php if ($miniralVitaminIronResults['vitamind_impact_on_health'] != '') { ?>
-                                    <h4>Impact on health</h4>
-                                    <p><?php echo ($miniralVitaminIronResults['vitamind_impact_on_health'] != '') ? $miniralVitaminIronResults['vitamind_impact_on_health'] : '' ?></p>
-                                <?php } ?>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <?php if ($patientDetails['PackageCode'] !== 'AYN_016') { ?>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
-                        <tr>
-                            <td class="leftPanel">
-                                <div class="graphDetail">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $miniralVitaminIronResults['phosphorus_color_code']; ?>" style="font-size: 34px;">
-                                            <?php echo (($miniralVitaminIronResults['phosphorus_result_value'] != '') ? $miniralVitaminIronResults['phosphorus_result_value'] : '') ?>
-                                        </span> <?php echo htmlspecialchars($miniralVitaminIronResults['phosphorus_uom']); ?>
-                                    </div>
-                                    <table class="image-result">
-                                        <tr>
-                                            <?php if ($miniralVitaminIronResults['phosphorus_result_value'] < $miniralVitaminIronResults['phosphorus_low_result_value']) { ?>
-                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                            <?php } ?>
-
-                                            <?php if ($miniralVitaminIronResults['phosphorus_result_value'] >= $miniralVitaminIronResults['phosphorus_low_result_value'] && $miniralVitaminIronResults['phosphorus_result_value'] <= $miniralVitaminIronResults['phosphorus_high_result_value']) { ?>
-                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
-                                            <?php } ?>
-
-                                            <?php if ($miniralVitaminIronResults['phosphorus_result_value'] > $miniralVitaminIronResults['phosphorus_high_result_value']) { ?>
-                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                            <?php } ?>
-                                            <td class="<?= $miniralVitaminIronResults['phosphorus_color_code']; ?> image-ressult">
-                                                <?php echo (($miniralVitaminIronResults['phosphorus_result_value_in_words'] != '') ? $miniralVitaminIronResults['phosphorus_result_value_in_words'] : '') ?>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <table class="mediacal-update">
-                                        <tr>
-                                            <!-- <td>Range</td>
-                                        <td>: <?php echo $miniralVitaminIronResults['phosphorus_low_result_value'] . " - " . $miniralVitaminIronResults['phosphorus_high_result_value'] . " "; ?> <?php echo htmlspecialchars($miniralVitaminIronResults['phosphorus_uom']); ?></td> -->
-
-
-                                            <td>Range</td>
-                                            <?php if (!empty($miniralVitaminIronResults['phosphorus_BRInterval_result_value'])) { ?>
-                                                <td> : <?php echo $miniralVitaminIronResults['phosphorus_BRInterval_result_value'] . " " . $miniralVitaminIronResults['phosphorus_uom']; ?> </td>
-                                            <?php } else { ?>
-                                                <td> : <?php echo $miniralVitaminIronResults['phosphorus_low_result_value'] . " - " . $miniralVitaminIronResults['phosphorus_high_result_value'] . " " . $miniralVitaminIronResults['phosphorus_uom']; ?> </td>
-                                            <?php } ?>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </td>
-                            <!-- Phosphorus -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Phosphorus</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['phosphorus_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($miniralVitaminIronResults['phosphorus_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $min_vit_iron_Testgroupdetails['P0010b_min_vit_iron_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-
-                                    </div>
-
-                                    <p style="margin-top:5px;">Phosphorus is a mineral which makes bones and teeth strong. This test checks the level of
-                                        phosphorus in your blood.</p>
-
-                                    <?php if ($miniralVitaminIronResults['phosphorus_impact_on_health'] != '') { ?>
-                                        <h4>Impact on health</h4>
-                                        <p><?php echo ($miniralVitaminIronResults['phosphorus_impact_on_health'] != '') ? $miniralVitaminIronResults['phosphorus_impact_on_health'] : '' ?></p>
-                                    <?php } ?>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                <?php } ?>
-                <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
-                    <tr>
-                        <td class="leftPanel">
-                            <div class="graphDetail">
-                                <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                <div>
-                                    <span class="<?= $miniralVitaminIronResults['uibc_color_code']; ?>" style="font-size: 34px;">
-                                        <?php echo (($miniralVitaminIronResults['uibc_result_value'] != '') ? $miniralVitaminIronResults['uibc_result_value'] : '') ?>
-                                    </span> <?php echo htmlspecialchars($miniralVitaminIronResults['uibc_uom']); ?>
+                                    <span class="<?= $miniralVitaminIronResults['phosphorus_color_code']; ?>" style="font-size: 34px;">
+                                        <?php echo (($miniralVitaminIronResults['phosphorus_result_value'] != '') ? $miniralVitaminIronResults['phosphorus_result_value'] : '') ?>
+                                    </span> <?php echo htmlspecialchars($miniralVitaminIronResults['phosphorus_uom']); ?>
                                 </div>
                                 <table class="image-result">
                                     <tr>
-                                        <?php if ($miniralVitaminIronResults['uibc_result_value'] < $miniralVitaminIronResults['uibc_low_result_value']) { ?>
+                                        <?php if ($miniralVitaminIronResults['phosphorus_result_value'] < $miniralVitaminIronResults['phosphorus_low_result_value']) { ?>
                                             <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
                                         <?php } ?>
 
-                                        <?php if ($miniralVitaminIronResults['uibc_result_value'] >= $miniralVitaminIronResults['uibc_low_result_value'] && $miniralVitaminIronResults['uibc_result_value'] <= $miniralVitaminIronResults['uibc_high_result_value']) { ?>
+                                        <?php if ($miniralVitaminIronResults['phosphorus_result_value'] >= $miniralVitaminIronResults['phosphorus_low_result_value'] && $miniralVitaminIronResults['phosphorus_result_value'] <= $miniralVitaminIronResults['phosphorus_high_result_value']) { ?>
                                             <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
                                         <?php } ?>
 
-                                        <?php if ($miniralVitaminIronResults['uibc_result_value'] > $miniralVitaminIronResults['uibc_high_result_value']) { ?>
+                                        <?php if ($miniralVitaminIronResults['phosphorus_result_value'] > $miniralVitaminIronResults['phosphorus_high_result_value']) { ?>
                                             <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
                                         <?php } ?>
-                                        <td class="<?= $miniralVitaminIronResults['uibc_color_code']; ?> image-ressult">
-                                            <?php echo (($miniralVitaminIronResults['uibc_result_value_in_words'] != '') ? $miniralVitaminIronResults['uibc_result_value_in_words'] : '') ?>
+                                        <td class="<?= $miniralVitaminIronResults['phosphorus_color_code']; ?> image-ressult">
+                                            <?php echo (($miniralVitaminIronResults['phosphorus_result_value_in_words'] != '') ? $miniralVitaminIronResults['phosphorus_result_value_in_words'] : '') ?>
                                         </td>
                                     </tr>
                                 </table>
                                 <table class="mediacal-update">
                                     <tr>
                                         <!-- <td>Range</td>
-                                    <td> : <?php echo $miniralVitaminIronResults['uibc_low_result_value'] . " - " . $miniralVitaminIronResults['uibc_high_result_value'] . " "; ?> <?php echo htmlspecialchars($miniralVitaminIronResults['uibc_uom']); ?></td> -->
+                                        <td>: <?php echo $miniralVitaminIronResults['phosphorus_low_result_value'] . " - " . $miniralVitaminIronResults['phosphorus_high_result_value'] . " "; ?> <?php echo htmlspecialchars($miniralVitaminIronResults['phosphorus_uom']); ?></td> -->
+
 
                                         <td>Range</td>
-                                        <?php if (!empty($miniralVitaminIronResults['uibc_BRInterval_result_value'])) { ?>
-                                            <td> : <?php echo $miniralVitaminIronResults['uibc_BRInterval_result_value'] . " " . $miniralVitaminIronResults['uibc_uom']; ?> </td>
+                                        <?php if (!empty($miniralVitaminIronResults['phosphorus_BRInterval_result_value'])) { ?>
+                                            <td> : <?php echo $miniralVitaminIronResults['phosphorus_BRInterval_result_value'] . " " . $miniralVitaminIronResults['phosphorus_uom']; ?> </td>
                                         <?php } else { ?>
-                                            <td> : <?php echo $miniralVitaminIronResults['uibc_low_result_value'] . " - " . $miniralVitaminIronResults['uibc_high_result_value'] . " " . $miniralVitaminIronResults['uibc_uom']; ?> </td>
+                                            <td> : <?php echo $miniralVitaminIronResults['phosphorus_low_result_value'] . " - " . $miniralVitaminIronResults['phosphorus_high_result_value'] . " " . $miniralVitaminIronResults['phosphorus_uom']; ?> </td>
                                         <?php } ?>
-
                                     </tr>
                                 </table>
                             </div>
                         </td>
-                        <!-- UIBC -->
+                        <!-- Phosphorus -->
                         <td class="rightPanel">
                             <div class="graphContent" style="position: relative;">
                                 <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                    <h4 style="margin: 0;">UIBC</h4>
-                                    <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['uibc_sample_method']; ?> </p>
+                                    <h4 style="margin: 0;">Phosphorus</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['phosphorus_sample_method']; ?> </p>
                                 </div>
 
                                 <!-- NABL Logo and Code Positioned Absolutely -->
                                 <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
 
-                                    <?php if ($miniralVitaminIronResults['uibc_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                    <?php if ($miniralVitaminIronResults['phosphorus_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
                                         <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
                                         <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                            <?= $min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_nabl_code']; ?>
+                                            <?= $min_vit_iron_Testgroupdetails['P0010b_min_vit_iron_nabl_code']; ?>
                                         </div>
                                     <?php endif; ?>
 
                                 </div>
 
-                                <p style="margin-top:5px;">UIBC checks for the body efficiency to transport Iron in the blood</p>
+                                <p style="margin-top:5px;">Phosphorus is a mineral which makes bones and teeth strong. This test checks the level of
+                                    phosphorus in your blood.</p>
 
-                                <?php if ($miniralVitaminIronResults['uibc_impact_on_health'] != '') { ?>
+                                <?php if ($miniralVitaminIronResults['phosphorus_impact_on_health'] != '') { ?>
                                     <h4>Impact on health</h4>
-                                    <p><?php echo ($miniralVitaminIronResults['uibc_impact_on_health'] != '') ? $miniralVitaminIronResults['uibc_impact_on_health'] : '' ?></p>
+                                    <p><?php echo ($miniralVitaminIronResults['phosphorus_impact_on_health'] != '') ? $miniralVitaminIronResults['phosphorus_impact_on_health'] : '' ?></p>
                                 <?php } ?>
                             </div>
                         </td>
                     </tr>
                 </table>
+            <?php } ?>
+            <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
+                <tr>
+                    <td class="leftPanel">
+                        <div class="graphDetail">
+                            <p style="color: #333;font-weight:600;">Your Result Value</p>
+                            <div>
+                                <span class="<?= $miniralVitaminIronResults['uibc_color_code']; ?>" style="font-size: 34px;">
+                                    <?php echo (($miniralVitaminIronResults['uibc_result_value'] != '') ? $miniralVitaminIronResults['uibc_result_value'] : '') ?>
+                                </span> <?php echo htmlspecialchars($miniralVitaminIronResults['uibc_uom']); ?>
+                            </div>
+                            <table class="image-result">
+                                <tr>
+                                    <?php if ($miniralVitaminIronResults['uibc_result_value'] < $miniralVitaminIronResults['uibc_low_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                    <?php } ?>
 
-            </div>
+                                    <?php if ($miniralVitaminIronResults['uibc_result_value'] >= $miniralVitaminIronResults['uibc_low_result_value'] && $miniralVitaminIronResults['uibc_result_value'] <= $miniralVitaminIronResults['uibc_high_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
+                                    <?php } ?>
 
-            <footer style="
+                                    <?php if ($miniralVitaminIronResults['uibc_result_value'] > $miniralVitaminIronResults['uibc_high_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                    <?php } ?>
+                                    <td class="<?= $miniralVitaminIronResults['uibc_color_code']; ?> image-ressult">
+                                        <?php echo (($miniralVitaminIronResults['uibc_result_value_in_words'] != '') ? $miniralVitaminIronResults['uibc_result_value_in_words'] : '') ?>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="mediacal-update">
+                                <tr>
+                                    <!-- <td>Range</td>
+                                    <td> : <?php echo $miniralVitaminIronResults['uibc_low_result_value'] . " - " . $miniralVitaminIronResults['uibc_high_result_value'] . " "; ?> <?php echo htmlspecialchars($miniralVitaminIronResults['uibc_uom']); ?></td> -->
+
+                                    <td>Range</td>
+                                    <?php if (!empty($miniralVitaminIronResults['uibc_BRInterval_result_value'])) { ?>
+                                        <td> : <?php echo $miniralVitaminIronResults['uibc_BRInterval_result_value'] . " " . $miniralVitaminIronResults['uibc_uom']; ?> </td>
+                                    <?php } else { ?>
+                                        <td> : <?php echo $miniralVitaminIronResults['uibc_low_result_value'] . " - " . $miniralVitaminIronResults['uibc_high_result_value'] . " " . $miniralVitaminIronResults['uibc_uom']; ?> </td>
+                                    <?php } ?>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <!-- UIBC -->
+                    <td class="rightPanel">
+                        <div class="graphContent" style="position: relative;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                <h4 style="margin: 0;">UIBC</h4>
+                                <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['uibc_sample_method']; ?> </p>
+                            </div>
+
+                            <!-- NABL Logo and Code Positioned Absolutely -->
+                            <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                <?php if ($miniralVitaminIronResults['uibc_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                    <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                    <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                        <?= $min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_nabl_code']; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                            </div>
+
+                            <p style="margin-top:5px;">UIBC checks for the body efficiency to transport Iron in the blood</p>
+
+                            <?php if ($miniralVitaminIronResults['uibc_impact_on_health'] != '') { ?>
+                                <h4>Impact on health</h4>
+                                <p><?php echo ($miniralVitaminIronResults['uibc_impact_on_health'] != '') ? $miniralVitaminIronResults['uibc_impact_on_health'] : '' ?></p>
+                            <?php } ?>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <footer style="
 		position: absolute; 
 		bottom: -10px; 
 		left: 0;
@@ -6725,13 +6731,377 @@
 		text-align: center; 
 		padding: 10px 0; 
 		page-break-before: always;">
-                <div>
-                    <?php //echo $footerWithLogo; 
-                    echo NewFooter(['V0004a', 'V0004c', 'Iron Studies'], $tgdrsig_details, $footerLogo, $patientDetails, $footerNablLogo); ?>
+            <div>
+                <?php //echo $footerWithLogo; 
+                echo NewFooter(['V0004a', 'V0004c', 'Iron Studies'], $tgdrsig_details, $footerLogo, $patientDetails, $footerNablLogo); ?>
+            </div>
+            <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
+        </footer>
+    </div>
+    <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
+        <div class="resultDetails" style="page-break-after: always;padding-top:50px;">
+            <div style="width:100%;">
+                <?php echo $co_brand_header2; ?>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td> <img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
+                    </tr>
+                </table>
+            </div>
+            <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
+                <tr>
+                    <td class="leftPanel">
+                        <div class="graphDetail">
+                            <p style="color: #333;font-weight:600;">Your Result Value</p>
+                            <div>
+                                <span class="<?= $miniralVitaminIronResults['tibc_color_code']; ?>" style="font-size: 34px;">
+                                    <?php echo (($miniralVitaminIronResults['tibc_result_value'] != '') ? $miniralVitaminIronResults['tibc_result_value'] : '') ?>
+                                </span> <?php echo htmlspecialchars($miniralVitaminIronResults['tibc_uom']); ?>
+                            </div>
+                            <table class="image-result">
+                                <tr>
+                                    <?php if ($miniralVitaminIronResults['tibc_result_value'] < $miniralVitaminIronResults['tibc_low_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                    <?php } ?>
+
+                                    <?php if ($miniralVitaminIronResults['tibc_result_value'] >= $miniralVitaminIronResults['tibc_low_result_value'] && $miniralVitaminIronResults['tibc_result_value'] <= $miniralVitaminIronResults['tibc_high_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
+                                    <?php } ?>
+
+                                    <?php if ($miniralVitaminIronResults['tibc_result_value'] > $miniralVitaminIronResults['tibc_high_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                    <?php } ?>
+                                    <td class="<?= $miniralVitaminIronResults['tibc_color_code']; ?> image-ressult">
+                                        <?php echo (($miniralVitaminIronResults['tibc_result_value_in_words'] != '') ? $miniralVitaminIronResults['tibc_result_value_in_words'] : '') ?>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="mediacal-update">
+                                <tr>
+                                    <!-- <td>Range </td>
+                                    <td> : <?php echo $miniralVitaminIronResults['tibc_low_result_value'] . " - " . $miniralVitaminIronResults['tibc_high_result_value'] . " "; ?> <?php echo htmlspecialchars($miniralVitaminIronResults['tibc_uom']); ?></td> -->
+                                    <td>Range</td>
+                                    <?php if (!empty($miniralVitaminIronResults['tibc_BRInterval_result_value'])) { ?>
+                                        <td> : <?php echo $miniralVitaminIronResults['tibc_BRInterval_result_value'] . " " . $miniralVitaminIronResults['tibc_uom']; ?> </td>
+                                    <?php } else { ?>
+                                        <td> : <?php echo $miniralVitaminIronResults['tibc_low_result_value'] . " - " . $miniralVitaminIronResults['tibc_high_result_value'] . " " . $miniralVitaminIronResults['tibc_uom']; ?> </td>
+                                    <?php } ?>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <!-- TIBC -->
+                    <td class="rightPanel">
+                        <div class="graphContent" style="position: relative;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                <h4 style="margin: 0;">TIBC</h4>
+                                <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['tibc_sample_method']; ?> </p>
+                            </div>
+
+                            <!-- NABL Logo and Code Positioned Absolutely -->
+                            <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                <?php if ($miniralVitaminIronResults['tibc_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                    <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                    <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                        <?= $min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_nabl_code']; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                            </div>
+
+                            <p style="margin-top:5px;">TIBC check iron level in your blood TIBC (total iron-binding capacity) measures the total amount of iron that can be bound by proteins in the blood.</p>
+
+                            <?php if ($miniralVitaminIronResults['tibc_impact_on_health'] != '') { ?>
+                                <h4>Impact on health</h4>
+                                <p><?php echo ($miniralVitaminIronResults['tibc_impact_on_health'] != '') ? $miniralVitaminIronResults['tibc_impact_on_health'] : '' ?></p>
+                            <?php } ?>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
+                <tr>
+                    <td class="leftPanel">
+                        <div class="graphDetail">
+                            <p style="color: #333;font-weight:600;">Your Result Value</p>
+                            <div>
+                                <span class="<?= $miniralVitaminIronResults['iron_color_code']; ?>" style="font-size: 34px;">
+                                    <?php echo (($miniralVitaminIronResults['iron_result_value'] != '') ? $miniralVitaminIronResults['iron_result_value'] : '') ?>
+                                </span> <?php echo htmlspecialchars($miniralVitaminIronResults['iron_uom']); ?>
+                            </div>
+                            <table class="image-result">
+                                <tr>
+                                    <?php if ($miniralVitaminIronResults['iron_result_value'] < $miniralVitaminIronResults['iron_low_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                    <?php } ?>
+
+                                    <?php if ($miniralVitaminIronResults['iron_result_value'] >= $miniralVitaminIronResults['iron_low_result_value'] && $miniralVitaminIronResults['iron_result_value'] <= $miniralVitaminIronResults['iron_high_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
+                                    <?php } ?>
+
+                                    <?php if ($miniralVitaminIronResults['iron_result_value'] > $miniralVitaminIronResults['iron_high_result_value']) { ?>
+                                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                    <?php } ?>
+                                    <td class="<?= $miniralVitaminIronResults['iron_color_code']; ?> image-ressult">
+                                        <?php echo (($miniralVitaminIronResults['iron_result_value_in_words'] != '') ? $miniralVitaminIronResults['iron_result_value_in_words'] : '') ?>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="mediacal-update">
+                                <tr>
+                                    <!-- <td>Range </td>
+                                    <td> : <?php echo $miniralVitaminIronResults['iron_low_result_value'] . " - " . $miniralVitaminIronResults['iron_high_result_value'] . " "; ?> <?php echo htmlspecialchars($miniralVitaminIronResults['iron_uom']); ?></td> -->
+
+                                    <td>Range</td>
+                                    <?php if (!empty($miniralVitaminIronResults['iron_BRInterval_result_value'])) { ?>
+                                        <td> : <?php echo $miniralVitaminIronResults['iron_BRInterval_result_value'] . " " . $miniralVitaminIronResults['iron_uom']; ?> </td>
+                                    <?php } else { ?>
+                                        <td> : <?php echo $miniralVitaminIronResults['iron_low_result_value'] . " - " . $miniralVitaminIronResults['iron_high_result_value'] . " " . $miniralVitaminIronResults['iron_uom']; ?> </td>
+                                    <?php } ?>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <!-- Iron -->
+                    <td class="rightPanel">
+                        <div class="graphContent" style="position: relative;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                <h4 style="margin: 0;">Iron</h4>
+                                <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['iron_sample_method']; ?> </p>
+                            </div>
+
+                            <!-- NABL Logo and Code Positioned Absolutely -->
+                            <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                <?php if ($miniralVitaminIronResults['iron_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                    <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                    <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                        <?= $min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_nabl_code']; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                            </div>
+
+                            <p style="margin-top:5px;">Iron is an essential mineral that forms RBCs of your blood. This test measures the level
+                                of iron in your blood.</p>
+
+                            <?php if ($miniralVitaminIronResults['iron_impact_on_health'] != '') { ?>
+                                <h4>Impact on health</h4>
+                                <p><?php echo ($miniralVitaminIronResults['iron_impact_on_health'] != '') ? $miniralVitaminIronResults['iron_impact_on_health'] : '' ?></p>
+                            <?php } ?>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
+                <tr>
+                    <td class="leftPanel">
+                        <div class="graphDetail">
+                            <p style="color: #333;font-weight:600;">Your Result Value</p>
+                            <div>
+                                <span class="<?= $miniralVitaminIronResults['iron_saturation_color_code']; ?>" style="font-size: 34px;">
+                                    <?php echo (($miniralVitaminIronResults['iron_saturation_result_value'] != '') ? $miniralVitaminIronResults['iron_saturation_result_value'] : '') ?>
+                                </span><?php echo htmlspecialchars($miniralVitaminIronResults['iron_saturation_uom']) ?>
+                            </div>
+
+                            <!-- Thumbs + Interpretation -->
+                            <table class="image-result">
+                                <tr>
+                                    <?php if (!empty($miniralVitaminIronResults['iron_saturation_thumb_up_icon'])): ?>
+                                        <td><img src="<?= $miniralVitaminIronResults['iron_saturation_thumb_up_icon']; ?>" /></td>
+                                    <?php endif; ?>
+                                    <td class="<?= $miniralVitaminIronResults['iron_saturation_color_code']; ?> image-ressult">
+                                        <?php echo (($miniralVitaminIronResults['iron_saturation_result_value_in_words'] != '') ? $miniralVitaminIronResults['iron_saturation_result_value_in_words'] : '') ?>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="mediacal-update">
+                                <tr>
+                                    <td>Range</td>
+                                    <?php if (!empty($miniralVitaminIronResults['iron_saturation_BRInterval_result_value'])) { ?>
+                                        <td> : <?php echo $miniralVitaminIronResults['iron_saturation_BRInterval_result_value'] ?> </td>
+                                    <?php } else { ?>
+                                            <td> : <?php echo $miniralVitaminIronResults['iron_saturation_low_result_value'] . " - " . $miniralVitaminIronResults['iron_saturation_high_result_value']?> </td>
+                                    <?php } ?>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+
+                    <!-- % OF IRON SATURATION -->
+                    <td class="rightPanel">
+                        <div class="graphContent" style="position: relative;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                <h4 style="margin: 0;">% of Iron Saturation</h4>
+                                <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['iron_saturation_sample_method']; ?> </p>
+                            </div>
+
+                            <!-- NABL Logo and Code -->
+                            <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+                                <?php if ($miniralVitaminIronResults['iron_saturation_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                    <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                    <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                        <?= $min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_nabl_code']; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+                            <!-- Description -->
+                            <p style="margin-top:5px;">
+                                Percentage of Iron Saturation also known as Transferrin saturation is the ratio of serum iron and TIBC.
+                                This parameter provides an estimate of how much serum iron is actually bound to transferrin and is expressed as a percentage.
+                                Transferrin saturation is typically utilised to determine a patient's iron status to detect either iron deficiency or overload.
+                            </p>
+
+                            <!-- Impact on health -->
+                            <?php if (!empty($miniralVitaminIronResults['iron_saturation_impact_on_health'])): ?>
+                                <h4>Impact on health</h4>
+                                <p><?= $miniralVitaminIronResults['iron_saturation_impact_on_health']; ?></p>
+                            <?php endif; ?>
+
+                            <!-- Suggestion -->
+                            <?php if (!empty($miniralVitaminIronResults['iron_saturation_suggestion'])): ?>
+                                <h4>Suggestion</h4>
+                                <p><?= $miniralVitaminIronResults['iron_saturation_suggestion']; ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div style="float:left;">
+                <div style="padding-top: 5px;">
+                    <p class="sample-type-para">
+                        <span class="p-tag" style="font-size: 16px;">Sample Type :</span> Serum
+                    </p>
                 </div>
-                <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
-            </footer>
+
+                <?php
+                if (
+                    !empty($min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_remarks']) ||
+                    !empty($min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_remarks']) ||
+                    !empty($min_vit_iron_Testgroupdetails['P0010b_min_vit_iron_remarks']) ||
+                    !empty($min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_remarks'])
+                ) { ?>
+                    <div style="padding-top: 2.5px;">
+                        <p class="sample-type-para">
+                            <span class="p-tag" style="font-size: 16px;">Service Remarks :</span>
+
+                            <?= htmlspecialchars($min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_remarks']) ?>
+
+                            <?php if (!empty($min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_remarks']) && !empty($min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_remarks'])): ?>
+                                ,
+                            <?php endif; ?>
+
+                            <?= htmlspecialchars($min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_remarks']) ?>
+
+                            <?php if ((!empty($min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_remarks']) || !empty($min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_remarks'])) && !empty($min_vit_iron_Testgroupdetails['P0010b_min_vit_iron_remarks'])): ?>
+                                ,
+                            <?php endif; ?>
+
+                            <?= htmlspecialchars($min_vit_iron_Testgroupdetails['P0010b_min_vit_iron_remarks']) ?>
+
+                            <?php if ((!empty($min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_remarks']) || !empty($min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_remarks']) || !empty($min_vit_iron_Testgroupdetails['P0010b_min_vit_iron_remarks'])) && !empty($min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_remarks'])): ?>
+                                ,
+                            <?php endif; ?>
+
+                            <?= htmlspecialchars($min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_remarks']) ?>
+                        </p>
+                    </div>
+                <?php } ?>
+
+
+
+
+                <div>
+                    <p class="suggestions-para">
+                        <span class="p-tag" style="font-size: 16px;">Suggestions :</span> (1) Usually, vitamin B12 deficiency anemia is easy to treat with diet and vitamin supplements. To increase the amount of vitamin B12 in your
+                        diet, eat more of foods that contain it, such as: Beef, liver, and chicken Fish Fortified breakfast cereal Low-fat milk, yogurt, and cheese
+                        Eggs. (2) Common effective ways to increase vitamin D levels in the body:
+                        Sunlight, Seafood, Mushrooms, Egg yolks, Fortified foods, Supplements.
+                    </p>
+                </div>
+                <?php
+                if (
+                    !empty($miniralVitaminIronResults['vitaminbtwelve_test_remraks']) ||
+                    !empty($miniralVitaminIronResults['vitamind_test_remraks']) ||
+                    !empty($miniralVitaminIronResults['phosphorus_test_remraks']) ||
+                    !empty($miniralVitaminIronResults['iron_test_remraks']) ||
+                    !empty($miniralVitaminIronResults['uibc_test_remraks']) ||
+                    !empty($miniralVitaminIronResults['tibc_test_remraks']) ||
+                    !empty($miniralVitaminIronResults['iron_saturation_test_remraks'])
+
+                ) {
+                ?>
+                    <div style="padding-top: 5px;">
+                        <p class="sample-type-para">
+                            <span class="p-tag" style="font-size: 16px;">Test Remarks :</span>
+                            <span class="test-remarks suggestions-para sample-type-para">
+                                <?php
+
+                                $remarks = array_filter([
+                                    $miniralVitaminIronResults['vitaminbtwelve_test_remraks'] ?? '',
+                                    $miniralVitaminIronResults['vitamind_test_remraks'] ?? '',
+                                    $miniralVitaminIronResults['phosphorus_test_remraks'] ?? '',
+                                    $miniralVitaminIronResults['iron_test_remraks'] ?? '',
+                                    $miniralVitaminIronResults['uibc_test_remraks'] ?? '',
+                                    $miniralVitaminIronResults['tibc_test_remraks'] ?? '',
+                                    $miniralVitaminIronResults['iron_saturation_test_remraks'] ?? '',
+                                ]);
+
+                                echo htmlspecialchars(implode(', ', $remarks));
+                                ?>
+                            </span>
+                        </p>
+                    </div>
+                <?php } ?>
+            </div>
+            <?php if ($urineResults['urinestatus_found']) { ?>
+                <div style="margin-top: 150px;">
+                    <table>
+                        <tr>
+                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
+                        </tr>
+                    </table>
+                </div>
+                <table cellspacing="0" cellpadding="0">
+                    <tr class="d-block">
+                        <td>
+                            <img src="https://cdn.shop.lifecell.in/reports/wellness/images/mfine-urine.png" alt="" style="padding-left: 10px; width:40px;" class="w-100">
+                        </td>
+                        <td style="padding-left: 15px;"> <span class="result-title" style="background-color: white;color:black">Urine</span></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="padding-left: 65px;font-size: 14px;">
+                            <p> <span style="font-weight: 700;">Remarks:</span> Sample Not Received.</p>
+                        </td>
+                    </tr>
+                </table>
+            <?php } ?>
         </div>
+
+        <footer style="
+		position: absolute; 
+		bottom: -10px; 
+		left: 0;
+		width: 100%; 
+		text-align: center; 
+		padding: 10px 0; 
+		page-break-before: always;">
+            <div>
+                <?php //echo $footerWithLogo;
+                echo NewFooter(['Iron Studies'], $tgdrsig_details, $footerLogo, $patientDetails, $footerNablLogo); ?>
+            </div>
+            <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
+        </footer>
+    </div>
+
+    <?php if (!$urineResults['urinestatus_found']) { ?>
+        <!-- URINE STARTED -->
         <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
             <div class="resultDetails" style="page-break-after: always;padding-top:50px;">
                 <div style="width:100%;">
@@ -6740,472 +7110,108 @@
                 <div>
                     <table>
                         <tr>
-                            <td> <img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
+                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
                         </tr>
                     </table>
                 </div>
-                <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
+                <table cellspacing="0" cellpadding="0">
+                    <tr class="d-block">
+                        <td>
+                            <img src="https://cdn.shop.lifecell.in/reports/wellness/images/mfine-urine.png" alt="" style="padding-left: 10px; width:40px;" class="w-100">
+
+                        </td>
+                        <td style="padding-left: 15px;"> <span class="result-title <?= $urineResults['urine-summary']; ?>">Urine</span></td>
+                    </tr>
+                </table>
+
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
                     <tr>
-                        <td class="leftPanel">
-                            <div class="graphDetail">
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height:90px;">
                                 <p style="color: #333;font-weight:600;">Your Result Value</p>
                                 <div>
-                                    <span class="<?= $miniralVitaminIronResults['tibc_color_code']; ?>" style="font-size: 34px;">
-                                        <?php echo (($miniralVitaminIronResults['tibc_result_value'] != '') ? $miniralVitaminIronResults['tibc_result_value'] : '') ?>
-                                    </span> <?php echo htmlspecialchars($miniralVitaminIronResults['tibc_uom']); ?>
+                                    <span style="font-size: 26px;">
+                                        <?php echo (($urineResults['urine_colour_result_value'] != '') ? $urineResults['urine_colour_result_value'] : '') ?>
+                                    </span>
+                                    <!-- Yellow -->
                                 </div>
-                                <table class="image-result">
-                                    <tr>
-                                        <?php if ($miniralVitaminIronResults['tibc_result_value'] < $miniralVitaminIronResults['tibc_low_result_value']) { ?>
-                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                        <?php } ?>
-
-                                        <?php if ($miniralVitaminIronResults['tibc_result_value'] >= $miniralVitaminIronResults['tibc_low_result_value'] && $miniralVitaminIronResults['tibc_result_value'] <= $miniralVitaminIronResults['tibc_high_result_value']) { ?>
-                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
-                                        <?php } ?>
-
-                                        <?php if ($miniralVitaminIronResults['tibc_result_value'] > $miniralVitaminIronResults['tibc_high_result_value']) { ?>
-                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                        <?php } ?>
-                                        <td class="<?= $miniralVitaminIronResults['tibc_color_code']; ?> image-ressult">
-                                            <?php echo (($miniralVitaminIronResults['tibc_result_value_in_words'] != '') ? $miniralVitaminIronResults['tibc_result_value_in_words'] : '') ?>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="mediacal-update">
-                                    <tr>
-                                        <!-- <td>Range </td>
-                                    <td> : <?php echo $miniralVitaminIronResults['tibc_low_result_value'] . " - " . $miniralVitaminIronResults['tibc_high_result_value'] . " "; ?> <?php echo htmlspecialchars($miniralVitaminIronResults['tibc_uom']); ?></td> -->
-                                        <td>Range</td>
-                                        <?php if (!empty($miniralVitaminIronResults['tibc_BRInterval_result_value'])) { ?>
-                                            <td> : <?php echo $miniralVitaminIronResults['tibc_BRInterval_result_value'] . " " . $miniralVitaminIronResults['tibc_uom']; ?> </td>
-                                        <?php } else { ?>
-                                            <td> : <?php echo $miniralVitaminIronResults['tibc_low_result_value'] . " - " . $miniralVitaminIronResults['tibc_high_result_value'] . " " . $miniralVitaminIronResults['tibc_uom']; ?> </td>
-                                        <?php } ?>
-                                    </tr>
-                                </table>
                             </div>
                         </td>
-                        <!-- TIBC -->
+                        <!-- Colour -->
                         <td class="rightPanel">
                             <div class="graphContent" style="position: relative;">
                                 <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                    <h4 style="margin: 0;">TIBC</h4>
-                                    <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['tibc_sample_method']; ?> </p>
+                                    <h4 style="margin: 0;">Colour</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_colour_sample_method']; ?> </p>
                                 </div>
 
                                 <!-- NABL Logo and Code Positioned Absolutely -->
                                 <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
 
-                                    <?php if ($miniralVitaminIronResults['tibc_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                    <?php if ($urineResults['urine_colour_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
                                         <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
                                         <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                            <?= $min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_nabl_code']; ?>
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
                                         </div>
                                     <?php endif; ?>
 
                                 </div>
-
-                                <p style="margin-top:5px;">TIBC check iron level in your blood TIBC (total iron-binding capacity) measures the total amount of iron that can be bound by proteins in the blood.</p>
-
-                                <?php if ($miniralVitaminIronResults['tibc_impact_on_health'] != '') { ?>
-                                    <h4>Impact on health</h4>
-                                    <p><?php echo ($miniralVitaminIronResults['tibc_impact_on_health'] != '') ? $miniralVitaminIronResults['tibc_impact_on_health'] : '' ?></p>
-                                <?php } ?>
+                                <p style="margin-top:5px;">This is a physical exam of urine</p>
                             </div>
                         </td>
                     </tr>
                 </table>
-                <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
+
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style=" padding-left: 10px;">
                     <tr>
-                        <td class="leftPanel">
-                            <div class="graphDetail">
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height:90px;">
                                 <p style="color: #333;font-weight:600;">Your Result Value</p>
                                 <div>
-                                    <span class="<?= $miniralVitaminIronResults['iron_color_code']; ?>" style="font-size: 34px;">
-                                        <?php echo (($miniralVitaminIronResults['iron_result_value'] != '') ? $miniralVitaminIronResults['iron_result_value'] : '') ?>
-                                    </span> <?php echo htmlspecialchars($miniralVitaminIronResults['iron_uom']); ?>
+                                    <span style="font-size: 26px;">
+                                        <?php echo (($urineResults['volume_result_value'] != '') ? $urineResults['volume_result_value'] : '') ?>
+                                    </span> <?php echo htmlspecialchars($urineResults['volume_uom']); ?>
                                 </div>
-                                <table class="image-result">
-                                    <tr>
-                                        <?php if ($miniralVitaminIronResults['iron_result_value'] < $miniralVitaminIronResults['iron_low_result_value']) { ?>
-                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                        <?php } ?>
-
-                                        <?php if ($miniralVitaminIronResults['iron_result_value'] >= $miniralVitaminIronResults['iron_low_result_value'] && $miniralVitaminIronResults['iron_result_value'] <= $miniralVitaminIronResults['iron_high_result_value']) { ?>
-                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
-                                        <?php } ?>
-
-                                        <?php if ($miniralVitaminIronResults['iron_result_value'] > $miniralVitaminIronResults['iron_high_result_value']) { ?>
-                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                        <?php } ?>
-                                        <td class="<?= $miniralVitaminIronResults['iron_color_code']; ?> image-ressult">
-                                            <?php echo (($miniralVitaminIronResults['iron_result_value_in_words'] != '') ? $miniralVitaminIronResults['iron_result_value_in_words'] : '') ?>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="mediacal-update">
-                                    <tr>
-                                        <!-- <td>Range </td>
-                                    <td> : <?php echo $miniralVitaminIronResults['iron_low_result_value'] . " - " . $miniralVitaminIronResults['iron_high_result_value'] . " "; ?> <?php echo htmlspecialchars($miniralVitaminIronResults['iron_uom']); ?></td> -->
-
-                                        <td>Range</td>
-                                        <?php if (!empty($miniralVitaminIronResults['iron_BRInterval_result_value'])) { ?>
-                                            <td> : <?php echo $miniralVitaminIronResults['iron_BRInterval_result_value'] . " " . $miniralVitaminIronResults['iron_uom']; ?> </td>
-                                        <?php } else { ?>
-                                            <td> : <?php echo $miniralVitaminIronResults['iron_low_result_value'] . " - " . $miniralVitaminIronResults['iron_high_result_value'] . " " . $miniralVitaminIronResults['iron_uom']; ?> </td>
-                                        <?php } ?>
-                                    </tr>
-                                </table>
                             </div>
                         </td>
-                        <!-- Iron -->
+                        <!-- Volume -->
                         <td class="rightPanel">
                             <div class="graphContent" style="position: relative;">
                                 <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                    <h4 style="margin: 0;">Iron</h4>
-                                    <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['iron_sample_method']; ?> </p>
+                                    <h4 style="margin: 0;">Volume</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['volume_sample_method']; ?> </p>
                                 </div>
 
                                 <!-- NABL Logo and Code Positioned Absolutely -->
                                 <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
 
-                                    <?php if ($miniralVitaminIronResults['iron_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                    <?php if ($urineResults['volume_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
                                         <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
                                         <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                            <?= $min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_nabl_code']; ?>
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
                                         </div>
                                     <?php endif; ?>
 
                                 </div>
-
-                                <p style="margin-top:5px;">Iron is an essential mineral that forms RBCs of your blood. This test measures the level
-                                    of iron in your blood.</p>
-
-                                <?php if ($miniralVitaminIronResults['iron_impact_on_health'] != '') { ?>
-                                    <h4>Impact on health</h4>
-                                    <p><?php echo ($miniralVitaminIronResults['iron_impact_on_health'] != '') ? $miniralVitaminIronResults['iron_impact_on_health'] : '' ?></p>
-                                <?php } ?>
+                                <p style="margin-top:5px;">This is a physical exam of urine</p>
                             </div>
+
                         </td>
                     </tr>
                 </table>
-                   <table cellspacing="0" cellpadding="0" class="graphBArContentSection">
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50">
                     <tr>
-                        <td class="leftPanel">
-                            <div class="graphDetail">
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height:143px;">
                                 <p style="color: #333;font-weight:600;">Your Result Value</p>
                                 <div>
-                                    <span class="<?= $miniralVitaminIronResults['iron_saturation_color_code']; ?>" style="font-size: 34px;">
-                                        <?php echo (($miniralVitaminIronResults['iron_saturation_result_value'] != '') ? $miniralVitaminIronResults['iron_saturation_result_value'] : '') ?>
-                                    </span><?php echo htmlspecialchars($miniralVitaminIronResults['iron_saturation_uom']) ?>
+                                    <span style="font-size: 26px;">
+                                        <?php echo (($urineResults['urine_specific_gravity_result_value'] != '') ? $urineResults['urine_specific_gravity_result_value'] : '') ?>
+                                    </span>
                                 </div>
-
-                                <!-- Thumbs + Interpretation -->
                                 <table class="image-result">
                                     <tr>
-                                        <?php if (!empty($miniralVitaminIronResults['iron_saturation_thumb_up_icon'])): ?>
-                                            <td><img src="<?= $miniralVitaminIronResults['iron_saturation_thumb_up_icon']; ?>" /></td>
-                                        <?php endif; ?>
-                                        <td class="<?= $miniralVitaminIronResults['iron_saturation_color_code']; ?> image-ressult">
-                                            <?php echo (($miniralVitaminIronResults['iron_saturation_result_value_in_words'] != '') ? $miniralVitaminIronResults['iron_saturation_result_value_in_words'] : '') ?>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="mediacal-update">
-                                    <tr>
-                                        <td>Range</td>
-                                        <?php if (!empty($miniralVitaminIronResults['iron_saturation_BRInterval_result_value'])) { ?>
-                                            <td> : <?php echo $miniralVitaminIronResults['iron_saturation_BRInterval_result_value'] ?> </td>
-                                        <?php } else { ?>
-                                            <td> : <?php echo $miniralVitaminIronResults['iron_saturation_low_result_value'] . " - " . $miniralVitaminIronResults['iron_saturation_high_result_value']?> </td>
-                                        <?php } ?>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-
-                        <!-- % OF IRON SATURATION -->
-                        <td class="rightPanel">
-                            <div class="graphContent" style="position: relative;">
-                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                    <h4 style="margin: 0;">% of Iron Saturation</h4>
-                                    <p class="methodology" style="margin: 0;"> <?= $miniralVitaminIronResults['iron_saturation_sample_method']; ?> </p>
-                                </div>
-
-                                <!-- NABL Logo and Code -->
-                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-                                    <?php if ($miniralVitaminIronResults['iron_saturation_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                            <?= $min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_nabl_code']; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
-
-                                <!-- Description -->
-                                <p style="margin-top:5px;">
-                                    Percentage of Iron Saturation also known as Transferrin saturation is the ratio of serum iron and TIBC. 
-                                    This parameter provides an estimate of how much serum iron is actually bound to transferrin and is expressed as a percentage. 
-                                    Transferrin saturation is typically utilised to determine a patient's iron status to detect either iron deficiency or overload.
-                                </p>
-
-                                <!-- Impact on health -->
-                                <?php if (!empty($miniralVitaminIronResults['iron_saturation_impact_on_health'])): ?>
-                                    <h4>Impact on health</h4>
-                                    <p><?= $miniralVitaminIronResults['iron_saturation_impact_on_health']; ?></p>
-                                <?php endif; ?>
-
-                                <!-- Suggestion -->
-                                <?php if (!empty($miniralVitaminIronResults['iron_saturation_suggestion'])): ?>
-                                    <h4>Suggestion</h4>
-                                    <p><?= $miniralVitaminIronResults['iron_saturation_suggestion']; ?></p>
-                                <?php endif; ?>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <div style="float:left;">
-                    <div style="padding-top: 5px;">
-                        <p class="sample-type-para">
-                            <span class="p-tag" style="font-size: 16px;">Sample Type :</span> Serum
-                        </p>
-                    </div>
-
-                    <?php
-                    if (
-                        !empty($min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_remarks']) ||
-                        !empty($min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_remarks']) ||
-                        !empty($min_vit_iron_Testgroupdetails['P0010b_min_vit_iron_remarks']) ||
-                        !empty($min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_remarks'])
-                    ) { ?>
-                        <div style="padding-top: 2.5px;">
-                            <p class="sample-type-para">
-                                <span class="p-tag" style="font-size: 16px;">Service Remarks :</span>
-
-                                <?= htmlspecialchars($min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_remarks']) ?>
-
-                                <?php if (!empty($min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_remarks']) && !empty($min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_remarks'])): ?>
-                                    ,
-                                <?php endif; ?>
-
-                                <?= htmlspecialchars($min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_remarks']) ?>
-
-                                <?php if ((!empty($min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_remarks']) || !empty($min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_remarks'])) && !empty($min_vit_iron_Testgroupdetails['P0010b_min_vit_iron_remarks'])): ?>
-                                    ,
-                                <?php endif; ?>
-
-                                <?= htmlspecialchars($min_vit_iron_Testgroupdetails['P0010b_min_vit_iron_remarks']) ?>
-
-                                <?php if ((!empty($min_vit_iron_Testgroupdetails['V0004a_min_vit_iron_remarks']) || !empty($min_vit_iron_Testgroupdetails['V0004c_min_vit_iron_remarks']) || !empty($min_vit_iron_Testgroupdetails['P0010b_min_vit_iron_remarks'])) && !empty($min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_remarks'])): ?>
-                                    ,
-                                <?php endif; ?>
-
-                                <?= htmlspecialchars($min_vit_iron_Testgroupdetails['iron_studies_min_vit_iron_remarks']) ?>
-                            </p>
-                        </div>
-                    <?php } ?>
-
-
-
-
-                    <div>
-                        <p class="suggestions-para">
-                            <span class="p-tag" style="font-size: 16px;">Suggestions :</span> (1) Usually, vitamin B12 deficiency anemia is easy to treat with diet and vitamin supplements. To increase the amount of vitamin B12 in your
-                            diet, eat more of foods that contain it, such as: Beef, liver, and chicken Fish Fortified breakfast cereal Low-fat milk, yogurt, and cheese
-                            Eggs. (2) Common effective ways to increase vitamin D levels in the body:
-                            Sunlight, Seafood, Mushrooms, Egg yolks, Fortified foods, Supplements.
-                        </p>
-                    </div>
-                    <?php
-                    if (
-                        !empty($miniralVitaminIronResults['vitaminbtwelve_test_remraks']) ||
-                        !empty($miniralVitaminIronResults['vitamind_test_remraks']) ||
-                        !empty($miniralVitaminIronResults['phosphorus_test_remraks']) ||
-                        !empty($miniralVitaminIronResults['iron_test_remraks']) ||
-                        !empty($miniralVitaminIronResults['uibc_test_remraks']) ||
-                        !empty($miniralVitaminIronResults['tibc_test_remraks']) ||
-                        !empty($miniralVitaminIronResults['iron_saturation_test_remraks'])
-
-                    ) {
-                    ?>
-                        <div style="padding-top: 5px;">
-                            <p class="sample-type-para">
-                                <span class="p-tag" style="font-size: 16px;">Test Remarks :</span>
-                                <span class="test-remarks suggestions-para sample-type-para">
-                                    <?php
-
-                                    $remarks = array_filter([
-                                        $miniralVitaminIronResults['vitaminbtwelve_test_remraks'] ?? '',
-                                        $miniralVitaminIronResults['vitamind_test_remraks'] ?? '',
-                                        $miniralVitaminIronResults['phosphorus_test_remraks'] ?? '',
-                                        $miniralVitaminIronResults['iron_test_remraks'] ?? '',
-                                        $miniralVitaminIronResults['uibc_test_remraks'] ?? '',
-                                        $miniralVitaminIronResults['tibc_test_remraks'] ?? '',
-                                        $miniralVitaminIronResults['iron_saturation_test_remraks'] ?? '',
-                                    ]);
-
-                                    echo htmlspecialchars(implode(', ', $remarks));
-                                    ?>
-                                </span>
-                            </p>
-                        </div>
-                    <?php } ?>
-                </div>
-                <?php if ($urineResults['urinestatus_found']) { ?>
-                    <div style="margin-top: 150px;">
-                        <table>
-                            <tr>
-                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <table cellspacing="0" cellpadding="0">
-                        <tr class="d-block">
-                            <td>
-                                <img src="https://cdn.shop.lifecell.in/reports/wellness/images/mfine-urine.png" alt="" style="padding-left: 10px; width:40px;" class="w-100">
-                            </td>
-                            <td style="padding-left: 15px;"> <span class="result-title" style="background-color: white;color:black">Urine</span></td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td style="padding-left: 65px;font-size: 14px;">
-                                <p> <span style="font-weight: 700;">Remarks:</span> Sample Not Received.</p>
-                            </td>
-                        </tr>
-                    </table>
-                <?php } ?>
-            </div>
-
-            <footer style="
-		position: absolute; 
-		bottom: -10px; 
-		left: 0;
-		width: 100%; 
-		text-align: center; 
-		padding: 10px 0; 
-		page-break-before: always;">
-                <div>
-                    <?php //echo $footerWithLogo;
-                    echo NewFooter(['Iron Studies'], $tgdrsig_details, $footerLogo, $patientDetails, $footerNablLogo); ?>
-                </div>
-                <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
-            </footer>
-        </div>
-
-        <?php if (!$urineResults['urinestatus_found']) { ?>
-            <!-- URINE STARTED -->
-            <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
-                <div class="resultDetails" style="page-break-after: always;padding-top:50px;">
-                    <div style="width:100%;">
-                        <?php echo $co_brand_header2; ?>
-                    </div>
-                    <div>
-                        <table>
-                            <tr>
-                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <table cellspacing="0" cellpadding="0">
-                        <tr class="d-block">
-                            <td>
-                                <img src="https://cdn.shop.lifecell.in/reports/wellness/images/mfine-urine.png" alt="" style="padding-left: 10px; width:40px;" class="w-100">
-
-                            </td>
-                            <td style="padding-left: 15px;"> <span class="result-title <?= $urineResults['urine-summary']; ?>">Urine</span></td>
-                        </tr>
-                    </table>
-
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height:90px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span style="font-size: 26px;">
-                                            <?php echo (($urineResults['urine_colour_result_value'] != '') ? $urineResults['urine_colour_result_value'] : '') ?>
-                                        </span>
-                                        <!-- Yellow -->
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Colour -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Colour</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_colour_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['urine_colour_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-
-                                    </div>
-                                    <p style="margin-top:5px;">This is a physical exam of urine</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style=" padding-left: 10px;">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height:90px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span style="font-size: 26px;">
-                                            <?php echo (($urineResults['volume_result_value'] != '') ? $urineResults['volume_result_value'] : '') ?>
-                                        </span> <?php echo htmlspecialchars($urineResults['volume_uom']); ?>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Volume -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Volume</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['volume_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['volume_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-
-                                    </div>
-                                    <p style="margin-top:5px;">This is a physical exam of urine</p>
-                                </div>
-
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height:143px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span style="font-size: 26px;">
-                                            <?php echo (($urineResults['urine_specific_gravity_result_value'] != '') ? $urineResults['urine_specific_gravity_result_value'] : '') ?>
-                                        </span>
-                                    </div>
-                                    <table class="image-result">
-                                        <tr>
-                                            <!-- <?php if ($urineResults['urine_specific_gravity_result_value_cleaned'] < $urineResults['urine_specific_gravity_low_result_value']) { ?>
+                                        <!-- <?php if ($urineResults['urine_specific_gravity_result_value_cleaned'] < $urineResults['urine_specific_gravity_low_result_value']) { ?>
                                             <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
                                             <?php } ?>
 
@@ -7219,345 +7225,345 @@
                                             <td class="<?= $urineResults['urine_specific_gravity_color_code']; ?> image-ressult" style="padding-left: 10px;">
                                                 <?php echo (($urineResults['urine_specific_gravity_result_value_in_words'] != '') ? $urineResults['urine_specific_gravity_result_value_in_words'] : '') ?>
                                             </td> -->
-                                        </tr>
-                                    </table>
-                                    <table class="mediacal-update" style="width: 77%;">
-                                        <!-- <tr>
+                                    </tr>
+                                </table>
+                                <table class="mediacal-update" style="width: 77%;">
+                                    <!-- <tr>
                                         <td>Range </td>
                                         <td>: <?php echo $urineResults['urine_specific_gravity_low_result_value'] . " - " . $urineResults['urine_specific_gravity_high_result_value'] . ""; ?></td>
                                     </tr> -->
-                                        <td>Range</td>
-                                        <?php if (!empty($urineResults['urine_specific_gravity_BRInterval_result_value'])) { ?>
-                                            <td> : <?php echo $urineResults['urine_specific_gravity_BRInterval_result_value'] . " " . $urineResults['urine_specific_gravity_uom']; ?> </td>
-                                        <?php } else { ?>
-                                            <td> : <?php echo $urineResults['urine_specific_gravity_low_result_value'] . " - " . $urineResults['urine_specific_gravity_high_result_value'] . " " . $urineResults['urine_specific_gravity_uom']; ?> </td>
+                                    <td>Range</td>
+                                    <?php if (!empty($urineResults['urine_specific_gravity_BRInterval_result_value'])) { ?>
+                                        <td> : <?php echo $urineResults['urine_specific_gravity_BRInterval_result_value'] . " " . $urineResults['urine_specific_gravity_uom']; ?> </td>
+                                    <?php } else { ?>
+                                        <td> : <?php echo $urineResults['urine_specific_gravity_low_result_value'] . " - " . $urineResults['urine_specific_gravity_high_result_value'] . " " . $urineResults['urine_specific_gravity_uom']; ?> </td>
+                                    <?php } ?>
+                                </table>
+                            </div>
+                        </td>
+                        <!-- Specific Gravity -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Specific Gravity</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_specific_gravity_sample_method']; ?> </p>
+                                </div>
+
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['urine_specific_gravity_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                </div>
+                                <p style="margin-top:5px;">Specific Gravity test is used in the evaluation of water balance and urine concentration</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50" style=" padding-left: 10px;">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height:107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_ph_color_code']; ?>" style="font-size: 26px;">
+                                        <?php echo (($urineResults['urine_ph_result_value'] != '') ? $urineResults['urine_ph_result_value'] : '') ?>
+                                    </span>
+                                </div>
+                                <table class="image-result" style="font-size: 15px;">
+                                    <tr>
+                                        <?php if ($urineResults['urine_ph_result_value_cleaned'] < $urineResults['urine_ph_low_result_value']) { ?>
+                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
                                         <?php } ?>
-                                    </table>
-                                </div>
-                            </td>
-                            <!-- Specific Gravity -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Specific Gravity</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_specific_gravity_sample_method']; ?> </p>
-                                    </div>
 
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+                                        <?php if ($urineResults['urine_ph_result_value_cleaned'] >= $urineResults['urine_ph_low_result_value']  && $urineResults['urine_ph_result_value_cleaned'] <= $urineResults['urine_ph_high_result_value']) { ?>
+                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
+                                        <?php } ?>
 
-                                        <?php if ($urineResults['urine_specific_gravity_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-
-                                    </div>
-                                    <p style="margin-top:5px;">Specific Gravity test is used in the evaluation of water balance and urine concentration</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50" style=" padding-left: 10px;">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height:107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_ph_color_code']; ?>" style="font-size: 26px;">
-                                            <?php echo (($urineResults['urine_ph_result_value'] != '') ? $urineResults['urine_ph_result_value'] : '') ?>
-                                        </span>
-                                    </div>
-                                    <table class="image-result" style="font-size: 15px;">
-                                        <tr>
-                                            <?php if ($urineResults['urine_ph_result_value_cleaned'] < $urineResults['urine_ph_low_result_value']) { ?>
-                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                            <?php } ?>
-
-                                            <?php if ($urineResults['urine_ph_result_value_cleaned'] >= $urineResults['urine_ph_low_result_value']  && $urineResults['urine_ph_result_value_cleaned'] <= $urineResults['urine_ph_high_result_value']) { ?>
-                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
-                                            <?php } ?>
-
-                                            <?php if ($urineResults['urine_ph_result_value_cleaned'] > $urineResults['urine_ph_high_result_value']) { ?>
-                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                            <?php } ?>
-                                            <td class="<?= $urineResults['urine_ph_color_code']; ?> image-ressult" style="padding-left: 10px;">
-                                                <?php echo (($urineResults['urine_ph_result_value_in_words'] != '') ? $urineResults['urine_ph_result_value_in_words'] : '') ?>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <table class="mediacal-update">
-                                        <!-- <tr>
+                                        <?php if ($urineResults['urine_ph_result_value_cleaned'] > $urineResults['urine_ph_high_result_value']) { ?>
+                                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                        <?php } ?>
+                                        <td class="<?= $urineResults['urine_ph_color_code']; ?> image-ressult" style="padding-left: 10px;">
+                                            <?php echo (($urineResults['urine_ph_result_value_in_words'] != '') ? $urineResults['urine_ph_result_value_in_words'] : '') ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="mediacal-update">
+                                    <!-- <tr>
                                         <td>Range </td>
                                         <td>: <?php echo $urineResults['urine_ph_low_result_value'] . " - " . $urineResults['urine_ph_high_result_value'] . ""; ?></td>
                                     </tr> -->
-                                        <td>Range</td>
-                                        <?php if (!empty($urineResults['urine_ph_BRInterval_result_value'])) { ?>
-                                            <td> : <?php echo $urineResults['urine_ph_BRInterval_result_value'] ?> </td>
-                                        <?php } else { ?>
-                                            <td> : <?php echo $urineResults['urine_ph_low_result_value'] . " - " . $urineResults['urine_ph_high_result_value'] ?> </td>
-                                        <?php } ?>
-                                    </table>
-                                </div>
-                            </td>
-                            <!-- pH -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">pH</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_ph_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['urine_ph_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-
-                                    </div>
-                                    <p style="margin-top:5px;">pH of urine may confirm Kidney stone conditions</p>
+                                    <td>Range</td>
+                                    <?php if (!empty($urineResults['urine_ph_BRInterval_result_value'])) { ?>
+                                        <td> : <?php echo $urineResults['urine_ph_BRInterval_result_value'] ?> </td>
+                                    <?php } else { ?>
+                                        <td> : <?php echo $urineResults['urine_ph_low_result_value'] . " - " . $urineResults['urine_ph_high_result_value'] ?> </td>
+                                    <?php } ?>
+                                </table>
+                            </div>
+                        </td>
+                        <!-- pH -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">pH</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_ph_sample_method']; ?> </p>
                                 </div>
 
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection w-50 float-left m-h">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height: 107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_protein_color_code']; ?>" style="font-size: 26px;">
-                                            <!--  <span style="font-size: 26px;">-->
-                                            <?php echo (($urineResults['urine_protein_result_value'] != '') ? $urineResults['urine_protein_result_value'] : '') ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Protein -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; position: relative;">
-                                        <h4 style="margin: 0;">Protein</h4>
-                                        <p class="methodology" style="margin: 0; max-width: 70%; word-wrap: break-word;">
-                                            <?= $urineResults['urine_protein_sample_method']; ?>
-                                        </p>
-                                    </div>
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
 
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <?php if ($urineResults['urine_protein_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                        <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
+                                    <?php if ($urineResults['urine_ph_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
                                         </div>
-                                        <style>
-                                            /* Adjust methodology styling when NABL logo is present */
-                                            .methodology {
-                                                max-width: 100%;
-                                                /* Allow it to take full width */
-                                                display: block;
-                                                white-space: normal;
-                                            }
-                                        </style>
                                     <?php endif; ?>
 
-                                    <p style="margin-top: 5px;">This test checks for presence or absence of protein in urine</p>
+                                </div>
+                                <p style="margin-top:5px;">pH of urine may confirm Kidney stone conditions</p>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection w-50 float-left m-h">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height: 107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_protein_color_code']; ?>" style="font-size: 26px;">
+                                        <!--  <span style="font-size: 26px;">-->
+                                        <?php echo (($urineResults['urine_protein_result_value'] != '') ? $urineResults['urine_protein_result_value'] : '') ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- Protein -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; position: relative;">
+                                    <h4 style="margin: 0;">Protein</h4>
+                                    <p class="methodology" style="margin: 0; max-width: 70%; word-wrap: break-word;">
+                                        <?= $urineResults['urine_protein_sample_method']; ?>
+                                    </p>
                                 </div>
 
-
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style=" padding-left: 10px;">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height: 107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_glucose_color_code']; ?>" style="font-size: 26px;">
-                                            <!--  <span style="font-size: 26px;">-->
-                                            <?php echo (($urineResults['urine_glucose_result_value'] != '') ? $urineResults['urine_glucose_result_value'] : '') ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Glucose -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Glucose</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_glucose_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <?php if ($urineResults['urine_protein_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
                                     <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['urine_glucose_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
                                     </div>
-                                    <p style="margin-top:5px;">This test checks for presence or absence of Glucose in urine</p>
+                                    <style>
+                                        /* Adjust methodology styling when NABL logo is present */
+                                        .methodology {
+                                            max-width: 100%;
+                                            /* Allow it to take full width */
+                                            display: block;
+                                            white-space: normal;
+                                        }
+                                    </style>
+                                <?php endif; ?>
+
+                                <p style="margin-top: 5px;">This test checks for presence or absence of protein in urine</p>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style=" padding-left: 10px;">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height: 107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_glucose_color_code']; ?>" style="font-size: 26px;">
+                                        <!--  <span style="font-size: 26px;">-->
+                                        <?php echo (($urineResults['urine_glucose_result_value'] != '') ? $urineResults['urine_glucose_result_value'] : '') ?>
+                                    </span>
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height: 107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_ketones_color_code']; ?>" style="font-size: 26px;">
-                                            <!--  <span style="font-size: 26px;"> -->
-                                            <?php echo (($urineResults['urine_ketones_result_value'] != '') ? $urineResults['urine_ketones_result_value'] : '') ?>
-                                        </span>
-                                    </div>
+                            </div>
+                        </td>
+                        <!-- Glucose -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Glucose</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_glucose_sample_method']; ?> </p>
                                 </div>
-                            </td>
-                            <!-- Ketones -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Ketones</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_ketones_sample_method']; ?> </p>
-                                    </div>
 
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
 
-                                        <?php if ($urineResults['urine_ketones_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test checks for presence or absence of Ketones in urine</p>
+                                    <?php if ($urineResults['urine_glucose_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style=" padding-left: 10px;">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height: 107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_urobilinogen_color_code']; ?>" style="font-size: 26px;">
-                                            <!--  <span style="font-size: 26px;">-->
-                                            <?php echo (($urineResults['urine_urobilinogen_result_value'] != '') ? $urineResults['urine_urobilinogen_result_value'] : '') ?>
-                                        </span>
-                                    </div>
+                                <p style="margin-top:5px;">This test checks for presence or absence of Glucose in urine</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height: 107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_ketones_color_code']; ?>" style="font-size: 26px;">
+                                        <!--  <span style="font-size: 26px;"> -->
+                                        <?php echo (($urineResults['urine_ketones_result_value'] != '') ? $urineResults['urine_ketones_result_value'] : '') ?>
+                                    </span>
                                 </div>
-                            </td>
-                            <!-- Urobilinogen -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Urobilinogen</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_urobilinogen_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['urine_urobilinogen_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test checks for presence or absence of Urobilinogen in urine</p>
+                            </div>
+                        </td>
+                        <!-- Ketones -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Ketones</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_ketones_sample_method']; ?> </p>
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height: 107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_bilirubin_color_code']; ?>" style="font-size: 26px;">
-                                            <!-- <span style="font-size: 26px;">-->
-                                            <?php echo (($urineResults['urine_bilirubin_result_value'] != '') ? $urineResults['urine_bilirubin_result_value'] : '') ?>
-                                        </span>
-                                    </div>
+
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['urine_ketones_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
-                            </td>
-                            <!-- Bilirubin -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Bilirubin</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_bilirubin_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['urine_bilirubin_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test checks for presence or absence of Bilirubin in urine</p>
+                                <p style="margin-top:5px;">This test checks for presence or absence of Ketones in urine</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style=" padding-left: 10px;">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height: 107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_urobilinogen_color_code']; ?>" style="font-size: 26px;">
+                                        <!--  <span style="font-size: 26px;">-->
+                                        <?php echo (($urineResults['urine_urobilinogen_result_value'] != '') ? $urineResults['urine_urobilinogen_result_value'] : '') ?>
+                                    </span>
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style="padding-bottom:34%; padding-left: 10px;">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height: 107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_nitrite_color_code']; ?>" style="font-size: 26px;">
-                                            <!-- <span style="font-size: 26px;"> -->
-                                            <?php echo (($urineResults['urine_nitrite_result_value'] != '') ? $urineResults['urine_nitrite_result_value'] : '') ?>
-                                        </span>
-                                    </div>
+                            </div>
+                        </td>
+                        <!-- Urobilinogen -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Urobilinogen</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_urobilinogen_sample_method']; ?> </p>
                                 </div>
-                            </td>
-                            <!-- Nitrite -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Nitrite</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_nitrite_sample_method']; ?> </p>
-                                    </div>
 
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
 
-                                        <?php if ($urineResults['urine_nitrite_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test checks for presence or absence of Nitrite in urine</p>
+                                    <?php if ($urineResults['urine_urobilinogen_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                                <p style="margin-top:5px;">This test checks for presence or absence of Urobilinogen in urine</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height: 107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_bilirubin_color_code']; ?>" style="font-size: 26px;">
+                                        <!-- <span style="font-size: 26px;">-->
+                                        <?php echo (($urineResults['urine_bilirubin_result_value'] != '') ? $urineResults['urine_bilirubin_result_value'] : '') ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- Bilirubin -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Bilirubin</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_bilirubin_sample_method']; ?> </p>
+                                </div>
 
-                <footer style="
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['urine_bilirubin_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This test checks for presence or absence of Bilirubin in urine</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style="padding-bottom:34%; padding-left: 10px;">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height: 107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_nitrite_color_code']; ?>" style="font-size: 26px;">
+                                        <!-- <span style="font-size: 26px;"> -->
+                                        <?php echo (($urineResults['urine_nitrite_result_value'] != '') ? $urineResults['urine_nitrite_result_value'] : '') ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- Nitrite -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Nitrite</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_nitrite_sample_method']; ?> </p>
+                                </div>
+
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['urine_nitrite_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This test checks for presence or absence of Nitrite in urine</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <footer style="
 		position: absolute; 
 		bottom: -10px; 
 		left: 0;
@@ -7565,648 +7571,13 @@
 		text-align: center; 
 		padding: 10px 0; 
 		page-break-before: always;">
-                    <div>
-                        <?php //echo $footerWithLogo;
-                        echo NewFooter(['R0007j'], $tgdrsig_details, $footerLogo, $patientDetails, $footerNablLogo); ?>
-                    </div>
-                    <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
-                </footer>
-            </div>
-            <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
-                <div class="resultDetails" style="page-break-after: always;padding-top:50px;">
-                    <div style="width:100%;">
-                        <?php echo $co_brand_header2; ?>
-                    </div>
-                    <div>
-                        <table>
-                            <tr>
-                                <td> <img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height: 107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_blood_color_code']; ?>" style="font-size: 26px;">
-                                            <!--<span style="font-size: 26px;">-->
-                                            <?php echo (($urineResults['urine_blood_result_value'] != '') ? $urineResults['urine_blood_result_value'] : '') ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Blood -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Blood</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_blood_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['urine_blood_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test checks for presence or absence of Blood in urine</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style=" padding-left: 10px;">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height: 107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_crystals_color_code']; ?>" style="font-size: 26px;">
-                                            <!-- <span style="font-size: 26px;"> -->
-                                            <?php echo (($urineResults['urine_crystals_result_value'] != '') ? $urineResults['urine_crystals_result_value'] : '') ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Crystals -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Crystals</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_crystals_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['urine_crystals_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test detects the presence or absence of Crystals in your urine</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height:147px">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <?php $paddingtop = !empty($urineResults['urine_puscell_secondvalue']) ? "" : 25 ?>
-                                    <div style="padding-top:   <?= $paddingtop ?>px;">
-                                        <span class="<?= $urineResults['urine_puscell_color_code']; ?>" style="font-size: 26px;">
-                                            <?php echo (($urineResults['urine_puscell_result_value'] != '') ? $urineResults['urine_puscell_result_value'] : '') ?>
-                                        </span> <?php echo htmlspecialchars($urineResults['urine_puscell_uom']); ?>
-                                    </div>
-                                    <table class="image-result" style="font-size: 20px;">
-                                        <tr>
-                                            <?php
-                                            if (!empty($urineResults['urine_puscell_secondvalue'])) { ?>
-                                                <?php
-                                                if ($urineResults['urine_puscell_secondvalue'] < $urineResults['urine_puscell_low_result_value']) { ?>
-                                                    <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                                <?php } ?>
-
-                                                <?php if ($urineResults['urine_puscell_secondvalue'] >= $urineResults['urine_puscell_low_result_value']  && $urineResults['urine_puscell_secondvalue'] <= $urineResults['urine_puscell_high_result_value']) { ?>
-                                                    <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
-                                                <?php } ?>
-
-                                                <?php if ($urineResults['urine_puscell_secondvalue'] > $urineResults['urine_puscell_high_result_value']) { ?>
-                                                    <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                                <?php } ?>
-                                                <td class="<?= $urineResults['urine_puscell_color_code']; ?> image-ressult" style="padding-left: 10px;">
-                                                    <?php echo (($urineResults['urine_puscell_result_value_in_words'] != '') ? $urineResults['urine_puscell_result_value_in_words'] : '') ?>
-                                                </td>
-                                        </tr>
-                                    <?php } ?>
-                                    </table>
-                                    <table class="mediacal-update" style="width: 77%;">
-                                        <?php if (!empty($urineResults['urine_puscell_secondvalue'])) { ?>
-                                            <!-- <tr>
-                                            <td>Range</td>
-                                            <td> : <?php echo $urineResults['urine_puscell_low_result_value'] . " - " . $urineResults['urine_puscell_high_result_value'] . " " . $urineResults['urine_puscell_uom']; ?> </td>
-                                    </tr> -->
-                                            <td>Range</td>
-                                            <?php if (!empty($urineResults['urine_puscell_BRInterval_result_value'])) { ?>
-                                                <td> : <?php echo $urineResults['urine_puscell_BRInterval_result_value'] . " " . $urineResults['urine_puscell_uom']; ?> </td>
-                                            <?php } else { ?>
-                                                <td> : <?php echo $urineResults['urine_puscell_low_result_value'] . " - " . $urineResults['urine_puscell_high_result_value'] . " " . $urineResults['urine_puscell_uom']; ?> </td>
-                                            <?php } ?>
-                                        <?php } ?>
-                                    </table>
-                                </div>
-                            </td>
-                            <!-- Pus Cell< -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Pus Cell</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_puscell_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['urine_puscell_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test detects Pyuria which confirms Urinary Tract Infection (UTI)</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50" style=" padding-left: 10px;">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height:147px">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <?php $paddingtop = !empty($urineResults['urine_epithelialcell_secondvalue']) ? "" : 25 ?>
-                                    <div style="padding-top:<?= $paddingtop ?>px;">
-                                        <span class="<?= $urineResults['urine_epithelialcell_color_code']; ?>" style="font-size: 26px;">
-                                            <?php echo (($urineResults['urine_epithelialcell_result_value'] != '') ? $urineResults['urine_epithelialcell_result_value'] : '') ?>
-                                        </span><?php echo htmlspecialchars($urineResults['urine_epithelialcell_uom']); ?>
-                                    </div>
-                                    <table class="image-result" style="width: 74%; font-size: 20px;">
-                                        <tr>
-                                            <?php
-                                            if (!empty($urineResults['urine_epithelialcell_secondvalue'])) { ?>
-                                                <?php
-                                                if ($urineResults['urine_epithelialcell_secondvalue'] < $urineResults['urine_epithelialcell_low_result_value']) { ?>
-                                                    <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                                <?php } ?>
-
-                                                <?php if ($urineResults['urine_epithelialcell_secondvalue'] >= $urineResults['urine_epithelialcell_low_result_value']  && $urineResults['urine_epithelialcell_secondvalue'] <= $urineResults['urine_epithelialcell_high_result_value']) { ?>
-                                                    <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
-                                                <?php } ?>
-
-                                                <?php if ($urineResults['urine_epithelialcell_secondvalue'] > $urineResults['urine_epithelialcell_high_result_value']) { ?>
-                                                    <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
-                                                <?php } ?>
-                                                <td class="<?= $urineResults['urine_epithelialcell_color_code']; ?> image-ressult" style="padding-left: 10px;">
-                                                    <?php echo (($urineResults['urine_epithelialcell_result_value_in_words'] != '') ? $urineResults['urine_epithelialcell_result_value_in_words'] : '') ?>
-                                                </td>
-                                        </tr>
-                                    <?php } ?>
-                                    </table>
-
-
-                                    <table class="mediacal-update" style="width: 77%;">
-                                        <?php
-                                        if (!empty($urineResults['urine_epithelialcell_secondvalue'])) { ?>
-                                            <!-- <tr>
-                                            <td>Range </td>
-                                            <td>: <?php echo $urineResults['urine_epithelialcell_low_result_value'] . " - " . $urineResults['urine_epithelialcell_high_result_value'] . " " . $urineResults['urine_epithelialcell_uom']; ?> </td>
-                                        </tr> -->
-                                            <td>Range</td>
-                                            <?php if (!empty($urineResults['urine_epithelialcell_BRInterval_result_value'])) { ?>
-                                                <td> : <?php echo $urineResults['urine_epithelialcell_BRInterval_result_value'] . " " . $urineResults['urine_epithelialcell_uom']; ?> </td>
-                                            <?php } else { ?>
-                                                <td> : <?php echo $urineResults['urine_epithelialcell_low_result_value'] . " - " . $urineResults['urine_epithelialcell_high_result_value'] . " " . $urineResults['urine_epithelialcell_uom']; ?> </td>
-                                            <?php } ?>
-                                        <?php } ?>
-                                    </table>
-                                </div>
-                            </td>
-                            <!-- Epithelial Cells -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Epithelial Cells</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_epithelialcell_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['urine_epithelialcell_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test detects the amount of Epithelial cells in your urine</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height:107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_yeast_color_code']; ?>" style="font-size: 26px;">
-                                            <!-- <span style="font-size: 26px;">-->
-                                            <?php echo (($urineResults['urine_yeast_result_value'] != '') ? $urineResults['urine_yeast_result_value'] : '') ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Yeast -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Yeast</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_yeast_sample_method']; ?> </p>
-                                    </div>
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-                                        <?php if ($urineResults['urine_yeast_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test detects the presence or absence of Crystals in your urine</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50" style=" padding-left: 10px;">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height:107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['bacteria_color_code']; ?>" style="font-size: 26px;">
-                                            <!-- <span style="font-size: 26px;">-->
-                                            <?php echo (($urineResults['bacteria_result_value'] != '') ? $urineResults['bacteria_result_value'] : '') ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Bacteria -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Bacteria</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['bacteria_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['bacteria_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test detects the presence or absence of Bacteria in your urine Bacteria in urine
-                                        confirms Urinary Tract Infection.</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height:107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['urine_appearance_color_code']; ?>" style="font-size: 26px;">
-                                            <!--  <span style="font-size: 26px;"> -->
-                                            <?php echo (($urineResults['urine_appearance_result_value'] != '') ? $urineResults['urine_appearance_result_value'] : '') ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Appearance -->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Appearance</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_appearance_sample_method']; ?> </p>
-                                    </div>
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['urine_appearance_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This is a physical exam of urine</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style=" padding-left: 10px;">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail" style="min-height:107px;">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['casts_color_code']; ?>" style="font-size: 26px;">
-                                            <!-- <span style="font-size: 26px;"> -->
-                                            <?php echo (($urineResults['casts_result_value'] != '') ? $urineResults['casts_result_value'] : '') ?>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Casts-->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">Casts</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['casts_sample_method']; ?> </p>
-                                    </div>
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-                                        <?php if ($urineResults['casts_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test detects the presence or absence of Casts in your urine</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
-                        <tr>
-                            <td class="leftPanel urine">
-                                <div class="graphDetail">
-                                    <p style="color: #333;font-weight:600;">Your Result Value</p>
-                                    <div>
-                                        <span class="<?= $urineResults['rbcs_color_code']; ?>" style="font-size: 27px;">
-                                            <!-- <span style="font-size: 26px;">-->
-                                            <?php echo (($urineResults['rbcs_result_value'] != '') ? $urineResults['rbcs_result_value'] : '') ?>
-                                        </span> <?php echo htmlspecialchars($urineResults['rbcs_uom']); ?>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- RBCs-->
-                            <td class="rightPanel">
-                                <div class="graphContent" style="position: relative;">
-                                    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
-                                        <h4 style="margin: 0;">RBCs</h4>
-                                        <p class="methodology" style="margin: 0;"> <?= $urineResults['rbcs_sample_method']; ?> </p>
-                                    </div>
-
-                                    <!-- NABL Logo and Code Positioned Absolutely -->
-                                    <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
-
-                                        <?php if ($urineResults['rbcs_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
-                                            <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
-                                            <div style="color: #000; font-size: 8px; line-height: 8px;">
-                                                <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <p style="margin-top:5px;">This test detects the presence or absence of RBCs in your urine</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-
-
-
-                    <div style="padding-top: 5px; clear: both;">
-                        <p class="sample-type-para">
-                            <span class="p-tag" style="font-size: 16px;">Sample Type :</span> Urine
-                        </p>
-                    </div>
-                    <?php if (!empty($urineTestgroupdetails['R0007j_urine_remarks'])) { ?>
-                        <div style="padding-top: 2.5px;">
-                            <p class="sample-type-para">
-                                <span class="p-tag" style="font-size: 16px;">Service Remarks :</span>
-                                <?= htmlspecialchars($urineTestgroupdetails['R0007j_urine_remarks']) ?>
-                            </p>
-                        </div>
-                    <?php } ?>
-                    <div>
-                        <p class="suggestions-para">
-                            <span class="p-tag" style="font-size: 16px;">Suggestions :</span> Drink plenty of water, use neat & clean washroom, Release your urine at shorter period
-
-                        </p>
-                    </div>
-                    <?php
-                    if (
-                        !empty($urineResults['bacteria_test_remraks']) ||
-                        !empty($urineResults['urine_colour_test_remraks']) ||
-                        !empty($urineResults['volume_test_remraks']) ||
-                        !empty($urineResults['urine_specific_gravity_test_remraks']) ||
-                        !empty($urineResults['urine_appearance_test_remraks']) ||
-                        !empty($urineResults['rbcs_test_remraks']) ||
-                        !empty($urineResults['casts_test_remraks']) ||
-                        !empty($urineResults['urine_protein_test_remraks']) ||
-                        !empty($urineResults['urine_glucose_test_remraks']) ||
-                        !empty($urineResults['urine_ketones_test_remraks']) ||
-                        !empty($urineResults['urine_urobilinogen_test_remraks']) ||
-                        !empty($urineResults['urine_bilirubin_test_remraks']) ||
-                        !empty($urineResults['urine_nitrite_test_remraks']) ||
-                        !empty($urineResults['urine_blood_test_remraks']) ||
-                        !empty($urineResults['urine_epithelialcell_test_remraks']) ||
-                        !empty($urineResults['urine_crystals_test_remraks']) ||
-                        !empty($urineResults['urine_yeast_test_remraks'])
-
-                    ) {
-                    ?>
-                        <div style="padding-top: 5px;">
-                            <p class="sample-type-para">
-                                <span class="p-tag" style="font-size: 16px;">Test Remarks :</span>
-                                <span class="test-remarks suggestions-para sample-type-para">
-                                    <?php
-
-                                    $remarks = array_filter([
-                                        $urineResults['bacteria_test_remraks'] ?? '',
-                                        $urineResults['urine_colour_test_remraks'] ?? '',
-                                        $urineResults['volume_test_remraks'] ?? '',
-                                        $urineResults['urine_specific_gravity_test_remraks'] ?? '',
-                                        $urineResults['urine_appearance_test_remraks'] ?? '',
-                                        $urineResults['rbcs_test_remraks'] ?? '',
-                                        $urineResults['casts_test_remraks'] ?? '',
-                                        $urineResults['urine_protein_test_remraks'] ?? '',
-                                        $urineResults['urine_glucose_test_remraks'] ?? '',
-                                        $urineResults['urine_ketones_test_remraks'] ?? '',
-                                        $urineResults['urine_urobilinogen_test_remraks'] ?? '',
-                                        $urineResults['urine_bilirubin_test_remraks'] ?? '',
-                                        $urineResults['urine_nitrite_test_remraks'] ?? '',
-                                        $urineResults['urine_blood_test_remraks'] ?? '',
-                                        $urineResults['urine_epithelialcell_test_remraks'] ?? '',
-                                        $urineResults['urine_crystals_test_remraks'] ?? '',
-                                        $urineResults['urine_yeast_test_remraks'] ?? '',
-                                    ]);
-
-                                    echo htmlspecialchars(implode(', ', $remarks));
-                                    ?>
-                                </span>
-                            </p>
-                        </div>
-                    <?php } ?>
-                    <div style="padding-top: 2px;">
-
-                        <?php
-                        if ($urineResults['urine_specific_gravity_color_code'] != 'green') {
-                            $urineResults['urine_specific_gravity'] = 'Specific Gravity,';
-                        } else {
-                            $urineResults['urine_specific_gravity'] = '';
-                        }
-                        if ($urineResults['urine_ph_color_code'] != 'green') {
-                            $urineResults['urine_ph'] = 'pH,';
-                        } else {
-                            $urineResults['urine_ph'] = '';
-                        }
-                        if ($urineResults['urine_protein_color_code'] != 'green') {
-                            $urineResults['urine_protein'] = 'Protein,';
-                        } else {
-                            $urineResults['urine_protein'] = '';
-                        }
-                        if ($urineResults['urine_glucose_color_code'] != 'green') {
-                            $urineResults['urine_glucose'] = 'Glucose,';
-                        } else {
-                            $urineResults['urine_glucose'] = '';
-                        }
-                        if ($urineResults['urine_ketones_color_code'] != 'green') {
-                            $urineResults['urine_ketones'] = 'Ketones,';
-                        } else {
-                            $urineResults['urine_ketones'] = '';
-                        }
-                        if ($urineResults['urine_urobilinogen_color_code'] != 'green') {
-                            $urineResults['urine_urobilinogen'] = 'Urobilinogen,';
-                        } else {
-                            $urineResults['urine_urobilinogen'] = '';
-                        }
-                        if ($urineResults['urine_bilirubin_color_code'] != 'green') {
-                            $urineResults['urine_bilirubin'] = 'Bilirubin,';
-                        } else {
-                            $urineResults['urine_bilirubin'] = '';
-                        }
-                        if ($urineResults['urine_nitrite_color_code'] != 'green') {
-                            $urineResults['urine_nitrite'] = 'Nitrite,';
-                        } else {
-                            $urineResults['urine_nitrite'] = '';
-                        }
-                        if ($urineResults['urine_blood_color_code'] != 'green') {
-                            $urineResults['urine_blood'] = 'Blood,';
-                        } else {
-                            $urineResults['urine_blood'] = '';
-                        }
-                        if ($urineResults['urine_crystals_color_code'] != 'green') {
-                            $urineResults['urine_crystals'] = 'Crystals,';
-                        } else {
-                            $urineResults['urine_crystals'] = '';
-                        }
-                        if ($urineResults['urine_puscell_color_code'] != 'green' && $urineResults['urine_puscell_color_code'] != 'black') {
-                            $urineResults['urine_puscell'] = 'Pus Cell,';
-                        } else {
-                            $urineResults['urine_puscell'] = '';
-                        }
-
-                        if ($urineResults['urine_epithelialcell_color_code'] != 'green' && $urineResults['urine_epithelialcell_color_code'] != 'black') {
-                            $urineResults['urine_epithelialcell'] = 'Epithelial Cells,';
-                        } else {
-                            $urineResults['urine_epithelialcell'] = '';
-                        }
-
-                        if ($urineResults['urine_yeast_color_code'] != 'green') {
-                            $urineResults['urine_yeast'] = 'Yeast,';
-                        } else {
-                            $urineResults['urine_yeast'] = '';
-                        }
-                        if ($urineResults['urine_appearance_color_code'] != 'green') {
-                            $urineResults['urine_appearance'] = 'Appearance,';
-                        } else {
-                            $urineResults['urine_appearance'] = '';
-                        }
-                        if ($urineResults['rbcs_color_code'] != 'green') {
-                            $urineResults['rbcs'] = 'RBCs,';
-                        } else {
-                            $urineResults['rbcs'] = '';
-                        }
-                        if ($urineResults['casts_color_code'] != 'green') {
-                            $urineResults['casts'] = 'Casts,';
-                        } else {
-                            $urineResults['casts'] = '';
-                        }
-
-
-                        ?>
-
-                        <p class="p-tag">About your Results</p>
-                        <?php if (($urineResults['urine_specific_gravity']) ||
-                            ($urineResults['urine_ph']) ||
-                            ($urineResults['urine_ph']) || ($urineResults['urine_protein']) ||
-                            ($urineResults['urine_glucose']) || ($urineResults['urine_ketones']) ||
-                            ($urineResults['urine_bilirubin']) || ($urineResults['urine_nitrite']) ||
-                            ($urineResults['urine_blood']) || ($urineResults['urine_crystals']) ||
-                            ($urineResults['urine_puscell']) || ($urineResults['urine_epithelialcell']) || ($urineResults['urine_yeast']) || ($urineResults['urine_appearance']) || ($urineResults['rbcs']) || ($urineResults['casts'])
-                        ) { ?>
-                            <p style="font-size: 14px;">During your health check we have found out that &nbsp; <span style="color: #EC1C24;">
-                                    <?php echo $urineResults['urine_specific_gravity'];
-                                    ?>
-                                    <?= $urineResults['urine_ph'] ?>
-                                    <?php echo $urineResults['urine_protein'];
-                                    ?>
-                                    <?php echo $urineResults['urine_glucose'];
-                                    ?>
-                                    <?php echo $urineResults['urine_ketones'];
-                                    ?>
-                                    <?php echo $urineResults['urine_bilirubin'];
-                                    ?>
-                                    <?php echo $urineResults['urine_nitrite'];
-                                    ?>
-                                    <?php echo $urineResults['urine_blood'];
-                                    ?>
-                                    <?php echo $urineResults['urine_crystals'];
-                                    ?>
-                                    <?= $urineResults['urine_puscell'] ?>
-                                    <?= $urineResults['urine_epithelialcell'] ?>
-                                    <?php echo $urineResults['urine_yeast'];
-                                    ?>
-                                    <?php echo $urineResults['urine_appearance'];
-                                    ?>
-                                    <?php echo $urineResults['rbcs'];
-                                    ?>
-                                    <?php echo $urineResults['casts'];
-                                    ?>
-
-
-                                </span>is your concern parameters, which can impact your health.</p>
-                        <?php } else { ?>
-                            <p style="font-size: 14px;">All the test results are Normal.</p>
-                        <?php  } ?>
-                    </div>
+                <div>
+                    <?php //echo $footerWithLogo;
+                    echo NewFooter(['R0007j'], $tgdrsig_details, $footerLogo, $patientDetails, $footerNablLogo); ?>
                 </div>
-                <footer style="
-		position: absolute; 
-		bottom: -10px; 
-		left: 0;
-		width: 100%; 
-		text-align: center; 
-		padding: 10px 0; 
-		page-break-before: always;">
-                    <div>
-                        <?php //echo $footerWithLogo; 
-                        echo NewFooter(['R0007j'], $tgdrsig_details, $footerLogo, $patientDetails, $footerNablLogo); ?>
-                    </div>
-                    <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
-                </footer>
-            </div>
-        <?php } ?>
-
-
+                <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
+            </footer>
+        </div>
         <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
             <div class="resultDetails" style="page-break-after: always;padding-top:50px;">
                 <div style="width:100%;">
@@ -8219,161 +7590,610 @@
                         </tr>
                     </table>
                 </div>
-                <div class="margin-auto w-50">
-                    <img style="width:95%;" src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-health-guid.png" alt="" />
-                </div>
-                <table>
-                    <tr class="d-block">
-                        <td style="border-right: 1px solid #00977b;
-                    padding-right: 10px;
-                    padding-left: 10px;"><img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/nutrition-icon.png" alt=""></td>
-                        <td></td>
-                        <td class="nutrition">Nutrition</td>
-                    </tr>
-                </table>
-                <table style="display:table-cell; height:340px; background: #f3f5f8;" class="float-left w-50">
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
                     <tr>
-                        <td class="dos">Do's</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Maintain balance with whole grains, legumes, dairy, fruits, vegetables, nuts, and healthy fats</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Boost calcium with milk, yogurt, cheese, and leafy greens Add variety with Brazil nuts, sesame seeds, and sunflower</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Add variety with Brazil nuts, sesame seeds, and sunflower
-                            seeds</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Enjoy apples, berries, and melons for fruit diversity</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Choose whole grains like whole wheat bread, brown rice,
-                            and oats</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Prioritize fresh fruits, greens, and unsalted nuts and seeds</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Ensure iodized salt intake for thyroid health</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Include fresh fruit and veggie juices for extra nutrients</td>
-                    </tr>
-
-                </table>
-                <table style="display:table-cell; height:340px; background: #f2faff;" class="w-50">
-                    <tr>
-                        <td class="donts">Dont's</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r">
-                            <img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" />
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height: 107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_blood_color_code']; ?>" style="font-size: 26px;">
+                                        <!--<span style="font-size: 26px;">-->
+                                        <?php echo (($urineResults['urine_blood_result_value'] != '') ? $urineResults['urine_blood_result_value'] : '') ?>
+                                    </span>
+                                </div>
+                            </div>
                         </td>
-                        <td class="dos-donts-td" style="color: #333;">Control sugar intake</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Reduce consumption of colas and sugary drinks</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td style="color: #333;">Decrease caffeine consumption</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Refrain from flavored and seasoned foods</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Avoid saturated fats, trans fats, and greasy foods such as cakes and fried items</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Exclude cruciferous vegetables like cauliflower, cabbage, and spinach</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Steer clear of soy products like soy milk or tofu</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Minimize intake of refined carbohydrates and processed foods</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Limit consumption of red meat and organ meats</td>
+                        <!-- Blood -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Blood</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_blood_sample_method']; ?> </p>
+                                </div>
+
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['urine_blood_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This test checks for presence or absence of Blood in urine</p>
+                            </div>
+                        </td>
                     </tr>
                 </table>
-                <table>
-                    <tr class="d-block">
-                        <td style="border-right: 1px solid #00977b;
-                    padding-right: 10px;
-                    padding-left: 10px;"><img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/lifestyle-icon.png" alt=""></td>
-                        <td></td>
-                        <td class="nutrition">Lifestyle</td>
-                    </tr>
-                </table>
-                <table style="display:table-cell; height:290px; background: #f3f5f8;" class="float-left w-50">
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style=" padding-left: 10px;">
                     <tr>
-                        <td class="dos">Do's</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Ensure consistent sunlight exposure</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Keep physically active and maintain a healthy weight</td>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height: 107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_crystals_color_code']; ?>" style="font-size: 26px;">
+                                        <!-- <span style="font-size: 26px;"> -->
+                                        <?php echo (($urineResults['urine_crystals_result_value'] != '') ? $urineResults['urine_crystals_result_value'] : '') ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- Crystals -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Crystals</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_crystals_sample_method']; ?> </p>
+                                </div>
+
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['urine_crystals_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This test detects the presence or absence of Crystals in your urine</p>
+                            </div>
+                        </td>
                     </tr>
                 </table>
-                <table style="display:table-cell; height:290px; background: #f2faff;" class="w-50">
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50">
                     <tr>
-                        <td class="donts">Dont's</td>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height:147px">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <?php $paddingtop = !empty($urineResults['urine_puscell_secondvalue']) ? "" : 25 ?>
+                                <div style="padding-top:   <?= $paddingtop ?>px;">
+                                    <span class="<?= $urineResults['urine_puscell_color_code']; ?>" style="font-size: 26px;">
+                                        <?php echo (($urineResults['urine_puscell_result_value'] != '') ? $urineResults['urine_puscell_result_value'] : '') ?>
+                                    </span> <?php echo htmlspecialchars($urineResults['urine_puscell_uom']); ?>
+                                </div>
+                                <table class="image-result" style="font-size: 20px;">
+                                    <tr>
+                                        <?php
+                                        if (!empty($urineResults['urine_puscell_secondvalue'])) { ?>
+                                            <?php
+                                            if ($urineResults['urine_puscell_secondvalue'] < $urineResults['urine_puscell_low_result_value']) { ?>
+                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                            <?php } ?>
+
+                                            <?php if ($urineResults['urine_puscell_secondvalue'] >= $urineResults['urine_puscell_low_result_value']  && $urineResults['urine_puscell_secondvalue'] <= $urineResults['urine_puscell_high_result_value']) { ?>
+                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
+                                            <?php } ?>
+
+                                            <?php if ($urineResults['urine_puscell_secondvalue'] > $urineResults['urine_puscell_high_result_value']) { ?>
+                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                            <?php } ?>
+                                            <td class="<?= $urineResults['urine_puscell_color_code']; ?> image-ressult" style="padding-left: 10px;">
+                                                <?php echo (($urineResults['urine_puscell_result_value_in_words'] != '') ? $urineResults['urine_puscell_result_value_in_words'] : '') ?>
+                                            </td>
+                                    </tr>
+                                <?php } ?>
+                                </table>
+                                <table class="mediacal-update" style="width: 77%;">
+                                    <?php if (!empty($urineResults['urine_puscell_secondvalue'])) { ?>
+                                        <!-- <tr>
+                                            <td>Range</td>
+                                            <td> : <?php echo $urineResults['urine_puscell_low_result_value'] . " - " . $urineResults['urine_puscell_high_result_value'] . " " . $urineResults['urine_puscell_uom']; ?> </td>
+                                    </tr> -->
+                                        <td>Range</td>
+                                        <?php if (!empty($urineResults['urine_puscell_BRInterval_result_value'])) { ?>
+                                            <td> : <?php echo $urineResults['urine_puscell_BRInterval_result_value'] . " " . $urineResults['urine_puscell_uom']; ?> </td>
+                                        <?php } else { ?>
+                                            <td> : <?php echo $urineResults['urine_puscell_low_result_value'] . " - " . $urineResults['urine_puscell_high_result_value'] . " " . $urineResults['urine_puscell_uom']; ?> </td>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </table>
+                            </div>
+                        </td>
+                        <!-- Pus Cell< -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Pus Cell</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_puscell_sample_method']; ?> </p>
+                                </div>
+
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['urine_puscell_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This test detects Pyuria which confirms Urinary Tract Infection (UTI)</p>
+                            </div>
+                        </td>
                     </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Pay attention to your body's signal and attend your
-                            routine health check-ups.</td>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50" style=" padding-left: 10px;">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height:147px">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <?php $paddingtop = !empty($urineResults['urine_epithelialcell_secondvalue']) ? "" : 25 ?>
+                                <div style="padding-top:<?= $paddingtop ?>px;">
+                                    <span class="<?= $urineResults['urine_epithelialcell_color_code']; ?>" style="font-size: 26px;">
+                                        <?php echo (($urineResults['urine_epithelialcell_result_value'] != '') ? $urineResults['urine_epithelialcell_result_value'] : '') ?>
+                                    </span><?php echo htmlspecialchars($urineResults['urine_epithelialcell_uom']); ?>
+                                </div>
+                                <table class="image-result" style="width: 74%; font-size: 20px;">
+                                    <tr>
+                                        <?php
+                                        if (!empty($urineResults['urine_epithelialcell_secondvalue'])) { ?>
+                                            <?php
+                                            if ($urineResults['urine_epithelialcell_secondvalue'] < $urineResults['urine_epithelialcell_low_result_value']) { ?>
+                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                            <?php } ?>
+
+                                            <?php if ($urineResults['urine_epithelialcell_secondvalue'] >= $urineResults['urine_epithelialcell_low_result_value']  && $urineResults['urine_epithelialcell_secondvalue'] <= $urineResults['urine_epithelialcell_high_result_value']) { ?>
+                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/green-thumbs.png" /></td>
+                                            <?php } ?>
+
+                                            <?php if ($urineResults['urine_epithelialcell_secondvalue'] > $urineResults['urine_epithelialcell_high_result_value']) { ?>
+                                                <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/red-thumb.png" /></td>
+                                            <?php } ?>
+                                            <td class="<?= $urineResults['urine_epithelialcell_color_code']; ?> image-ressult" style="padding-left: 10px;">
+                                                <?php echo (($urineResults['urine_epithelialcell_result_value_in_words'] != '') ? $urineResults['urine_epithelialcell_result_value_in_words'] : '') ?>
+                                            </td>
+                                    </tr>
+                                <?php } ?>
+                                </table>
+
+
+                                <table class="mediacal-update" style="width: 77%;">
+                                    <?php
+                                    if (!empty($urineResults['urine_epithelialcell_secondvalue'])) { ?>
+                                        <!-- <tr>
+                                            <td>Range </td>
+                                            <td>: <?php echo $urineResults['urine_epithelialcell_low_result_value'] . " - " . $urineResults['urine_epithelialcell_high_result_value'] . " " . $urineResults['urine_epithelialcell_uom']; ?> </td>
+                                        </tr> -->
+                                        <td>Range</td>
+                                        <?php if (!empty($urineResults['urine_epithelialcell_BRInterval_result_value'])) { ?>
+                                            <td> : <?php echo $urineResults['urine_epithelialcell_BRInterval_result_value'] . " " . $urineResults['urine_epithelialcell_uom']; ?> </td>
+                                        <?php } else { ?>
+                                            <td> : <?php echo $urineResults['urine_epithelialcell_low_result_value'] . " - " . $urineResults['urine_epithelialcell_high_result_value'] . " " . $urineResults['urine_epithelialcell_uom']; ?> </td>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </table>
+                            </div>
+                        </td>
+                        <!-- Epithelial Cells -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Epithelial Cells</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_epithelialcell_sample_method']; ?> </p>
+                                </div>
+
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['urine_epithelialcell_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This test detects the amount of Epithelial cells in your urine</p>
+                            </div>
+                        </td>
                     </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Refrain from overexerting yourself without consuming
-                            food or beverages.</td>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height:107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_yeast_color_code']; ?>" style="font-size: 26px;">
+                                        <!-- <span style="font-size: 26px;">-->
+                                        <?php echo (($urineResults['urine_yeast_result_value'] != '') ? $urineResults['urine_yeast_result_value'] : '') ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- Yeast -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Yeast</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_yeast_sample_method']; ?> </p>
+                                </div>
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+                                    <?php if ($urineResults['urine_yeast_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This test detects the presence or absence of Crystals in your urine</p>
+                            </div>
+                        </td>
                     </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Steer clear of smoking and alcohol consumption.</td>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50" style=" padding-left: 10px;">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height:107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['bacteria_color_code']; ?>" style="font-size: 26px;">
+                                        <!-- <span style="font-size: 26px;">-->
+                                        <?php echo (($urineResults['bacteria_result_value'] != '') ? $urineResults['bacteria_result_value'] : '') ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- Bacteria -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Bacteria</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['bacteria_sample_method']; ?> </p>
+                                </div>
+
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['bacteria_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This test detects the presence or absence of Bacteria in your urine Bacteria in urine
+                                    confirms Urinary Tract Infection.</p>
+                            </div>
+                        </td>
                     </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Avoid engaging in rigorous exercises.</td>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height:107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['urine_appearance_color_code']; ?>" style="font-size: 26px;">
+                                        <!--  <span style="font-size: 26px;"> -->
+                                        <?php echo (($urineResults['urine_appearance_result_value'] != '') ? $urineResults['urine_appearance_result_value'] : '') ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- Appearance -->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Appearance</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['urine_appearance_sample_method']; ?> </p>
+                                </div>
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['urine_appearance_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This is a physical exam of urine</p>
+                            </div>
+                        </td>
                     </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Resist the temptation of overeating or consuming
-                            calorie-rich foods.</td>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h" style=" padding-left: 10px;">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail" style="min-height:107px;">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['casts_color_code']; ?>" style="font-size: 26px;">
+                                        <!-- <span style="font-size: 26px;"> -->
+                                        <?php echo (($urineResults['casts_result_value'] != '') ? $urineResults['casts_result_value'] : '') ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- Casts-->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">Casts</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['casts_sample_method']; ?> </p>
+                                </div>
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+                                    <?php if ($urineResults['casts_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This test detects the presence or absence of Casts in your urine</p>
+                            </div>
+                        </td>
                     </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Prevent prolonged stress or overwork.</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Reduce the frequency of dining out.</td>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="graphBArContentSection float-left w-50 m-h">
+                    <tr>
+                        <td class="leftPanel urine">
+                            <div class="graphDetail">
+                                <p style="color: #333;font-weight:600;">Your Result Value</p>
+                                <div>
+                                    <span class="<?= $urineResults['rbcs_color_code']; ?>" style="font-size: 27px;">
+                                        <!-- <span style="font-size: 26px;">-->
+                                        <?php echo (($urineResults['rbcs_result_value'] != '') ? $urineResults['rbcs_result_value'] : '') ?>
+                                    </span> <?php echo htmlspecialchars($urineResults['rbcs_uom']); ?>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- RBCs-->
+                        <td class="rightPanel">
+                            <div class="graphContent" style="position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                    <h4 style="margin: 0;">RBCs</h4>
+                                    <p class="methodology" style="margin: 0;"> <?= $urineResults['rbcs_sample_method']; ?> </p>
+                                </div>
+
+                                <!-- NABL Logo and Code Positioned Absolutely -->
+                                <div style="position: absolute; top: -5px; right: 0; display: flex; align-items: center;">
+
+                                    <?php if ($urineResults['rbcs_is_nabl_accredited'] == 1  && !($patientDetails['hospital_logo']['combained'])): ?>
+                                        <img src="https://reports.lifecell.in/images/footer-logo-pns-new.png" alt="" style="width: auto; height: 40px; margin-right: 10px;">
+                                        <div style="color: #000; font-size: 8px; line-height: 8px;">
+                                            <?= $urineTestgroupdetails['R0007j_urine_nabl_code']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <p style="margin-top:5px;">This test detects the presence or absence of RBCs in your urine</p>
+                            </div>
+                        </td>
                     </tr>
                 </table>
 
 
+
+                <div style="padding-top: 5px; clear: both;">
+                    <p class="sample-type-para">
+                        <span class="p-tag" style="font-size: 16px;">Sample Type :</span> Urine
+                    </p>
+                </div>
+                <?php if (!empty($urineTestgroupdetails['R0007j_urine_remarks'])) { ?>
+                    <div style="padding-top: 2.5px;">
+                        <p class="sample-type-para">
+                            <span class="p-tag" style="font-size: 16px;">Service Remarks :</span>
+                            <?= htmlspecialchars($urineTestgroupdetails['R0007j_urine_remarks']) ?>
+                        </p>
+                    </div>
+                <?php } ?>
+                <div>
+                    <p class="suggestions-para">
+                        <span class="p-tag" style="font-size: 16px;">Suggestions :</span> Drink plenty of water, use neat & clean washroom, Release your urine at shorter period
+
+                    </p>
+                </div>
+                <?php
+                if (
+                    !empty($urineResults['bacteria_test_remraks']) ||
+                    !empty($urineResults['urine_colour_test_remraks']) ||
+                    !empty($urineResults['volume_test_remraks']) ||
+                    !empty($urineResults['urine_specific_gravity_test_remraks']) ||
+                    !empty($urineResults['urine_appearance_test_remraks']) ||
+                    !empty($urineResults['rbcs_test_remraks']) ||
+                    !empty($urineResults['casts_test_remraks']) ||
+                    !empty($urineResults['urine_protein_test_remraks']) ||
+                    !empty($urineResults['urine_glucose_test_remraks']) ||
+                    !empty($urineResults['urine_ketones_test_remraks']) ||
+                    !empty($urineResults['urine_urobilinogen_test_remraks']) ||
+                    !empty($urineResults['urine_bilirubin_test_remraks']) ||
+                    !empty($urineResults['urine_nitrite_test_remraks']) ||
+                    !empty($urineResults['urine_blood_test_remraks']) ||
+                    !empty($urineResults['urine_epithelialcell_test_remraks']) ||
+                    !empty($urineResults['urine_crystals_test_remraks']) ||
+                    !empty($urineResults['urine_yeast_test_remraks'])
+
+                ) {
+                ?>
+                    <div style="padding-top: 5px;">
+                        <p class="sample-type-para">
+                            <span class="p-tag" style="font-size: 16px;">Test Remarks :</span>
+                            <span class="test-remarks suggestions-para sample-type-para">
+                                <?php
+
+                                $remarks = array_filter([
+                                    $urineResults['bacteria_test_remraks'] ?? '',
+                                    $urineResults['urine_colour_test_remraks'] ?? '',
+                                    $urineResults['volume_test_remraks'] ?? '',
+                                    $urineResults['urine_specific_gravity_test_remraks'] ?? '',
+                                    $urineResults['urine_appearance_test_remraks'] ?? '',
+                                    $urineResults['rbcs_test_remraks'] ?? '',
+                                    $urineResults['casts_test_remraks'] ?? '',
+                                    $urineResults['urine_protein_test_remraks'] ?? '',
+                                    $urineResults['urine_glucose_test_remraks'] ?? '',
+                                    $urineResults['urine_ketones_test_remraks'] ?? '',
+                                    $urineResults['urine_urobilinogen_test_remraks'] ?? '',
+                                    $urineResults['urine_bilirubin_test_remraks'] ?? '',
+                                    $urineResults['urine_nitrite_test_remraks'] ?? '',
+                                    $urineResults['urine_blood_test_remraks'] ?? '',
+                                    $urineResults['urine_epithelialcell_test_remraks'] ?? '',
+                                    $urineResults['urine_crystals_test_remraks'] ?? '',
+                                    $urineResults['urine_yeast_test_remraks'] ?? '',
+                                ]);
+
+                                echo htmlspecialchars(implode(', ', $remarks));
+                                ?>
+                            </span>
+                        </p>
+                    </div>
+                <?php } ?>
+                <div style="padding-top: 2px;">
+
+                    <?php
+                    if ($urineResults['urine_specific_gravity_color_code'] != 'green') {
+                        $urineResults['urine_specific_gravity'] = 'Specific Gravity,';
+                    } else {
+                        $urineResults['urine_specific_gravity'] = '';
+                    }
+                    if ($urineResults['urine_ph_color_code'] != 'green') {
+                        $urineResults['urine_ph'] = 'pH,';
+                    } else {
+                        $urineResults['urine_ph'] = '';
+                    }
+                    if ($urineResults['urine_protein_color_code'] != 'green') {
+                        $urineResults['urine_protein'] = 'Protein,';
+                    } else {
+                        $urineResults['urine_protein'] = '';
+                    }
+                    if ($urineResults['urine_glucose_color_code'] != 'green') {
+                        $urineResults['urine_glucose'] = 'Glucose,';
+                    } else {
+                        $urineResults['urine_glucose'] = '';
+                    }
+                    if ($urineResults['urine_ketones_color_code'] != 'green') {
+                        $urineResults['urine_ketones'] = 'Ketones,';
+                    } else {
+                        $urineResults['urine_ketones'] = '';
+                    }
+                    if ($urineResults['urine_urobilinogen_color_code'] != 'green') {
+                        $urineResults['urine_urobilinogen'] = 'Urobilinogen,';
+                    } else {
+                        $urineResults['urine_urobilinogen'] = '';
+                    }
+                    if ($urineResults['urine_bilirubin_color_code'] != 'green') {
+                        $urineResults['urine_bilirubin'] = 'Bilirubin,';
+                    } else {
+                        $urineResults['urine_bilirubin'] = '';
+                    }
+                    if ($urineResults['urine_nitrite_color_code'] != 'green') {
+                        $urineResults['urine_nitrite'] = 'Nitrite,';
+                    } else {
+                        $urineResults['urine_nitrite'] = '';
+                    }
+                    if ($urineResults['urine_blood_color_code'] != 'green') {
+                        $urineResults['urine_blood'] = 'Blood,';
+                    } else {
+                        $urineResults['urine_blood'] = '';
+                    }
+                    if ($urineResults['urine_crystals_color_code'] != 'green') {
+                        $urineResults['urine_crystals'] = 'Crystals,';
+                    } else {
+                        $urineResults['urine_crystals'] = '';
+                    }
+                    if ($urineResults['urine_puscell_color_code'] != 'green' && $urineResults['urine_puscell_color_code'] != 'black') {
+                        $urineResults['urine_puscell'] = 'Pus Cell,';
+                    } else {
+                        $urineResults['urine_puscell'] = '';
+                    }
+
+                    if ($urineResults['urine_epithelialcell_color_code'] != 'green' && $urineResults['urine_epithelialcell_color_code'] != 'black') {
+                        $urineResults['urine_epithelialcell'] = 'Epithelial Cells,';
+                    } else {
+                        $urineResults['urine_epithelialcell'] = '';
+                    }
+
+                    if ($urineResults['urine_yeast_color_code'] != 'green') {
+                        $urineResults['urine_yeast'] = 'Yeast,';
+                    } else {
+                        $urineResults['urine_yeast'] = '';
+                    }
+                    if ($urineResults['urine_appearance_color_code'] != 'green') {
+                        $urineResults['urine_appearance'] = 'Appearance,';
+                    } else {
+                        $urineResults['urine_appearance'] = '';
+                    }
+                    if ($urineResults['rbcs_color_code'] != 'green') {
+                        $urineResults['rbcs'] = 'RBCs,';
+                    } else {
+                        $urineResults['rbcs'] = '';
+                    }
+                    if ($urineResults['casts_color_code'] != 'green') {
+                        $urineResults['casts'] = 'Casts,';
+                    } else {
+                        $urineResults['casts'] = '';
+                    }
+
+
+                    ?>
+
+                    <p class="p-tag">About your Results</p>
+                    <?php if (($urineResults['urine_specific_gravity']) ||
+                        ($urineResults['urine_ph']) ||
+                        ($urineResults['urine_ph']) || ($urineResults['urine_protein']) ||
+                        ($urineResults['urine_glucose']) || ($urineResults['urine_ketones']) ||
+                        ($urineResults['urine_bilirubin']) || ($urineResults['urine_nitrite']) ||
+                        ($urineResults['urine_blood']) || ($urineResults['urine_crystals']) ||
+                        ($urineResults['urine_puscell']) || ($urineResults['urine_epithelialcell']) || ($urineResults['urine_yeast']) || ($urineResults['urine_appearance']) || ($urineResults['rbcs']) || ($urineResults['casts'])
+                    ) { ?>
+                        <p style="font-size: 14px;">During your health check we have found out that &nbsp; <span style="color: #EC1C24;">
+                                <?php echo $urineResults['urine_specific_gravity'];
+                                ?>
+                                <?= $urineResults['urine_ph'] ?>
+                                <?php echo $urineResults['urine_protein'];
+                                ?>
+                                <?php echo $urineResults['urine_glucose'];
+                                ?>
+                                <?php echo $urineResults['urine_ketones'];
+                                ?>
+                                <?php echo $urineResults['urine_bilirubin'];
+                                ?>
+                                <?php echo $urineResults['urine_nitrite'];
+                                ?>
+                                <?php echo $urineResults['urine_blood'];
+                                ?>
+                                <?php echo $urineResults['urine_crystals'];
+                                ?>
+                                <?= $urineResults['urine_puscell'] ?>
+                                <?= $urineResults['urine_epithelialcell'] ?>
+                                <?php echo $urineResults['urine_yeast'];
+                                ?>
+                                <?php echo $urineResults['urine_appearance'];
+                                ?>
+                                <?php echo $urineResults['rbcs'];
+                                ?>
+                                <?php echo $urineResults['casts'];
+                                ?>
+
+
+                            </span>is your concern parameters, which can impact your health.</p>
+                    <?php } else { ?>
+                        <p style="font-size: 14px;">All the test results are Normal.</p>
+                    <?php  } ?>
+                </div>
             </div>
             <footer style="
 		position: absolute; 
@@ -8384,156 +8204,342 @@
 		padding: 10px 0; 
 		page-break-before: always;">
                 <div>
-                    <?php echo $footerWithLogo; ?>
+                    <?php //echo $footerWithLogo; 
+                    echo NewFooter(['R0007j'], $tgdrsig_details, $footerLogo, $patientDetails, $footerNablLogo); ?>
                 </div>
                 <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
             </footer>
         </div>
+    <?php } ?>
 
-        <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
-            <div class="resultDetails" style="page-break-after: always;padding-top:50px;">
-                <div style="width:100%;">
-                    <?php echo $co_brand_header2; ?>
-                </div>
-                <div>
-                    <table>
-                        <tr>
-                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
-                        </tr>
-                    </table>
-                </div>
+
+    <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
+        <div class="resultDetails" style="page-break-after: always;padding-top:50px;">
+            <div style="width:100%;">
+                <?php echo $co_brand_header2; ?>
+            </div>
+            <div>
                 <table>
-                    <tr class="d-block">
-                        <td style="    border-right: 1px solid #00977b;
+                    <tr>
+                        <td> <img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="margin-auto w-50">
+                <img style="width:95%;" src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-health-guid.png" alt="" />
+            </div>
+            <table>
+                <tr class="d-block">
+                    <td style="border-right: 1px solid #00977b;
+                    padding-right: 10px;
+                    padding-left: 10px;"><img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/nutrition-icon.png" alt=""></td>
+                    <td></td>
+                    <td class="nutrition">Nutrition</td>
+                </tr>
+            </table>
+            <table style="display:table-cell; height:340px; background: #f3f5f8;" class="float-left w-50">
+                <tr>
+                    <td class="dos">Do's</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Maintain balance with whole grains, legumes, dairy, fruits, vegetables, nuts, and healthy fats</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Boost calcium with milk, yogurt, cheese, and leafy greens Add variety with Brazil nuts, sesame seeds, and sunflower</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Add variety with Brazil nuts, sesame seeds, and sunflower
+                        seeds</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Enjoy apples, berries, and melons for fruit diversity</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Choose whole grains like whole wheat bread, brown rice,
+                        and oats</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Prioritize fresh fruits, greens, and unsalted nuts and seeds</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Ensure iodized salt intake for thyroid health</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Include fresh fruit and veggie juices for extra nutrients</td>
+                </tr>
+
+            </table>
+            <table style="display:table-cell; height:340px; background: #f2faff;" class="w-50">
+                <tr>
+                    <td class="donts">Dont's</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r">
+                        <img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" />
+                    </td>
+                    <td class="dos-donts-td" style="color: #333;">Control sugar intake</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Reduce consumption of colas and sugary drinks</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td style="color: #333;">Decrease caffeine consumption</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Refrain from flavored and seasoned foods</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Avoid saturated fats, trans fats, and greasy foods such as cakes and fried items</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Exclude cruciferous vegetables like cauliflower, cabbage, and spinach</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Steer clear of soy products like soy milk or tofu</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Minimize intake of refined carbohydrates and processed foods</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Limit consumption of red meat and organ meats</td>
+                </tr>
+            </table>
+            <table>
+                <tr class="d-block">
+                    <td style="border-right: 1px solid #00977b;
+                    padding-right: 10px;
+                    padding-left: 10px;"><img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/lifestyle-icon.png" alt=""></td>
+                    <td></td>
+                    <td class="nutrition">Lifestyle</td>
+                </tr>
+            </table>
+            <table style="display:table-cell; height:290px; background: #f3f5f8;" class="float-left w-50">
+                <tr>
+                    <td class="dos">Do's</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Ensure consistent sunlight exposure</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Keep physically active and maintain a healthy weight</td>
+                </tr>
+            </table>
+            <table style="display:table-cell; height:290px; background: #f2faff;" class="w-50">
+                <tr>
+                    <td class="donts">Dont's</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Pay attention to your body's signal and attend your
+                        routine health check-ups.</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Refrain from overexerting yourself without consuming
+                        food or beverages.</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Steer clear of smoking and alcohol consumption.</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Avoid engaging in rigorous exercises.</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Resist the temptation of overeating or consuming
+                        calorie-rich foods.</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Prevent prolonged stress or overwork.</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wrong-icon.png" class="dos-donts" alt="wrong-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Reduce the frequency of dining out.</td>
+                </tr>
+            </table>
+
+
+        </div>
+        <footer style="
+		position: absolute; 
+		bottom: -10px; 
+		left: 0;
+		width: 100%; 
+		text-align: center; 
+		padding: 10px 0; 
+		page-break-before: always;">
+            <div>
+                <?php echo $footerWithLogo; ?>
+            </div>
+            <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
+        </footer>
+    </div>
+
+    <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
+        <div class="resultDetails" style="page-break-after: always;padding-top:50px;">
+            <div style="width:100%;">
+                <?php echo $co_brand_header2; ?>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
+                    </tr>
+                </table>
+            </div>
+            <table>
+                <tr class="d-block">
+                    <td style="    border-right: 1px solid #00977b;
                     padding-right: 10px;
                     padding-left: 10px;"><img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/physical-activity-icon.png" alt="">
-                        </td>
-                        <td></td>
-                        <td class="nutrition">Physical Activity</td>
-                    </tr>
-                </table>
-                <table class="w-100">
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Physical activities range from walks to yoga and light weight lifting, recommended for 30 minutes, 3-4 days a week</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">If regular workouts are tough, try using stairs and doing household chores
-                        </td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Options for physical exertion vary, including walks, sports, and
-                            weightlifting</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;"> Engage in physical activity for at least 30 minutes, 3-4 times
-                            weekly
-                        </td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">
-                            Incorporate incidental activities like stair climbing and household tasks for fitness
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr class="d-block">
-                        <td style="border-right: 1px solid #00977b;
+                    </td>
+                    <td></td>
+                    <td class="nutrition">Physical Activity</td>
+                </tr>
+            </table>
+            <table class="w-100">
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Physical activities range from walks to yoga and light weight lifting, recommended for 30 minutes, 3-4 days a week</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">If regular workouts are tough, try using stairs and doing household chores
+                    </td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Options for physical exertion vary, including walks, sports, and
+                        weightlifting</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;"> Engage in physical activity for at least 30 minutes, 3-4 times
+                        weekly
+                    </td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">
+                        Incorporate incidental activities like stair climbing and household tasks for fitness
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr class="d-block">
+                    <td style="border-right: 1px solid #00977b;
                     padding-right: 10px;
                     padding-left: 10px;"><img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/balanced-diet-icon.png" alt="">
-                        </td>
-                        <td></td>
-                        <td class="nutrition">Balanced Diet</td>
-                    </tr>
-                </table>
-                <table class="w-100">
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">A healthy lifestyle hinges on a balanced diet comprising whole
-                            grains, vegetables, fruits, nuts, seeds, beans, and plant oils.</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Prioritize a high-protein breakfast and a modest dinner for optimal
-                            nutrition.
-                        </td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Steer clear of processed foods, potatoes, and calorie-laden sugary
-                            products.</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;"> Remember to hydrate consistently by drinking water throughout the
-                            day.
-                        </td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">
-                            Optimal nutrition entails incorporating whole foods and avoiding processed items while
-                            maintaining a balanced meal schedule.
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr class="d-block">
-                        <td style="border-right: 1px solid #00977b;
+                    </td>
+                    <td></td>
+                    <td class="nutrition">Balanced Diet</td>
+                </tr>
+            </table>
+            <table class="w-100">
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">A healthy lifestyle hinges on a balanced diet comprising whole
+                        grains, vegetables, fruits, nuts, seeds, beans, and plant oils.</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Prioritize a high-protein breakfast and a modest dinner for optimal
+                        nutrition.
+                    </td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Steer clear of processed foods, potatoes, and calorie-laden sugary
+                        products.</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;"> Remember to hydrate consistently by drinking water throughout the
+                        day.
+                    </td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">
+                        Optimal nutrition entails incorporating whole foods and avoiding processed items while
+                        maintaining a balanced meal schedule.
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr class="d-block">
+                    <td style="border-right: 1px solid #00977b;
                     padding-right: 10px;
                     padding-left: 10px;"><img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/stress-management-icon.png" alt="">
-                        </td>
-                        <td></td>
-                        <td class="nutrition">Stress Management</td>
-                    </tr>
-                </table>
-                <table class="w-100">
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Stress management plays a crucial role in maintaining overall
-                            well-being, necessitating daily adjustments.</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Prioritizing adequate sleep, aiming for 6-8 hours nightly, is
-                            foundational to stress reduction.
-                        </td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">Engaging in meditation fosters mental clarity and resilience against
-                            stressors.</td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td style="color: #333;"> Cultivating a positive lifestyle outlook and incorporating humor
-                            into daily routines can alleviate stress.
-                        </td>
-                    </tr>
-                    <tr class="d-block guidance">
-                        <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
-                        <td class="dos-donts-td" style="color: #333;">
-                            Traveling, connecting with supportive individuals, and dedicating time to beloved hobbies are
-                            effective stress-relief strategies.
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr class="d-block">
-                        <td style="border-right: 1px solid #00977b;padding-right: 10px;padding-left: 10px;"><img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/follow-up-test-icon.png" alt="">
-                        </td>
-                        <td></td>
-                        <td class="nutrition">Suggested follow up test</td>
-                    </tr>
+                    </td>
+                    <td></td>
+                    <td class="nutrition">Stress Management</td>
+                </tr>
+            </table>
+            <table class="w-100">
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Stress management plays a crucial role in maintaining overall
+                        well-being, necessitating daily adjustments.</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Prioritizing adequate sleep, aiming for 6-8 hours nightly, is
+                        foundational to stress reduction.
+                    </td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">Engaging in meditation fosters mental clarity and resilience against
+                        stressors.</td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td style="color: #333;"> Cultivating a positive lifestyle outlook and incorporating humor
+                        into daily routines can alleviate stress.
+                    </td>
+                </tr>
+                <tr class="d-block guidance">
+                    <td class="paddingl-r"><img src="https://cdn.shop.lifecell.in/reports/wellness/images/right-icon.png" class="dos-donts" alt="right-icon" /></td>
+                    <td class="dos-donts-td" style="color: #333;">
+                        Traveling, connecting with supportive individuals, and dedicating time to beloved hobbies are
+                        effective stress-relief strategies.
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr class="d-block">
+                    <td style="border-right: 1px solid #00977b;padding-right: 10px;padding-left: 10px;"><img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/follow-up-test-icon.png" alt="">
+                    </td>
+                    <td></td>
+                    <td class="nutrition">Suggested follow up test</td>
+                </tr>
 
-                </table>
-                <table class="border-collapse" style="width:100%; margin: 10px; border: 1px solid #777;">
-                    <tr>
-                       <?php
+            </table>
+            <table class="border-collapse" style="width:100%; margin: 10px; border: 1px solid #777;">
+                <tr>
+                    <?php
                     if ($pancreasResults['glucose_fasting_status_found']) {
                         if ($pancreasResults['hba1c_color_code'] != 'green') {
                             $pancreasResults['hba1c'] = 'HbA1c,';
@@ -8571,9 +8577,9 @@
                             </td>
                         <?php } ?>
                     <?php } ?>
-                    </tr>
-                    <tr>
-                        <?php
+                </tr>
+                <tr>
+                    <?php
                         if ($heartResults['lipoprotein_ldl_status_found']) {
                             // Assign values when LDL status is found
                             $heartResults['total_cholesterol'] = ($heartResults['total_cholesterol_color_code'] != 'green') ? 'Total Cholesterol,' : '';
@@ -8586,24 +8592,24 @@
                             $heartResults['non_hdl_cholesterol'] = ($heartResults['nonhdlcholesterol_color_code'] != 'green') ? 'Non HDL Cholesterol,' : '';
                             ?>
 
-                            <?php if (
+                    <?php if (
                                 $heartResults['total_cholesterol_color_code'] == 'green' &&
                                 $heartResults['triglycerides_color_code'] == 'green' &&
                                 $heartResults['hdl_cholesterol_color_code'] == 'green' &&
                                 $heartResults['lipoproteincholesterol_color_code'] == 'green' &&
                                 $heartResults['lipoprotein_ldl_color_code'] == 'green' &&
                                 $heartResults['total_cholesterolhdlratio_color_code'] == 'green' &&
-                                $heartResults['ldlorhdlratio_color_code'] == 'green' &&
-                                $heartResults['nonhdlcholesterol_color_code'] == 'green'
-                            ) { ?>
+                        $heartResults['ldlorhdlratio_color_code'] == 'green' &&
+                        $heartResults['nonhdlcholesterol_color_code'] == 'green'
+                    ) { ?>
                                 <td class="tests">Heart - Nill</td>
                             <?php } else { ?>
-                                <td class="tests">Heart -
-                                    <?= $heartResults['total_cholesterol'] ?>
-                                    <?= $heartResults['triglycerides'] ?>
-                                    <?= $heartResults['HDL_cholesterol'] ?>
-                                    <?= $heartResults['low_Density_lipoprotein'] ?>
-                                    <?= $heartResults['very_low_Density_lipoprotein'] ?>
+                        <td class="tests">Heart -
+                            <?= $heartResults['total_cholesterol'] ?>
+                            <?= $heartResults['triglycerides'] ?>
+                            <?= $heartResults['HDL_cholesterol'] ?>
+                            <?= $heartResults['low_Density_lipoprotein'] ?>
+                            <?= $heartResults['very_low_Density_lipoprotein'] ?>
                                     <?= $heartResults['total_cholesterol_hdl_ratio'] ?>
                                     <?= $heartResults['ldl_or_hdl_ratio'] ?>
                                     <?= $heartResults['non_hdl_cholesterol'] ?>
@@ -8636,643 +8642,643 @@
                                     <?= $heartResults['triglycerides'] ?>
                                     <?= $heartResults['HDL_cholesterol'] ?>
                                     <?= $heartResults['low_Density_lipoprotein'] ?>
-                                    <?= $heartResults['total_cholesterol_hdl_ratio'] ?>
-                                    <?= $heartResults['ldl_or_hdl_ratio'] ?>
-                                    <?= $heartResults['non_hdl_cholesterol'] ?>
-                                </td>
+                            <?= $heartResults['total_cholesterol_hdl_ratio'] ?>
+                            <?= $heartResults['ldl_or_hdl_ratio'] ?>
+                            <?= $heartResults['non_hdl_cholesterol'] ?>
+                        </td>
                             <?php } ?>
                         <?php } ?>
-                    </tr>
+                </tr>
 
-                    <tr>
-                        <?php
-                        if ($thyroidResults['thyronine_color_code'] != 'green') {
-                            $thyroidResults['thyronine'] = 'Thyronine (T3 Total),';
+                <tr>
+                    <?php
+                    if ($thyroidResults['thyronine_color_code'] != 'green') {
+                        $thyroidResults['thyronine'] = 'Thyronine (T3 Total),';
+                    } else {
+                        $thyroidResults['thyronine'] = '';
+                    }
+                    if ($thyroidResults['thyroxine_color_code'] != 'green') {
+                        $thyroidResults['thyroxine'] = 'Thyroid Thyroxine (T4),';
+                    } else {
+                        $thyroidResults['thyroxine'] = '';
+                    }
+                    if ($thyroidResults['tsh_color_code'] != 'green') {
+                        $thyroidResults['tsh'] = 'TSH,';
+                    } else {
+                        $thyroidResults['tsh'] = '';
+                    }
+                    ?>
+                    <?php if ($thyroidResults['thyronine_color_code'] == 'green' && $thyroidResults['thyroxine_color_code'] == 'green' && $thyroidResults['tsh_color_code'] == 'green') { ?>
+                        <td class="tests">Thyroid - Nill </td>
+                    <?php } else { ?>
+                        <td class="tests">Thyroid -
+                            <?= $thyroidResults['thyronine'] ?>
+                            <?= $thyroidResults['thyroxine'] ?>
+                            <?= $thyroidResults['tsh'] ?>
+                        </td>
+                    <?php } ?>
+                </tr>
+                <tr>
+                    <?php
+                    if ($kidneyResults['urea_result_color_code'] != 'green') {
+                        $kidneyResults['urea'] = 'Urea,';
+                    } else {
+                        $kidneyResults['urea'] = '';
+                    }
+                    if ($kidneyResults['creatinine_color_code'] != 'green') {
+                        $kidneyResults['creatinine'] = 'Creatinine,';
+                    } else {
+                        $kidneyResults['creatinine'] = '';
+                    }
+                    if ($kidneyResults['uricacid_color_code'] != 'green') {
+                        $kidneyResults['uric_Acid'] = 'Uric Acid,';
+                    } else {
+                        $kidneyResults['uric_Acid'] = '';
+                    }
+                    if ($kidneyResults['calcium_color_code'] != 'green') {
+                        $kidneyResults['calcium'] = 'Calcium,';
+                    } else {
+                        $kidneyResults['calcium'] = '';
+                    }
+                    if ($kidneyResults['blood_urea_nitrogen_color_code'] != 'green') {
+                        $kidneyResults['blood_urea_nitrogen'] = 'Blood Urea Nitrogen (BUN),';
+                    } else {
+                        $kidneyResults['blood_urea_nitrogen'] = '';
+                    }
+                    if ($kidneyResults['creatinine_ratio_color_code'] != 'green') {
+                        $kidneyResults['creatinine_ratio'] = 'BUN/Creatinine Ratio,';
+                    } else {
+                        $kidneyResults['creatinine_ratio'] = '';
+                    }
+                    if ($kidneyResults['sodium_result_color_code'] != 'green') {
+                        $kidneyResults['sodium_result_color'] = 'Sodium (Na+) Serum,';
+                    } else {
+                        $kidneyResults['sodium_result_color'] = '';
+                    }
+
+                    if ($kidneyResults['potassium_result_color_code'] != 'green') {
+                        $kidneyResults['potassium_result_color'] = 'Potassium (K+) Serum,';
+                    } else {
+                        $kidneyResults['potassium_result_color'] = '';
+                    }
+
+                    if ($kidneyResults['chloride_result_color_code'] != 'green') {
+                        $kidneyResults['chloride_result_color'] = 'Chloride Serum,';
+                    } else {
+                        $kidneyResults['chloride_result_color'] = '';
+                    }
+                    if ($kidneyResults['magnesium_color_code'] != 'green') {
+                        $kidneyResults['magnesium'] = 'Magnesium Serum,';
+                    } else {
+                        $kidneyResults['magnesium'] = '';
+                    }
+
+                    if ($kidneyResults['egfr_color_code'] != 'green') {
+                        $kidneyResults['egfr'] = 'eGFR,';
+                    } else {
+                        $kidneyResults['egfr'] = '';
+                    }
+                    ?>
+                    <?php if (
+                        $kidneyResults['urea_result_color_code'] == 'green' && $kidneyResults['creatinine_color_code'] == 'green' &&
+                        $kidneyResults['uricacid_color_code'] == 'green' && $kidneyResults['calcium_color_code'] == 'green' &&
+                        $kidneyResults['blood_urea_nitrogen_color_code'] == 'green' &&
+                        $kidneyResults['creatinine_ratio_color_code'] == 'green' && $kidneyResults['sodium_result_color_code'] == 'green' && $kidneyResults['potassium_result_color_code'] == 'green' && $kidneyResults['chloride_result_color_code'] == 'green' && $kidneyResults['magnesium_color_code'] == 'green'   && $kidneyResults['egfr_color_code'] == 'green'
+                    ) { ?>
+                        <td class="tests">Kidney - Nil
+                        </td>
+                    <?php   } else { ?>
+                        <td class="tests">Kidney -
+                            <?= $kidneyResults['urea'] ?>
+                            <?= $kidneyResults['creatinine'] ?>
+                            <?= $kidneyResults['uric_Acid'] ?>
+                            <?= $kidneyResults['calcium'] ?>
+                            <?= $kidneyResults['blood_urea_nitrogen'] ?>
+                            <?= $kidneyResults['creatinine_ratio'] ?>
+                            <?= $kidneyResults['sodium_result_color'] ?>
+                            <?= $kidneyResults['potassium_result_color'] ?>
+                            <?= $kidneyResults['chloride_result_color'] ?>
+                            <?= $kidneyResults['magnesium'] ?>
+                            <?= $kidneyResults['egfr'] ?>
+                        </td>
+                    <?php   } ?>
+                </tr>
+                <tr>
+                    <?php
+                    if ($liverResults['bilirubin_color_code'] != 'green') {
+                        $liverResults['bilirubin_total'] = 'Bilirubin  - Total,';
+                    } else {
+                        $liverResults['bilirubin_total'] = '';
+                    }
+                    if ($liverResults['bilirubin_direct_color_code'] != 'green') {
+                        $liverResults['bilirubin_direct'] = 'Bilirubin - Direct,';
+                    } else {
+                        $liverResults['bilirubin_direct'] = '';
+                    }
+                    if ($liverResults['bilirubin_indirect_color_code'] != 'green') {
+                        $liverResults['bilirubin_indirect'] = 'Bilirubin - Indirect,';
+                    } else {
+                        $liverResults['bilirubin_indirect'] = '';
+                    }
+                    if ($liverResults['sgpt_alt_color_code'] != 'green') {
+                        $liverResults['sgpt_alt'] = 'GSGPT-AL,';
+                    } else {
+                        $liverResults['sgpt_alt'] = '';
+                    }
+                    if ($liverResults['sgot_ast_color_code'] != 'green') {
+                        $liverResults['sgot_ast'] = 'SGOT-AST,';
+                    } else {
+                        $liverResults['sgot_ast'] = '';
+                    }
+                    if ($liverResults['alkaline_phosphatase_color_code'] != 'green') {
+                        $liverResults['alkaline_phosphatase'] = 'Alkaline Phosphatase,';
+                    } else {
+                        $liverResults['alkaline_phosphatase'] = '';
+                    }
+                    if ($liverResults['ggt_result_found_view'] == 1) {
+                        if (($patientDetails['PackageCode'] !== 'AYN_016') && ($liverResults['ggt_color_code'] != 'green')) {
+                            $liverResults['ggt'] = 'Gamma Glutamyl Transferase (GGT),';
                         } else {
-                            $thyroidResults['thyronine'] = '';
+                            $liverResults['ggt'] = '';
                         }
-                        if ($thyroidResults['thyroxine_color_code'] != 'green') {
-                            $thyroidResults['thyroxine'] = 'Thyroid Thyroxine (T4),';
-                        } else {
-                            $thyroidResults['thyroxine'] = '';
-                        }
-                        if ($thyroidResults['tsh_color_code'] != 'green') {
-                            $thyroidResults['tsh'] = 'TSH,';
-                        } else {
-                            $thyroidResults['tsh'] = '';
-                        }
-                        ?>
-                        <?php if ($thyroidResults['thyronine_color_code'] == 'green' && $thyroidResults['thyroxine_color_code'] == 'green' && $thyroidResults['tsh_color_code'] == 'green') { ?>
-                            <td class="tests">Thyroid - Nill </td>
+                    }
+                    if ($liverResults['total_protein_color_code'] != 'green') {
+                        $liverResults['total_protein'] = 'Protein Total,';
+                    } else {
+                        $liverResults['total_protein'] = '';
+                    }
+                    if ($liverResults['globulin_color_code'] != 'green') {
+                        $liverResults['globulin'] = 'Globulin,';
+                    } else {
+                        $liverResults['globulin'] = '';
+                    }
+                    if ($liverResults['albumin_color_code'] != 'green') {
+                        $liverResults['albumin'] = 'Albumin,';
+                    } else {
+                        $liverResults['albumin'] = '';
+                    }
+                    if ($liverResults['ag_ratio_color_code'] != 'green') {
+                        $liverResults['ag_ratio'] = 'A : G Ratio,';
+                    } else {
+                        $liverResults['ag_ratio'] = '';
+                    }
+                    ?>
+                    <?php if ($liverResults['ggt_result_found_view'] == 1) { ?>
+                        <?php if (
+                            $liverResults['bilirubin_color_code'] == 'green' &&
+                            $liverResults['bilirubin_direct_color_code'] == 'green' &&
+                            $liverResults['bilirubin_indirect_color_code'] == 'green' &&
+                            $liverResults['sgpt_alt_color_code'] == 'green' &&
+                            $liverResults['sgot_ast_color_code'] == 'green' &&
+                            $liverResults['alkaline_phosphatase_color_code'] == 'green' &&
+                            $liverResults['ggt_color_code'] == 'green' &&
+                            $liverResults['total_protein_color_code'] == 'green' &&
+                            $liverResults['globulin_color_code'] == 'green' &&
+                            $liverResults['albumin_color_code'] == 'green' &&
+                            $liverResults['ag_ratio_color_code'] == 'green'
+                        ) { ?>
+                            <td class="tests">Liver - Nil</td>
                         <?php } else { ?>
-                            <td class="tests">Thyroid -
-                                <?= $thyroidResults['thyronine'] ?>
-                                <?= $thyroidResults['thyroxine'] ?>
-                                <?= $thyroidResults['tsh'] ?>
+                            <td class="tests">Liver -
+                                <?= $liverResults['bilirubin_total'] ?>
+                                <?= $liverResults['bilirubin_direct'] ?>
+                                <?= $liverResults['bilirubin_indirect'] ?>
+                                <?= $liverResults['sgpt_alt'] ?>
+                                <?= $liverResults['sgot_ast'] ?>
+                                <?= $liverResults['alkaline_phosphatase'] ?>
+                                <?= $liverResults['ggt'] ?>
+                                <?= $liverResults['total_protein'] ?>
+                                <?= $liverResults['globulin'] ?>
+                                <?= $liverResults['albumin'] ?>
+                                <?= $liverResults['ag_ratio'] ?>
                             </td>
                         <?php } ?>
-                    </tr>
-                    <tr>
-                        <?php
-                        if ($kidneyResults['urea_result_color_code'] != 'green') {
-                            $kidneyResults['urea'] = 'Urea,';
-                        } else {
-                            $kidneyResults['urea'] = '';
-                        }
-                        if ($kidneyResults['creatinine_color_code'] != 'green') {
-                            $kidneyResults['creatinine'] = 'Creatinine,';
-                        } else {
-                            $kidneyResults['creatinine'] = '';
-                        }
-                        if ($kidneyResults['uricacid_color_code'] != 'green') {
-                            $kidneyResults['uric_Acid'] = 'Uric Acid,';
-                        } else {
-                            $kidneyResults['uric_Acid'] = '';
-                        }
-                        if ($kidneyResults['calcium_color_code'] != 'green') {
-                            $kidneyResults['calcium'] = 'Calcium,';
-                        } else {
-                            $kidneyResults['calcium'] = '';
-                        }
-                        if ($kidneyResults['blood_urea_nitrogen_color_code'] != 'green') {
-                            $kidneyResults['blood_urea_nitrogen'] = 'Blood Urea Nitrogen (BUN),';
-                        } else {
-                            $kidneyResults['blood_urea_nitrogen'] = '';
-                        }
-                        if ($kidneyResults['creatinine_ratio_color_code'] != 'green') {
-                            $kidneyResults['creatinine_ratio'] = 'BUN/Creatinine Ratio,';
-                        } else {
-                            $kidneyResults['creatinine_ratio'] = '';
-                        }
-                        if ($kidneyResults['sodium_result_color_code'] != 'green') {
-                            $kidneyResults['sodium_result_color'] = 'Sodium (Na+) Serum,';
-                        } else {
-                            $kidneyResults['sodium_result_color'] = '';
-                        }
-
-                        if ($kidneyResults['potassium_result_color_code'] != 'green') {
-                            $kidneyResults['potassium_result_color'] = 'Potassium (K+) Serum,';
-                        } else {
-                            $kidneyResults['potassium_result_color'] = '';
-                        }
-
-                        if ($kidneyResults['chloride_result_color_code'] != 'green') {
-                            $kidneyResults['chloride_result_color'] = 'Chloride Serum,';
-                        } else {
-                            $kidneyResults['chloride_result_color'] = '';
-                        }
-                        if ($kidneyResults['magnesium_color_code'] != 'green') {
-                            $kidneyResults['magnesium'] = 'Magnesium Serum,';
-                        } else {
-                            $kidneyResults['magnesium'] = '';
-                        }
-
-                        if ($kidneyResults['egfr_color_code'] != 'green') {
-                            $kidneyResults['egfr'] = 'eGFR,';
-                        } else {
-                            $kidneyResults['egfr'] = '';
-                        }
-                        ?>
+                    <?php } else { ?>
                         <?php if (
-                            $kidneyResults['urea_result_color_code'] == 'green' && $kidneyResults['creatinine_color_code'] == 'green' &&
-                            $kidneyResults['uricacid_color_code'] == 'green' && $kidneyResults['calcium_color_code'] == 'green' &&
-                            $kidneyResults['blood_urea_nitrogen_color_code'] == 'green' &&
-                            $kidneyResults['creatinine_ratio_color_code'] == 'green' && $kidneyResults['sodium_result_color_code'] == 'green' && $kidneyResults['potassium_result_color_code'] == 'green' && $kidneyResults['chloride_result_color_code'] == 'green' && $kidneyResults['magnesium_color_code'] == 'green'   && $kidneyResults['egfr_color_code'] == 'green'
+                            $liverResults['bilirubin_color_code'] == 'green' &&
+                            $liverResults['bilirubin_direct_color_code'] == 'green' &&
+                            $liverResults['bilirubin_indirect_color_code'] == 'green' &&
+                            $liverResults['sgpt_alt_color_code'] == 'green' &&
+                            $liverResults['sgot_ast_color_code'] == 'green' &&
+                            $liverResults['alkaline_phosphatase_color_code'] == 'green' &&
+                            $liverResults['total_protein_color_code'] == 'green' &&
+                            $liverResults['globulin_color_code'] == 'green' &&
+                            $liverResults['albumin_color_code'] == 'green' &&
+                            $liverResults['ag_ratio_color_code'] == 'green'
                         ) { ?>
-                            <td class="tests">Kidney - Nil
+                            <td class="tests">Liver - Nil</td>
+                        <?php } else { ?>
+                            <td class="tests">Liver -
+                                <?= $liverResults['bilirubin_total'] ?>
+                                <?= $liverResults['bilirubin_direct'] ?>
+                                <?= $liverResults['bilirubin_indirect'] ?>
+                                <?= $liverResults['sgpt_alt'] ?>
+                                <?= $liverResults['sgot_ast'] ?>
+                                <?= $liverResults['alkaline_phosphatase'] ?>
+                                <?= $liverResults['total_protein'] ?>
+                                <?= $liverResults['globulin'] ?>
+                                <?= $liverResults['albumin'] ?>
+                                <?= $liverResults['ag_ratio'] ?>
                             </td>
-                        <?php   } else { ?>
-                            <td class="tests">Kidney -
-                                <?= $kidneyResults['urea'] ?>
-                                <?= $kidneyResults['creatinine'] ?>
-                                <?= $kidneyResults['uric_Acid'] ?>
-                                <?= $kidneyResults['calcium'] ?>
-                                <?= $kidneyResults['blood_urea_nitrogen'] ?>
-                                <?= $kidneyResults['creatinine_ratio'] ?>
-                                <?= $kidneyResults['sodium_result_color'] ?>
-                                <?= $kidneyResults['potassium_result_color'] ?>
-                                <?= $kidneyResults['chloride_result_color'] ?>
-                                <?= $kidneyResults['magnesium'] ?>
-                                <?= $kidneyResults['egfr'] ?>
-                            </td>
-                        <?php   } ?>
-                    </tr>
-                    <tr>
-                        <?php
-                        if ($liverResults['bilirubin_color_code'] != 'green') {
-                            $liverResults['bilirubin_total'] = 'Bilirubin  - Total,';
-                        } else {
-                            $liverResults['bilirubin_total'] = '';
-                        }
-                        if ($liverResults['bilirubin_direct_color_code'] != 'green') {
-                            $liverResults['bilirubin_direct'] = 'Bilirubin - Direct,';
-                        } else {
-                            $liverResults['bilirubin_direct'] = '';
-                        }
-                        if ($liverResults['bilirubin_indirect_color_code'] != 'green') {
-                            $liverResults['bilirubin_indirect'] = 'Bilirubin - Indirect,';
-                        } else {
-                            $liverResults['bilirubin_indirect'] = '';
-                        }
-                        if ($liverResults['sgpt_alt_color_code'] != 'green') {
-                            $liverResults['sgpt_alt'] = 'GSGPT-AL,';
-                        } else {
-                            $liverResults['sgpt_alt'] = '';
-                        }
-                        if ($liverResults['sgot_ast_color_code'] != 'green') {
-                            $liverResults['sgot_ast'] = 'SGOT-AST,';
-                        } else {
-                            $liverResults['sgot_ast'] = '';
-                        }
-                        if ($liverResults['alkaline_phosphatase_color_code'] != 'green') {
-                            $liverResults['alkaline_phosphatase'] = 'Alkaline Phosphatase,';
-                        } else {
-                            $liverResults['alkaline_phosphatase'] = '';
-                        }
-                        if ($liverResults['ggt_result_found_view'] == 1) {
-                            if (($patientDetails['PackageCode'] !== 'AYN_016') && ($liverResults['ggt_color_code'] != 'green')) {
-                                $liverResults['ggt'] = 'Gamma Glutamyl Transferase (GGT),';
-                            } else {
-                                $liverResults['ggt'] = '';
-                            }
-                        }
-                        if ($liverResults['total_protein_color_code'] != 'green') {
-                            $liverResults['total_protein'] = 'Protein Total,';
-                        } else {
-                            $liverResults['total_protein'] = '';
-                        }
-                        if ($liverResults['globulin_color_code'] != 'green') {
-                            $liverResults['globulin'] = 'Globulin,';
-                        } else {
-                            $liverResults['globulin'] = '';
-                        }
-                        if ($liverResults['albumin_color_code'] != 'green') {
-                            $liverResults['albumin'] = 'Albumin,';
-                        } else {
-                            $liverResults['albumin'] = '';
-                        }
-                        if ($liverResults['ag_ratio_color_code'] != 'green') {
-                            $liverResults['ag_ratio'] = 'A : G Ratio,';
-                        } else {
-                            $liverResults['ag_ratio'] = '';
-                        }
-                        ?>
-                        <?php if ($liverResults['ggt_result_found_view'] == 1) { ?>
-                            <?php if (
-                                $liverResults['bilirubin_color_code'] == 'green' &&
-                                $liverResults['bilirubin_direct_color_code'] == 'green' &&
-                                $liverResults['bilirubin_indirect_color_code'] == 'green' &&
-                                $liverResults['sgpt_alt_color_code'] == 'green' &&
-                                $liverResults['sgot_ast_color_code'] == 'green' &&
-                                $liverResults['alkaline_phosphatase_color_code'] == 'green' &&
-                                $liverResults['ggt_color_code'] == 'green' &&
-                                $liverResults['total_protein_color_code'] == 'green' &&
-                                $liverResults['globulin_color_code'] == 'green' &&
-                                $liverResults['albumin_color_code'] == 'green' &&
-                                $liverResults['ag_ratio_color_code'] == 'green'
-                            ) { ?>
-                                <td class="tests">Liver - Nil</td>
+                        <?php } ?>
+                    <?php } ?>
+
+
+
+                </tr>
+                <tr>
+                    <?php
+                    if ($bloodResults['hemoglobin_color_code'] != 'green') {
+                        $bloodResults['hemoglobin'] = 'Hemoglobin,';
+                    } else {
+                        $bloodResults['hemoglobin'] = '';
+                    }
+                    if ($bloodResults['rbccount_color_code'] != 'green') {
+                        $bloodResults['rbccount_ery'] = 'Erythrocyte Count-RBC,';
+                    } else {
+                        $bloodResults['rbccount_ery'] = '';
+                    }
+                    if ($bloodResults['hematocrit_pcv_color_code'] != 'green') {
+                        $bloodResults['hematocrit_pcv'] = 'Hematocrit-PCV,';
+                    } else {
+                        $bloodResults['hematocrit_pcv'] = '';
+                    }
+                    // if ($bloodResults['platelet_cell_ratio_color_code'] != 'green') {
+                    //     $bloodResults['platelet_cell_ratio'] = ' Platelet - Large Cell Ratio,';
+                    // } else {
+                    //     $bloodResults['platelet_cell_ratio'] = '';
+                    // }
+                    if ($bloodResults['leukocytes_count_color_code'] != 'green') {
+                        $bloodResults['leukocytes_count'] = ' Leukocytes Count - WBC Total,';
+                    } else {
+                        $bloodResults['leukocytes_count'] = '';
+                    }
+                    if ($bloodResults['neutrophils_count_color_code'] != 'green') {
+                        $bloodResults['neutrophils_count'] = 'Absolute Neutrophils Count,';
+                    } else {
+                        $bloodResults['neutrophils_count'] = '';
+                    }
+                    if ($bloodResults['monocyte_count_color_code'] != 'green') {
+                        $bloodResults['monocyte_count'] = 'Absolute Monocyte Count,';
+                    } else {
+                        $bloodResults['monocyte_count'] = '';
+                    }
+                    if ($bloodResults['corpuscular_volume_color_code'] != 'green') {
+                        $bloodResults['corpuscular_volume'] = 'Mean Corpuscular Volume-MCV,';
+                    } else {
+                        $bloodResults['corpuscular_volume'] = '';
+                    }
+                    if ($bloodResults['mchc_color_code'] != 'green') {
+                        $bloodResults['mchc'] = 'MCHC,';
+                    } else {
+                        $bloodResults['mchc'] = '';
+                    }
+                    if ($bloodResults['red_cell_dist_cv_color_code'] != 'green') {
+                        $bloodResults['red_cell_dist_cv'] = 'Red Cell Distribution Width CV,';
+                    } else {
+                        $bloodResults['red_cell_dist_cv'] = '';
+                    }
+                    if ($bloodResults['red_cell_dist_sd_color_code'] != 'green') {
+                        $bloodResults['red_cell_dist_sd'] = 'Red Cell Distribution Width SD,';
+                    } else {
+                        $bloodResults['red_cell_dist_sd'] = '';
+                    }
+                    if ($bloodResults['platelets_count_color_code'] != 'green') {
+                        $bloodResults['platelets_count'] = 'Platelet Count,';
+                    } else {
+                        $bloodResults['platelets_count'] = '';
+                    }
+                    if ($bloodResults['mpv_color_code'] != 'green') {
+                        $bloodResults['mpv'] = 'MPV,';
+                    } else {
+                        $bloodResults['mpv'] = '';
+                    }
+                    if ($bloodResults['pdw_color_code'] != 'green') {
+                        $bloodResults['pdw'] = 'PDW,';
+                    } else {
+                        $bloodResults['pdw'] = '';
+                    }
+                    if ($bloodResults['platelet_crit_color_code'] != 'green') {
+                        $bloodResults['platelet_crit'] = 'Platelet Crit,';
+                    } else {
+                        $bloodResults['platelet_crit'] = '';
+                    }
+                    if ($bloodResults['lymphocyte_count_color_code'] != 'green') {
+                        $bloodResults['lymphocyte_count'] = 'Absolute Lymphocyte Count,';
+                    } else {
+                        $bloodResults['lymphocyte_count'] = '';
+                    }
+                    if ($bloodResults['eosinophil_count_color_code'] != 'green') {
+                        $bloodResults['eosinophil_count'] = 'Absolute Eosinophil Count,';
+                    } else {
+                        $bloodResults['eosinophil_count'] = '';
+                    }
+                    if ($bloodResults['basophil_count_color_code'] != 'green') {
+                        $bloodResults['basophil_count'] = 'Absolute Basophil Count,';
+                    } else {
+                        $bloodResults['basophil_count'] = '';
+                    }
+                    if ($bloodResults['neutrophils_color_code'] != 'green') {
+                        $bloodResults['neutrophils_color'] = 'Neutrophils,';
+                    } else {
+                        $bloodResults['neutrophils_color'] = '';
+                    }
+                    if ($bloodResults['lymphocyte_color_code'] != 'green') {
+                        $bloodResults['lymphocyte_color'] = 'Lymphocyte,';
+                    } else {
+                        $bloodResults['lymphocyte_color'] = '';
+                    }
+                    if ($bloodResults['monocytes_color_code'] != 'green') {
+                        $bloodResults['monocytes_color'] = 'Monocytes,';
+                    } else {
+                        $bloodResults['monocytes_color'] = '';
+                    }
+                    if ($bloodResults['lactate_dehydragenase_LDH_serum__color_code'] != 'green') {
+                        $bloodResults['lactate_dehydragenase_LDH_serum__color'] = 'Lactatedehydragenase (LDH) Serum,';
+                    } else {
+                        $bloodResults['lactate_dehydragenase_LDH_serum__color'] = '';
+                    }
+                    if ($bloodResults['mch_color_code'] != 'green') {
+                        $bloodResults['mch_color_code'] = 'MCH (Mean Corpuscular Hb),';
+                    } else {
+                        $bloodResults['mch_color_code'] = '';
+                    }
+                    if ($bloodResults['erythrocyte_sedimentation_color_code'] != 'green') {
+                        $bloodResults['erythrocyte_sedimentation'] = 'ESR EDTA Blood,';
+                    } else {
+                        $bloodResults['erythrocyte_sedimentation'] = '';
+                    }
+
+                    ?>
+                    <?php if (
+                        $bloodResults['hemoglobin_color_code'] == 'green' && $bloodResults['rbccount_color_code'] == 'green' &&
+                        $bloodResults['hematocrit_pcv_color_code'] == 'green' && //$bloodResults['platelet_cell_ratio_color_code'] == 'green' &&
+                        $bloodResults['leukocytes_count_color_code'] == 'green' && $bloodResults['neutrophils_count_color_code'] == 'green' &&
+                        $bloodResults['monocyte_count_color_code'] == 'green' && $bloodResults['corpuscular_volume_color_code'] == 'green' &&
+                        $bloodResults['mchc_color_code'] == 'green' && $bloodResults['red_cell_dist_cv_color_code'] == 'green' &&
+                        $bloodResults['platelets_count_color_code'] == 'green' && $bloodResults['mpv_color_code'] == 'green' &&
+                        $bloodResults['pdw_color_code'] == 'green' && $bloodResults['platelet_crit_color_code'] == 'green' &&
+                        $bloodResults['lymphocyte_count_color_code'] == 'green' && $bloodResults['eosinophil_count_color_code'] == 'green' &&
+                        $bloodResults['basophil_count_color_code'] == 'green' &&  $bloodResults['neutrophils_color_code'] == 'green' &&
+                        $bloodResults['lymphocyte_color_code'] == 'green' && $bloodResults['monocytes_color_code'] == 'green' &&
+                        $bloodResults['lactate_dehydragenase_LDH_serum__color_code'] == 'green' && $bloodResults['mch_color_code'] == 'green' && ($bloodResults['erythrocyte_sedimentation_color_code'] == 'green')
+                    ) { ?>
+                        <td class="tests">Blooad - Nill </td>
+
+                    <?php } else { ?>
+                        <td class="tests">Blood -
+                            <?= $bloodResults['hemoglobin'] ?>
+                            <?= $bloodResults['rbccount_ery'] ?>
+                            <?= $bloodResults['hematocrit_pcv'] ?>
+                            <?= $bloodResults['leukocytes_count'] ?>
+                            <?= $bloodResults['neutrophils_count'] ?>
+                            <?= $bloodResults['monocyte_count'] ?>
+                            <?= $bloodResults['corpuscular_volume'] ?>
+                            <?= $bloodResults['mchc'] ?>
+                            <?= $bloodResults['red_cell_dist_cv'] ?>
+                            <?= $bloodResults['red_cell_dist_sd'] ?>
+                            <?= $bloodResults['platelets_count'] ?>
+                            <?= $bloodResults['mpv'] ?>
+                            <?= $bloodResults['pdw'] ?>
+                            <?= $bloodResults['platelet_crit'] ?>
+                            <?= $bloodResults['lymphocyte_count'] ?>
+                            <?= $bloodResults['eosinophil_count'] ?>
+                            <?= $bloodResults['basophil_count'] ?>
+                            <?= $bloodResults['neutrophils_color'] ?>
+                            <?= $bloodResults['lymphocyte_color'] ?>
+                            <?= $bloodResults['monocytes_color'] ?>
+                            <?= $bloodResults['lactate_dehydragenase_LDH_serum__color'] ?>
+                            <?= $bloodResults['mch_color_code'] ?>
+                            <?= $bloodResults['erythrocyte_sedimentation'] ?>
+
+
+                        </td>
+                    <?php } ?>
+
+                </tr>
+                <tr>
+                    <?php
+                    if ($miniralVitaminIronResults['vitaminbtwelve_color_code'] != 'green') {
+                        $miniralVitaminIronResults['vitaminbtwelve_color'] = 'Vitamin B12,';
+                    } else {
+                        $miniralVitaminIronResults['vitaminbtwelve_color'] = '';
+                    }
+                    if ($miniralVitaminIronResults['vitamind_color_code'] != 'green') {
+                        $miniralVitaminIronResults['vitamind_twentyfive'] = 'Vitamin D-25 Hydroxy,';
+                    } else {
+                        $miniralVitaminIronResults['vitamind_twentyfive'] = '';
+                    }
+                    if (($patientDetails['PackageCode'] !== 'AYN_016') && ($miniralVitaminIronResults['phosphorus_color_code'] != 'green')) {
+                        $miniralVitaminIronResults['phosphorus'] = 'Phosphorus,';
+                    } else {
+                        $miniralVitaminIronResults['phosphorus'] = '';
+                    }
+                    // if (! empty($miniralVitaminIronResults['ferritin_color_code']) != 'green') {
+                    //     $miniralVitaminIronResults['ferritin'] = 'Ferritin,';
+                    // } else {
+                    //     $miniralVitaminIronResults['ferritin'] = '';
+                    // }
+                    if ($miniralVitaminIronResults['iron_color_code'] != 'green') {
+                        $miniralVitaminIronResults['iron'] = 'Iron,';
+                    } else {
+                        $miniralVitaminIronResults['iron'] = '';
+                    }
+                    if ($miniralVitaminIronResults['uibc_color_code'] != 'green') {
+                        $miniralVitaminIronResults['uibc'] = 'UIBC,';
+                    } else {
+                        $miniralVitaminIronResults['uibc'] = '';
+                    }
+                    if ($miniralVitaminIronResults['tibc_color_code'] != 'green') {
+                        $miniralVitaminIronResults['tibc'] = 'TIBC,';
+                    } else {
+                        $miniralVitaminIronResults['tibc'] = '';
+                    }
+                    if ($miniralVitaminIronResults['iron_saturation_color_code'] != 'green') {
+                        $miniralVitaminIronResults['iron_saturation'] = 'Iron Saturation,';
+                    } else {
+                        $miniralVitaminIronResults['iron_saturation'] = '';
+                    }
+
+
+                    ?>
+
+                    <?php if (
+                        $miniralVitaminIronResults['vitaminbtwelve_color_code'] == 'green' &&
+                        ($miniralVitaminIronResults['phosphorus_color_code'] == 'green') &&
+                        $miniralVitaminIronResults['iron_color_code'] == 'green' &&
+                        $miniralVitaminIronResults['uibc_color_code'] == 'green' &&
+                        $miniralVitaminIronResults['tibc_color_code'] == 'green' &&   $miniralVitaminIronResults['iron_saturation_color_code'] == 'green'
+                    ) { ?>
+                        <td class="tests">
+                            <?php if (($patientDetails['PackageCode'] == 'AYN_016')) { ?>
+                                Vitamins & Iron - Nil
                             <?php } else { ?>
-                                <td class="tests">Liver -
-                                    <?= $liverResults['bilirubin_total'] ?>
-                                    <?= $liverResults['bilirubin_direct'] ?>
-                                    <?= $liverResults['bilirubin_indirect'] ?>
-                                    <?= $liverResults['sgpt_alt'] ?>
-                                    <?= $liverResults['sgot_ast'] ?>
-                                    <?= $liverResults['alkaline_phosphatase'] ?>
-                                    <?= $liverResults['ggt'] ?>
-                                    <?= $liverResults['total_protein'] ?>
-                                    <?= $liverResults['globulin'] ?>
-                                    <?= $liverResults['albumin'] ?>
-                                    <?= $liverResults['ag_ratio'] ?>
-                                </td>
+                                Vitamins, Minerals & Iron - Nil
                             <?php } ?>
-                        <?php } else { ?>
-                            <?php if (
-                                $liverResults['bilirubin_color_code'] == 'green' &&
-                                $liverResults['bilirubin_direct_color_code'] == 'green' &&
-                                $liverResults['bilirubin_indirect_color_code'] == 'green' &&
-                                $liverResults['sgpt_alt_color_code'] == 'green' &&
-                                $liverResults['sgot_ast_color_code'] == 'green' &&
-                                $liverResults['alkaline_phosphatase_color_code'] == 'green' &&
-                                $liverResults['total_protein_color_code'] == 'green' &&
-                                $liverResults['globulin_color_code'] == 'green' &&
-                                $liverResults['albumin_color_code'] == 'green' &&
-                                $liverResults['ag_ratio_color_code'] == 'green'
-                            ) { ?>
-                                <td class="tests">Liver - Nil</td>
+                        </td>
+                    <?php } else { ?>
+                        <td class="tests">
+                            <?php if (($patientDetails['PackageCode'] == 'AYN_016')) { ?>
+                                Vitamins & Iron -
                             <?php } else { ?>
-                                <td class="tests">Liver -
-                                    <?= $liverResults['bilirubin_total'] ?>
-                                    <?= $liverResults['bilirubin_direct'] ?>
-                                    <?= $liverResults['bilirubin_indirect'] ?>
-                                    <?= $liverResults['sgpt_alt'] ?>
-                                    <?= $liverResults['sgot_ast'] ?>
-                                    <?= $liverResults['alkaline_phosphatase'] ?>
-                                    <?= $liverResults['total_protein'] ?>
-                                    <?= $liverResults['globulin'] ?>
-                                    <?= $liverResults['albumin'] ?>
-                                    <?= $liverResults['ag_ratio'] ?>
-                                </td>
+                                Vitamins, Minerals & Iron -
                             <?php } ?>
-                        <?php } ?>
-
-
-
-                    </tr>
-                    <tr>
-                        <?php
-                        if ($bloodResults['hemoglobin_color_code'] != 'green') {
-                            $bloodResults['hemoglobin'] = 'Hemoglobin,';
-                        } else {
-                            $bloodResults['hemoglobin'] = '';
-                        }
-                        if ($bloodResults['rbccount_color_code'] != 'green') {
-                            $bloodResults['rbccount_ery'] = 'Erythrocyte Count-RBC,';
-                        } else {
-                            $bloodResults['rbccount_ery'] = '';
-                        }
-                        if ($bloodResults['hematocrit_pcv_color_code'] != 'green') {
-                            $bloodResults['hematocrit_pcv'] = 'Hematocrit-PCV,';
-                        } else {
-                            $bloodResults['hematocrit_pcv'] = '';
-                        }
-                        // if ($bloodResults['platelet_cell_ratio_color_code'] != 'green') {
-                        //     $bloodResults['platelet_cell_ratio'] = ' Platelet - Large Cell Ratio,';
-                        // } else {
-                        //     $bloodResults['platelet_cell_ratio'] = '';
-                        // }
-                        if ($bloodResults['leukocytes_count_color_code'] != 'green') {
-                            $bloodResults['leukocytes_count'] = ' Leukocytes Count - WBC Total,';
-                        } else {
-                            $bloodResults['leukocytes_count'] = '';
-                        }
-                        if ($bloodResults['neutrophils_count_color_code'] != 'green') {
-                            $bloodResults['neutrophils_count'] = 'Absolute Neutrophils Count,';
-                        } else {
-                            $bloodResults['neutrophils_count'] = '';
-                        }
-                        if ($bloodResults['monocyte_count_color_code'] != 'green') {
-                            $bloodResults['monocyte_count'] = 'Absolute Monocyte Count,';
-                        } else {
-                            $bloodResults['monocyte_count'] = '';
-                        }
-                        if ($bloodResults['corpuscular_volume_color_code'] != 'green') {
-                            $bloodResults['corpuscular_volume'] = 'Mean Corpuscular Volume-MCV,';
-                        } else {
-                            $bloodResults['corpuscular_volume'] = '';
-                        }
-                        if ($bloodResults['mchc_color_code'] != 'green') {
-                            $bloodResults['mchc'] = 'MCHC,';
-                        } else {
-                            $bloodResults['mchc'] = '';
-                        }
-                        if ($bloodResults['red_cell_dist_cv_color_code'] != 'green') {
-                            $bloodResults['red_cell_dist_cv'] = 'Red Cell Distribution Width CV,';
-                        } else {
-                            $bloodResults['red_cell_dist_cv'] = '';
-                        }
-                        if ($bloodResults['red_cell_dist_sd_color_code'] != 'green') {
-                            $bloodResults['red_cell_dist_sd'] = 'Red Cell Distribution Width SD,';
-                        } else {
-                            $bloodResults['red_cell_dist_sd'] = '';
-                        }
-                        if ($bloodResults['platelets_count_color_code'] != 'green') {
-                            $bloodResults['platelets_count'] = 'Platelet Count,';
-                        } else {
-                            $bloodResults['platelets_count'] = '';
-                        }
-                        if ($bloodResults['mpv_color_code'] != 'green') {
-                            $bloodResults['mpv'] = 'MPV,';
-                        } else {
-                            $bloodResults['mpv'] = '';
-                        }
-                        if ($bloodResults['pdw_color_code'] != 'green') {
-                            $bloodResults['pdw'] = 'PDW,';
-                        } else {
-                            $bloodResults['pdw'] = '';
-                        }
-                        if ($bloodResults['platelet_crit_color_code'] != 'green') {
-                            $bloodResults['platelet_crit'] = 'Platelet Crit,';
-                        } else {
-                            $bloodResults['platelet_crit'] = '';
-                        }
-                        if ($bloodResults['lymphocyte_count_color_code'] != 'green') {
-                            $bloodResults['lymphocyte_count'] = 'Absolute Lymphocyte Count,';
-                        } else {
-                            $bloodResults['lymphocyte_count'] = '';
-                        }
-                        if ($bloodResults['eosinophil_count_color_code'] != 'green') {
-                            $bloodResults['eosinophil_count'] = 'Absolute Eosinophil Count,';
-                        } else {
-                            $bloodResults['eosinophil_count'] = '';
-                        }
-                        if ($bloodResults['basophil_count_color_code'] != 'green') {
-                            $bloodResults['basophil_count'] = 'Absolute Basophil Count,';
-                        } else {
-                            $bloodResults['basophil_count'] = '';
-                        }
-                        if ($bloodResults['neutrophils_color_code'] != 'green') {
-                            $bloodResults['neutrophils_color'] = 'Neutrophils,';
-                        } else {
-                            $bloodResults['neutrophils_color'] = '';
-                        }
-                        if ($bloodResults['lymphocyte_color_code'] != 'green') {
-                            $bloodResults['lymphocyte_color'] = 'Lymphocyte,';
-                        } else {
-                            $bloodResults['lymphocyte_color'] = '';
-                        }
-                        if ($bloodResults['monocytes_color_code'] != 'green') {
-                            $bloodResults['monocytes_color'] = 'Monocytes,';
-                        } else {
-                            $bloodResults['monocytes_color'] = '';
-                        }
-                        if ($bloodResults['lactate_dehydragenase_LDH_serum__color_code'] != 'green') {
-                            $bloodResults['lactate_dehydragenase_LDH_serum__color'] = 'Lactatedehydragenase (LDH) Serum,';
-                        } else {
-                            $bloodResults['lactate_dehydragenase_LDH_serum__color'] = '';
-                        }
-                        if ($bloodResults['mch_color_code'] != 'green') {
-                            $bloodResults['mch_color_code'] = 'MCH (Mean Corpuscular Hb),';
-                        } else {
-                            $bloodResults['mch_color_code'] = '';
-                        }
-                        if ($bloodResults['erythrocyte_sedimentation_color_code'] != 'green') {
-                            $bloodResults['erythrocyte_sedimentation'] = 'ESR EDTA Blood,';
-                        } else {
-                            $bloodResults['erythrocyte_sedimentation'] = '';
-                        }
-
-                        ?>
-                        <?php if (
-                            $bloodResults['hemoglobin_color_code'] == 'green' && $bloodResults['rbccount_color_code'] == 'green' &&
-                            $bloodResults['hematocrit_pcv_color_code'] == 'green' && //$bloodResults['platelet_cell_ratio_color_code'] == 'green' &&
-                            $bloodResults['leukocytes_count_color_code'] == 'green' && $bloodResults['neutrophils_count_color_code'] == 'green' &&
-                            $bloodResults['monocyte_count_color_code'] == 'green' && $bloodResults['corpuscular_volume_color_code'] == 'green' &&
-                            $bloodResults['mchc_color_code'] == 'green' && $bloodResults['red_cell_dist_cv_color_code'] == 'green' &&
-                            $bloodResults['platelets_count_color_code'] == 'green' && $bloodResults['mpv_color_code'] == 'green' &&
-                            $bloodResults['pdw_color_code'] == 'green' && $bloodResults['platelet_crit_color_code'] == 'green' &&
-                            $bloodResults['lymphocyte_count_color_code'] == 'green' && $bloodResults['eosinophil_count_color_code'] == 'green' &&
-                            $bloodResults['basophil_count_color_code'] == 'green' &&  $bloodResults['neutrophils_color_code'] == 'green' &&
-                            $bloodResults['lymphocyte_color_code'] == 'green' && $bloodResults['monocytes_color_code'] == 'green' &&
-                            $bloodResults['lactate_dehydragenase_LDH_serum__color_code'] == 'green' && $bloodResults['mch_color_code'] == 'green' && ($bloodResults['erythrocyte_sedimentation_color_code'] == 'green')
-                        ) { ?>
-                            <td class="tests">Blooad - Nill </td>
-
-                        <?php } else { ?>
-                            <td class="tests">Blood -
-                                <?= $bloodResults['hemoglobin'] ?>
-                                <?= $bloodResults['rbccount_ery'] ?>
-                                <?= $bloodResults['hematocrit_pcv'] ?>
-                                <?= $bloodResults['leukocytes_count'] ?>
-                                <?= $bloodResults['neutrophils_count'] ?>
-                                <?= $bloodResults['monocyte_count'] ?>
-                                <?= $bloodResults['corpuscular_volume'] ?>
-                                <?= $bloodResults['mchc'] ?>
-                                <?= $bloodResults['red_cell_dist_cv'] ?>
-                                <?= $bloodResults['red_cell_dist_sd'] ?>
-                                <?= $bloodResults['platelets_count'] ?>
-                                <?= $bloodResults['mpv'] ?>
-                                <?= $bloodResults['pdw'] ?>
-                                <?= $bloodResults['platelet_crit'] ?>
-                                <?= $bloodResults['lymphocyte_count'] ?>
-                                <?= $bloodResults['eosinophil_count'] ?>
-                                <?= $bloodResults['basophil_count'] ?>
-                                <?= $bloodResults['neutrophils_color'] ?>
-                                <?= $bloodResults['lymphocyte_color'] ?>
-                                <?= $bloodResults['monocytes_color'] ?>
-                                <?= $bloodResults['lactate_dehydragenase_LDH_serum__color'] ?>
-                                <?= $bloodResults['mch_color_code'] ?>
-                                <?= $bloodResults['erythrocyte_sedimentation'] ?>
-
-
-                            </td>
-                        <?php } ?>
-
-                    </tr>
-                    <tr>
-                        <?php
-                        if ($miniralVitaminIronResults['vitaminbtwelve_color_code'] != 'green') {
-                            $miniralVitaminIronResults['vitaminbtwelve_color'] = 'Vitamin B12,';
-                        } else {
-                            $miniralVitaminIronResults['vitaminbtwelve_color'] = '';
-                        }
-                        if ($miniralVitaminIronResults['vitamind_color_code'] != 'green') {
-                            $miniralVitaminIronResults['vitamind_twentyfive'] = 'Vitamin D-25 Hydroxy,';
-                        } else {
-                            $miniralVitaminIronResults['vitamind_twentyfive'] = '';
-                        }
-                        if (($patientDetails['PackageCode'] !== 'AYN_016') && ($miniralVitaminIronResults['phosphorus_color_code'] != 'green')) {
-                            $miniralVitaminIronResults['phosphorus'] = 'Phosphorus,';
-                        } else {
-                            $miniralVitaminIronResults['phosphorus'] = '';
-                        }
-                        // if (! empty($miniralVitaminIronResults['ferritin_color_code']) != 'green') {
-                        //     $miniralVitaminIronResults['ferritin'] = 'Ferritin,';
-                        // } else {
-                        //     $miniralVitaminIronResults['ferritin'] = '';
-                        // }
-                        if ($miniralVitaminIronResults['iron_color_code'] != 'green') {
-                            $miniralVitaminIronResults['iron'] = 'Iron,';
-                        } else {
-                            $miniralVitaminIronResults['iron'] = '';
-                        }
-                        if ($miniralVitaminIronResults['uibc_color_code'] != 'green') {
-                            $miniralVitaminIronResults['uibc'] = 'UIBC,';
-                        } else {
-                            $miniralVitaminIronResults['uibc'] = '';
-                        }
-                        if ($miniralVitaminIronResults['tibc_color_code'] != 'green') {
-                            $miniralVitaminIronResults['tibc'] = 'TIBC,';
-                        } else {
-                            $miniralVitaminIronResults['tibc'] = '';
-                        }
-                        if ($miniralVitaminIronResults['iron_saturation_color_code'] != 'green') {
-                            $miniralVitaminIronResults['iron_saturation'] = 'Iron Saturation,';
-                        } else {
-                            $miniralVitaminIronResults['iron_saturation'] = '';
-                        }
-
-
-                        ?>
-
-                        <?php if (
-                            $miniralVitaminIronResults['vitaminbtwelve_color_code'] == 'green' &&
-                            ($miniralVitaminIronResults['phosphorus_color_code'] == 'green') &&
-                            $miniralVitaminIronResults['iron_color_code'] == 'green' &&
-                            $miniralVitaminIronResults['uibc_color_code'] == 'green' &&
-                            $miniralVitaminIronResults['tibc_color_code'] == 'green' &&   $miniralVitaminIronResults['iron_saturation_color_code'] == 'green'
-                        ) { ?>
-                            <td class="tests">
-                                <?php if (($patientDetails['PackageCode'] == 'AYN_016')) { ?>
-                                    Vitamins & Iron - Nil
-                                <?php } else { ?>
-                                    Vitamins, Minerals & Iron - Nil
-                                <?php } ?>
-                            </td>
-                        <?php } else { ?>
-                            <td class="tests">
-                                <?php if (($patientDetails['PackageCode'] == 'AYN_016')) { ?>
-                                    Vitamins & Iron -
-                                <?php } else { ?>
-                                    Vitamins, Minerals & Iron -
-                                <?php } ?>
-                                <?= $miniralVitaminIronResults['vitaminbtwelve_color'] ?>
-                                <?= $miniralVitaminIronResults['vitamind_twentyfive'] ?>
-                                <?= $miniralVitaminIronResults['phosphorus']
-                                ?>
-                                <?= $miniralVitaminIronResults['iron']
-                                ?>
-                                <?= $miniralVitaminIronResults['uibc']
-                                ?>
-                                <?= $miniralVitaminIronResults['tibc']
-                                ?>
-                                 <?= $miniralVitaminIronResults['iron_saturation']
-                                ?>
-                            </td>
-                        <?php } ?>
-
-                    </tr>
-                    <tr>
-                        <?php if (!$urineResults['urinestatus_found']) { ?>
-                            <?php
-                            if ($urineResults['urine_specific_gravity_color_code'] != 'green') {
-                                $urineResults['urine_specific_gravity'] = 'Specific Gravity,';
-                            } else {
-                                $urineResults['urine_specific_gravity'] = '';
-                            }
-                            if ($urineResults['urine_ph_color_code'] != 'green') {
-                                $urineResults['urine_ph'] = 'pH,';
-                            } else {
-                                $urineResults['urine_ph'] = '';
-                            }
-                            if ($urineResults['urine_protein_color_code'] != 'green') {
-                                $urineResults['urine_protein'] = 'Protein,';
-                            } else {
-                                $urineResults['urine_protein'] = '';
-                            }
-                            if ($urineResults['urine_glucose_color_code'] != 'green') {
-                                $urineResults['urine_glucose'] = 'Glucose,';
-                            } else {
-                                $urineResults['urine_glucose'] = '';
-                            }
-                            if ($urineResults['urine_ketones_color_code'] != 'green') {
-                                $urineResults['urine_ketones'] = 'Ketones,';
-                            } else {
-                                $urineResults['urine_ketones'] = '';
-                            }
-                            if ($urineResults['urine_urobilinogen_color_code'] != 'green') {
-                                $urineResults['urine_urobilinogen'] = 'Urobilinogen,';
-                            } else {
-                                $urineResults['urine_urobilinogen'] = '';
-                            }
-                            if ($urineResults['bacteria_color_code'] != 'green') {
-                                $urineResults['bacteria'] = 'Bacteria,';
-                            } else {
-                                $urineResults['bacteria'] = '';
-                            }
-                            if ($urineResults['urine_bilirubin_color_code'] != 'green') {
-                                $urineResults['urine_bilirubin'] = 'Bilirubin,';
-                            } else {
-                                $urineResults['urine_bilirubin'] = '';
-                            }
-                            if ($urineResults['urine_nitrite_color_code'] != 'green') {
-                                $urineResults['urine_nitrite'] = 'Nitrite,';
-                            } else {
-                                $urineResults['urine_nitrite'] = '';
-                            }
-                            if ($urineResults['urine_blood_color_code'] != 'green') {
-                                $urineResults['urine_blood'] = 'Blood,';
-                            } else {
-                                $urineResults['urine_blood'] = '';
-                            }
-                            if ($urineResults['urine_crystals_color_code'] != 'green') {
-                                $urineResults['urine_crystals'] = 'Crystals,';
-                            } else {
-                                $urineResults['urine_crystals'] = '';
-                            }
-                            if ($urineResults['urine_puscell_color_code'] != 'green') {
-                                $urineResults['urine_puscell'] = 'Pus Cell,';
-                            } else {
-                                $urineResults['urine_puscell'] = '';
-                            }
-                            if ($urineResults['urine_epithelialcell_color_code'] != 'green') {
-                                $urineResults['urine_epithelialcell'] = 'Epithelial Cells,';
-                            } else {
-                                $urineResults['urine_epithelialcell'] = '';
-                            }
-                            if ($urineResults['urine_yeast_color_code'] != 'green') {
-                                $urineResults['urine_yeast'] = 'Yeast,';
-                            } else {
-                                $urineResults['urine_yeast'] = '';
-                            }
-                            if ($urineResults['urine_appearance_color_code'] != 'green') {
-                                $urineResults['urine_appearance'] = 'Appearance,';
-                            } else {
-                                $urineResults['urine_appearance'] = '';
-                            }
-                            if ($urineResults['rbcs_color_code'] != 'green') {
-                                $urineResults['rbcs'] = 'RBCs,';
-                            } else {
-                                $urineResults['rbcs'] = '';
-                            }
-                            if ($urineResults['casts_color_code'] != 'green') {
-                                $urineResults['casts'] = 'Casts,';
-                            } else {
-                                $urineResults['casts'] = '';
-                            }
+                            <?= $miniralVitaminIronResults['vitaminbtwelve_color'] ?>
+                            <?= $miniralVitaminIronResults['vitamind_twentyfive'] ?>
+                            <?= $miniralVitaminIronResults['phosphorus']
                             ?>
-                            <?php if (
-                                $urineResults['urine_specific_gravity_color_code'] == 'green' &&
-                                $urineResults['urine_ph_color_code'] == 'green' &&
-                                $urineResults['urine_protein_color_code'] == 'green' && $urineResults['urine_glucose_color_code'] == 'green' &&
-                                $urineResults['urine_ketones_color_code'] == 'green' && $urineResults['urine_urobilinogen_color_code'] == 'green' &&
-                                $urineResults['urine_bilirubin_color_code'] == 'green' && $urineResults['urine_nitrite_color_code'] == 'green' &&
-                                $urineResults['urine_blood_color_code'] == 'green' && $urineResults['urine_crystals_color_code'] == 'green' &&
-                                $urineResults['urine_puscell_color_code'] == 'green' && $urineResults['urine_epithelialcell_color_code'] == 'green' &&
-                                $urineResults['bacteria_color_code'] == 'green' &&
-                                $urineResults['urine_yeast_color_code'] == 'green'  && $urineResults['urine_appearance_color_code'] == 'green' &&
-                                $urineResults['rbcs_color_code'] == 'green' && $urineResults['casts_color_code'] == 'green'
-                            ) { ?>
-                                <td class="tests">Urine - Nil </td>
-                            <?php } else { ?>
-                                <td class="tests">Urine -
-                                    <?php echo $urineResults['urine_specific_gravity'];
-                                    ?>
-                                    <?= $urineResults['urine_ph'] ?>
-                                    <?php echo $urineResults['urine_protein'];
-                                    ?>
-                                    <?php echo $urineResults['urine_glucose'];
-                                    ?>
-                                    <?php echo $urineResults['urine_ketones'];
-                                    ?>
-                                    <?php echo $urineResults['bacteria'];
-                                    ?>
-                                    <?php echo $urineResults['urine_bilirubin'];
-                                    ?>
-                                    <?php echo $urineResults['urine_nitrite'];
-                                    ?>
-                                    <?php echo $urineResults['urine_blood'];
-                                    ?>
-                                    <?php echo $urineResults['urine_crystals'];
-                                    ?>
-                                    <?= $urineResults['urine_puscell'] ?>
-                                    <?= $urineResults['urine_epithelialcell'] ?>
-                                    <?php echo $urineResults['urine_yeast'];
-                                    ?>
-                                    <?php echo $urineResults['urine_appearance'];
-                                    ?>
-                                    <?php echo $urineResults['rbcs'];
-                                    ?>
-                                    <?php echo $urineResults['casts'];
-                                    ?>
-                                </td>
-                            <?php } ?>
+                            <?= $miniralVitaminIronResults['iron']
+                            ?>
+                            <?= $miniralVitaminIronResults['uibc']
+                            ?>
+                            <?= $miniralVitaminIronResults['tibc']
+                            ?>
+                            <?= $miniralVitaminIronResults['iron_saturation']
+                            ?>
+                        </td>
+                    <?php } ?>
+
+                </tr>
+                <tr>
+                    <?php if (!$urineResults['urinestatus_found']) { ?>
+                    <?php
+                        if ($urineResults['urine_specific_gravity_color_code'] != 'green') {
+                            $urineResults['urine_specific_gravity'] = 'Specific Gravity,';
+                        } else {
+                            $urineResults['urine_specific_gravity'] = '';
+                        }
+                        if ($urineResults['urine_ph_color_code'] != 'green') {
+                            $urineResults['urine_ph'] = 'pH,';
+                        } else {
+                            $urineResults['urine_ph'] = '';
+                        }
+                        if ($urineResults['urine_protein_color_code'] != 'green') {
+                            $urineResults['urine_protein'] = 'Protein,';
+                        } else {
+                            $urineResults['urine_protein'] = '';
+                        }
+                        if ($urineResults['urine_glucose_color_code'] != 'green') {
+                            $urineResults['urine_glucose'] = 'Glucose,';
+                        } else {
+                            $urineResults['urine_glucose'] = '';
+                        }
+                        if ($urineResults['urine_ketones_color_code'] != 'green') {
+                            $urineResults['urine_ketones'] = 'Ketones,';
+                        } else {
+                            $urineResults['urine_ketones'] = '';
+                        }
+                        if ($urineResults['urine_urobilinogen_color_code'] != 'green') {
+                            $urineResults['urine_urobilinogen'] = 'Urobilinogen,';
+                        } else {
+                            $urineResults['urine_urobilinogen'] = '';
+                        }
+                        if ($urineResults['bacteria_color_code'] != 'green') {
+                            $urineResults['bacteria'] = 'Bacteria,';
+                        } else {
+                            $urineResults['bacteria'] = '';
+                        }
+                        if ($urineResults['urine_bilirubin_color_code'] != 'green') {
+                            $urineResults['urine_bilirubin'] = 'Bilirubin,';
+                        } else {
+                            $urineResults['urine_bilirubin'] = '';
+                        }
+                        if ($urineResults['urine_nitrite_color_code'] != 'green') {
+                            $urineResults['urine_nitrite'] = 'Nitrite,';
+                        } else {
+                            $urineResults['urine_nitrite'] = '';
+                        }
+                        if ($urineResults['urine_blood_color_code'] != 'green') {
+                            $urineResults['urine_blood'] = 'Blood,';
+                        } else {
+                            $urineResults['urine_blood'] = '';
+                        }
+                        if ($urineResults['urine_crystals_color_code'] != 'green') {
+                            $urineResults['urine_crystals'] = 'Crystals,';
+                        } else {
+                            $urineResults['urine_crystals'] = '';
+                        }
+                        if ($urineResults['urine_puscell_color_code'] != 'green') {
+                            $urineResults['urine_puscell'] = 'Pus Cell,';
+                        } else {
+                            $urineResults['urine_puscell'] = '';
+                        }
+                        if ($urineResults['urine_epithelialcell_color_code'] != 'green') {
+                            $urineResults['urine_epithelialcell'] = 'Epithelial Cells,';
+                        } else {
+                            $urineResults['urine_epithelialcell'] = '';
+                        }
+                        if ($urineResults['urine_yeast_color_code'] != 'green') {
+                            $urineResults['urine_yeast'] = 'Yeast,';
+                        } else {
+                            $urineResults['urine_yeast'] = '';
+                        }
+                        if ($urineResults['urine_appearance_color_code'] != 'green') {
+                            $urineResults['urine_appearance'] = 'Appearance,';
+                        } else {
+                            $urineResults['urine_appearance'] = '';
+                        }
+                        if ($urineResults['rbcs_color_code'] != 'green') {
+                            $urineResults['rbcs'] = 'RBCs,';
+                        } else {
+                            $urineResults['rbcs'] = '';
+                        }
+                        if ($urineResults['casts_color_code'] != 'green') {
+                            $urineResults['casts'] = 'Casts,';
+                        } else {
+                            $urineResults['casts'] = '';
+                        }
+                    ?>
+                        <?php if (
+                            $urineResults['urine_specific_gravity_color_code'] == 'green' &&
+                            $urineResults['urine_ph_color_code'] == 'green' &&
+                            $urineResults['urine_protein_color_code'] == 'green' && $urineResults['urine_glucose_color_code'] == 'green' &&
+                            $urineResults['urine_ketones_color_code'] == 'green' && $urineResults['urine_urobilinogen_color_code'] == 'green' &&
+                            $urineResults['urine_bilirubin_color_code'] == 'green' && $urineResults['urine_nitrite_color_code'] == 'green' &&
+                            $urineResults['urine_blood_color_code'] == 'green' && $urineResults['urine_crystals_color_code'] == 'green' &&
+                            $urineResults['urine_puscell_color_code'] == 'green' && $urineResults['urine_epithelialcell_color_code'] == 'green' &&
+                            $urineResults['bacteria_color_code'] == 'green' &&
+                            $urineResults['urine_yeast_color_code'] == 'green'  && $urineResults['urine_appearance_color_code'] == 'green' &&
+                            $urineResults['rbcs_color_code'] == 'green' && $urineResults['casts_color_code'] == 'green'
+                        ) { ?>
+                            <td class="tests">Urine - Nil </td>
+                        <?php } else { ?>
+                            <td class="tests">Urine -
+                                <?php echo $urineResults['urine_specific_gravity'];
+                                ?>
+                                <?= $urineResults['urine_ph'] ?>
+                                <?php echo $urineResults['urine_protein'];
+                                ?>
+                                <?php echo $urineResults['urine_glucose'];
+                                ?>
+                                <?php echo $urineResults['urine_ketones'];
+                                ?>
+                                <?php echo $urineResults['bacteria'];
+                                ?>
+                                <?php echo $urineResults['urine_bilirubin'];
+                                ?>
+                                <?php echo $urineResults['urine_nitrite'];
+                                ?>
+                                <?php echo $urineResults['urine_blood'];
+                                ?>
+                                <?php echo $urineResults['urine_crystals'];
+                                ?>
+                                <?= $urineResults['urine_puscell'] ?>
+                                <?= $urineResults['urine_epithelialcell'] ?>
+                                <?php echo $urineResults['urine_yeast'];
+                                ?>
+                                <?php echo $urineResults['urine_appearance'];
+                                ?>
+                                <?php echo $urineResults['rbcs'];
+                                ?>
+                                <?php echo $urineResults['casts'];
+                                ?>
+                            </td>
                         <?php } ?>
-                    </tr>
-                </table>
-            </div>
-            <footer style="
+                    <?php } ?>
+                </tr>
+            </table>
+        </div>
+        <footer style="
 		position: absolute; 
 		bottom: -10px; 
 		left: 0;
@@ -9280,287 +9286,287 @@
 		text-align: center; 
 		padding: 10px 0; 
 		page-break-before: always;">
-                <div>
-                    <?php echo $footerWithLogo; ?>
-                </div>
-                <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
-            </footer>
-        </div>
-        <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
-            <div class="resultDetails" style="padding-top:50px;">
-                <div style="width:100%;">
-                    <?= $co_brand_header2 ?>
-                </div>
-                <div>
-                    <table>
-                        <tr>
-                            <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
-                        </tr>
-                    </table>
-                </div>
+            <div>
+                <?php echo $footerWithLogo; ?>
+            </div>
+            <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
+        </footer>
+    </div>
+    <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
+        <div class="resultDetails" style="padding-top:50px;">
+            <div style="width:100%;">
+                <?= $co_brand_header2 ?>
+            </div>
+            <div>
                 <table>
-                    <tr class="d-block">
-                        <td style="border-right: 1px solid #00977b;padding-right: 10px;padding-left: 10px;">
-                            <img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/screening-icon.png" alt="">
-                        </td>
-                        <td></td>
-                        <td class="nutrition"> Suggestions for preventive screening</td>
-                    </tr>
-                </table>
-                <table style="font-size:14px; padding-top:16px; padding-bottom: 17px;font-weight:700;" class="float-left w-30">
                     <tr>
-                        <td>Risks Factors</td>
-                        <td>Recommended Tests</td>
+                        <td><img src="https://cdn.shop.lifecell.in/reports/wellness/images/wr-header-divider.png" alt=""></td>
                     </tr>
                 </table>
-                <table style="width: 70%;font-size: 14px; font-weight:normal;" class="float-left border-collapse">
-                    <tr>
-                        <td style="border-bottom: 1px solid #444444;padding-bottom: 5px;"></td>
-                        <td style="border-bottom: 1px solid #444444;padding-bottom: 5px;"></td>
-                        <td style="border-bottom: 1px solid #444444;padding-bottom: 5px; font-weight: 600;">Age Group</td>
-                        <td style="border-bottom: 1px solid #444444;padding-bottom: 5px;"></td>
-                    </tr>
-                    <tr style="text-align: center;">
-                        <td style="padding-top: 5px;padding-bottom: 8px;font-weight: 600;">
-                            (18-29 Yrs.)</td>
-                        <td style="padding-top: 5px;padding-bottom: 8px;font-weight: 600;">
-                            (30-39 Yrs.)</td>
-                        <td style="padding-top: 5px;padding-bottom: 8px;font-weight: 600;">
-                            (40-55 Yrs.)</td>
-                        <td style="padding-top: 5px;padding-bottom: 8px;font-weight: 600;">
-                            (Above 55 Yrs.)</td>
-                    </tr>
-                </table>
-                <table style="border-bottom:1px solid #ACACAD; font-size:14px; border-top: 1px solid #0293B2;">
-                    <tr class="float-left w-30">
-                        <td style="font-weight:600;">Diabetes</td>
-                        <td style="padding-left: 80px;">HbA1c</br>
-                            Blood Glucose</br> fasting</td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                </table>
-                <table style="  border-bottom: 1px solid #ACACAD;  font-size: 14px;">
-                    <tr class="float-left w-30">
-                        <td style="font-weight:600;">Thyroid</br>Disorder</td>
-                        <td style="padding-left: 80px;">Thyroid Profile-Total</br>(T3, T4 & TSH Ultra-</br> sensitive)</td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                </table>
-                <table style="border-bottom: 1px solid #ACACAD; font-size: 14px;">
-                    <tr class="float-left w-30">
-                        <td style="font-weight:600;">Vitamin-D</br>Deficiency</td>
-                        <td style="padding-left: 65px;">Vitamin D Total 25</br>-Hydroxy </td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                </table>
-                <table style="  border-bottom: 1px solid #ACACAD; font-size: 14px;">
-                    <tr class="float-left w-30">
-                        <td style="font-weight:600;">Vitamin B12</br> Deficiency</td>
-                        <td style="padding-left: 60px;">Vitamin B12</br>Cyanocobalamin</td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                </table>
-                <table style="  border-bottom: 1px solid #ACACAD; font-size: 14px;">
-                    <tr class="float-left w-30">
-                        <td style="font-weight:600;">High</br>Cholesterol</br>/Dyslipidemia</td>
-                        <td style="padding-left: 50px;">Lipid Profile</br>Cholesterol-Total,</br>Serum</td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                </table>
-                <table style="border-bottom: 1px solid #ACACAD; font-size: 14px;">
-                    <tr class="float-left w-30">
-                        <td style="font-weight:600;">Kidney</br>Disorder </td>
-                        <td style="padding-left: 80px;">Kidney function test</br>Urine Routine &</br>MicroscopySerum </br>Urea Serum</td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="float-left w-17">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                </table>
-                <table style="font-size: 14px;">
-                    <tr class="float-left w-30">
-                        <td style="font-weight:600;">Liver Disorder</td>
-                        <td style="padding-left: 50px;">Liver function test</br>SGOT/AST</br>SGPT/ALT</td>
-                    </tr>
-                    <tr class="w-17 float-left">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="w-17 float-left">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="w-17 float-left">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                    <tr class="w-17 float-left">
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
-                        <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
-                    </tr>
-                </table>
-                <div style="padding-top: 20px;">
-                    <p class="details-img"><span><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></span>Recommended</p>
-                    <p class="details-img"><span><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></span>Strongly Recommended</p>
-                    <p class="details-img"><span><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></span>Screen annually</p>
-                    <p class="details-img"><span> <img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></span>Repeat earlier in case of symptoms</p>
-                    <p class="details-img"><span><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></span>Under treatment- Repeat every 3 months</p>
-                </div>
-
+            </div>
+            <table>
+                <tr class="d-block">
+                    <td style="border-right: 1px solid #00977b;padding-right: 10px;padding-left: 10px;">
+                        <img style="width:50px;" src="https://cdn.shop.lifecell.in/reports/wellness/images/screening-icon.png" alt="">
+                    </td>
+                    <td></td>
+                    <td class="nutrition"> Suggestions for preventive screening</td>
+                </tr>
+            </table>
+            <table style="font-size:14px; padding-top:16px; padding-bottom: 17px;font-weight:700;" class="float-left w-30">
+                <tr>
+                    <td>Risks Factors</td>
+                    <td>Recommended Tests</td>
+                </tr>
+            </table>
+            <table style="width: 70%;font-size: 14px; font-weight:normal;" class="float-left border-collapse">
+                <tr>
+                    <td style="border-bottom: 1px solid #444444;padding-bottom: 5px;"></td>
+                    <td style="border-bottom: 1px solid #444444;padding-bottom: 5px;"></td>
+                    <td style="border-bottom: 1px solid #444444;padding-bottom: 5px; font-weight: 600;">Age Group</td>
+                    <td style="border-bottom: 1px solid #444444;padding-bottom: 5px;"></td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td style="padding-top: 5px;padding-bottom: 8px;font-weight: 600;">
+                        (18-29 Yrs.)</td>
+                    <td style="padding-top: 5px;padding-bottom: 8px;font-weight: 600;">
+                        (30-39 Yrs.)</td>
+                    <td style="padding-top: 5px;padding-bottom: 8px;font-weight: 600;">
+                        (40-55 Yrs.)</td>
+                    <td style="padding-top: 5px;padding-bottom: 8px;font-weight: 600;">
+                        (Above 55 Yrs.)</td>
+                </tr>
+            </table>
+            <table style="border-bottom:1px solid #ACACAD; font-size:14px; border-top: 1px solid #0293B2;">
+                <tr class="float-left w-30">
+                    <td style="font-weight:600;">Diabetes</td>
+                    <td style="padding-left: 80px;">HbA1c</br>
+                        Blood Glucose</br> fasting</td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+            </table>
+            <table style="  border-bottom: 1px solid #ACACAD;  font-size: 14px;">
+                <tr class="float-left w-30">
+                    <td style="font-weight:600;">Thyroid</br>Disorder</td>
+                    <td style="padding-left: 80px;">Thyroid Profile-Total</br>(T3, T4 & TSH Ultra-</br> sensitive)</td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+            </table>
+            <table style="border-bottom: 1px solid #ACACAD; font-size: 14px;">
+                <tr class="float-left w-30">
+                    <td style="font-weight:600;">Vitamin-D</br>Deficiency</td>
+                    <td style="padding-left: 65px;">Vitamin D Total 25</br>-Hydroxy </td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+            </table>
+            <table style="  border-bottom: 1px solid #ACACAD; font-size: 14px;">
+                <tr class="float-left w-30">
+                    <td style="font-weight:600;">Vitamin B12</br> Deficiency</td>
+                    <td style="padding-left: 60px;">Vitamin B12</br>Cyanocobalamin</td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+            </table>
+            <table style="  border-bottom: 1px solid #ACACAD; font-size: 14px;">
+                <tr class="float-left w-30">
+                    <td style="font-weight:600;">High</br>Cholesterol</br>/Dyslipidemia</td>
+                    <td style="padding-left: 50px;">Lipid Profile</br>Cholesterol-Total,</br>Serum</td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+            </table>
+            <table style="border-bottom: 1px solid #ACACAD; font-size: 14px;">
+                <tr class="float-left w-30">
+                    <td style="font-weight:600;">Kidney</br>Disorder </td>
+                    <td style="padding-left: 80px;">Kidney function test</br>Urine Routine &</br>MicroscopySerum </br>Urea Serum</td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="float-left w-17">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+            </table>
+            <table style="font-size: 14px;">
+                <tr class="float-left w-30">
+                    <td style="font-weight:600;">Liver Disorder</td>
+                    <td style="padding-left: 50px;">Liver function test</br>SGOT/AST</br>SGPT/ALT</td>
+                </tr>
+                <tr class="w-17 float-left">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="w-17 float-left">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="w-17 float-left">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+                <tr class="w-17 float-left">
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></td>
+                    <td><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></td>
+                </tr>
+            </table>
+            <div style="padding-top: 20px;">
+                <p class="details-img"><span><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-1.png" alt="" /></span>Recommended</p>
+                <p class="details-img"><span><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-5.png" alt="" /></span>Strongly Recommended</p>
+                <p class="details-img"><span><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-2.png" alt="" /></span>Screen annually</p>
+                <p class="details-img"><span> <img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-3.png" alt="" /></span>Repeat earlier in case of symptoms</p>
+                <p class="details-img"><span><img class="screening-icon" src="https://cdn.shop.lifecell.in/reports/wellness/images/icon-screening-4.png" alt="" /></span>Under treatment- Repeat every 3 months</p>
             </div>
 
-            <div class="wr-disclaimer" style="width:100%; padding-bottom:10px;">
-                <p class="title" style="color:#a5247a; font-size:16px; padding:10px 0px 2px;">Disclaimer</p>
-                <div style="width:70%; float:left;">
-                    <p style="font-size:12px;">This is an electronically authenticated report, if test results are alarming or unexpected, customer/Client is advised to contact the customer care immediately for possibleremedial action. All lab results are subject to clinical interpretation by qualified medical professional and this report is not subject to use for any medico-legal purpose.</p>
-                </div>
-                <div style="width: 28%; border-left: 1px solid #ccc; vertical-align: middle; float:right; text-align:right;">
-                    <p><a style="font-size:12px; margin-right:10px; text-decoration:none;" href="mailto:care@lifecell.in"><img style="padding-right:10px; padding-bottom:3px; width:20px; vertical-align:middle;" src="https://cdn.shop.lifecell.in/reports/wellness/images/mail-icon-wr.png" alt='' />care@lifecell.in</a>
-                        <a style="font-size:12px; margin-right:10px; text-decoration:none;" href="tel:1800 266 5533"><img style="padding-right:10px; padding-bottom:3px; width:20px; vertical-align:middle;" src="https://cdn.shop.lifecell.in/reports/wellness/images/call-brand-color.png" alt='' />1800 266 5533</a>
-                    </p>
-                    <p><a style="font-size:12px; margin-right:10px; text-decoration:none;" href="tel:+917845756259"><img style="padding-right: 1px; width:22px; vertical-align:middle;" src="https://cdn.shop.lifecell.in/reports/wellness/images/whatsapp-icon-wr.png" alt='' />+91 78457 56259</a>
-                        <a style="font-size:12px; margin-right:10px; text-decoration:none;" href="https://www.lifecell.in" target="_blank"><img style="padding-right:7px; width:20px; vertical-align:middle;" src="https://cdn.shop.lifecell.in/reports/wellness/images/web-brand-color.png" alt='' />www.lifecell.in</a>
-                    </p>
-                </div>
+        </div>
 
+        <div class="wr-disclaimer" style="width:100%; padding-bottom:10px;">
+            <p class="title" style="color:#a5247a; font-size:16px; padding:10px 0px 2px;">Disclaimer</p>
+            <div style="width:70%; float:left;">
+                <p style="font-size:12px;">This is an electronically authenticated report, if test results are alarming or unexpected, customer/Client is advised to contact the customer care immediately for possible remedial action. All lab results are subject to clinical interpretation by qualified medical professional and this report is not subject to use for any medico-legal purpose.</p>
             </div>
-            <footer style="
+            <div style="width: 28%; border-left: 1px solid #ccc; vertical-align: middle; float:right; text-align:right;">
+                <p><a style="font-size:12px; margin-right:10px; text-decoration:none;" href="mailto:care@lifecell.in"><img style="padding-right:10px; padding-bottom:3px; width:20px; vertical-align:middle;" src="https://cdn.shop.lifecell.in/reports/wellness/images/mail-icon-wr.png" alt='' />care@lifecell.in</a>
+                    <a style="font-size:12px; margin-right:10px; text-decoration:none;" href="tel:1800 266 5533"><img style="padding-right:10px; padding-bottom:3px; width:20px; vertical-align:middle;" src="https://cdn.shop.lifecell.in/reports/wellness/images/call-brand-color.png" alt='' />1800 266 5533</a>
+                </p>
+                <p><a style="font-size:12px; margin-right:10px; text-decoration:none;" href="tel:+917845756259"><img style="padding-right: 1px; width:22px; vertical-align:middle;" src="https://cdn.shop.lifecell.in/reports/wellness/images/whatsapp-icon-wr.png" alt='' />+91 78457 56259</a>
+                    <a style="font-size:12px; margin-right:10px; text-decoration:none;" href="https://www.lifecell.in" target="_blank"><img style="padding-right:7px; width:20px; vertical-align:middle;" src="https://cdn.shop.lifecell.in/reports/wellness/images/web-brand-color.png" alt='' />www.lifecell.in</a>
+                </p>
+            </div>
+
+        </div>
+        <footer style="
 		position: absolute; 
 		bottom: -302px; 
 		left: 0;
@@ -9568,37 +9574,37 @@
 		text-align: center; 
 		padding: 10px 0; 
 		page-break-before: always;">
-                <div>
-                    <?php echo $footerWithLogo; ?>
-                </div>
-                <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
-            </footer>
-        </div>
-        <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
-            <div class="resultDetails" style="page-break-before:always;padding-top:0px;">
-                <div style="width:100%; position: absolute;">
-                    <?php echo $co_brand_banner; ?>
-                </div>
-                <div class="title" style="padding-bottom:5%;">
-                    <div style="height: 1230px; overflow: hidden; padding: 0px 10px; margin: 0 auto;">
-                        <!-- <img style="width:100%; display:block;" src="<?= base_url('images/wellness/lab_network_image.jpg') ?>" alt="" /> -->
-                        <img style="width:100%; display:block;" src="<?= base_url('images/wellness/lab_network_image-new.png') ?>" alt="" />
-                    </div>
+            <div>
+                <?php echo $footerWithLogo; ?>
+            </div>
+            <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
+        </footer>
+    </div>
+    <div class="body-cl" style="min-height: 1110px; position: relative; padding: 0px;">
+        <div class="resultDetails" style="page-break-before:always;padding-top:0px;">
+            <div style="width:100%; position: absolute;">
+                <?php echo $co_brand_banner; ?>
+            </div>
+            <div class="title" style="padding-bottom:5%;">
+                <div style="height: 1230px; overflow: hidden; padding: 0px 10px; margin: 0 auto;">
+                    <!-- <img style="width:100%; display:block;" src="<?= base_url('images/wellness/lab_network_image.jpg') ?>" alt="" /> -->
+                    <img style="width:100%; display:block;" src="<?= base_url('images/wellness/lab_network_image-new.png') ?>" alt="" />
                 </div>
             </div>
-            <footer style="
+        </div>
+        <footer style="
 		position: absolute; 
 		bottom: -125px; 
 		left: 0;
 		width: 100%; 
 		text-align: center; 
 		padding: 10px 0;">
-                <div>
-                    <?php echo $footerWithLogo; ?>
-                </div>
-                <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
-            </footer>
-        </div>
+            <div>
+                <?php echo $footerWithLogo; ?>
+            </div>
+            <div class="pageno">Page <?= $currentPage++ ?> of <?= $totalPages ?></div>
+        </footer>
+    </div>
 
     </div>
 

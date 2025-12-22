@@ -227,7 +227,16 @@
                                                     </tr>
                                                 </table>
                                             </td>
+                                        </tr>
+                                         <!-- GENESIS LOGO -->
+                                        <?php } elseif($json_data->PatientDetails[0]->BRANCH_CODE == 875) { ?>
+                                        <tr>
+                                            <td>
+                                                <img src="<?= base_url('images/pns/genesis-pns-new.png'); ?>" style='float:right;width:100%;'>
+                                            </td>
+                                        </tr>    
                                             <!-- LIFECELL LOGO -->
+                                        <tr>
                                             <?php   } else { ?>
                                             <td>
                                                 <!-- <?php $font_size = "12px;";

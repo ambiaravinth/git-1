@@ -1500,90 +1500,90 @@ if ($data['no_of_foetus'] == 2) {
 if (isset($json_data->PatientRiskDetails)) {
     $prior_risk = "";
 
-    // if($json_data->PatientDetails[0]->SYSTEM_TYPE == 'Web'){
+    if($json_data->PatientDetails[0]->SYSTEM_TYPE == 'Web'){
 
-    //     if($json_data->PatientRiskDetails[0]->SMOKING == "NotStated"){
-    //         $prior_risk .= "<strong>Smoker: NotStated</strong><br/>";
-    //     }elseif($json_data->PatientRiskDetails[0]->SMOKING == "NonSmoker"){
-    //         $prior_risk .= "<strong>Smoker: NonSmoker</strong><br/>";
-    //     }elseif($json_data->PatientRiskDetails[0]->SMOKING == "Smoker"){
-    //         $prior_risk .= "<strong>Smoker: Smoker</strong><br/>"; 
-    //     }
+        if($json_data->PatientRiskDetails[0]->SMOKING == "NotStated"){
+            $prior_risk .= "<strong>Smoker: NotStated</strong><br/>";
+        }elseif($json_data->PatientRiskDetails[0]->SMOKING == "NonSmoker"){
+            $prior_risk .= "<strong>Smoker: NonSmoker</strong><br/>";
+        }elseif($json_data->PatientRiskDetails[0]->SMOKING == "Smoker"){
+            $prior_risk .= "<strong>Smoker: Smoker</strong><br/>"; 
+        }
 
-    //     if ($json_data->PatientRiskDetails[0]->DIABETETS == "Y") {
-    //         $prior_risk .= "<strong>Diabetes Type 1: Yes</strong><br/>";
-    //     }elseif ($json_data->PatientRiskDetails[0]->DIABETETS == "N") {
-    //         $prior_risk .= "<strong>Diabetes Type 1: No</strong><br/>";
-    //     }
+        if ($json_data->PatientRiskDetails[0]->DIABETETS == "Y") {
+            $prior_risk .= "<strong>Diabetes Type 1: Yes</strong><br/>";
+        }elseif ($json_data->PatientRiskDetails[0]->DIABETETS == "N") {
+            $prior_risk .= "<strong>Diabetes Type 1: No</strong><br/>";
+        }
 
-    //     if ($json_data->PatientRiskDetails[0]->DiabetesType2 == "Y") {
-    //         $prior_risk .= "<strong>Diabetes Type 2: Yes</strong><br/>";
-    //     }elseif ($json_data->PatientRiskDetails[0]->DiabetesType2 == "N") {
-    //         $prior_risk .= "<strong>Diabetes Type 2: No</strong><br/>";
-    //     }
+        if ($json_data->PatientRiskDetails[0]->DiabetesType2 == "Y") {
+            $prior_risk .= "<strong>Diabetes Type 2: Yes</strong><br/>";
+        }elseif ($json_data->PatientRiskDetails[0]->DiabetesType2 == "N") {
+            $prior_risk .= "<strong>Diabetes Type 2: No</strong><br/>";
+        }
 
-    //     if ($json_data->PatientRiskDetails[0]->InsulinTreatmentForType2Diabetic == "Y") {
-    //         $prior_risk .= "<strong>Insulin Treatment: Yes</strong><br/>";
-    //     }elseif ($json_data->PatientRiskDetails[0]->InsulinTreatmentForType2Diabetic == "N") {
-    //         $prior_risk .= "<strong>Insulin Treatment: No</strong><br/>";
-    //     }
+        if ($json_data->PatientRiskDetails[0]->InsulinTreatmentForType2Diabetic == "Y") {
+            $prior_risk .= "<strong>Insulin Treatment: Yes</strong><br/>";
+        }elseif ($json_data->PatientRiskDetails[0]->InsulinTreatmentForType2Diabetic == "N") {
+            $prior_risk .= "<strong>Insulin Treatment: No</strong><br/>";
+        }
 
-    //     if ($json_data->PatientRiskDetails[0]->PREVIOUS_NTD == "Y") {
-    //         $prior_risk .= "<strong>Previous NTD: Yes</strong><br/>";
-    //     }elseif ($json_data->PatientRiskDetails[0]->PREVIOUS_NTD == "N") {
-    //         $prior_risk .= "<strong>Previous NTD: No</strong><br/>";
-    //     }
+        if ($json_data->PatientRiskDetails[0]->PREVIOUS_NTD == "Y") {
+            $prior_risk .= "<strong>Previous NTD: Yes</strong><br/>";
+        }elseif ($json_data->PatientRiskDetails[0]->PREVIOUS_NTD == "N") {
+            $prior_risk .= "<strong>Previous NTD: No</strong><br/>";
+        }
 
-    //     if ($json_data->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "Y") {
-    //         $prior_risk .= "<strong>Chronic Hypertension: Yes</strong><br/>";
-    //     }elseif ($json_data->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "N") {
-    //         $prior_risk .= "<strong>Chronic Hypertension: No</strong><br/>";
-    //     }
+        if ($json_data->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "Y") {
+            $prior_risk .= "<strong>Chronic Hypertension: Yes</strong><br/>";
+        }elseif ($json_data->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "N") {
+            $prior_risk .= "<strong>Chronic Hypertension: No</strong><br/>";
+        }
 
-    // }else{
-    //     if ($json_data->PatientRiskDetails[0]->SMOKING == "Y") {
-    //         $prior_risk .= "<strong>Smoker</strong><br/>";
-    //     }
-    //     if ($json_data->PatientRiskDetails[0]->DIABETETS == "Y") {
-    //         $type = "";
-    //         if ($json_data->PatientRiskDetails[0]->DIABETIC_TYPE == "1") {
-    //             $type = "I";
-    //         }
-    //         if ($json_data->PatientRiskDetails[0]->DIABETIC_TYPE == "2") {
-    //             $type = "II";
-    //         }
-    //         $prior_risk .= "<strong>Diabetes Type $type</strong><br/>";
-    //     }
-    //     if ($json_data->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "3") {
-    //         $prior_risk .= "<strong>Chronic hypertension</strong><br/>";
-    //     }
-    // }
+    }else{
+        if ($json_data->PatientRiskDetails[0]->SMOKING == "Y") {
+            $prior_risk .= "<strong>Smoker</strong><br/>";
+        }
+        if ($json_data->PatientRiskDetails[0]->DIABETETS == "Y") {
+            $type = "";
+            if ($json_data->PatientRiskDetails[0]->DIABETIC_TYPE == "1") {
+                $type = "I";
+            }
+            if ($json_data->PatientRiskDetails[0]->DIABETIC_TYPE == "2") {
+                $type = "II";
+            }
+            $prior_risk .= "<strong>Diabetes Type $type</strong><br/>";
+        }
+        if ($json_data->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "3") {
+            $prior_risk .= "<strong>Chronic hypertension</strong><br/>";
+        }
+    }
 
-    // if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "1") {
-    //     $prior_risk .= "<strong>Patient had  Preeclampsia</strong><br/>";
-    // }
-    // if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "2") {
-    //     $prior_risk .= "<strong>Mother of Patient had  Preeclampsia</strong><br/>";
-    // }
-    // if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "3") {
-    //     $prior_risk .= "<strong>Mother of Patient & Patient had  Preeclampsia</strong><br/>";
-    // }
-    // if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "Y") {
-    //     $prior_risk .= "<strong> Preeclampsia in previous pregnancy</strong><br/>";
-    // }
-    // $prev_history = "";
-    // if ($json_data->PatientRiskDetails[0]->PREVIOUS_DOWN == "Y") {
-    //     $prev_history .= "Down syndrome";
-    // }
-    // if ($json_data->PatientRiskDetails[0]->PATAUS_SYNDROME == "Y") {
-    //     $prev_history .= ",Patau Syndrome";
-    // }
-    // if ($json_data->PatientRiskDetails[0]->PREVIOUS_EDWARDS == "Y") {
-    //     $prev_history .= ",EDWARDS Syndrome";
-    // }
-    // if (!empty($prev_history)) {
-    //     $prior_risk .= "<strong> $prev_history in previous pregnancy</strong><br/>";
-    // }
+    if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "1") {
+        $prior_risk .= "<strong>Patient had  Preeclampsia</strong><br/>";
+    }
+    if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "2") {
+        $prior_risk .= "<strong>Mother of Patient had  Preeclampsia</strong><br/>";
+    }
+    if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "3") {
+        $prior_risk .= "<strong>Mother of Patient & Patient had  Preeclampsia</strong><br/>";
+    }
+    if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "Y") {
+        $prior_risk .= "<strong> Preeclampsia in previous pregnancy</strong><br/>";
+    }
+    $prev_history = "";
+    if ($json_data->PatientRiskDetails[0]->PREVIOUS_DOWN == "Y") {
+        $prev_history .= "Down syndrome";
+    }
+    if ($json_data->PatientRiskDetails[0]->PATAUS_SYNDROME == "Y") {
+        $prev_history .= ",Patau Syndrome";
+    }
+    if ($json_data->PatientRiskDetails[0]->PREVIOUS_EDWARDS == "Y") {
+        $prev_history .= ",EDWARDS Syndrome";
+    }
+    if (!empty($prev_history)) {
+        $prior_risk .= "<strong> $prev_history in previous pregnancy</strong><br/>";
+    }
     if ($prior_risk == "") {
         $prior_risk = "None";
     }

@@ -39,7 +39,7 @@ function getPrescriptionDetails($json_reportdata)
     if($json_reportdata->PatientDetails[0]->SYSTEM_TYPE == "Web"){
         $City = $json_reportdata->PatientDetails[0]->City != '' ? $json_reportdata->PatientDetails[0]->City : '';
     }else{
-        $City = $json_reportdata->PatientDetails[0]->CENTER_CODE != '' ? $json_reportdata->PatientDetails[0]->CENTER_CODE : '';
+    $City = $json_reportdata->PatientDetails[0]->CENTER_CODE != '' ? $json_reportdata->PatientDetails[0]->CENTER_CODE : '';
     }
     return ['Clinician' => $Clinician, 'Hospital' => $Hospital, 'City' => $City];
 }
@@ -163,85 +163,46 @@ function getPriorRiskFactors($json_reportdata)
     if (isset($json_reportdata->PatientRiskDetails)) {
 
         $prior_risk = [];
-        $prev_history = "";
-
-        if($json_reportdata->PatientDetails[0]->SYSTEM_TYPE == 'Web'){
-            if($json_reportdata->PatientRiskDetails[0]->SMOKING == "NotStated"){
-                $prior_risk["Smoker"] = "NotStated"; 
-            }elseif($json_reportdata->PatientRiskDetails[0]->SMOKING == "NonSmoker"){
-                $prior_risk["Smoker"] = "NonSmoker";
-            }elseif($json_reportdata->PatientRiskDetails[0]->SMOKING == "Smoker"){
-                $prior_risk["Smoker"] = "Smoker";
+        $SMOKING = $json_reportdata->PatientRiskDetails[0]->SMOKING;
+        if ($SMOKING == "Y" || $SMOKING == "YES") {
+            $prior_risk['Smoker'] = "Yes";
+        }else if ($SMOKING == "N" || $SMOKING == "NO") {
+            $prior_risk['Smoker'] = "No";
+        }else if ($SMOKING == "" || $SMOKING == NULL) {
+            $prior_risk['Smoker'] = "NULL";
+        }
+        $DIABETETS = $json_reportdata->PatientRiskDetails[0]->DIABETETS;
+        if ($DIABETETS == "Y") {
+            if($json_reportdata->PatientRiskDetails[0]->DIABETIC_TYPE == "1"){
+                $prior_risk['Diabetes'] = "Type 1";
             }
-            if ($json_reportdata->PatientRiskDetails[0]->DIABETETS == "Y") {
-                $prior_risk["Diabetes Type 1"] = "Yes";
-            }elseif ($json_reportdata->PatientRiskDetails[0]->DIABETETS == "N") {
-                $prior_risk["Diabetes Type 1"] = "No";
+            if($json_reportdata->PatientRiskDetails[0]->DIABETIC_TYPE == "2"){
+                $prior_risk['Diabetes'] = "Type 2";
             }
-            if ($json_reportdata->PatientRiskDetails[0]->DiabetesType2 == "Y") {
-                $prior_risk["Diabetes Type 2"] = "Yes";
-            }elseif ($json_reportdata->PatientRiskDetails[0]->DiabetesType2 == "N") {
-                $prior_risk["Diabetes Type 2"] = "No";
-            }
-            if ($json_reportdata->PatientRiskDetails[0]->InsulinTreatmentForType2Diabetic == "Y") {
-                $prior_risk["Insulin Treatment"] = "Yes";
-            }elseif ($json_reportdata->PatientRiskDetails[0]->InsulinTreatmentForType2Diabetic == "N") {
-                $prior_risk["Insulin Treatment"] = "No";
-            }
-            if ($json_reportdata->PatientRiskDetails[0]->PREVIOUS_NTD == "Y") {
-                $prior_risk["Previous NTD"] ="Yes";
-            }elseif ($json_reportdata->PatientRiskDetails[0]->PREVIOUS_NTD == "N") {
-                $prior_risk["Previous NTD"] ="No";
-            }
-            if ($json_reportdata->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "Y") {
-                $prior_risk["Chronic Hypertension"] = "Yes";
-            }elseif ($json_reportdata->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "N") {
-                $prior_risk["Chronic Hypertension"] = "No";
-            }
+        }else if ($DIABETETS == "N") {
+            $prior_risk['Diabetes'] = "No";
+        }else if ($DIABETETS == "" || $DIABETETS == NULL) {
+            $prior_risk['Diabetes'] = "NULL";
         }else{
-            $SMOKING = $json_reportdata->PatientRiskDetails[0]->SMOKING;
-            if ($SMOKING == "Y" || $SMOKING == "YES") {
-                $prior_risk['Smoker'] = "Yes";
-            }else if ($SMOKING == "N" || $SMOKING == "NO") {
-                $prior_risk['Smoker'] = "No";
-            }else if ($SMOKING == "" || $SMOKING == NULL) {
-                $prior_risk['Smoker'] = "NULL";
-            }
-            $DIABETETS = $json_reportdata->PatientRiskDetails[0]->DIABETETS;
-            if ($DIABETETS == "Y") {
-                if($json_reportdata->PatientRiskDetails[0]->DIABETIC_TYPE == "1"){
-                    $prior_risk['Diabetes'] = "Type 1";
-                }
-                if($json_reportdata->PatientRiskDetails[0]->DIABETIC_TYPE == "2"){
-                    $prior_risk['Diabetes'] = "Type 2";
-                }
-            }else if ($DIABETETS == "N") {
-                $prior_risk['Diabetes'] = "No";
-            }else if ($DIABETETS == "" || $DIABETETS == NULL) {
-                $prior_risk['Diabetes'] = "NULL";
-            }else{
-                $prior_risk['Diabetes'] = "NA";
-            }
-            $CHRONIC_HYPERTENSION = $json_reportdata->PatientRiskDetails[0]->CHRONIC_HYPERTENSION;
-            if ($CHRONIC_HYPERTENSION == "3") {
-                $prior_risk['Hypertension'] = "Yes";
-            }else if($CHRONIC_HYPERTENSION == "1") {
-                $prior_risk['Hypertension'] = "Untreated";
-            }else if($CHRONIC_HYPERTENSION == "2"){
-                $prior_risk['Hypertension'] = "Medication";
-            }elseif($CHRONIC_HYPERTENSION == "0"){
-                $prior_risk['Hypertension'] = "No";
-            }elseif($CHRONIC_HYPERTENSION == "-1"){
-                $prior_risk['Hypertension'] = "Not Known";
-            }else{
-                $prior_risk['Hypertension'] = "NULL";
-            }
-            $PREVIOUS_NTD = $json_reportdata->PatientRiskDetails[0]->PREVIOUS_NTD;
-            if ($PREVIOUS_NTD == "Y") {
-                $prev_history .= !empty($prev_history) ? ",O NTD" : "O NTD";
-            }
+            $prior_risk['Diabetes'] = "NA";
+        }
+        $CHRONIC_HYPERTENSION = $json_reportdata->PatientRiskDetails[0]->CHRONIC_HYPERTENSION;
+        if ($CHRONIC_HYPERTENSION == "3") {
+            $prior_risk['Hypertension'] = "Yes";
+        }else if($CHRONIC_HYPERTENSION == "1") {
+            $prior_risk['Hypertension'] = "Untreated";
+        }else if($CHRONIC_HYPERTENSION == "2"){
+            $prior_risk['Hypertension'] = "Medication";
+        }elseif($CHRONIC_HYPERTENSION == "0"){
+            $prior_risk['Hypertension'] = "No";
+        }elseif($CHRONIC_HYPERTENSION == "-1"){
+            $prior_risk['Hypertension'] = "Not Known";
+        }else{
+            $prior_risk['Hypertension'] = "NULL";
         }
 
+        $prev_history = "";
+        
         $PREVIOUS_DOWN = $json_reportdata->PatientRiskDetails[0]->PREVIOUS_DOWN;
         if ($PREVIOUS_DOWN == "Y") {
             $prev_history .= "T21";
@@ -256,6 +217,10 @@ function getPriorRiskFactors($json_reportdata)
         }
 
         $PREVIOUS_NTD = $json_reportdata->PatientRiskDetails[0]->PREVIOUS_NTD;
+        if ($PREVIOUS_NTD == "Y") {
+            $prev_history .= !empty($prev_history) ? ",O NTD" : "O NTD";
+        }
+
         if(!empty($prev_history)){
             $prior_risk['Previous Baby history'] = "$prev_history";
         }else if($PREVIOUS_DOWN == "N" && $PATAUS_SYNDROME == "N" && $PREVIOUS_EDWARDS == "N" && $PREVIOUS_NTD == "N"){
@@ -313,10 +278,10 @@ function getPriorRiskFactors($json_reportdata)
 
 function getAssistanceDetails($json_reportdata)
 {
-    if (isset($json_reportdata->PatientRiskDetails[0]->CONCEPTION_TYPE) && ($json_reportdata->PatientRiskDetails[0]->CONCEPTION_TYPE !== '')) {
+    if (isset($json_reportdata->PatientRiskDetails[0]->CONCEPTION_TYPE) && ($json_reportdata->PatientRiskDetails[0]->CONCEPTION_TYPE != '')) {
         $CONCEPTION_TYPE = $json_reportdata->PatientRiskDetails[0]->CONCEPTION_TYPE;
         if ($CONCEPTION_TYPE == 0) {
-            $conceptiontype = ($json_reportdata->PatientDetails[0]->SYSTEM_TYPE == 'Web') ? "Own Egg" : "In Vitro Fertilization"; 
+            $conceptiontype = "In Vitro Fertilization";
         } else if ($CONCEPTION_TYPE == 1) {
             $conceptiontype = "Gift";
         } else if ($CONCEPTION_TYPE == 2) {
@@ -324,13 +289,12 @@ function getAssistanceDetails($json_reportdata)
         } else if ($CONCEPTION_TYPE == 3) {
             $conceptiontype = "Clomiphene Treatment";
         } else if ($CONCEPTION_TYPE == 4) {
-            if ($json_reportdata->PatientRiskDetails[0]->AssistanceMethod == "DonorEgg") {
+            if ($json_reportdata->PatientRiskDetails[0]->EGG == "Donor") {
                 $conceptiontype = "Donor Egg";
-            } 
-            if ($json_reportdata->PatientRiskDetails[0]->AssistanceMethod == "OwnEgg") {
+            }
+            if ($json_reportdata->PatientRiskDetails[0]->EGG == "Own") {
                 $conceptiontype = "Own Egg";
-            } 
-            $conceptiontype = ($json_reportdata->PatientDetails[0]->SYSTEM_TYPE == 'Web') ? "Donor Egg" : $conceptiontype; 
+            }
         } else if ($CONCEPTION_TYPE == 5) {
             $conceptiontype = "Donor Insemination";
         } else if ($CONCEPTION_TYPE == 6) {
@@ -415,6 +379,9 @@ function getInterpretation($json_reportdata)
                 $interpretation .= $resultData->RESULT_VALUE;
                 $sts_flag = 1;
             }
+            // if($resultData->LAB_ID == "41000104647"){
+            //     debug($interpretation);
+            // }
         }
     }
     return ['Interpretation' => $interpretation];

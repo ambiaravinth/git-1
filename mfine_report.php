@@ -153,9 +153,6 @@ if ($marker == "pereport") {
     }
 } else {
     if (in_array($testGroupCode, PE_MARKER_TEST_GROUP_CODE) && in_array($testGroupCode, DOUBLE_MARKER_TEST_GROUP_CODE)) {
-        if ($testGroupCode == "CSWOPLGFDEL") {
-            $reportTitle = 'Combined Screening with Pre-eclampsia';
-        }
         $reportTitle = 'First Trimester Combined +  Preeclampsia Screening ';
         $doubleMarker = 1;
     } elseif (in_array($testGroupCode, DOUBLE_MARKER_TEST_GROUP_CODE)) {
@@ -216,10 +213,6 @@ if ($pe) {
     $momCodes = PENTA_PE_MARKER_MOM_PARAMETERS_ASSESED;
     $data['parameter_assed'] = $testCodes;
 }
-//print_r($data['parameter_assed']);
-//print_r($momCodes);
-
-
 
 /* Start Risk Assessment Test code merge based on Test Group*/
 $riskTestCodes = [];
@@ -313,21 +306,11 @@ if (isset($json_data->TestResultDetails)) {
             $furtherTesting[$resultData->TEST_CODE]['sort'] = 4;
         }
 
-        if ($resultData->TEST_NAME == "Lifecycle Auto comment" && !empty($resultData->RESULT_VALUE)) {
-            $furtherTesting[$resultData->TEST_CODE]['resultvalue'] = $resultData->RESULT_VALUE;
-            $furtherTesting[$resultData->TEST_CODE]['name'] = "Clinical Comments";
-            $furtherTesting[$resultData->TEST_CODE]['sort'] = 4;
-        }
-
         if ($resultData->TEST_NAME == "FTS Interpretation" && $fts_flag == 0) {
             $interpretation .= $resultData->RESULT_VALUE . "\n";
             $fts_flag = 1;
         }
-        // FTS Penta Interpretation - PENTACMNT (updated on 10-Dec-2024)
-        if ($resultData->TEST_CODE == "PENTACMNT" && $fts_penta_flag == 0 && $marker == "pereport") {
-            $interpretation .= str_replace(["Trimester/", "Trimester"], "", $resultData->RESULT_VALUE) . "\n";
-            $fts_penta_flag = 1;
-        }
+
         if ($resultData->TEST_CODE == "PENTAINTERPE" && $fts_penta_flag == 0 && $marker == "pereport") {
             $interpretation .= $resultData->RESULT_VALUE . "\n";
             $interpretation .= str_replace(["Trimester/", "Trimester"], "", $resultData->RESULT_VALUE) . "\n";
@@ -338,17 +321,6 @@ if (isset($json_data->TestResultDetails)) {
             $interpretation .= str_replace(["/", "Preeclampsia"], "", $resultData->RESULT_VALUE) . "\n";
             $fts_penta_flag = 1;
         }
-
-        // // Penta Interpretation - PENTAINTERPE
-        // if ($resultData->TEST_CODE == "PENTAINTERPE" && $marker == "pereport") {
-        //     $interpretation .= str_replace(["Trimester/", "Trimester"], "", $resultData->RESULT_VALUE) . "\n";
-        //     $fts_penta_flag = 1;
-        // }
-        // // Penta Interpretation (Without PE)
-        // if ($resultData->TEST_CODE == "PENTAINTERWOPE" && $fts_penta_flag == 0 && $pereport == 1  && $marker == "report") {
-        //     $interpretation .= str_replace(["/", "Preeclampsia"], "", $resultData->RESULT_VALUE) . "\n";
-        //     $fts_penta_flag = 1;
-        // }
 
         // if ($resultData->TEST_NAME == "FTS Penta Interpretation" && $fts_penta_flag == 0) {
         //     $interpretation .= $resultData->RESULT_VALUE . "\n";
@@ -373,7 +345,7 @@ if (isset($json_data->TestResultDetails)) {
                 'result_value' => $resultData->RESULT_VALUE,
                 'mom_value' => $momValue,
                 'printing_name' => $resultData->PRINTING_NAME,
-                'uom_value' => str_replace(["�", "ï¿½"], "μ", $resultData->UOM),
+                'uom_value' => $resultData->UOM,
             ];
             if (array_key_exists($resultData->TEST_CODE, FOOTER_ABBREVATION)) {
                 $footerAbbrevation = FOOTER_ABBREVATION;
@@ -808,10 +780,10 @@ if (isset($json_data->TestResultDetails)) {
         }
     }
 
-
     if (in_array("NT", $testCodes)) {
         $momValue2 = "";
         foreach ($momTestResults as $momtestResult) {
+
             if ($data['no_of_foetus'] == 2) {
                 $momTestCode1 = trim($momCodes["NT"]);
                 if (trim($momtestResult->TEST_CODE) == $momTestCode1) {
@@ -828,14 +800,12 @@ if (isset($json_data->TestResultDetails)) {
                 }
             }
         }
-
         $data['NT'] = [
-            'result_value' => $json_data->PatientRiskDetails[0]->NT_VALUE ?? null,
+            'result_value' => $json_data->PatientRiskDetails[0]->NT_VALUE ?? "N/A",
             'mom_value' => $momValue ? $momValue : 0,
             'printing_name' => 'NT',
             'uom_value' => 'mm',
         ];
-
         if ($data['no_of_foetus'] == 2 && !empty($momValue2)) {
             $data['NT2'] = [
                 'result_value' => $json_data->PatientRiskDetails[0]->NT_VALUE_2 ?? "N/A",
@@ -844,16 +814,12 @@ if (isset($json_data->TestResultDetails)) {
                 'uom_value' => 'mm',
             ];
         }
-        
         if (array_key_exists('NT', FOOTER_ABBREVATION)) {
             $footerAbbrevation = FOOTER_ABBREVATION;
             $resultValue = $footerAbbrevation['NT'];
             $footerContent .= "NT:" . $resultValue . " | ";
         }
     }
-
-
-
     if (array_key_exists('MoM', FOOTER_ABBREVATION)) {
         $footerAbbrevation = FOOTER_ABBREVATION;
         $resultValue = $footerAbbrevation['MoM'];
@@ -915,11 +881,9 @@ if (isset($json_data->TestResultDetails)) {
             }
         }
     }
-
     $finalOutPut['codes']  = $testresultsparameter;
     $finalOutPut['printingNames']  = $printingNameparameter;
     $parameterResult = $finalOutPut['codes'];
-   // print_r($parameterResult);
 
 
     foreach ($data['risk_test_codes'] as $risktestCode) {
@@ -1129,10 +1093,6 @@ $edwardSyndrome = isset($riskResult['edward']) ? $riskResult['edward'] : [];
 $patueSyndrome = isset($riskResult['patau']) ? $riskResult['patau'] : [];
 $ntSyndrome = isset($riskResult['ntsyndrome']) ? $riskResult['ntsyndrome'] : [];
 
-
-
-
-
 $ftclass = "first-trimester";
 if (!empty($downSyndrome) && !empty($edwardSyndrome) && !empty($patueSyndrome) && !empty($ntSyndrome)) {
     $ftclass = "";
@@ -1145,445 +1105,429 @@ $printingNamesOfRisk = $finalRiskData['printingNames'];
 $printingNamesOfParameter = $finalOutPut['printingNames'];
 $prior_risk = "";
 
-if ($data['no_of_foetus'] == 2) {
+// twin case Down Syndrome (T21), Edward Syndrome (T18), Patau Syndrome (T13), ntSyndrome,pe32,pe34,pe37 color code
+if($data['no_of_foetus'] == 2){
     $keys = array_keys($downSyndrome);
     $count_key = count($keys);
-    if (!empty($keys)) {
-        if ($count_key == 1) {
-            if (
-                $downSyndrome[$keys[0]]['risk_result'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $downsyndrome_risk_color = "increased_risk";
-                $downsyndrome_border_color = "increased_risk_border";
-                $downsyndrome_risk_text = "increased_risk_text";
-            } elseif (
-                $downSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $downsyndrome_risk_color = "intermediate_risk";
-                $downsyndrome_border_color = "intermediate_risk_border";
-                $downsyndrome_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $downsyndrome_risk_color = "low_risk";
-                $downsyndrome_border_color = "low_risk_border";
-                $downsyndrome_risk_text = "low_risk_text";
-            }
-        } else {
-            if (
-                $downSyndrome[$keys[0]]['risk_result'] == "Increased Risk" ||
-                $downSyndrome[$keys[1]]['final_risk'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $downsyndrome_risk_color = "increased_risk";
-                $downsyndrome_border_color = "increased_risk_border";
-                $downsyndrome_risk_text = "increased_risk_text";
-            } elseif (
-                $downSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk" ||
-                $downSyndrome[$keys[1]]['final_risk'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $downsyndrome_risk_color = "intermediate_risk";
-                $downsyndrome_border_color = "intermediate_risk_border";
-                $downsyndrome_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $downsyndrome_risk_color = "low_risk";
-                $downsyndrome_border_color = "low_risk_border";
-                $downsyndrome_risk_text = "low_risk_text";
-            }
-        }
+    if(!empty($keys)){
+    if($count_key == 1){
+    if (
+        $downSyndrome[$keys[0]]['risk_result'] == "Increased Risk"
+    ) {
+        // Increased Risk if any value is "Increased Risk"
+        $downsyndrome_risk_color = "increased_risk";
+        $downsyndrome_border_color = "increased_risk_border";
+        $downsyndrome_risk_text = "increased_risk_text";
+    } elseif (
+        $downSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk" 
+    ) {
+        // Intermediate Risk if any value is "Intermediate Risk"
+        $downsyndrome_risk_color = "intermediate_risk";
+        $downsyndrome_border_color = "intermediate_risk_border";
+        $downsyndrome_risk_text = "intermediate_risk_text";
+    } else{
+        //  Low Risk only if both values are "Low Risk"
+        $downsyndrome_risk_color = "low_risk";
+        $downsyndrome_border_color = "low_risk_border";
+        $downsyndrome_risk_text = "low_risk_text";
     }
-
-
-
+    }else{
+        if (
+            $downSyndrome[$keys[0]]['risk_result'] == "Increased Risk" || 
+            $downSyndrome[$keys[1]]['final_risk'] == "Increased Risk"
+        ) {
+            // Increased Risk if any value is "Increased Risk"
+            $downsyndrome_risk_color = "increased_risk";
+            $downsyndrome_border_color = "increased_risk_border";
+            $downsyndrome_risk_text = "increased_risk_text";
+        } elseif (
+            $downSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk" || 
+            $downSyndrome[$keys[1]]['final_risk'] == "Intermediate Risk"
+        ) {
+            // Intermediate Risk if any value is "Intermediate Risk"
+            $downsyndrome_risk_color = "intermediate_risk";
+            $downsyndrome_border_color = "intermediate_risk_border";
+            $downsyndrome_risk_text = "intermediate_risk_text";
+        } else{
+            //  Low Risk only if both values are "Low Risk"
+            $downsyndrome_risk_color = "low_risk";
+            $downsyndrome_border_color = "low_risk_border";
+            $downsyndrome_risk_text = "low_risk_text";
+        }
+    
+    }
+    }
+    
+    
+    
     $keys = array_keys($edwardSyndrome);
     $count_key = count($keys);
-    if (!empty($keys)) {
-        if ($count_key == 1) {
-            if (
-                $edwardSyndrome[$keys[0]]['risk_result'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $edward_risk_color = "increased_risk";
-                $edward_border_color = "increased_risk_border";
-                $edward_risk_text = "increased_risk_text";
-            } elseif (
-                $edwardSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $edward_risk_color = "intermediate_risk";
-                $edward_border_color = "intermediate_risk_border";
-                $edward_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $edward_risk_color = "low_risk";
-                $edward_border_color = "low_risk_border";
-                $edward_risk_text = "low_risk_text";
-            }
-        } else {
-            if (
-                $edwardSyndrome[$keys[0]]['risk_result'] == "Increased Risk" ||
-                $edwardSyndrome[$keys[1]]['final_risk'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $edward_risk_color = "increased_risk";
-                $edward_border_color = "increased_risk_border";
-                $edward_risk_text = "increased_risk_text";
-            } elseif (
-                $edwardSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk" ||
-                $edwardSyndrome[$keys[1]]['final_risk'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $edward_risk_color = "intermediate_risk";
-                $edward_border_color = "intermediate_risk_border";
-                $edward_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $edward_risk_color = "low_risk";
-                $edward_border_color = "low_risk_border";
-                $edward_risk_text = "low_risk_text";
-            }
+    if(!empty($keys)){
+    if($count_key == 1){
+    if (
+        $edwardSyndrome[$keys[0]]['risk_result'] == "Increased Risk"
+    ) {
+        // Increased Risk if any value is "Increased Risk"
+        $edward_risk_color = "increased_risk";
+        $edward_border_color = "increased_risk_border";
+        $edward_risk_text = "increased_risk_text";
+    } elseif (
+        $edwardSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk"
+    ) {
+        // Intermediate Risk if any value is "Intermediate Risk"
+        $edward_risk_color = "intermediate_risk";
+        $edward_border_color = "intermediate_risk_border";
+        $edward_risk_text = "intermediate_risk_text";
+    } else{
+        //  Low Risk only if both values are "Low Risk"
+        $edward_risk_color = "low_risk";
+        $edward_border_color = "low_risk_border";
+        $edward_risk_text = "low_risk_text";
+    }
+    }
+    else{
+        if (
+            $edwardSyndrome[$keys[0]]['risk_result'] == "Increased Risk" || 
+            $edwardSyndrome[$keys[1]]['final_risk'] == "Increased Risk"
+        ) {
+            // Increased Risk if any value is "Increased Risk"
+            $edward_risk_color = "increased_risk";
+            $edward_border_color = "increased_risk_border";
+            $edward_risk_text = "increased_risk_text";
+        } elseif (
+            $edwardSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk" || 
+            $edwardSyndrome[$keys[1]]['final_risk'] == "Intermediate Risk"
+        ) {
+            // Intermediate Risk if any value is "Intermediate Risk"
+            $edward_risk_color = "intermediate_risk";
+            $edward_border_color = "intermediate_risk_border";
+            $edward_risk_text = "intermediate_risk_text";
+        } else{
+            //  Low Risk only if both values are "Low Risk"
+            $edward_risk_color = "low_risk";
+            $edward_border_color = "low_risk_border";
+            $edward_risk_text = "low_risk_text";
         }
+    
+    }
     }
     $keys = array_keys($patueSyndrome);
     $count_key = count($keys);
-    if (!empty($keys)) {
-        if ($count_key == 1) {
-            if (
-                $patueSyndrome[$keys[0]]['risk_result'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $patau_risk_color = "increased_risk";
-                $patau_border_color = "increased_risk_border";
-                $patau_risk_text = "increased_risk_text";
-            } elseif (
-                $patueSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $patau_risk_color = "intermediate_risk";
-                $patau_border_color = "intermediate_risk_border";
-                $patau_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $patau_risk_color = "low_risk";
-                $patau_border_color = "low_risk_border";
-                $patau_risk_text = "low_risk_text";
-            }
-        } else {
-            if (
-                $patueSyndrome[$keys[0]]['risk_result'] == "Increased Risk" ||
-                $patueSyndrome[$keys[1]]['final_risk'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $patau_risk_color = "increased_risk";
-                $patau_border_color = "increased_risk_border";
-                $patau_risk_text = "increased_risk_text";
-            } elseif (
-                $patueSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk" ||
-                $patueSyndrome[$keys[1]]['final_risk'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $patau_risk_color = "intermediate_risk";
-                $patau_border_color = "intermediate_risk_border";
-                $patau_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $patau_risk_color = "low_risk";
-                $patau_border_color = "low_risk_border";
-                $patau_risk_text = "low_risk_text";
-            }
+    if(!empty($keys)){
+    if($count_key == 1){
+    if (
+        $patueSyndrome[$keys[0]]['risk_result'] == "Increased Risk"
+    ) {
+        // Increased Risk if any value is "Increased Risk"
+        $patau_risk_color = "increased_risk";
+        $patau_border_color = "increased_risk_border";
+        $patau_risk_text = "increased_risk_text";
+    } elseif (
+        $patueSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk"
+    ) {
+        // Intermediate Risk if any value is "Intermediate Risk"
+        $patau_risk_color = "intermediate_risk";
+        $patau_border_color = "intermediate_risk_border";
+        $patau_risk_text = "intermediate_risk_text";
+    } else{
+        //  Low Risk only if both values are "Low Risk"
+        $patau_risk_color = "low_risk";
+        $patau_border_color = "low_risk_border";
+        $patau_risk_text = "low_risk_text";
+    }
+    }else{
+        if (
+            $patueSyndrome[$keys[0]]['risk_result'] == "Increased Risk" || 
+            $patueSyndrome[$keys[1]]['final_risk'] == "Increased Risk"
+        ) {
+            // Increased Risk if any value is "Increased Risk"
+            $patau_risk_color = "increased_risk";
+            $patau_border_color = "increased_risk_border";
+            $patau_risk_text = "increased_risk_text";
+        } elseif (
+            $patueSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk" || 
+            $patueSyndrome[$keys[1]]['final_risk'] == "Intermediate Risk"
+        ) {
+            // Intermediate Risk if any value is "Intermediate Risk"
+            $patau_risk_color = "intermediate_risk";
+            $patau_border_color = "intermediate_risk_border";
+            $patau_risk_text = "intermediate_risk_text";
+        } else{
+            //  Low Risk only if both values are "Low Risk"
+            $patau_risk_color = "low_risk";
+            $patau_border_color = "low_risk_border";
+            $patau_risk_text = "low_risk_text";
         }
+    
+    }
+    
     }
     $keys = array_keys($ntSyndrome);
     $count_key = count($keys);
-    if (!empty($keys)) {
-        if ($count_key == 1) {
-            if (
-                $ntSyndrome[$keys[0]]['risk_result'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $ntsyndrome_risk_color = "increased_risk";
-                $ntsyndrome_border_color = "increased_risk_border";
-                $ntsyndrome_risk_text = "increased_risk_text";
-            } elseif (
-                $ntSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $ntsyndrome_risk_color = "intermediate_risk";
-                $ntsyndrome_border_color = "intermediate_risk_border";
-                $ntsyndrome_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $ntsyndrome_risk_color = "low_risk";
-                $ntsyndrome_border_color = "low_risk_border";
-                $ntsyndrome_risk_text = "low_risk_text";
-            }
-        } else {
-            if (
-                $ntSyndrome[$keys[0]]['risk_result'] == "Increased Risk" ||
-                $ntSyndrome[$keys[1]]['final_risk'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $ntsyndrome_risk_color = "increased_risk";
-                $ntsyndrome_border_color = "increased_risk_border";
-                $ntsyndrome_risk_text = "increased_risk_text";
-            } elseif (
-                $ntSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk" ||
-                $ntSyndrome[$keys[1]]['final_risk'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $ntsyndrome_risk_color = "intermediate_risk";
-                $ntsyndrome_border_color = "intermediate_risk_border";
-                $ntsyndrome_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $ntsyndrome_risk_color = "low_risk";
-                $ntsyndrome_border_color = "low_risk_border";
-                $ntsyndrome_risk_text = "low_risk_text";
-            }
+    
+    if(!empty($keys)){
+    if($count_key == 1){
+    if (
+        $ntSyndrome[$keys[0]]['risk_result'] == "Increased Risk"
+    ) {
+        // Increased Risk if any value is "Increased Risk"
+        $ntsyndrome_risk_color = "increased_risk";
+        $ntsyndrome_border_color = "increased_risk_border";
+        $ntsyndrome_risk_text = "increased_risk_text";
+    } elseif (
+        $ntSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk"
+    ) {
+        // Intermediate Risk if any value is "Intermediate Risk"
+        $ntsyndrome_risk_color = "intermediate_risk";
+        $ntsyndrome_border_color = "intermediate_risk_border";
+        $ntsyndrome_risk_text = "intermediate_risk_text";
+    } else{
+        //  Low Risk only if both values are "Low Risk"
+        $ntsyndrome_risk_color = "low_risk";
+        $ntsyndrome_border_color = "low_risk_border";
+        $ntsyndrome_risk_text = "low_risk_text";
+    }
+    }
+    else{
+        if (
+            $ntSyndrome[$keys[0]]['risk_result'] == "Increased Risk" || 
+            $ntSyndrome[$keys[1]]['final_risk'] == "Increased Risk"
+        ) {
+            // Increased Risk if any value is "Increased Risk"
+            $ntsyndrome_risk_color = "increased_risk";
+            $ntsyndrome_border_color = "increased_risk_border";
+            $ntsyndrome_risk_text = "increased_risk_text";
+        } elseif (
+            $ntSyndrome[$keys[0]]['risk_result'] == "Intermediate Risk" || 
+            $ntSyndrome[$keys[1]]['final_risk'] == "Intermediate Risk"
+        ) {
+            // Intermediate Risk if any value is "Intermediate Risk"
+            $ntsyndrome_risk_color = "intermediate_risk";
+            $ntsyndrome_border_color = "intermediate_risk_border";
+            $ntsyndrome_risk_text = "intermediate_risk_text";
+        } else{
+            //  Low Risk only if both values are "Low Risk"
+            $ntsyndrome_risk_color = "low_risk";
+            $ntsyndrome_border_color = "low_risk_border";
+            $ntsyndrome_risk_text = "low_risk_text";
         }
     }
-
+    }
+    
     $keys = array_keys($pe32);
     $count_key = count($keys);
-    if (!empty($keys)) {
-        if ($count_key == 1) {
-            if (
-                $pe32[$keys[0]]['risk_result'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $pe_32_risk_color = "increased_risk";
-                $pe_32_border_color = "increased_risk_border";
-                $pe_32_risk_text = "increased_risk_text";
-            } elseif (
-                $pe32[$keys[0]]['risk_result'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $pe_32_risk_color = "intermediate_risk";
-                $pe_32_border_color = "intermediate_risk_border";
-                $pe_32_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $pe_32_risk_color = "low_risk";
-                $pe_32_border_color = "low_risk_border";
-                $pe_32_risk_text = "low_risk_text";
-            }
-        } else {
-            if (
-                $pe32[$keys[0]]['risk_result'] == "Increased Risk" ||
-                $pe32[$keys[1]]['final_risk'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $pe_32_risk_color = "increased_risk";
-                $pe_32_border_color = "increased_risk_border";
-                $pe_32_risk_text = "increased_risk_text";
-            } elseif (
-                $pe32[$keys[0]]['risk_result'] == "Intermediate Risk" ||
-                $pe32[$keys[1]]['final_risk'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $pe_32_risk_color = "intermediate_risk";
-                $pe_32_border_color = "intermediate_risk_border";
-                $pe_32_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $pe_32_risk_color = "low_risk";
-                $pe_32_border_color = "low_risk_border";
-                $pe_32_risk_text = "low_risk_text";
-            }
-        }
+    if(!empty($keys)){
+    if($count_key == 1){
+    if (
+        $pe32[$keys[0]]['risk_result'] == "Increased Risk" 
+    ) {
+        // Increased Risk if any value is "Increased Risk"
+        $pe_32_risk_color = "increased_risk";
+        $pe_32_border_color = "increased_risk_border";
+        $pe_32_risk_text = "increased_risk_text";
+    } elseif (
+        $pe32[$keys[0]]['risk_result'] == "Intermediate Risk"
+    ) {
+        // Intermediate Risk if any value is "Intermediate Risk"
+        $pe_32_risk_color = "intermediate_risk";
+        $pe_32_border_color = "intermediate_risk_border";
+        $pe_32_risk_text = "intermediate_risk_text";
+    } else{
+        //  Low Risk only if both values are "Low Risk"
+        $pe_32_risk_color = "low_risk";
+         $pe_32_border_color = "low_risk_border";
+         $pe_32_risk_text = "low_risk_text";
     }
-
+    }else{
+        if (
+            $pe32[$keys[0]]['risk_result'] == "Increased Risk" || 
+            $pe32[$keys[1]]['final_risk'] == "Increased Risk"
+        ) {
+            // Increased Risk if any value is "Increased Risk"
+            $pe_32_risk_color = "increased_risk";
+            $pe_32_border_color = "increased_risk_border";
+            $pe_32_risk_text = "increased_risk_text";
+        } elseif (
+            $pe32[$keys[0]]['risk_result'] == "Intermediate Risk" || 
+            $pe32[$keys[1]]['final_risk'] == "Intermediate Risk"
+        ) {
+            // Intermediate Risk if any value is "Intermediate Risk"
+            $pe_32_risk_color = "intermediate_risk";
+            $pe_32_border_color = "intermediate_risk_border";
+            $pe_32_risk_text = "intermediate_risk_text";
+        } else{
+            //  Low Risk only if both values are "Low Risk"
+            $pe_32_risk_color = "low_risk";
+             $pe_32_border_color = "low_risk_border";
+             $pe_32_risk_text = "low_risk_text";
+        }
+    
+    }
+    }
+    
     $keys = array_keys($pe34);
     $count_key = count($keys);
-    if (!empty($keys)) {
-        if ($count_key == 1) {
-            if (
-                $pe34[$keys[0]]['risk_result'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $pe_34_risk_color = "increased_risk";
-                $pe_34_border_color = "increased_risk_border";
-                $pe_34_risk_text = "increased_risk_text";
-            } elseif (
-                $pe34[$keys[0]]['risk_result'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $pe_34_risk_color = "intermediate_risk";
-                $pe_34_border_color = "intermediate_risk_border";
-                $pe_34_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $pe_34_risk_color = "low_risk";
-                $pe_34_border_color = "low_risk_border";
-                $pe_34_risk_text = "low_risk_text";
-            }
-        } else {
-            if (
-                $pe34[$keys[0]]['risk_result'] == "Increased Risk" ||
-                $pe34[$keys[1]]['final_risk'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $pe_34_risk_color = "increased_risk";
-                $pe_34_border_color = "increased_risk_border";
-                $pe_34_risk_text = "increased_risk_text";
-            } elseif (
-                $pe34[$keys[0]]['risk_result'] == "Intermediate Risk" ||
-                $pe34[$keys[1]]['final_risk'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $pe_34_risk_color = "intermediate_risk";
-                $pe_34_border_color = "intermediate_risk_border";
-                $pe_34_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $pe_34_risk_color = "low_risk";
-                $pe_34_border_color = "low_risk_border";
-                $pe_34_risk_text = "low_risk_text";
-            }
-        }
+    if(!empty($keys)){
+    if($count_key == 1){
+    if (
+        $pe34[$keys[0]]['risk_result'] == "Increased Risk"
+    ) {
+        // Increased Risk if any value is "Increased Risk"
+        $pe_34_risk_color = "increased_risk";
+        $pe_34_border_color = "increased_risk_border";
+        $pe_34_risk_text = "increased_risk_text";
+    } elseif (
+        $pe34[$keys[0]]['risk_result'] == "Intermediate Risk"
+    ) {
+        // Intermediate Risk if any value is "Intermediate Risk"
+        $pe_34_risk_color = "intermediate_risk";
+        $pe_34_border_color = "intermediate_risk_border";
+        $pe_34_risk_text = "intermediate_risk_text";
+    } else{
+        //  Low Risk only if both values are "Low Risk"
+        $pe_34_risk_color = "low_risk";
+        $pe_34_border_color = "low_risk_border";
+        $pe_34_risk_text = "low_risk_text";
     }
-
+    }else{
+        if (
+            $pe34[$keys[0]]['risk_result'] == "Increased Risk" || 
+            $pe34[$keys[1]]['final_risk'] == "Increased Risk"
+        ) {
+            // Increased Risk if any value is "Increased Risk"
+            $pe_34_risk_color = "increased_risk";
+            $pe_34_border_color = "increased_risk_border";
+            $pe_34_risk_text = "increased_risk_text";
+        } elseif (
+            $pe34[$keys[0]]['risk_result'] == "Intermediate Risk" || 
+            $pe34[$keys[1]]['final_risk'] == "Intermediate Risk"
+        ) {
+            // Intermediate Risk if any value is "Intermediate Risk"
+            $pe_34_risk_color = "intermediate_risk";
+            $pe_34_border_color = "intermediate_risk_border";
+            $pe_34_risk_text = "intermediate_risk_text";
+        } else{
+            //  Low Risk only if both values are "Low Risk"
+            $pe_34_risk_color = "low_risk";
+            $pe_34_border_color = "low_risk_border";
+            $pe_34_risk_text = "low_risk_text";
+        }
+    
+    }
+    }
+    
     $keys = array_keys($pe37);
     $count_key = count($keys);
-
-    if (!empty($keys)) {
-        if ($count_key == 1) {
-            if (
-                $pe37[$keys[0]]['risk_result'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $pe_37_risk_color = "increased_risk";
-                $pe_37_border_color = "increased_risk_border";
-                $pe_37_risk_text = "increased_risk_text";
-            } elseif (
-                $pe37[$keys[0]]['risk_result'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $pe_37_risk_color = "intermediate_risk";
-                $pe_37_border_color = "intermediate_risk_border";
-                $pe_37_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $pe_37_risk_color = "low_risk";
-                $pe_37_border_color = "low_risk_border";
-                $pe_37_risk_text = "low_risk_text";
-            }
-        } else {
-            if (
-                $pe37[$keys[0]]['risk_result'] == "Increased Risk" ||
-                $pe37[$keys[1]]['final_risk'] == "Increased Risk"
-            ) {
-                // Increased Risk if any value is "Increased Risk"
-                $pe_37_risk_color = "increased_risk";
-                $pe_37_border_color = "increased_risk_border";
-                $pe_37_risk_text = "increased_risk_text";
-            } elseif (
-                $pe37[$keys[0]]['risk_result'] == "Intermediate Risk" ||
-                $pe37[$keys[1]]['final_risk'] == "Intermediate Risk"
-            ) {
-                // Intermediate Risk if any value is "Intermediate Risk"
-                $pe_37_risk_color = "intermediate_risk";
-                $pe_37_border_color = "intermediate_risk_border";
-                $pe_37_risk_text = "intermediate_risk_text";
-            } else {
-                //  Low Risk only if both values are "Low Risk"
-                $pe_37_risk_color = "low_risk";
-                $pe_37_border_color = "low_risk_border";
-                $pe_37_risk_text = "low_risk_text";
-            }
-        }
+    
+    if(!empty($keys)){
+    if($count_key == 1){
+    if (
+        $pe37[$keys[0]]['risk_result'] == "Increased Risk"
+    ) {
+        // Increased Risk if any value is "Increased Risk"
+        $pe_37_risk_color = "increased_risk";
+        $pe_37_border_color = "increased_risk_border";
+        $pe_37_risk_text = "increased_risk_text";
+    } elseif (
+        $pe37[$keys[0]]['risk_result'] == "Intermediate Risk"
+    ) {
+        // Intermediate Risk if any value is "Intermediate Risk"
+        $pe_37_risk_color = "intermediate_risk";
+        $pe_37_border_color = "intermediate_risk_border";
+        $pe_37_risk_text = "intermediate_risk_text";
+    } else{
+        //  Low Risk only if both values are "Low Risk"
+        $pe_37_risk_color = "low_risk";
+        $pe_37_border_color = "low_risk_border";
+        $pe_37_risk_text = "low_risk_text";
+        
+       
     }
-}
+    }else{
+        if (
+            $pe37[$keys[0]]['risk_result'] == "Increased Risk" || 
+            $pe37[$keys[1]]['final_risk'] == "Increased Risk"
+        ) {
+            // Increased Risk if any value is "Increased Risk"
+            $pe_37_risk_color = "increased_risk";
+            $pe_37_border_color = "increased_risk_border";
+            $pe_37_risk_text = "increased_risk_text";
+        } elseif (
+            $pe37[$keys[0]]['risk_result'] == "Intermediate Risk" || 
+            $pe37[$keys[1]]['final_risk'] == "Intermediate Risk"
+        ) {
+            // Intermediate Risk if any value is "Intermediate Risk"
+            $pe_37_risk_color = "intermediate_risk";
+            $pe_37_border_color = "intermediate_risk_border";
+            $pe_37_risk_text = "intermediate_risk_text";
+        } else{
+            //  Low Risk only if both values are "Low Risk"
+            $pe_37_risk_color = "low_risk";
+            $pe_37_border_color = "low_risk_border";
+            $pe_37_risk_text = "low_risk_text";
+            
+           
+        }
+    
+    }
+    }
+    }
+
 if (isset($json_data->PatientRiskDetails)) {
     $prior_risk = "";
+    if ($json_data->PatientRiskDetails[0]->SMOKING == "Y") {
+        $prior_risk .= "<strong>Smoker</strong><br/>";
+    }
 
-    if($json_data->PatientDetails[0]->SYSTEM_TYPE == 'Web'){
-
-        if($json_data->PatientRiskDetails[0]->SMOKING == "NotStated"){
-            $prior_risk .= "<strong>Smoker: NotStated</strong><br/>";
-        }elseif($json_data->PatientRiskDetails[0]->SMOKING == "NonSmoker"){
-            $prior_risk .= "<strong>Smoker: NonSmoker</strong><br/>";
-        }elseif($json_data->PatientRiskDetails[0]->SMOKING == "Smoker"){
-            $prior_risk .= "<strong>Smoker: Smoker</strong><br/>"; 
-        }
-
-        if ($json_data->PatientRiskDetails[0]->DIABETETS == "Y") {
-            $prior_risk .= "<strong>Diabetes Type 1: Yes</strong><br/>";
-        }elseif ($json_data->PatientRiskDetails[0]->DIABETETS == "N") {
-            $prior_risk .= "<strong>Diabetes Type 1: No</strong><br/>";
-        }
-
-        if ($json_data->PatientRiskDetails[0]->DiabetesType2 == "Y") {
-            $prior_risk .= "<strong>Diabetes Type 2: Yes</strong><br/>";
-        }elseif ($json_data->PatientRiskDetails[0]->DiabetesType2 == "N") {
-            $prior_risk .= "<strong>Diabetes Type 2: No</strong><br/>";
-        }
-
-        if ($json_data->PatientRiskDetails[0]->InsulinTreatmentForType2Diabetic == "Y") {
-            $prior_risk .= "<strong>Insulin Treatment: Yes</strong><br/>";
-        }elseif ($json_data->PatientRiskDetails[0]->InsulinTreatmentForType2Diabetic == "N") {
-            $prior_risk .= "<strong>Insulin Treatment: No</strong><br/>";
-        }
-
-        if ($json_data->PatientRiskDetails[0]->PREVIOUS_NTD == "Y") {
-            $prior_risk .= "<strong>Previous NTD: Yes</strong><br/>";
-        }elseif ($json_data->PatientRiskDetails[0]->PREVIOUS_NTD == "N") {
-            $prior_risk .= "<strong>Previous NTD: No</strong><br/>";
-        }
-
-        if ($json_data->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "Y") {
-            $prior_risk .= "<strong>Chronic Hypertension: Yes</strong><br/>";
-        }elseif ($json_data->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "N") {
-            $prior_risk .= "<strong>Chronic Hypertension: No</strong><br/>";
-        }
-
-    }else{
-        if ($json_data->PatientRiskDetails[0]->SMOKING == "Y") {
-            $prior_risk .= "<strong>Smoker</strong><br/>";
-        }
-        if ($json_data->PatientRiskDetails[0]->DIABETETS == "Y") {
-            $type = "";
-            if ($json_data->PatientRiskDetails[0]->DIABETIC_TYPE == "1") {
-                $type = "I";
-            }
-            if ($json_data->PatientRiskDetails[0]->DIABETIC_TYPE == "2") {
-                $type = "II";
-            }
-            $prior_risk .= "<strong>Diabetes Type $type</strong><br/>";
-        }
-        if ($json_data->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "3") {
-            $prior_risk .= "<strong>Chronic hypertension</strong><br/>";
-        }
+    if ($json_data->PatientRiskDetails[0]->CHRONIC_HYPERTENSION == "3") {
+        $prior_risk .= "<strong>Chronic hypertension</strong><br/>";
     }
 
     if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "1") {
         $prior_risk .= "<strong>Patient had  Preeclampsia</strong><br/>";
     }
+
     if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "2") {
         $prior_risk .= "<strong>Mother of Patient had  Preeclampsia</strong><br/>";
     }
+
     if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "3") {
         $prior_risk .= "<strong>Mother of Patient & Patient had  Preeclampsia</strong><br/>";
     }
+
     if ($json_data->PatientRiskDetails[0]->FAMILY_HISTORY_OF_PE == "Y") {
         $prior_risk .= "<strong> Preeclampsia in previous pregnancy</strong><br/>";
     }
+
+    if ($json_data->PatientRiskDetails[0]->DIABETETS == "Y") {
+        $type = "";
+        if ($json_data->PatientRiskDetails[0]->DIABETIC_TYPE == "1") {
+            $type = "I";
+        }
+        if ($json_data->PatientRiskDetails[0]->DIABETIC_TYPE == "2") {
+            $type = "II";
+        }
+        $prior_risk .= "<strong>Diabetes Type $type</strong><br/>";
+    }
+
+
     $prev_history = "";
+
     if ($json_data->PatientRiskDetails[0]->PREVIOUS_DOWN == "Y") {
         $prev_history .= "Down syndrome";
     }
+
     if ($json_data->PatientRiskDetails[0]->PATAUS_SYNDROME == "Y") {
         $prev_history .= ",Patau Syndrome";
     }
     if ($json_data->PatientRiskDetails[0]->PREVIOUS_EDWARDS == "Y") {
         $prev_history .= ",EDWARDS Syndrome";
     }
+
     if (!empty($prev_history)) {
         $prior_risk .= "<strong> $prev_history in previous pregnancy</strong><br/>";
     }
+
     if ($prior_risk == "") {
         $prior_risk = "None";
     }
@@ -1594,6 +1538,7 @@ $update_filter['risk_assesment'] = "";
 <?php $actual_link = base_url(); ?>
 
 <body>
+
     <div class='report-page' style="padding-top: 15px;">
         <div class='report-page-main-container'>
             <section class='pns-test-report-body'>
@@ -1607,7 +1552,7 @@ $update_filter['risk_assesment'] = "";
                         <tr>
                             <td class='patient-speci-presc-tb-def'>
                                 <table class='patient-speci-presc-tb-def-div' style='color:#777;font-size:12px;' cellpadding='2'>
-                                    <tr style='font-size:14px;'>
+                                    <tr style='font-size:14px'>
                                         <td>Client Name</td>
                                         <td>:</td>
                                         <?php if (strlen(trim($json_data->PatientDetails[0]->PATIENT_NAME)) > 25) { ?>
@@ -1657,8 +1602,8 @@ $update_filter['risk_assesment'] = "";
                                             <!-- <?php //echo isset($json_data->PatientRiskDetails[0]->HEIGHT) ? $json_data->PatientRiskDetails[0]->HEIGHT . "cm" : "NM" 
                                                     ?> -->
                                             <?php echo ($json_data->PatientDetails[0]->HEIGHT != '') ?
-                                                $json_data->PatientDetails[0]->HEIGHT . "cm" : ($json_data->PatientRiskDetails[0]->HEIGHT != '' ?
-                                                    $json_data->PatientRiskDetails[0]->HEIGHT . "cm" : ""); ?> /
+                                                $json_data->PatientDetails[0]->HEIGHT . "cm" : ($json_data->PatientDetails[0]->PATIENT_HEIGHT != '' ?
+                                                    $json_data->PatientDetails[0]->PATIENT_HEIGHT . "cm" : "NM"); ?> /
                                             <?php echo isset($json_data->PatientRiskDetails[0]->WEIGHT) ? $json_data->PatientRiskDetails[0]->WEIGHT . "Kg" : "" ?>
                                         </td>
                                     </tr>
@@ -1720,7 +1665,7 @@ $update_filter['risk_assesment'] = "";
                                         <td>Clinician</td>
                                         <td>:</td>
                                         <td>DR.<?php echo (($json_data->PatientDetails[0]->REFERRED_BY != '') ?
-                                                    ucwords(($json_data->PatientDetails[0]->REFERRED_BY)) : "") ?></td>
+                                                ucwords(($json_data->PatientDetails[0]->REFERRED_BY)) : "") ?></td>
                                     </tr>
                                     <tr>
                                         <td>Hospital</td>
@@ -1732,14 +1677,8 @@ $update_filter['risk_assesment'] = "";
                                     <tr>
                                         <td>City</td>
                                         <td>:</td>
-                                        <?php 
-                                            if($json_data->PatientDetails[0]->SYSTEM_TYPE == "Web"){
-                                                $City = $json_data->PatientDetails[0]->City ?? '';
-                                            }else{
-                                                $City = $json_data->PatientDetails[0]->CENTER_CODE ?? '';
-                                            }
-                                        ?>
-                                        <td><?php echo $City ?></td>
+                                        <td><?php echo (($json_data->PatientDetails[0]->CENTER_CODE != '') ?
+                                                $json_data->PatientDetails[0]->CENTER_CODE : "") ?></td>
                                     </tr>
                                 </table>
                             </td>
@@ -1944,11 +1883,10 @@ $update_filter['risk_assesment'] = "";
                             <td class='patient-speci-presc-tb-hdr' style="font-size:14px;">Assistance Details</td>
                             <td class="assistance-details">Method<p class='number'>
                                     <?php
-                                    if (isset($json_data->PatientRiskDetails[0]->CONCEPTION_TYPE) && ($json_data->PatientRiskDetails[0]->CONCEPTION_TYPE !== '')) {
+                                    if (isset($json_data->PatientRiskDetails[0]->CONCEPTION_TYPE) && ($json_data->PatientRiskDetails[0]->CONCEPTION_TYPE != '')) {
                                         $CONCEPTION_TYPE = $json_data->PatientRiskDetails[0]->CONCEPTION_TYPE;
                                         if ($CONCEPTION_TYPE == 0) {
-                                            // echo "In Vitro Fertilization";
-                                            echo ($json_data->PatientDetails[0]->SYSTEM_TYPE == 'Web') ? "Own Egg" : "In Vitro Fertilization"; 
+                                            echo "In Vitro Fertilization";
                                         } else if ($CONCEPTION_TYPE == 1) {
                                             echo "Gift";
                                         } else if ($CONCEPTION_TYPE == 2) {
@@ -1956,16 +1894,15 @@ $update_filter['risk_assesment'] = "";
                                         } else if ($CONCEPTION_TYPE == 3) {
                                             echo "Clomiphene Treatment";
                                         } else if ($CONCEPTION_TYPE == 4) {
-                                            if ($json_data->PatientRiskDetails[0]->AssistanceMethod == "DonorEgg") {
-                                                $cc_type = "Donor Egg";
+                                            if ($json_data->PatientRiskDetails[0]->EGG == "Donor") {
+                                                echo "Donor Egg";
                                             }
-                                            if ($json_data->PatientRiskDetails[0]->AssistanceMethod == "OwnEgg") {
-                                                $cc_type = "Own Egg";
+                                            if ($json_data->PatientRiskDetails[0]->EGG == "Own") {
+                                                echo  "Own Egg";
                                             }
-                                            echo ($json_data->PatientDetails[0]->SYSTEM_TYPE == 'Web') ? "Donor Egg" : $cc_type;
                                         } else if ($CONCEPTION_TYPE == 5) {
                                             echo "Donor Insemination";
-                                        } else if ($CONCEPTION_TYPE == 6) { 
+                                        } else if ($CONCEPTION_TYPE == 6) {
                                             echo "ICSI";
                                         } else if ($CONCEPTION_TYPE == 7) {
                                             echo "Other";
@@ -2014,6 +1951,8 @@ $update_filter['risk_assesment'] = "";
                     <table style="width:100%;<?php echo $table_size; ?>border-radius:15px;border:0px solid #ccc;border-spacing: 5px 0;margin: 5px 0;" border="0" cellspacing="0" cellpadding="5">
                         <tr>
                             <?php $i = 0;
+
+
                             foreach ($printingNamesOfParameter as $key => $printingName) { ?>
                                 <?php if ($riskSoftwareMethodByPrint == "LIFECYCLE") {
                                     if ($printingName == 'DIA') {
@@ -2042,8 +1981,7 @@ $update_filter['risk_assesment'] = "";
                                 ?>
                                 <td class="patient-speci-presc-tb-parameter"><?php echo $printingName ?><span class="test-title"> (By <?php echo $parameterMethod; ?> )</span>
                                 </td>
-                            <?php }
-                            ?>
+                            <?php } ?>
                         </tr>
                         <tr>
                             <?php //echo "<pre>". print_r($parameterResult)."<<";die; 
@@ -2107,19 +2045,17 @@ $update_filter['risk_assesment'] = "";
                     if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") {
                         $txt_line = "Results Were Analyzed by PRISCA S/W - Version 5.2";
                     }
-
-                    // if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "LIFECYCLE") { ?>
+                    if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "LIFECYCLE") { ?>
                         <span class="test-title alok">(<?= $txt_line ?>)</span></span>
                     <span class="increased_risk">Increased Risk</span>
                     <span class="intermediate_risk">Intermediate Risk</span>
                     <span class="low_risk">Low Risk</span>
-                <?php // } ?>
-
-                <?php // if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") { ?>
-                    <!-- <span class="test-title alok">(<?= $txt_line ?>)</span></span>
+                <?php } ?>
+                <?php if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") { ?>
+                    <span class="test-title alok">(<?= $txt_line ?>)</span></span>
                 <span class="increased_risk">Increased Risk</span>
-                <span class="low_risk">Low Risk</span> -->
-            <?php // } ?>
+                <span class="low_risk">Low Risk</span>
+            <?php  } ?>
         </div>
         <!-- New Graph -->
 
@@ -2160,7 +2096,7 @@ $update_filter['risk_assesment'] = "";
                                     <td class="patient-speci-presc-tb-parameter <?= $ftclass ?> number <?= $css_color ?>"> <?php echo $printingName; ?></td>
                                 <?php } ?>
                             </tr>
-                            <?php
+                              <?php
                             $temp_prisca_Syndrome_age_risk = [];
                             $BR_Risk_flag = '0:0';
                             $FR_Risk_flag = '0:0';
@@ -2221,12 +2157,11 @@ $update_filter['risk_assesment'] = "";
                                         </table>
                                     </td>
                                 <?php } ?>
-
                                 <?php if (!empty($edwardSyndrome)) { ?>
                                     <td class="<?= $edward_risk_color ?> patient-speci-presc-tb-def">
                                         <table class="patient-speci-presc-tb-def-div <?= $ftclass ?> number <?= $edward_risk_text ?>" style="font-size:12px;" cellpadding="0">
                                             <?php
-                                            $i = 0;
+                                             $i = 0;
                                             if (count($edwardSyndrome) == 2) {
                                                 $keys = array_keys($edwardSyndrome); ?>
                                                 <tr>
@@ -2236,8 +2171,7 @@ $update_filter['risk_assesment'] = "";
                                                     <td><span class="risk-graph-font">Final Risk (Twin 2) R2 - <?php echo $edwardSyndrome[$keys[1]]['risk_result_twin']; ?></span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><span class="risk-graph-font">Age Risk(AR) - <?php echo ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $edwardSyndrome[$keys[0]]['age_risk']; ?></span></td>
-                                                </tr>
+                                                    <td><span class="risk-graph-font">Age Risk(AR) - <?php echo ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $edwardSyndrome[$keys[0]]['age_risk']; ?></span></td>                                                </tr>
                                                 <tr>
                                                     <td><span class="risk-graph-font">Risk for Twin1 - <?php echo $edwardSyndrome[$keys[0]]['risk_result']; ?></span></td>
                                                 </tr>
@@ -2252,8 +2186,7 @@ $update_filter['risk_assesment'] = "";
                                                         <td><span class="risk-graph-font">Final Risk (FR) - <?php echo $Syndrome['final_risk']; ?></span></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><span class="risk-graph-font">Age Risk (AR) - <?php echo ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $Syndrome['age_risk']; ?></span></td>
-                                                    </tr>
+                                                        <td><span class="risk-graph-font">Age Risk (AR) - <?php echo ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $Syndrome['age_risk']; ?></span></td>                                                    </tr>
                                                     <tr>
                                                         <td><span class="risk-graph-font">Risk Result - <?php echo $Syndrome['risk_result']; ?></span></td>
                                                     </tr>
@@ -2263,13 +2196,13 @@ $update_filter['risk_assesment'] = "";
                                         </table>
                                     </td>
                                 <?php } ?>
-
                                 <?php if (!empty($patueSyndrome)) { ?>
                                     <td class="patient-speci-presc-tb-def <?= $patau_risk_color ?>">
                                         <table class="patient-speci-presc-tb-def-div <?= $ftclass ?> number <?= $patau_risk_text ?>" style="font-size:12px;" cellpadding="0">
                                             <?php
                                             $i = 0;
                                             if (count($patueSyndrome) == 2) {
+                                                
                                                 $keys = array_keys($patueSyndrome); ?>
                                                 <tr>
                                                     <td><span class="risk-graph-font">Final Risk (Twin 1) R1 - <?php echo $patueSyndrome[$keys[0]]['final_risk']; ?></span></td>
@@ -2278,8 +2211,7 @@ $update_filter['risk_assesment'] = "";
                                                     <td><span class="risk-graph-font">Final Risk (Twin 2) R2 - <?php echo $patueSyndrome[$keys[1]]['risk_result_twin']; ?></span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><span class="risk-graph-font">Age Risk(AR) - <?php echo ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $patueSyndrome[$keys[0]]['age_risk']; ?></span></td>
-                                                </tr>
+                                                    <td><span class="risk-graph-font">Age Risk(AR) - <?php echo ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $patueSyndrome[$keys[0]]['age_risk']; ?></span></td>                                                </tr>
                                                 <tr>
                                                     <td><span class="risk-graph-font">Risk for Twin1 - <?php echo $patueSyndrome[$keys[0]]['risk_result']; ?></span></td>
                                                 </tr>
@@ -2294,7 +2226,7 @@ $update_filter['risk_assesment'] = "";
                                                         <td><span class="risk-graph-font">Final Risk (FR) - <?php echo $Syndrome['final_risk']; ?></span></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><span class="risk-graph-font">Age Risk (AR) - <?php echo ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $Syndrome['age_risk']; ?></span></td>
+                                                       <td><span class="risk-graph-font">Age Risk (AR) - <?php echo ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") ? $temp_prisca_Syndrome_age_risk[$i++] : $Syndrome['age_risk']; ?></span></td>
                                                     </tr>
                                                     <tr>
                                                         <td><span class="risk-graph-font">Risk Result - <?php echo $Syndrome['risk_result']; ?></span></td>
@@ -2305,9 +2237,6 @@ $update_filter['risk_assesment'] = "";
                                         </table>
                                     </td>
                                 <?php } ?>
-
-
-
                                 <?php if (!empty($ntSyndrome)) { ?>
                                     <td class="patient-speci-presc-tb-def <?= $ntsyndrome_risk_color ?>">
                                         <table class="patient-speci-presc-tb-def-div <?= $ftclass ?> number <?= $ntsyndrome_risk_text ?>" cellpadding="0">
@@ -2422,25 +2351,22 @@ $update_filter['risk_assesment'] = "";
                             <tr>
                                 <?php $j = 0;
                                 foreach ($printingNamesOfRisk as $key => $printingName) {
-
-                                    if ($key == "down" && (count($downSyndrome) == 1)) {
-
-                                ?>
+                                    if ($key == "down" && (count($downSyndrome) == 1)) { ?>
                                         <td class="graph-main-div <?= $downsyndrome_border_color ?>">
                                             <table class="graph" style="color:#333333;font-size:12px;" cellpadding="0">
                                                 <td><?php
                                                     if ($showBR == 1 && (!empty($downSyndrome['PRDS']['biochemical_risk']) || (!empty($downSyndrome['PNSDMDS']['biochemical_risk'])))) {
-                                                        // if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") {
-                                                            // echo riskGraphPrisca($downSyndrome, $ftclass);
-                                                        // } else {
+                                                        if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") {
+                                                            echo riskGraphPrisca($downSyndrome, $ftclass);
+                                                        } else {
                                                             echo riskGraph($downSyndrome, $ftclass);
-                                                        // }
+                                                        }
                                                     } else {
-                                                        // if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") {
-                                                        //     echo riskGraphPriscaWithoutBR($downSyndrome, $ftclass);
-                                                        // } else {
+                                                        if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") {
+                                                            echo riskGraphPriscaWithoutBR($downSyndrome, $ftclass);
+                                                        } else {
                                                             echo riskGraphWithoutBR($downSyndrome, $ftclass);
-                                                        // }
+                                                        }
                                                     }  ?> </td>
                                             </table>
                                         </td>
@@ -2448,16 +2374,11 @@ $update_filter['risk_assesment'] = "";
                                         <td class="graph-main-div <?= $downsyndrome_border_color ?>">
                                             <table class="graph" style="color:#333333;font-size:12px;" cellpadding="0">
                                                 <tr>
-                                                    <td>
-                                                        <?php if ($showBR == 1) {
+                                                    <td><?php if ($showBR == 1) {
                                                             echo riskGraphTwin($downSyndrome, $ftclass);
-                                                        } ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php if ($showBR == 0) {
+                                                        } else {
                                                             echo riskGraphForDownSydromeTwin($downSyndrome, $ftclass);
-                                                        } ?>
-                                                    </td>
+                                                        }  ?> </td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -2501,21 +2422,17 @@ $update_filter['risk_assesment'] = "";
                                         <td class="graph-main-div <?= $ntsyndrome_border_color ?>">
                                             <table class="graph" style="color:#333333;font-size:12px;" cellpadding="0">
                                                 <tr>
-                                                    <td>
-                                                        <?php
+                                                    <td><?php 
                                                         if ($data['no_of_foetus'] == 2) {
-                                                            echo riskGraphForNTDTwin($momValue, $ftclass);
+                                                          echo riskGraphForNTDTwin($momValue, $ftclass); 
                                                         } else {
-                                                            echo riskGraphForNTD($momValue, $ftclass);
+                                                            echo riskGraphForNTD($momValue, $ftclass); 
                                                         }
-                                                        ?>
-                                                    </td>
-
+                                                         ?></td>
                                                 </tr>
                                             </table>
                                         </td>
                                     <?php } else if ($key == "ntsyndrome" && (count($ntSyndrome) == 2)) {
-
                                     ?>
                                         <td class="graph-main-div  <?= $ntsyndrome_border_color ?>">
                                             <table class="graph" style="color:#333333;font-size:12px;" cellpadding="0">
@@ -2609,15 +2526,16 @@ $update_filter['risk_assesment'] = "";
                             <?php echo $interpretation ?>
                         </p>
                         <?php if ($showBioComment == 1) { ?>
-                            <p class='interpretation' style="font-size:10px"> The above risk has been calculated based on Biochemistry values alone.Biochemistry based Screening offers detection rate of 60% (5% FPR)</p>
+                            <p class='interpretation' style="font-size:14px"> The above risk has been calculated based on Biochemistry values alone.
+                                Biochemistry based Screening offers detection rate of 60% (5% FPR)</p>
                         <?php } ?>
                     </td>
                 </tr>
                 <tr class='interpretation-main'>
                     <td class='interpretation-details'>
                         <?php if (($comment_flag && $comment_flag == 1)) { ?>
-                            <span style="font-size: 14px; text-transform: uppercase;margin: 0px; color: #0a81a0;font-weight: 600;">Comments: </span>
-                            <span style="font-size: 10px !important"><?php echo ucfirst($comment) ?></span>
+                            <span style="font-size: 16px; text-transform: uppercase;margin: 0px; color: #0a81a0;font-weight: 600;">Comments: </span>
+                            <span style="    font-size: 15px !important"><?php echo ucfirst($comment) ?></span>
                         <?php } ?>
                     </td>
                 </tr>
@@ -2631,8 +2549,8 @@ $update_filter['risk_assesment'] = "";
                     $margin = 1;
                     $padding = 1;
                 } ?>
-
-                <?php
+                 <?php
+                if (!function_exists('find_ratio_result')) {
                 function find_ratio_result($value, $min, $max)
                 {
                     if (preg_match('/(\d+):(\d+)/', $value, $matches)) {
@@ -2641,17 +2559,16 @@ $update_filter['risk_assesment'] = "";
                     }
                     return false;
                 }
-
+               }
                 if ($Prefix_flag == 1 && $Risk_Name_flag == "T21" && find_ratio_result($BR_Risk_flag, 1, 1000) && find_ratio_result($FR_Risk_flag, 1000, 100000) && $FR_Risk_Word_flag == "Low Risk") {
-                    //if(true){ 
-                ?>
+                //if(true){ ?>
                     <tr class='interpretation-main'>
                         <td class='interpretation-details'>
                             <p class='title'>Comment</p>
                             <p class='interpretation' style="font-size:10px">
                                 <img class='inter-img' src='<?= base_url('images/pns/Interpretation.png'); ?>' alt='' style="width:25px;" />
                                 If in case increased biochemical risk (1 to 250), further testing is recommended-non-invasive or invasive testing, along with a detailed anomaly scan between 18 to 20 weeks.
-                            </p>
+                                </p>
                         </td>
                     </tr>
                 <?php } ?>
@@ -2665,20 +2582,18 @@ $update_filter['risk_assesment'] = "";
                 } ?>
                 <table style='margin-top:<?= $margin ?>%; padding-bottom: 15px;'>
                     <tr class='caution-main'>
+
                         <td class='caution-details'>
                             <p class='title'>Caution</p>
                             <p class='caution'><img class='caut-img' src='<?= base_url('images/pns/Caution.png'); ?>' alt='' style="width:26px;" /> <span>It must be clearly understood that this is a screening test, and therefore cannot
-                                    be used to reach a definitive diagnosis. A low-risk result <br><br> doesn't guarantee that your baby won't
+                                    be used to reach a definitive diagnosis. A low-risk result doesn't guarantee that your baby won't
                                     have one of these conditions. Likewise, an increased-risk result doesn't guarantee that your
                                     baby will be born with one of these conditions, and that further confirmatory tests must be
                                     performed in consultation with your healthcare provider.</span></p>
                         </td>
                     </tr>
                 </table>
-    </div>
-
-
-    <!-- Page 2 Start -->
+    </div><!-- Page 2 Start -->
     <?php if ($marker == "pereport") { ?>
         <div class='report-page page2' style="background: #FFFBF3;<?= $next_page; ?>page-break-after: always;">
         <?php
@@ -2765,53 +2680,52 @@ $update_filter['risk_assesment'] = "";
                                     </style>
                                 <?php
                                 } ?>
-
                                 <table style='width:100%;border-radius: 10px; height: 250px;' border='0' cellspacing='10' cellpadding='10' class="pechange">
                                     <p class='title'>Understanding Reported Final Risk:</p>
                                     <p class='content'>Prenatal screening gives a risk estimate after analyzing. The risk
                                         estimate is in the form of a ratio. For example, if the reported final risk is <span class='number'>1:1280,</span>
                                         it means that of <span class='number'>1280</span> pregnancies with similar values, one baby is likely to be affected with the screened condition
                                     </p>
-                                    <!-- <p class="risk-title title" style="text-align:left;font-size: 13px;margin-top: 1px !important; margin-bottom: -40px;"> Trisomy T21 Cuttoff<p> -->
                                     <tr>
-                                        <td class='risk-1'>
-                                            <p class='risk-title' style="font-size: 12px;">Increased Risk:</p>
-                                            <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as “Screen Positive” when the
-                                                probability ratio is greater than <span class='number'><?php echo $lowCutoff ?></span> births.</p>
-                                        </td>
-                                        <?php
-                                        if ($marker != "pereport"  && strtoupper($risk_type) != "2LEVEL") { ?>
-                                            <td class='risk-2'>
-                                                <p class='risk-title' style="margin-top: 50px; font-size: 12px;">Intermediate Risk: </p>
-                                                <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as “Intermediate Probability” when
-                                                    the probability ratio is within <span class='number'>1:251</span> to <span class='number'>1:1000</span> births.</p>
-                                            </td>
-                                        <?php } ?>
-                                        <td class='risk-3'>
-                                            <p class='risk-title' style="font-size: 12px;">Low Risk:</p>
-                                            <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as "Screen Negative" when the probability ratio is lesser&nbsp; than <span class='number'><?php echo $lowRiskCutoff ?? $lowCutoff ?></span> births.
-                                                <!-- <span class='number'><?php echo $highCutoff ?></span> births. -->
-                                            </p>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <!-- <table style='width:100%;border-radius: 10px; height: 250px;' border='0' cellspacing='10' cellpadding='10' class="pechange">
-                                    <p class="risk-title title" style="text-align:left;font-size: 13px;margin-top: 1px; margin-bottom: -40px;"> Trisomy 13,18
-                                    <p>
-                                        <tr>
+                                        <?php if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "LIFECYCLE") { ?>
                                             <td class='risk-1'>
                                                 <p class='risk-title' style="font-size: 12px;">Increased Risk:</p>
                                                 <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as “Screen Positive” when the
                                                     probability ratio is greater than <span class='number'><?php echo $lowCutoff ?></span> births.</p>
                                             </td>
+                                        <?php } ?>
+                                        <?php if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") { ?>
+                                            <td class='prisca-risk-1'>
+                                                <p class='risk-title' style="font-size: 12px;">Increased Risk:</p>
+                                                <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as “Screen Positive” when the
+                                                    probability ratio is greater than <span class='number'><?php echo $lowCutoff ?></span> births.</p>
+                                            </td>
+                                        <?php } ?>
+                                        <?php if ($marker != "pereport" && strtoupper($risk_type) != "2LEVEL" && $json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "LIFECYCLE") { ?>
+                                            <td class='risk-2'>
+                                                <p class='risk-title' style="font-size: 12px;">Intermediate Risk: </p>
+                                                <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as “Intermediate Probability” when
+                                                    the probability ratio is within <span class='number'>1:251</span> to <span class='number'>1:1000</span> births.</p>
+                                            </td>
+                                        <?php } ?>
+                                        <?php if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "PRISCA") { ?>
+                                            <td class='prisca-risk-3'>
+                                                <p class='risk-title' style="font-size: 12px;">Low Risk:</p>
+                                                <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as "Screen Negative" when the probability ratio is lesser&nbsp; than <span class='number'><?php echo $lowRiskCutoff ?? $lowCutoff ?></span> births.
+                                                    <!-- <span class='number'><?php echo $highCutoff ?></span> births. -->
+                                                </p>
+                                            </td>
+                                        <?php } ?>
+                                        <?php if ($json_data->PatientRiskDetails[0]->RISK_SOFTWARE_NAME == "LIFECYCLE") { ?>
                                             <td class='risk-3'>
                                                 <p class='risk-title' style="font-size: 12px;">Low Risk:</p>
-                                                <p class='risk-detail' style="font-size: 11px;max-width: 160px;">The result is considered as "Screen Negative" when the probability ratio is lesser&nbsp; than <span class='number'><?php echo $lowRiskCutoff ?? $lowCutoff ?></span> births. -->
+                                                <p class='risk-detail'style="font-size: 11px;max-width: 160px;">The result is considered as "Screen Negative" when the probability ratio is lesser&nbsp; than <span class='number'><?php echo $lowRiskCutoff ?? $lowCutoff ?></span> births.
                                                     <!-- <span class='number'><?php echo $highCutoff ?></span> births. -->
-                                                <!-- </p>
+                                                </p>
                                             </td>
-                                        </tr>
-                                </table> -->
+                                        <?php } ?>
+                                    </tr>
+                                </table>
                             </div>
                         </section>
                         <?php $disclaimer_css = "";
@@ -2828,54 +2742,55 @@ $update_filter['risk_assesment'] = "";
                                         per imaging guidelines may lead to erroneous risk assessments, and LifeCell does not
                                         bear responsibility for results arising due to such errors</p>
                                     <p><span class='number'><b>3.</b></span><b> As per FMF Guidelines, if Down Syndrome final risk is between 251 to 1000, it will be considered as intermediate risk and further testing will be required for confirmation. </b></p>
-                                    <?php
+                                    <?php 
                                     $Hideshowdisclaimer = [
-                                        "1TQWPLGF",
-                                        "1TPENDEL",
-                                        "TDSWOPE",
-                                        "1TQWDIA",
-                                        "CSPLGFDELV",
-                                        "CSPLGFDEL",
-                                        "FTSPLGF",
-                                        "P0030",
-                                        "PLGFBIOVAL",
-                                        "DELPLGFPAPPA",
-                                        "QSTDELQFPCR",
-                                        "QSTIMUQFPCR",
-                                        "QSTDEL14W",
-                                        "SQDMR",
-                                        "STSIMU",
-                                        "MSAFPDS",
-                                        "STSDEL14W",
-                                        "ISDEL-QST",
-                                        "QSTDEL",
-                                        "QSTIMU",
-                                        "STSDEL",
-                                        "HPQUAD",
-                                        "RCELL_27",
-                                        "RCELL_29",
-                                        "CSPLGFDELNIPTHB",
-                                        "CSPLGFBDEL",
-                                        "QSTDSHB",
-                                        "RAJEEV_002",
-                                        "RAJEEV_008",
-                                        "1TQWNIPT",
-                                        "CSPLGFDELHB",
-                                        "QSTIMUNIPT",
-                                        "QSTDSNIPT",
-                                        "CSPLGFDELNIPT",
-                                        "QSTDSNIPTQFPCR",
-                                        "CSPLGFDELLC",
-                                        "QSTDSNIPTM",
-                                        "QSTDSNIPTQFPCRM",
-                                        "CSWOPLGFDELHB",
+                                            "1TQWPLGF",
+                                            "1TPENDEL",
+                                            "TDSWOPE",
+                                            "1TQWDIA",
+                                            "CSPLGFDELV",
+                                            "CSPLGFDEL",
+                                            "FTSPLGF",
+                                            "P0030",
+                                            "PLGFBIOVAL",
+                                            "DELPLGFPAPPA",
+                                            "QSTDELQFPCR",
+                                            "QSTIMUQFPCR",
+                                            "QSTDEL14W",
+                                            "SQDMR",
+                                            "STSIMU",
+                                            "MSAFPDS",
+                                            "STSDEL14W",
+                                            "ISDEL-QST",
+                                            "QSTDEL",
+                                            "QSTIMU",
+                                            "STSDEL",
+                                            "HPQUAD",
+                                            "RCELL_27",
+                                            "RCELL_29",
+                                            "CSPLGFDELNIPTHB",
+                                            "CSPLGFBDEL",
+                                            "QSTDSHB",
+                                            "RAJEEV_002",
+                                            "RAJEEV_008",
+                                            "1TQWNIPT",
+                                            "CSPLGFDELHB",
+                                            "QSTIMUNIPT",
+                                            "QSTDSNIPT",
+                                            "CSPLGFDELNIPT",
+                                            "QSTDSNIPTQFPCR",
+                                            "CSPLGFDELLC",
+                                            "QSTDSNIPTM",
+                                            "QSTDSNIPTQFPCRM",
+                                            "CSWOPLGFDELHB",
+                                            
+                                        ];
 
-                                    ];
-                                    if ($uk_neqas_logo) {
-                                        if (!in_array($testGroupCode, $Hideshowdisclaimer)) { ?>
-                                            <p><span class='number'>4.</span> <I>Quality of our Prenatal screening results (Biochemistry values, MoM, Risk Assessments) are monitored by the UKNEQAS external quality assessment program.</I></p>
-                                    <?php }
-                                    } ?>
+                                    if ($uk_neqas_logo) { 
+                                        if (!in_array($testGroupCode, $Hideshowdisclaimer)) {?>
+                                        <p><span class='number'>4.</span> Quality of our Prenatal screening results (Biochemistry values, MoM, Risk Assessments) are monitored by the UKNEQAS external quality assessment program. </p>
+                                    <?php } 
+                                    }?>
                                 </td>
                             </tr>
                         </table>

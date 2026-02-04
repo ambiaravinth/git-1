@@ -1546,6 +1546,7 @@ if (isset($json_data->PatientRiskDetails)) {
         $prior_risk .= "<strong> Preeclampsia in previous pregnancy</strong><br/>";
     }
     $prev_history = "";
+
     if ($json_data->PatientRiskDetails[0]->PREVIOUS_DOWN == "Y") {
         $prev_history .= "Down syndrome";
     }

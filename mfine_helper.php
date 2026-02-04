@@ -415,6 +415,9 @@ function getInterpretation($json_reportdata)
                 $interpretation .= $resultData->RESULT_VALUE;
                 $sts_flag = 1;
             }
+            // if($resultData->LAB_ID == "41000104647"){
+            //     debug($interpretation);
+            // }
         }
     }
     return ['Interpretation' => $interpretation];

@@ -33,7 +33,6 @@ $riskassessment = $reportdata['Risk_Assessment'];
 $interpretation = $reportdata['Interpretation'];
 $ftclass = "first-trimester";
 
-
 $Risk_Name_flag = '';
 if (isset($riskassessment['downsyndrome']['PRDS']['final_risk']) && !empty($riskassessment['downsyndrome']['PRDS']['final_risk'])) {
     $Risk_Name_flag = "T21";
@@ -46,10 +45,12 @@ $Prefix_flag = 0;
 if (in_array($testGroupCode, $FTS_testgroupCodes)) {
     $Prefix_flag = 1;
 }
+
 ?>
 <?php $actual_link = base_url(); ?>
 
 <body>
+
     <div class='report-page' style="padding-top: 15px;">
         <div class='report-page-main-container'>
             <section class='pns-test-report-body'>
@@ -71,10 +72,11 @@ if (in_array($testGroupCode, $FTS_testgroupCodes)) {
                                             <?php } else { ?>
                                             <td style="width:100%; display:inline-block;">
                                             <?php } ?>
-                                            <?= ucwords($patientdetails['Title']); ?><?= ucwords(($patientdetails['Patient_name'])) ?>
+                                            <?= ucwords($patientdetails['Title']); ?>
+                                            <?= ucwords(($patientdetails['Patient_name'])) ?>
                                             </td>
                                     </tr>
-                                    <tr style='font-size:14px;'>
+                                    <tr>
                                         <td>Husband Name</td>
                                         <td>:</td>
                                         <?php if (strlen(trim($patientdetails['husband_name'])) > 18) { ?>

@@ -256,9 +256,6 @@ class PnsReportJson extends ResourceController
                 $doubleMarker = 1;
             } elseif (in_array($testGroupCode, $packageData['DOUBLE_MARKER_TEST_GROUP_CODE'])) {
                 $NT_VALUE = isset($json_data->PatientRiskDetails[0]->NT_VALUE) ? $json_data->PatientRiskDetails[0]->NT_VALUE :"";
-                if($testGroupCode == 'DMDELM' || $testGroupCode == 'DMDELMM'){
-                    $reportTitle = 'Double marker (Delfia)';
-                }
                 if ($NT_VALUE !="") {
                     $reportTitle = 'First Trimester Combined Screening Report ';
                     $showBR = 1;
@@ -408,11 +405,6 @@ class PnsReportJson extends ResourceController
                 if ($resultData->TEST_NAME == "FTS Interpretation" && $fts_flag == 0) {
                     $interpretation .= $resultData->RESULT_VALUE . "\n";
                     $fts_flag = 1;
-                }
-                // FTS Penta Interpretation
-                if ($resultData->TEST_CODE == "PENTACMNT" && $fts_penta_flag == 0 && $marker == "pereport") {
-                    $interpretation .= $resultData->RESULT_VALUE . "\n";
-                    $fts_penta_flag = 1;
                 }
                 if ($resultData->TEST_CODE == "PENTAINTERPE" && $fts_penta_flag == 0 && $marker == "pereport") {
                     $interpretation .= $resultData->RESULT_VALUE . "\n";
